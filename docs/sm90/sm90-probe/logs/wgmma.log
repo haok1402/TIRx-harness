@@ -1,0 +1,12 @@
+NVIDIA H200, 595.91.07
+{"case": "wgmma_ss_bf16_f32acc_n128", "ok": true, "max_abs_err": 1.52587890625e-05, "tol": 0.23700258255004883, "wgmma_in_src": 1}
+{"case": "wgmma_ss_fp16_f32acc_n128", "ok": true, "max_abs_err": 1.9073486328125e-05, "tol": 0.23700521469116212, "wgmma_in_src": 1}
+{"case": "wgmma_ss_fp16_f16acc_n128", "ok": true, "max_abs_err": 0.027498245239257812, "tol": 0.5, "wgmma_in_src": 1}
+{"case": "wgmma_ss_e4m3_f32acc_n128", "ok": true, "max_abs_err": 0.0262908935546875, "tol": 0.9523257446289063, "wgmma_in_src": 1}
+{"case": "wgmma_ss_e5m2_f32acc_n128", "ok": true, "max_abs_err": 0.01053619384765625, "tol": 0.9163613891601563, "wgmma_in_src": 1}
+{"case": "wgmma_ss_e4m3_f16acc_n128", "ok": true, "max_abs_err": 0.0276947021484375, "tol": 0.5, "wgmma_in_src": 1}
+{"case": "wgmma_rs_bf16_f32acc_n128", "ok": true, "max_abs_err": 1.52587890625e-05, "tol": 0.23700258255004883, "wgmma_in_src": 1}
+{"case": "wgmma_rs_e4m3_f32acc_n128", "ok": true, "max_abs_err": 0.0262908935546875, "tol": 0.9523257446289063, "wgmma_in_src": 1}
+{"case": "wgmma_ss_bf16_f32acc_n256", "ok": true, "max_abs_err": 1.52587890625e-05, "tol": 0.24689180374145508, "wgmma_in_src": 1}
+{"case": "wgmma_ss_bf16_f32acc_n128_staged", "ok": true, "max_abs_err": 1.52587890625e-05, "tol": 0.23700258255004883, "wgmma_in_src": 1}
+SUMMARY 10 / 10

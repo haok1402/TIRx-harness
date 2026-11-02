@@ -1,0 +1,204 @@
+gemm_bf16_8192x8192x8192_mc1_s4.cu(312): warning #177-D: variable "stage" was declared but never referenced
+          int stage = (kt & 3);
+              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(726): warning #177-D: variable "prev" was declared but never referenced
+            int prev = ((kt_1 + 3) & 3);
+                ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(459): warning #177-D: variable "stage_1" was declared but never referenced
+        int stage_1 = (kt_1 & 3);
+            ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(321): warning #177-D: variable "wg" was declared but never referenced
+      int wg = ((((int)threadIdx.x) >> 7) - 1);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(322): warning #177-D: variable "ct" was declared but never referenced
+      int ct = (((int)threadIdx.x) & 127);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(863): warning #177-D: variable "w" was declared but never referenced
+      int w = ((((int)threadIdx.x) & 127) >> 5);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(864): warning #177-D: variable "lane" was declared but never referenced
+      int lane = (((int)threadIdx.x) & 31);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(865): warning #177-D: variable "row" was declared but never referenced
+      int row = (((((((int)blockIdx.x) & 63) * 128) + ((((int)threadIdx.x) >> 5) * 16)) + ((((int)threadIdx.x) & 31) >> 2)) - 64);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(866): warning #177-D: variable "col" was declared but never referenced
+      int col = (((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2));
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(871): warning #177-D: variable "col_1" was declared but never referenced
+      int col_1 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 8);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(876): warning #177-D: variable "col_2" was declared but never referenced
+      int col_2 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 16);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(881): warning #177-D: variable "col_3" was declared but never referenced
+      int col_3 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 24);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(886): warning #177-D: variable "col_4" was declared but never referenced
+      int col_4 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 32);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(891): warning #177-D: variable "col_5" was declared but never referenced
+      int col_5 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 40);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(896): warning #177-D: variable "col_6" was declared but never referenced
+      int col_6 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 48);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(901): warning #177-D: variable "col_7" was declared but never referenced
+      int col_7 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 56);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(906): warning #177-D: variable "col_8" was declared but never referenced
+      int col_8 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 64);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(911): warning #177-D: variable "col_9" was declared but never referenced
+      int col_9 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 72);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(916): warning #177-D: variable "col_10" was declared but never referenced
+      int col_10 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 80);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(921): warning #177-D: variable "col_11" was declared but never referenced
+      int col_11 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 88);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(926): warning #177-D: variable "col_12" was declared but never referenced
+      int col_12 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 96);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(931): warning #177-D: variable "col_13" was declared but never referenced
+      int col_13 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 104);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(936): warning #177-D: variable "col_14" was declared but never referenced
+      int col_14 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 112);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(941): warning #177-D: variable "col_15" was declared but never referenced
+      int col_15 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 120);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(946): warning #177-D: variable "col_16" was declared but never referenced
+      int col_16 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 128);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(951): warning #177-D: variable "col_17" was declared but never referenced
+      int col_17 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 136);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(956): warning #177-D: variable "col_18" was declared but never referenced
+      int col_18 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 144);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(961): warning #177-D: variable "col_19" was declared but never referenced
+      int col_19 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 152);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(966): warning #177-D: variable "col_20" was declared but never referenced
+      int col_20 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 160);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(971): warning #177-D: variable "col_21" was declared but never referenced
+      int col_21 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 168);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(976): warning #177-D: variable "col_22" was declared but never referenced
+      int col_22 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 176);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(981): warning #177-D: variable "col_23" was declared but never referenced
+      int col_23 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 184);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(986): warning #177-D: variable "col_24" was declared but never referenced
+      int col_24 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 192);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(991): warning #177-D: variable "col_25" was declared but never referenced
+      int col_25 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 200);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(996): warning #177-D: variable "col_26" was declared but never referenced
+      int col_26 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 208);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(1001): warning #177-D: variable "col_27" was declared but never referenced
+      int col_27 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 216);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(1006): warning #177-D: variable "col_28" was declared but never referenced
+      int col_28 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 224);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(1011): warning #177-D: variable "col_29" was declared but never referenced
+      int col_29 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 232);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(1016): warning #177-D: variable "col_30" was declared but never referenced
+      int col_30 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 240);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(1021): warning #177-D: variable "col_31" was declared but never referenced
+      int col_31 = ((((((int)blockIdx.x) >> 6) * 256) + ((((int)threadIdx.x) & 3) * 2)) + 248);
+          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(285): warning #177-D: variable "tx" was declared but never referenced
+    int tx = ((int)threadIdx.x);
+        ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(286): warning #177-D: variable "bid" was declared but never referenced
+    int bid = ((int)blockIdx.x);
+        ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(291): warning #177-D: variable "m_blk" was declared but never referenced
+    int m_blk = (((int)blockIdx.x) & 63);
+        ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(292): warning #177-D: variable "n_blk" was declared but never referenced
+    int n_blk = (((int)blockIdx.x) >> 6);
+        ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(51): warning #177-D: function "__pack_nv_bfloat162" was declared but never referenced
+  __pack_nv_bfloat162(const nv_bfloat16 x, const nv_bfloat16 y) {
+  ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(75): warning #177-D: function "hpow" was declared but never referenced
+  static inline __attribute__((device)) __attribute__((host)) nv_bfloat16 hpow(nv_bfloat16 x, nv_bfloat16 y) { float tmp_x = __bfloat162float(x); float tmp_y = __bfloat162float(y); float result = powf(tmp_x, tmp_y); return __float2bfloat16(result); }
+                                                                          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(79): warning #177-D: function "htan" was declared but never referenced
+  static inline __attribute__((device)) __attribute__((host)) nv_bfloat16 htan(nv_bfloat16 x) { float tmp_x = __bfloat162float(x); float result = tanf(tmp_x); return __float2bfloat16(result); }
+                                                                          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(80): warning #177-D: function "hatan" was declared but never referenced
+  static inline __attribute__((device)) __attribute__((host)) nv_bfloat16 hatan(nv_bfloat16 x) { float tmp_x = __bfloat162float(x); float result = atanf(tmp_x); return __float2bfloat16(result); }
+                                                                          ^
+
+gemm_bf16_8192x8192x8192_mc1_s4.cu(81): warning #177-D: function "herf" was declared but never referenced
+  static inline __attribute__((device)) __attribute__((host)) nv_bfloat16 herf(nv_bfloat16 x) { float tmp_x = __bfloat162float(x); float result = erf(tmp_x); return __float2bfloat16(result); }
+                                                                          ^
+
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function 'main_kernel' for 'sm_90a'
+ptxas info    : Function properties for main_kernel
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 1 barriers, 196672 bytes smem
+ptxas info    : Compile time = 138.891 ms

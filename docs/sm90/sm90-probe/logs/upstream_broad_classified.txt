@@ -1,0 +1,14 @@
+== upstream_broad.xml {'fail': 359, 'pass': 1083, 'skip': 52}
+  317 A: sm_100+-only instruction/feature rejected by ptxas/driver at sm_90a (expected)
+   26 B: interleaved / packed-fp4 TMA descriptor rejected by H200 driver (not used by kernels)
+    6 C: tile-pattern lowering KeyError 'm' (arch-independent pattern bug)
+    5 D: DSMEM bulk-copy tile pattern codegen bug (arch-independent)
+    1 F: other: AssertionError: Regex pattern did not match.   Expected regex: 'alignment' [+1 more line; 
+    1 F: other: AssertionError: cvt_f6x2_f32 assert 'sm_100a' == 'sm_90a'      - sm_90a   ?    ^   + sm_10
+    1 F: other: TypeError: 'Var' object cannot be interpreted as an integer
+    2 F: other: ValueError: Invalid A.strides[3] on argument #0 when calling:   `kernel(A: Tensor([15, 2, 
+== upstream_batch2.xml {'pass': 331, 'fail': 45, 'skip': 10}
+    4 A: sm_100+-only instruction/feature rejected by ptxas/driver at sm_90a (expected)
+   30 C: tile-pattern lowering KeyError 'm' (arch-independent pattern bug)
+    2 F: other: ValueError: Check failed: (pattern.has_value()) is false: Tensor parameters require a shap
+    9 F: other: ValueError: view(dtype): the last dimension must have unit stride

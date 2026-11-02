@@ -1,0 +1,49 @@
+NVIDIA H200, 595.91.07
+### cluster_pdl
+Traceback (most recent call last):
+  File "/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_cluster_pdl.py", line 85, in <module>
+    @T.function
+     ^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/python/tvm_tirx/script/parser/entry.py", line 424, in decorator
+    return apply(function) if function is not None else apply
+           ~~~~~^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/python/tvm_tirx/script/parser/entry.py", line 413, in apply
+    result = parse(
+        function,
+    ...<4 lines>...
+        check_well_formed=options.get("check_well_formed", True),
+    )
+  File "/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/python/tvm_tirx/script/parser/entry.py", line 904, in parse
+    result = _builder()
+  File "/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_cluster_pdl.py", line 86, in _builder1
+    def dsmem_st_async(Out: T.Tensor((NW,), "uint32")):
+    ...<23 lines>...
+        T.cuda.cluster_sync()
+  File "/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_cluster_pdl.py", line 102, in _build0
+    if rank == 0:
+    ...<6 lines>...
+        Out[tx] = dst[tx]
+  File "/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_cluster_pdl.py", line 106, in _then3
+    rdst[0], T.Cast("uint32", tx * 7 + 3), rbar[0])
+                                                ^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/python/tvm_tirx/script/ir_builder/base.py", line 381, in ctx
+    return with_at_group_(self.loc, thunk, attach_result=attach_result)
+  File "/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/python/tvm_tirx/script/ir_builder/base.py", line 466, in with_at_group_
+    value = thunk()
+  File "/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_cluster_pdl.py", line 105, in <lambda>
+    T.ptx["st.async.shared::cluster.mbarrier::complete_tx::bytes.b32"](
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/python/tvm_tirx/backend/cuda/ptx/engine.py", line 1018, in __getitem__
+    raise KeyError(str(err)) from None
+KeyError: "'async' is not a valid modifier for 'st'; open slots: mmio∈{mmio}; sem∈{weak,release,relaxed,volatile}; scope∈{cta,cluster,gpu,sys}; space∈{global,shared,shared::cta,shared::cluster,local}; cop∈{wb,cg,cs,wt}; l1ev∈{L1::evict_normal,L1::evict_unchanged,L1::evict_first,L1::evict_last,L1::no_allocate}; cache∈{L2::cache_hint}; type∈{b8,u8,s8,b16,u16,s16,b32,u32,s32,b64,u64,s64,f32,f64,b128}"
+### txl
+{"case": "rmsnorm_sm90", "ok": false, "stage": "tirx", "type": "TypeError", "errors": ["Mismatched type on argument #1 when calling: `prim.Cast(0: ir.PrimType, 1: ir.PrimExpr, 2: ir.Location) -> prim.Cast`. Expected `ir.PrimExpr` but got `ffi.SmallStr`"]}
+{"case": "gemm_sm100_on_sm90", "ok": false, "stage": "nvrtc/ptxas", "type": "RuntimeError", "errors": ["error   : Feature '.32x32b' not supported on .target 'sm_90a'", "error   : Feature '.cta_group::2' not supported on .target 'sm_90a'", "error   : Feature '.get_first_ctaid::x' requires .target sm_100 or higher", "error   : Feature '.is_canceled' requires .target sm_100 or higher", "error   : Feature '.kind::f16' not supported on .target 'sm_90a'", "error   : Feature '.multicast::cluster::all' not supported on .target 'sm_90a'"]}
+{"case": "txl_pipeline_specialize", "ok": false, "stage": "tirx", "type": "AttributeError", "errors": ["'KTile' object has no attribute 'ptr_to'"]}
+### gemm host
+{"case": "gemm_host_overhead_256x256x64", "tirx_gemm_host_us_per_call": 9.650587383657694, "torch_matmul_host_us_per_call": 11.116564273834229}
+### tests
+FAILED tirx/tile/cuda/test_mma_sync.py::test_cuda_gemm_mma_numerical_tiled[bfloat16-1.0-1-1-1-8]
+FAILED tirx/tile/cuda/test_mma_sync.py::test_cuda_gemm_mma_lowers_tiled[1-1-1-8]
+FAILED tirx/tile/cuda/test_mma_sync.py::test_cuda_gemm_mma_codegen_issue_count[1-1-1-8]
+============ 45 failed, 331 passed, 10 skipped in 67.46s (0:01:07) =============

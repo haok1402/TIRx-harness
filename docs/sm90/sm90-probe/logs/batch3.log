@@ -1,0 +1,92 @@
+NVIDIA H200, 595.91.07
+### cluster_pdl
+{"case": "dsmem_ld", "ok": true}
+{"case": "dsmem_bulk", "ok": true}
+{"case": "dsmem_st_async", "ok": true}
+{"case": "pdl", "ok": true, "griddepcontrol_in_src": 6}
+{"case": "preferred_cluster", "ok": true, "cluster_ranks": [1, 2, 1, 2, 1, 2, 1, 2]}
+{"case": "host_call_us", "ok": true, "tirx_host_us_per_call": 4.122847737744451, "torch_add_host_us_per_call": 4.739740793593228}
+SUMMARY 6 / 6
+### txl
+Traceback (most recent call last):
+  File "/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_txl.py", line 43, in case
+    rec.update(fn())
+               ~~^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_txl.py", line 54, in rmsnorm_sm90
+    k = m.get_kernel(4096, backend_config=CFG)
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/norm/rmsnorm.py", line 270, in get_kernel
+    return make_kernel(hidden_size, backend_config=backend_config).func
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/norm/rmsnorm.py", line 95, in make_kernel
+    @txl.kernel()
+     ~~~~~~~~~~^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/tirx_lite/entry.py", line 312, in decorator
+    fn(*args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/norm/rmsnorm.py", line 195, in rmsnorm
+    iw[0], iw[1], iw[2], iw[3], inp.ptr_to([gidx(row * hidden_size + st)])
+                                            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/norm/rmsnorm.py", line 152, in gidx
+    return txl.Cast(goff, "int64")
+           ~~~~~~~~^^^^^^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/python/tvm_tirx/ir/prim/expr.py", line 76, in __init__
+    self.__init_handle_by_constructor__(_prim_ffi_api.Cast, ty, value, loc)  # type: ignore
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "python/tvm_ffi/cython/object.pxi", line 363, in tvm_ffi.core.Object.__init_handle_by_constructor__
+  File "python/tvm_ffi/cython/object.pxi", line 189, in tvm_ffi.core.CObject.__init_handle_by_constructor__
+  File "python/tvm_ffi/cython/function.pxi", line 137, in tvm_ffi.core.ConstructorCall
+  File "python/tvm_ffi/cython/error.pxi", line 212, in tvm_ffi.core.CHECK_CALL
+  File "<unknown>", line 0, in _TAIL_CALL_CALL.llvm.8155519880111797829
+TypeError: Mismatched type on argument #1 when calling: `prim.Cast(0: ir.PrimType, 1: ir.PrimExpr, 2: ir.Location) -> prim.Cast`. Expected `ir.PrimExpr` but got `ffi.SmallStr`
+
+{"case": "rmsnorm_sm90", "ok": false, "stage": "tirx", "type": "TypeError", "errors": ["Mismatched type on argument #1 when calling: `prim.Cast(0: ir.PrimType, 1: ir.PrimExpr, 2: ir.Location) -> prim.Cast`. Expected `ir.PrimExpr` but got `ffi.SmallStr`"]}
+Traceback (most recent call last):
+  File "/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_txl.py", line 43, in case
+    rec.update(fn())
+               ~~^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_txl.py", line 70, in rmsnorm_trace_sm100_control
+    m.get_kernel(4096, backend_config={"cuda": {"arch": "sm_100a"}})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/norm/rmsnorm.py", line 270, in get_kernel
+    return make_kernel(hidden_size, backend_config=backend_config).func
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/norm/rmsnorm.py", line 95, in make_kernel
+    @txl.kernel()
+     ~~~~~~~~~~^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/tirx_lite/entry.py", line 312, in decorator
+    fn(*args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/norm/rmsnorm.py", line 195, in rmsnorm
+    iw[0], iw[1], iw[2], iw[3], inp.ptr_to([gidx(row * hidden_size + st)])
+                                            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/norm/rmsnorm.py", line 152, in gidx
+    return txl.Cast(goff, "int64")
+           ~~~~~~~~^^^^^^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/python/tvm_tirx/ir/prim/expr.py", line 76, in __init__
+    self.__init_handle_by_constructor__(_prim_ffi_api.Cast, ty, value, loc)  # type: ignore
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "python/tvm_ffi/cython/object.pxi", line 363, in tvm_ffi.core.Object.__init_handle_by_constructor__
+  File "python/tvm_ffi/cython/object.pxi", line 189, in tvm_ffi.core.CObject.__init_handle_by_constructor__
+  File "python/tvm_ffi/cython/function.pxi", line 137, in tvm_ffi.core.ConstructorCall
+  File "python/tvm_ffi/cython/error.pxi", line 212, in tvm_ffi.core.CHECK_CALL
+  File "<unknown>", line 0, in _TAIL_CALL_CALL_NON_PY_GENERAL.llvm.8155519880111797829
+TypeError: Mismatched type on argument #1 when calling: `prim.Cast(0: ir.PrimType, 1: ir.PrimExpr, 2: ir.Location) -> prim.Cast`. Expected `ir.PrimExpr` but got `ffi.SmallStr`
+
+{"case": "rmsnorm_trace_sm100_control", "ok": false, "stage": "tirx", "type": "TypeError", "errors": ["Mismatched type on argument #1 when calling: `prim.Cast(0: ir.PrimType, 1: ir.PrimExpr, 2: ir.Location) -> prim.Cast`. Expected `ir.PrimExpr` but got `ffi.SmallStr`"]}
+Traceback (most recent call last):
+  File "/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_txl.py", line 43, in case
+    rec.update(fn())
+               ~~^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_txl.py", line 92, in txl_pipeline_specialize
+    @txl.kernel()
+     ~~~~~~~~~~^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/tirx_lite/entry.py", line 333, in decorator
+    check_low_level_ir(func, allowed_func_calls=allowed_func_calls)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/tirx_lite/low_level_ir.py", line 277, in check_low_level_ir
+    raise LowLevelIRContractError(report)
+tirx_kernels.tirx_lite.low_level_ir.LowLevelIRContractError: low-level IR contract failed with 2 violation(s) across 1 function(s); recorded 0 func_call(s) and 8 address-only load(s)
+- root: buffer_store (TensorStore, scope=global, span=/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_txl.py:136:1-136:63)
+- root: buffer_load (TensorLoad, scope=shared.dyn)
+
+{"case": "txl_pipeline_specialize", "ok": false, "stage": "tirx", "type": "LowLevelIRContractError", "errors": ["low-level IR contract failed with 2 violation(s) across 1 function(s); recorded 0 func_call(s) and 8 address-only load(s)\n- root: buffer_store (TensorStore, scope=global, span=/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_txl.py:136:1-136:63)\n- root: buffer_load (TensorLoad, scope=shared.dyn)"]}

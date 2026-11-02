@@ -1,0 +1,18 @@
+files scanned: 152 (TIRx-kernels 716d8a3, tirx_kernels/**/*.py > 3000 chars, excl. tests/bench/tirx_lite)
+  60  tcgen05.mma (UMMA)
+  58  TMEM (tcgen05.ld/st)
+  59  tcgen05.alloc
+  21  tcgen05.cp (smem->TMEM, scales)
+  21  2-CTA MMA/TMA (cta_group::2)
+   7  CLC (cluster launch control)
+  18  block-scaled MMA (mxf8/nvfp4)
+  75  packed f32x2 math
+  28  preferred_cluster launch attr
+  62  TMA (cp.async.bulk.tensor)
+  24  TMA multicast
+  34  clusters
+  38  setmaxnreg / regs=
+  31  griddepcontrol (PDL)
+  22  ldmatrix/stmatrix
+  10  mma.sync (SM80 MMA)
+   0  wgmma (SM90 MMA)

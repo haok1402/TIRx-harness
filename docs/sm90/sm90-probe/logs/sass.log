@@ -1,0 +1,17 @@
+NVIDIA H200, 595.91.07
+gemm_bf16_1024x1024x1024_mc0_s4               regs=168  spill=0 HGMMA=64   warn=0
+gemm_bf16_1024x1024x1024_mc1_s4               regs=168  spill=0 HGMMA=64   warn=0
+gemm_bf16_2048x4096x8192_mc1_s4               regs=168  spill=0 HGMMA=8    warn=0
+gemm_bf16_4096x4096x4096_mc0_s4               regs=168  spill=0 HGMMA=8    warn=0
+gemm_bf16_4096x4096x4096_mc1_s4               regs=168  spill=0 HGMMA=8    warn=0
+gemm_bf16_8192x8192x8192_mc1_s4               regs=168  spill=0 HGMMA=8    warn=0
+wgmma_rs_bf16_f32acc_n128                     regs=106  spill=0 HGMMA=8    warn=50
+wgmma_rs_e4m3_f32acc_n128                     regs=106  spill=0 HGMMA=0    warn=45
+wgmma_ss_bf16_f32acc_n128                     regs=90   spill=0 HGMMA=32   warn=11
+wgmma_ss_bf16_f32acc_n128_staged              regs=90   spill=0 HGMMA=32   warn=11
+wgmma_ss_bf16_f32acc_n256                     regs=154  spill=0 HGMMA=32   warn=11
+wgmma_ss_e4m3_f16acc_n128                     regs=58   spill=0 HGMMA=0    warn=5
+wgmma_ss_e4m3_f32acc_n128                     regs=90   spill=0 HGMMA=0    warn=6
+wgmma_ss_e5m2_f32acc_n128                     regs=90   spill=0 HGMMA=0    warn=6
+wgmma_ss_fp16_f16acc_n128                     regs=58   spill=0 HGMMA=32   warn=10
+wgmma_ss_fp16_f32acc_n128                     regs=90   spill=0 HGMMA=32   warn=11
