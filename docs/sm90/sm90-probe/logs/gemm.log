@@ -1,0 +1,5 @@
+NVIDIA H200, 595.91.07
+{"case": "gemm_bf16_4096x4096x4096_mc1_s4", "ok": true, "rel_err_vs_cublas": 0.0, "rel_err_vs_fp32": 0.0016612891340628266, "us": 199.39712524414062, "tflops": 689.2724922875421, "cublas_us": 173.99616241455078, "cublas_tflops": 789.89646417918, "ratio_vs_cublas": 0.8726111883584627}
+{"case": "gemm_bf16_8192x8192x8192_mc1_s4", "ok": true, "rel_err_vs_cublas": 0.0, "rel_err_vs_fp32": 0.0016559885116294026, "us": 1669.6409606933594, "tflops": 658.5317763882606, "cublas_us": 1644.0762329101562, "cublas_tflops": 668.7716820951605, "ratio_vs_cublas": 0.984688487893477}
+{"case": "gemm_bf16_2048x4096x8192_mc1_s4", "ok": true, "rel_err_vs_cublas": 0.0, "rel_err_vs_fp32": 0.0016552464803680778, "us": 182.26367950439453, "tflops": 754.0666020005715, "cublas_us": 170.4985618591309, "cublas_tflops": 806.1003680814307, "ratio_vs_cublas": 0.9354500157285589}
+{"case": "gemm_bf16_4096x4096x4096_mc0_s4", "ok": true, "rel_err_vs_cublas": 0.0, "rel_err_vs_fp32": 0.0016612891340628266, "us": 195.27488708496094, "tflops": 703.8229826869778, "cublas_us": 174.06463623046875, "cublas_tflops": 789.5857334859516, "ratio_vs_cublas": 0.8913825982894362}
