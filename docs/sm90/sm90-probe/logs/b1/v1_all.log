@@ -1,0 +1,34 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 76.53, 31"}}
+{"dtype": "bf16", "shape": [4096, 4096, 4096], "compile_s": 2.1, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 189.2, "cublas_us": 180.3, "tirx_tflops": 726.4, "cublas_tflops": 762.2, "ratio": 0.953}
+{"dtype": "bf16", "shape": [8192, 8192, 8192], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 1558.5, "cublas_us": 1570.5, "tirx_tflops": 705.5, "cublas_tflops": 700.1, "ratio": 1.008}
+{"dtype": "bf16", "shape": [16384, 16384, 16384], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 12728.7, "cublas_us": 12724.8, "tirx_tflops": 691.0, "cublas_tflops": 691.3, "ratio": 1.0}
+{"dtype": "bf16", "shape": [2048, 8192, 1024], "compile_s": 1.8, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 55.0, "cublas_us": 53.4, "tirx_tflops": 624.5, "cublas_tflops": 643.0, "ratio": 0.971}
+{"dtype": "bf16", "shape": [2048, 11008, 4096], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 275.4, "cublas_us": 250.2, "tirx_tflops": 670.5, "cublas_tflops": 738.1, "ratio": 0.908}
+{"dtype": "bf16", "shape": [4096, 4096, 11008], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 480.0, "cublas_us": 463.1, "tirx_tflops": 769.5, "cublas_tflops": 797.6, "ratio": 0.965}
+{"dtype": "bf16", "shape": [4096, 11008, 4096], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 507.9, "cublas_us": 495.7, "tirx_tflops": 727.3, "cublas_tflops": 745.2, "ratio": 0.976}
+{"dtype": "bf16", "shape": [1024, 1024, 1024], "compile_s": 3.4, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 19.4, "cublas_us": 10.3, "tirx_tflops": 110.7, "cublas_tflops": 209.4, "ratio": 0.529}
+{"dtype": "bf16", "shape": [2048, 2048, 2048], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 31.1, "cublas_us": 28.4, "tirx_tflops": 552.3, "cublas_tflops": 604.9, "ratio": 0.913}
+{"dtype": "bf16", "shape": [1024, 8192, 2048], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 59.7, "cublas_us": 49.4, "tirx_tflops": 575.3, "cublas_tflops": 695.4, "ratio": 0.827}
+{"dtype": "bf16", "shape": [2048, 4096, 11008], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 242.6, "cublas_us": 231.5, "tirx_tflops": 761.3, "cublas_tflops": 797.7, "ratio": 0.954}
+{"dtype": "bf16", "shape": [4096, 2048, 8192], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 184.9, "cublas_us": 174.9, "tirx_tflops": 743.5, "cublas_tflops": 786.0, "ratio": 0.946}
+{"dtype": "bf16", "shape": [8192, 1024, 2048], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 55.4, "cublas_us": 49.3, "tirx_tflops": 620.7, "cublas_tflops": 696.8, "ratio": 0.891}
+{"dtype": "fp16", "shape": [4096, 4096, 4096], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 193.7, "cublas_us": 185.3, "tirx_tflops": 709.6, "cublas_tflops": 741.6, "ratio": 0.957}
+{"dtype": "fp16", "shape": [8192, 8192, 8192], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 1482.0, "cublas_us": 1473.7, "tirx_tflops": 741.9, "cublas_tflops": 746.1, "ratio": 0.994}
+{"dtype": "fp16", "shape": [16384, 16384, 16384], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 13331.1, "cublas_us": 13186.3, "tirx_tflops": 659.8, "cublas_tflops": 667.1, "ratio": 0.989}
+{"dtype": "fp16", "shape": [2048, 8192, 1024], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 55.6, "cublas_us": 54.6, "tirx_tflops": 618.2, "cublas_tflops": 629.4, "ratio": 0.982}
+{"dtype": "fp16", "shape": [2048, 11008, 4096], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 282.0, "cublas_us": 258.1, "tirx_tflops": 654.8, "cublas_tflops": 715.7, "ratio": 0.915}
+{"dtype": "fp16", "shape": [4096, 4096, 11008], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 495.8, "cublas_us": 481.8, "tirx_tflops": 745.1, "cublas_tflops": 766.6, "ratio": 0.972}
+{"dtype": "fp16", "shape": [4096, 11008, 4096], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 522.7, "cublas_us": 514.3, "tirx_tflops": 706.6, "cublas_tflops": 718.2, "ratio": 0.984}
+{"dtype": "fp16", "shape": [1024, 1024, 1024], "compile_s": 3.5, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 19.4, "cublas_us": 10.2, "tirx_tflops": 110.6, "cublas_tflops": 210.0, "ratio": 0.526}
+{"dtype": "fp16", "shape": [2048, 2048, 2048], "compile_s": 1.6, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 31.3, "cublas_us": 28.9, "tirx_tflops": 548.1, "cublas_tflops": 593.9, "ratio": 0.923}
+{"dtype": "fp16", "shape": [1024, 8192, 2048], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 59.6, "cublas_us": 50.7, "tirx_tflops": 576.7, "cublas_tflops": 678.1, "ratio": 0.85}
+{"dtype": "fp16", "shape": [2048, 4096, 11008], "compile_s": 1.7, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 248.6, "cublas_us": 238.4, "tirx_tflops": 743.0, "cublas_tflops": 774.6, "ratio": 0.959}
+{"dtype": "fp16", "shape": [4096, 2048, 8192], "compile_s": 1.6, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 189.2, "cublas_us": 180.1, "tirx_tflops": 726.2, "cublas_tflops": 763.2, "ratio": 0.952}
+{"dtype": "fp16", "shape": [8192, 1024, 2048], "compile_s": 1.6, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 55.7, "cublas_us": 50.7, "tirx_tflops": 616.9, "cublas_tflops": 677.2, "ratio": 0.911}
+{"dtype": "bf16", "gated_geomean": 0.968, "n": 7, "min": 0.908}
+{"dtype": "fp16", "gated_geomean": 0.97, "n": 7, "min": 0.915}
+{"state_after": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "1980, 1980, 0x0000000000000000, 120.30, 33"}}

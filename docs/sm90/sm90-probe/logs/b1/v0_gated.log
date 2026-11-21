@@ -1,0 +1,38 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "810, 1980, 0x0000000000000001, 79.64, 30"}}
+{"dtype": "bf16", "shape": [4096, 4096, 4096], "compile_s": 2.4, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 197.0, "cublas_us": 181.2, "tirx_tflops": 697.6, "cublas_tflops": 758.7, "ratio": 0.919}
+{"dtype": "bf16", "shape": [8192, 8192, 8192], "compile_s": 2.1, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 1454.3, "cublas_us": 1416.9, "tirx_tflops": 756.0, "cublas_tflops": 776.0, "ratio": 0.974}
+{"dtype": "bf16", "shape": [16384, 16384, 16384], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 12768.5, "cublas_us": 12736.9, "tirx_tflops": 688.9, "cublas_tflops": 690.6, "ratio": 0.998}
+{"dtype": "bf16", "shape": [2048, 8192, 1024], "compile_s": 2.2, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 73.6, "cublas_us": 53.7, "tirx_tflops": 466.5, "cublas_tflops": 640.3, "ratio": 0.729}
+{"dtype": "bf16", "shape": [2048, 11008, 4096], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 286.6, "cublas_us": 250.5, "tirx_tflops": 644.4, "cublas_tflops": 737.1, "ratio": 0.874}
+{"dtype": "bf16", "shape": [4096, 4096, 11008], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 482.7, "cublas_us": 464.8, "tirx_tflops": 765.2, "cublas_tflops": 794.7, "ratio": 0.963}
+{"dtype": "bf16", "shape": [4096, 11008, 4096], "error": "ValueError: Check failed: (small.has_value() && (bits == 64 || (*small >= -(int64_t{1} << (bits - 1)) && *small < (int64_t{1} << (bits - 1))))) is false: Literal value 6392510528 exceeds range of int32"}
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in main_kernel (sm_90a): 36 bytes spill stores, 36 bytes spill loads (40 bytes stack frame)
+  result = compile_source(code, config, target=target)
+{"dtype": "bf16", "shape": [1024, 1024, 1024], "compile_s": 3.9, "clusters": 66, "remarks": ["[spill] in main_kernel (sm_90a): 36 bytes spill stores, 36 bytes spill loads (40 bytes stack frame)"], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 21.2, "cublas_us": 10.4, "tirx_tflops": 101.3, "cublas_tflops": 206.5, "ratio": 0.491}
+{"dtype": "bf16", "shape": [2048, 2048, 2048], "compile_s": 1.9, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 35.0, "cublas_us": 28.4, "tirx_tflops": 491.2, "cublas_tflops": 603.9, "ratio": 0.813}
+{"dtype": "bf16", "shape": [1024, 8192, 2048], "compile_s": 1.9, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 61.1, "cublas_us": 49.5, "tirx_tflops": 562.2, "cublas_tflops": 694.3, "ratio": 0.81}
+{"dtype": "bf16", "shape": [2048, 4096, 11008], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 242.0, "cublas_us": 231.3, "tirx_tflops": 763.2, "cublas_tflops": 798.4, "ratio": 0.956}
+{"dtype": "bf16", "shape": [4096, 2048, 8192], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 184.3, "cublas_us": 174.8, "tirx_tflops": 745.8, "cublas_tflops": 786.2, "ratio": 0.949}
+{"dtype": "bf16", "shape": [8192, 1024, 2048], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 59.6, "cublas_us": 49.4, "tirx_tflops": 576.5, "cublas_tflops": 695.4, "ratio": 0.829}
+{"dtype": "fp16", "shape": [4096, 4096, 4096], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 201.0, "cublas_us": 185.9, "tirx_tflops": 683.6, "cublas_tflops": 739.4, "ratio": 0.925}
+{"dtype": "fp16", "shape": [8192, 8192, 8192], "compile_s": 2.1, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 1652.8, "cublas_us": 1625.8, "tirx_tflops": 665.3, "cublas_tflops": 676.3, "ratio": 0.984}
+{"dtype": "fp16", "shape": [16384, 16384, 16384], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 13510.2, "cublas_us": 13522.0, "tirx_tflops": 651.1, "cublas_tflops": 650.5, "ratio": 1.001}
+{"dtype": "fp16", "shape": [2048, 8192, 1024], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 74.5, "cublas_us": 54.7, "tirx_tflops": 461.2, "cublas_tflops": 628.7, "ratio": 0.734}
+{"dtype": "fp16", "shape": [2048, 11008, 4096], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 294.4, "cublas_us": 258.4, "tirx_tflops": 627.4, "cublas_tflops": 714.8, "ratio": 0.878}
+{"dtype": "fp16", "shape": [4096, 4096, 11008], "compile_s": 2.1, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 499.1, "cublas_us": 482.8, "tirx_tflops": 740.1, "cublas_tflops": 765.1, "ratio": 0.967}
+{"dtype": "fp16", "shape": [4096, 11008, 4096], "error": "ValueError: Check failed: (small.has_value() && (bits == 64 || (*small >= -(int64_t{1} << (bits - 1)) && *small < (int64_t{1} << (bits - 1))))) is false: Literal value 6392510528 exceeds range of int32"}
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in main_kernel (sm_90a): 36 bytes spill stores, 36 bytes spill loads (40 bytes stack frame)
+  result = compile_source(code, config, target=target)
+{"dtype": "fp16", "shape": [1024, 1024, 1024], "compile_s": 3.9, "clusters": 66, "remarks": ["[spill] in main_kernel (sm_90a): 36 bytes spill stores, 36 bytes spill loads (40 bytes stack frame)"], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 21.9, "cublas_us": 10.5, "tirx_tflops": 98.2, "cublas_tflops": 205.2, "ratio": 0.478}
+{"dtype": "fp16", "shape": [2048, 2048, 2048], "compile_s": 1.9, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 35.7, "cublas_us": 29.1, "tirx_tflops": 481.3, "cublas_tflops": 591.3, "ratio": 0.814}
+{"dtype": "fp16", "shape": [1024, 8192, 2048], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 61.9, "cublas_us": 50.9, "tirx_tflops": 554.9, "cublas_tflops": 674.7, "ratio": 0.822}
+{"dtype": "fp16", "shape": [2048, 4096, 11008], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 249.9, "cublas_us": 239.4, "tirx_tflops": 739.2, "cublas_tflops": 771.5, "ratio": 0.958}
+{"dtype": "fp16", "shape": [4096, 2048, 8192], "compile_s": 1.9, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 189.7, "cublas_us": 180.4, "tirx_tflops": 724.4, "cublas_tflops": 762.1, "ratio": 0.951}
+{"dtype": "fp16", "shape": [8192, 1024, 2048], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 60.6, "cublas_us": 50.9, "tirx_tflops": 566.6, "cublas_tflops": 675.1, "ratio": 0.839}
+{"dtype": "bf16", "gated_geomean": 0.905, "n": 6, "min": 0.729}
+{"dtype": "fp16", "gated_geomean": 0.91, "n": 6, "min": 0.734}
+{"state_after": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "1980, 1980, 0x0000000000000000, 119.66, 33"}}

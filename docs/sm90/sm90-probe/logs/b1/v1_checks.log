@@ -1,0 +1,36 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+bf16 perf_remarks=error: compiled; chain check rc 0 {"function": "main_kernel", "gmma": 8, "chains": [4, 4], "gsb0": 2, "flags": []}
+fp16 perf_remarks=error: compiled; chain check rc 0 {"function": "main_kernel", "gmma": 8, "chains": [4, 4], "gsb0": 2, "flags": []}
+torch 2.15.0+cu134
+PASS  fp16_bf16_gemm_sm90 [fp16_4096x4096x4096]
+PASS  fp16_bf16_gemm_sm90 [fp16_8192x8192x8192]
+PASS  fp16_bf16_gemm_sm90 [fp16_16384x16384x16384]
+PASS  fp16_bf16_gemm_sm90 [fp16_2048x8192x1024]
+PASS  fp16_bf16_gemm_sm90 [fp16_2048x11008x4096]
+PASS  fp16_bf16_gemm_sm90 [fp16_4096x4096x11008]
+PASS  fp16_bf16_gemm_sm90 [fp16_4096x11008x4096]
+PASS  fp16_bf16_gemm_sm90 [fp16_1024x1024x1024]
+PASS  fp16_bf16_gemm_sm90 [fp16_2048x2048x2048]
+PASS  fp16_bf16_gemm_sm90 [fp16_1024x8192x2048]
+PASS  fp16_bf16_gemm_sm90 [fp16_2048x4096x11008]
+PASS  fp16_bf16_gemm_sm90 [fp16_4096x2048x8192]
+PASS  fp16_bf16_gemm_sm90 [fp16_8192x1024x2048]
+PASS  fp16_bf16_gemm_sm90 [bf16_4096x4096x4096]
+PASS  fp16_bf16_gemm_sm90 [bf16_8192x8192x8192]
+PASS  fp16_bf16_gemm_sm90 [bf16_16384x16384x16384]
+PASS  fp16_bf16_gemm_sm90 [bf16_2048x8192x1024]
+PASS  fp16_bf16_gemm_sm90 [bf16_2048x11008x4096]
+PASS  fp16_bf16_gemm_sm90 [bf16_4096x4096x11008]
+PASS  fp16_bf16_gemm_sm90 [bf16_4096x11008x4096]
+PASS  fp16_bf16_gemm_sm90 [bf16_1024x1024x1024]
+PASS  fp16_bf16_gemm_sm90 [bf16_2048x2048x2048]
+PASS  fp16_bf16_gemm_sm90 [bf16_1024x8192x2048]
+PASS  fp16_bf16_gemm_sm90 [bf16_2048x4096x11008]
+PASS  fp16_bf16_gemm_sm90 [bf16_4096x2048x8192]
+PASS  fp16_bf16_gemm_sm90 [bf16_8192x1024x2048]
+
+============================================================
+Total: 26  Passed: 26  Failed: 0  Skipped: 0
