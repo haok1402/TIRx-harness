@@ -26,10 +26,17 @@ spec: |
   Triton, CUTE DSL, raw CUDA, or an existing solution kernel for production
   computation.
 
-  Starting point: tirx-kernels `tirx_kernels/norm/rmsnorm.py` has an sm_90a
-  path (a persistent grid of 8 CTAs per SM with 128-bit loads and stores)
-  that reaches 0.80-0.96x of FlashInfer at batch_size >= 4113. Beating 1.0x
-  there is the first goal; small batches are latency bound.
+  Starting point: tirx-kernels `tirx_kernels/norm/rmsnorm.py`. Its sm_90a path
+  (`tirx_kernels/norm/_rmsnorm_sm90.py`) came from an earlier evolution run on
+  this task. It has two kernels:
+  - batch_size <= 1024: a register-resident kernel, one row per CTA;
+  - larger batches: a persistent ring of whole-row cp.async.bulk loads, fed by
+    global row tickets so the DRAM stream stays sequential.
+  It scores about 1.04-1.05x FlashInfer (1.01-1.08x per shape at
+  batch_size >= 4113). Large shapes run within ~2% of a driver memcpy of the
+  same bytes, so most remaining headroom is in the latency-bound small batches
+  and in the 4113-row tail. Build it with get_kernel(hidden_size, batch_size)
+  and _kernel_args(X, W, Y).
 
   Correctness requires torch.isclose rtol=1e-3, atol=1e-3 against FlashInfer
   on every element of every shape. Speedup is sum(FlashInfer GPU time) /
