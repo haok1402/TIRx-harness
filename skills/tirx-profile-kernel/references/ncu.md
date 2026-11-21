@@ -96,7 +96,7 @@ The SASS operand names the access — `LDS.U16` on bf16 = scalar un-vectorized
 shared load (vectorize/swizzle); `LDG.E` strided = uncoalesced global load.
 
 Caveats:
-- Confirm a metric on a busy GPU with `ncu --query-metrics --chip gb100` (reads the B200 metric DB without a device; the plain `--query-metrics` needs a free GPU).
+- Confirm a metric on a busy GPU with `ncu --query-metrics --chip gb100` (reads the B200 metric DB without a device; the plain `--query-metrics` needs a free GPU). On Hopper (H100/H200, sm_90a) use `--chip gh100`.
 - Plain `LDS`/`STS` (non-LDSM) bank conflicts have no per-source `smsp__sass_*` counter on this build — only device-level `l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld` / `_op_st` (Details page), then localize by SASS operand.
 
 **3. Map to the CUDA source line.** The report embeds the resolved `.cu`

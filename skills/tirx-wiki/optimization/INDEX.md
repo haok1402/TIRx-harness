@@ -15,6 +15,7 @@ optimizations.
 | [swp-edge-cutting.md](swp-edge-cutting.md) | Cut software-pipeline period via per-iter DAG edge cutting |
 | [playbook.md](playbook.md) | Implementation detail for recurring, empirically strong moves |
 | [kernel-catalog.md](kernel-catalog.md) | Which bundled canonical kernel already uses technique X |
+| [sm90.md](sm90.md) | Hopper (sm_90a): WGMMA protocol, fragments, setmaxnreg budgets, schedules, FP8 promotion, reading C75xx remarks |
 
 ## Empirically strong patterns
 
