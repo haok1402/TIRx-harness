@@ -1,0 +1,16 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"dtype": "bf16", "shape": [1, 4096, 4096], "nan": 0, "rel_err_vs_fp32": 0.001638536574319005, "cublas_rel_err_vs_fp32": 0.0016385363414883614, "bit_exact_cublas": false, "error": "AssertionError: Tensor-likes are not close!\n\nMismatched elements: 4 / 4096 (0.1%)\nGreatest absolute difference: 0.5 at index (0, 3610) (up to 0.01 allowed)\nGreatest relative difference: 0.007080078125 at index (0, 3812) (up to 0.001 allowed)"}
+{"dtype": "bf16", "shape": [100, 2112, 7168], "nan": 0, "rel_err_vs_fp32": 0.0016620922833681107, "cublas_rel_err_vs_fp32": 0.0016620768001303077, "bit_exact_cublas": false, "error": "AssertionError: Tensor-likes are not close!\n\nMismatched elements: 395 / 211200 (0.2%)\nGreatest absolute difference: 2.0 at index (49, 442) (up to 0.01 allowed)\nGreatest relative difference: 0.0078125 at index (58, 2109) (up to 0.001 allowed)"}
+{"dtype": "bf16", "shape": [777, 576, 1000], "nan": 0, "rel_err_vs_fp32": 0.001661619171500206, "cublas_rel_err_vs_fp32": 0.001661619171500206, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.525}
+{"dtype": "bf16", "shape": [4096, 2112, 7168], "nan": 0, "rel_err_vs_fp32": 0.001658012391999364, "cublas_rel_err_vs_fp32": 0.001658012391999364, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.689}
+{"dtype": "bf16", "shape": [300, 520, 136], "nan": 0, "rel_err_vs_fp32": 0.0016548805870115757, "cublas_rel_err_vs_fp32": 0.0016548805870115757, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.679}
+{"dtype": "bf16", "shape": [129, 264, 8], "nan": 0, "rel_err_vs_fp32": 0.0016514441231265664, "cublas_rel_err_vs_fp32": 0.0016514441231265664, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.703}
+{"dtype": "fp16", "shape": [1, 4096, 4096], "nan": 0, "rel_err_vs_fp32": 0.00020348381076473743, "cublas_rel_err_vs_fp32": 0.00020344108634162694, "bit_exact_cublas": false, "run_test": "pass", "ratio": 0.355}
+{"dtype": "fp16", "shape": [100, 2112, 7168], "nan": 0, "rel_err_vs_fp32": 0.00020799176127184182, "cublas_rel_err_vs_fp32": 0.00020783090440090746, "bit_exact_cublas": false, "run_test": "pass", "ratio": 0.242}
+{"dtype": "fp16", "shape": [777, 576, 1000], "nan": 0, "rel_err_vs_fp32": 0.00020763256179634482, "cublas_rel_err_vs_fp32": 0.00020763256179634482, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.569}
+{"dtype": "fp16", "shape": [4096, 2112, 7168], "nan": 0, "rel_err_vs_fp32": 0.0002073258365271613, "cublas_rel_err_vs_fp32": 0.0002073258365271613, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.696}
+{"dtype": "fp16", "shape": [300, 520, 136], "nan": 0, "rel_err_vs_fp32": 0.00020652617968153208, "cublas_rel_err_vs_fp32": 0.00020652617968153208, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.611}
+{"dtype": "fp16", "shape": [129, 264, 8], "nan": 0, "rel_err_vs_fp32": 0.00020377170585561544, "cublas_rel_err_vs_fp32": 0.00020377170585561544, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.706}
