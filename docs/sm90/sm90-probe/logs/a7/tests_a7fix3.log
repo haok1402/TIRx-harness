@@ -1,0 +1,69 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0 -- /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-wgmma-helpers/python/tvm_tirx/__init__.py
+TVM_TIRX_LIBRARY_PATH=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/tvm_tirx/lib SKBUILD_EDITABLE_SKIP=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/build
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-wgmma-helpers
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+collecting ... collected 52 items
+
+tests/python/backend/cuda/test_wgmma_helpers.py::test_shapes PASSED      [  1%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[8] PASSED [  3%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[64] PASSED [  5%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[256] PASSED [  7%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_a_fragment_is_the_first_16_accumulator_columns PASSED [  9%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_named_barriers PASSED [ 11%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_offsets_cross_swizzle_atoms PASSED [ 13%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw128-k128B] PASSED [ 15%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw128-k256B] PASSED [ 17%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw64-k64B] PASSED [ 19%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw64-k256B] PASSED [ 21%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw32-k32B] PASSED [ 23%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw32-k256B] PASSED [ 25%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw128-k128B] PASSED [ 26%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw128-k256B] PASSED [ 28%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw64-k64B] PASSED [ 30%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw64-k256B] PASSED [ 32%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw32-k32B] PASSED [ 34%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw32-k256B] PASSED [ 36%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw128-k128B] PASSED [ 38%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw128-k256B] PASSED [ 40%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw64-k128B] PASSED [ 42%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw64-k256B] PASSED [ 44%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw32-k128B] PASSED [ 46%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw32-k256B] PASSED [ 48%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n128] PASSED [ 50%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n256] PASSED [ 51%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-f16-n128] PASSED [ 53%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-e4m3-n128-k256B] PASSED [ 55%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-bf16-n128-k256B] PASSED [ 57%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-f16-n64-sw64] PASSED [ 59%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-bf16-n64-mnB-sw64-k256B] PASSED [ 61%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_chain_is_one_pipelined_group[ss] PASSED [ 63%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_chain_is_one_pipelined_group[rs] PASSED [ 65%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_named_barrier_ping_pong PASSED [ 67%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_fa_forward_microkernel PASSED [ 69%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_producer_and_two_ping_pong_consumers PASSED [ 71%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_wgmma_serialization_remarks PASSED [ 73%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_spills_and_stack_frames PASSED [ 75%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_multi_arch_log_tags_each_target PASSED [ 76%]
+tests/python/backend/cuda/test_perf_remarks.py::test_unnamed_remark_goes_to_the_only_entry_function PASSED [ 78%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_clean_and_empty_logs PASSED [ 80%]
+tests/python/backend/cuda/test_perf_remarks.py::test_report_policy PASSED [ 82%]
+tests/python/backend/cuda/test_perf_remarks.py::test_collectors_nest_by_identity PASSED [ 84%]
+tests/python/backend/cuda/test_perf_remarks.py::test_backend_config_validates_perf_remarks PASSED [ 86%]
+tests/python/backend/cuda/test_perf_remarks.py::test_serialized_wgmma_chain_warns_and_raises PASSED [ 88%]
+tests/python/backend/cuda/test_perf_remarks.py::test_clean_wgmma_chain_has_no_remarks[2] PASSED [ 90%]
+tests/python/backend/cuda/test_perf_remarks.py::test_clean_wgmma_chain_has_no_remarks[4] PASSED [ 92%]
+tests/python/backend/cuda/test_perf_remarks.py::test_register_spills_are_reported PASSED [ 94%]
+tests/python/backend/cuda/test_perf_remarks.py::test_error_mode_through_tvm_tirx_compile_is_structured PASSED [ 96%]
+tests/python/backend/cuda/test_perf_remarks.py::test_user_collector_around_tvm_tirx_compile PASSED [ 98%]
+tests/python/backend/cuda/test_perf_remarks.py::test_warn_mode_remarks_are_on_the_executable PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/python/backend/cuda/test_perf_remarks.py::test_report_policy
+  /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/_pytest/python.py:187: TIRxPerfWarning: ptxas [C7517] in main_kernel (sm_90a): wgmma.wait_group is injected in around line 646 by compiler to allow use of registers defined by GMMA in function 'main_kernel'
+    result = testfunction(**testargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 52 passed, 1 warning in 44.93s ========================

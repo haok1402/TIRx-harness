@@ -1,0 +1,107 @@
+{"kernel": "act_and_mul", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "allgather_gemm", "arch": "sm_100a", "ok": false, "stage": "compile", "err": "RuntimeError: Error: Could not find NVSHMEM installation. | Searched in the following locations: |   - /usr/local/cuda-13.2"}
+{"kernel": "alphamoe_fp8_blockscale_qwen3next", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.7}
+{"kernel": "blockscaled_contiguous_gather_grouped_gemm_swiglu_fusion_rubin", "arch": "sm_107a", "ok": false, "stage": "compile", "err": "RuntimeError: NVRTC compilation failed: | nvrtc: error: invalid value for --gpu-architecture (-arch) | \u0000"}
+{"kernel": "bmm_fp8_rubin", "arch": "sm_107a", "ok": false, "stage": "compile", "err": "RuntimeError: NVRTC compilation failed: | nvrtc: error: invalid value for --gpu-architecture (-arch) | \u0000"}
+{"kernel": "cudnn_sm100_bsa_backward_blk128", "arch": "sm_100a", "ok": true, "funcs": 3, "s": 4.7}
+{"kernel": "cudnn_sm100_bsa_backward_blk64", "arch": "sm_100a", "ok": true, "funcs": 3, "s": 4.5}
+{"kernel": "cudnn_sm100_bsa_forward_blk128", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 4.4}
+{"kernel": "cudnn_sm100_bsa_forward_blk64", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 3.7}
+{"kernel": "cudnn_sm100_bsa_forward_combine_blk64", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.0}
+{"kernel": "cudnn_sm100_csa_compressor_fwd", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.1}
+{"kernel": "cudnn_sm100_dense_blockscaled_gemm_persistent_amax", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.1}
+{"kernel": "cudnn_sm100_dense_blockscaled_gemm_persistent_dsrelu_quant", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.5}
+{"kernel": "cudnn_sm100_dense_blockscaled_gemm_persistent_srelu_quant", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.3}
+{"kernel": "cudnn_sm100_dense_blockscaled_gemm_persistent_swiglu_interleaved_quant", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.3}
+{"kernel": "cudnn_sm100_dense_gemm_persistent_swiglu", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.2}
+{"kernel": "cudnn_sm100_dsa_sparse_attention_backward", "arch": "sm_100a", "ok": true, "funcs": 4, "s": 6.5}
+{"kernel": "cudnn_sm100_flex_attention_backward", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 3.5}
+{"kernel": "cudnn_sm100_flex_attention_forward_hd256", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 4.8}
+{"kernel": "cudnn_sm100_gdn2_bprop_f16", "arch": "sm_100a", "ok": true, "funcs": 2, "s": 6.7}
+{"kernel": "cudnn_sm100_gdn2_prefill_f16", "arch": "sm_100a", "ok": true, "funcs": 2, "s": 6.9}
+{"kernel": "cudnn_sm100_gdn2_recompute_f16", "arch": "sm_100a", "ok": true, "funcs": 2, "s": 5.3}
+{"kernel": "cudnn_sm100_gdn_bprop_f16", "arch": "sm_100a", "ok": true, "funcs": 2, "s": 10.4}
+{"kernel": "cudnn_sm100_gdn_prefill_f16", "arch": "sm_100a", "ok": true, "funcs": 2, "s": 7.4}
+{"kernel": "cudnn_sm100_gdn_recompute_f16", "arch": "sm_100a", "ok": true, "funcs": 2, "s": 5.6}
+{"kernel": "cudnn_sm100_gemm_proj_rope_mxfp8_bf16in", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 3.2}
+{"kernel": "cudnn_sm100_gemm_proj_rope_mxfp8_mxfp8in", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 3.2}
+{"kernel": "cudnn_sm100_kda_bprop_f16", "arch": "sm_100a", "ok": true, "funcs": 2, "s": 5.8}
+{"kernel": "cudnn_sm100_moe_blockscaled_grouped_gemm_dglu_dbias", "arch": "sm_100a", "ok": true, "funcs": 2, "s": 4.3}
+{"kernel": "cudnn_sm100_moe_grouped_gemm_dglu_dbias", "arch": "sm_100a", "ok": true, "funcs": 2, "s": 3.4}
+{"kernel": "cudnn_sm103_flex_attention_forward", "arch": "sm_103a", "ok": true, "funcs": 1, "s": 4.6}
+{"kernel": "deepep_combine", "arch": "sm_100a", "ok": false, "stage": "trace", "err": "ModuleNotFoundError: No module named 'deep_ep'"}
+{"kernel": "deepep_dispatch", "arch": "sm_100a", "ok": false, "stage": "trace", "err": "ModuleNotFoundError: No module named 'deep_ep'"}
+{"kernel": "deepgemm_sm100_fp4_mqa_logits", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.7}
+{"kernel": "deepgemm_sm100_fp4_paged_mqa_logits", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.4}
+{"kernel": "deepgemm_sm100_fp8_bmm", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.1}
+{"kernel": "deepgemm_sm100_fp8_gemm_1d1d", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.1}
+{"kernel": "deepgemm_sm100_fp8_mqa_logits", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.6}
+{"kernel": "deepgemm_sm100_fp8_paged_mqa_logits", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.4}
+{"kernel": "deepgemm_sm100_k_grouped_fp8_gemm_contiguous", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.3}
+{"kernel": "deepgemm_sm100_m_grouped_fp8_gemm_contiguous", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.3}
+{"kernel": "deepgemm_sm100_m_grouped_fp8_gemm_masked", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.4}
+{"kernel": "deepgemm_sm100_tf32_hc_prenorm_gemm", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.5}
+{"kernel": "dense_blockscaled_gemm_sm107", "arch": "sm_107a", "ok": false, "stage": "compile", "err": "RuntimeError: NVRTC compilation failed: | nvrtc: error: invalid value for --gpu-architecture (-arch) | \u0000"}
+{"kernel": "fast_topk_clusters", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.3}
+{"kernel": "fastcu_nvfp4_gemm_gb300", "arch": "sm_103a", "ok": false, "stage": "trace", "err": "AttributeError: module 'tirx_kernels.ported.fastcu.nvfp4_gemm_gb300' has no attribute 'get_kernel'"}
+{"kernel": "filtered_topk", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 2.0}
+{"kernel": "flash_attention4", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 4.7}
+{"kernel": "flash_attention4_fp4", "arch": "sm_103a", "ok": true, "funcs": 1, "s": 4.3}
+{"kernel": "flash_attention4_tileop", "arch": "sm_100a", "ok": false, "stage": "compile", "err": "RuntimeError: Tensor instruction lowering failed: op=tirx.cuda.tile.apply target=cuda scope=thread | B: no matching shared matrix descriptor; swizzle 3: descriptor strides must be compile-time constants; swizzle 0: descriptor strides must be compile-time constants; swizzle 1: descriptor strides must be compile-time constants; swizzle 2: descriptor strides must be compile-time constants | call: T.c"}
+{"kernel": "flash_attention_backward_sm100", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 3.4}
+{"kernel": "flash_mla_sparse_fwd", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 2.8}
+{"kernel": "flashinfer_add_rmsnorm_fp4quant", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.0}
+{"kernel": "flashinfer_fused_add_rmsnorm", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.9}
+{"kernel": "flashinfer_fused_add_rmsnorm_quant", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.9}
+{"kernel": "flashinfer_fused_dit_layernorm", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.0}
+{"kernel": "flashinfer_layernorm", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.7}
+{"kernel": "flashinfer_qk_rmsnorm", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "flashinfer_rmsnorm", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "flashinfer_rmsnorm_fp4quant", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "flashinfer_rmsnorm_quant", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.9}
+{"kernel": "fp16_bf16_gemm", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.6}
+{"kernel": "gdn_cp_prefill_sm100", "arch": "sm_100a", "ok": true, "funcs": 6, "s": 14.4}
+{"kernel": "gdn_decode_bf16_ilp4", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.0}
+{"kernel": "gdn_decode_bf16_wide_vec_mtp", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.3}
+{"kernel": "gdn_decode_bf16_wide_vec_t1", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.4}
+{"kernel": "gdn_decode_fp32_mtp_warp", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.7}
+{"kernel": "gdn_prefill_sm100", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 6.0}
+{"kernel": "gemm_reduce_scatter", "arch": "sm_100a", "ok": false, "stage": "compile", "err": "RuntimeError: Error: Could not find NVSHMEM installation. | Searched in the following locations: |   - /usr/local/cuda-13.2"}
+{"kernel": "grouped_gemm_masked_rubin", "arch": "sm_107a", "ok": false, "stage": "trace", "err": "TypeError: get_kernel() got an unexpected keyword argument 'expected_m_per_group'"}
+{"kernel": "kda_backward_packed", "arch": "sm_100a", "ok": true, "funcs": 3, "s": 18.9}
+{"kernel": "kda_decode_multishape", "arch": "sm_100a", "ok": false, "stage": "trace", "err": "SkipTest: native TIRx KDA decode builds its device programs inside the shape dispatch; inspect them through prepare_bench for 1 token(s) x 8 sequence(s)"}
+{"kernel": "kda_forward_portfolio_multishape", "arch": "sm_100a", "ok": true, "funcs": 2, "s": 7.0}
+{"kernel": "merge_state", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "mla_dsv4_multishape", "arch": "sm_100a", "ok": true, "funcs": 0, "s": 0.6}
+{"kernel": "msa_decode_multishape", "arch": "sm_100a", "ok": false, "stage": "trace", "err": "AcceleratorError: CUDA error: no CUDA-capable device is detected | Search for `cudaErrorNoDevice' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information. | Device-side assertions were explicitly omitted for this error check; the error probably arose while initializing the DSA handlers."}
+{"kernel": "msa_prefill_multishape", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 5.9}
+{"kernel": "msa_sparse_atten_fwd_combine_sm100", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.3}
+{"kernel": "msa_sparse_atten_fwd_nvfp4_kv_sm100", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 6.1}
+{"kernel": "msa_sparse_atten_fwd_sm100", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 6.6}
+{"kernel": "msa_sparse_prepare_flat_schedule_sm100", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "msa_sparse_prepare_fwd_split_atomic_sm100", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.7}
+{"kernel": "mxfp4_quantize", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "mxfp8_quantize", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "nvfp4_gemm", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.3}
+{"kernel": "nvfp4_quantize", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "nvfp4_quantize_per_token", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "radix_topk_multi_cta", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.9}
+{"kernel": "radix_topk_single_cta", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.9}
+{"kernel": "recurrent_kda_decode_grouped", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.0}
+{"kernel": "recurrent_kda_decode_one_warp", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.2}
+{"kernel": "rmsnorm", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "selective_state_update_mtp_horizontal", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.2}
+{"kernel": "selective_state_update_mtp_simple", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.1}
+{"kernel": "selective_state_update_mtp_vertical", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.6}
+{"kernel": "selective_state_update_stp_horizontal", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.5}
+{"kernel": "selective_state_update_stp_simple", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.9}
+{"kernel": "selective_state_update_stp_vertical", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 1.6}
+{"kernel": "silu_and_mul_nvfp4_experts_quantize", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "sm100_fp8_fp4_mega_moe", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 2.0}
+{"kernel": "sparse_flashmla_decode_head64", "arch": "sm_100a", "ok": false, "stage": "trace", "err": "SkipTest: CUDA is required for sparse FlashMLA decode"}
+{"kernel": "sparse_flashmla_prefill_head128_phase1", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 2.7}
+{"kernel": "sparse_flashmla_prefill_head128_small_topk_phase1", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 2.9}
+{"kernel": "sparse_flashmla_prefill_head64_phase1", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 2.8}
+{"kernel": "stable_sort_topk_by_value", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 0.8}
+{"kernel": "vsa_multishape", "arch": "sm_100a", "ok": true, "funcs": 1, "s": 3.9}
+SUMMARY ok=93 fail=13

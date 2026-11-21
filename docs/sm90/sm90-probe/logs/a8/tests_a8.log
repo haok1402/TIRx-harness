@@ -1,0 +1,49 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0 -- /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-packed-f32/python/tvm_tirx/__init__.py
+TVM_TIRX_LIBRARY_PATH=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/tvm_tirx/lib SKBUILD_EDITABLE_SKIP=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/build
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-packed-f32
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+collecting ... collected 38 items
+
+tests/python/backend/cuda/test_packed_f32x2.py::test_argument_checks PASSED [  2%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_helper_has_packed_and_scalar_paths PASSED [  5%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_same_source_compiles_packed_on_sm100_and_scalar_on_sm90[add] PASSED [  7%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_same_source_compiles_packed_on_sm100_and_scalar_on_sm90[sub] PASSED [ 10%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_same_source_compiles_packed_on_sm100_and_scalar_on_sm90[mul] PASSED [ 13%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_same_source_compiles_packed_on_sm100_and_scalar_on_sm90[fma] PASSED [ 15%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[add_rn] PASSED [ 18%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[add_rn_ftz] PASSED [ 21%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[add_rz] PASSED [ 23%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[add_rz_ftz] PASSED [ 26%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[add_rm] PASSED [ 28%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[add_rm_ftz] PASSED [ 31%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[add_rp] PASSED [ 34%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[add_rp_ftz] PASSED [ 36%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[sub_rn] PASSED [ 39%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[sub_rn_ftz] PASSED [ 42%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[sub_rz] PASSED [ 44%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[sub_rz_ftz] PASSED [ 47%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[sub_rm] PASSED [ 50%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[sub_rm_ftz] PASSED [ 52%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[sub_rp] PASSED [ 55%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[sub_rp_ftz] PASSED [ 57%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[mul_rn] PASSED [ 60%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[mul_rn_ftz] PASSED [ 63%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[mul_rz] PASSED [ 65%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[mul_rz_ftz] PASSED [ 68%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[mul_rm] PASSED [ 71%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[mul_rm_ftz] PASSED [ 73%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[mul_rp] PASSED [ 76%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[mul_rp_ftz] PASSED [ 78%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[fma_rn] PASSED [ 81%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[fma_rn_ftz] PASSED [ 84%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[fma_rz] PASSED [ 86%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[fma_rz_ftz] PASSED [ 89%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[fma_rm] PASSED [ 92%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[fma_rm_ftz] PASSED [ 94%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[fma_rp] PASSED [ 97%]
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[fma_rp_ftz] PASSED [100%]
+
+============================= 38 passed in 34.91s ==============================

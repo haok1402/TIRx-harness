@@ -1,0 +1,15 @@
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_unpinned_setmaxnreg_is_rejected[sm_100a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_pinned_setmaxnreg_compiles[attrs0-sm_90a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_pinned_setmaxnreg_compiles[attrs0-sm_100a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_pinned_setmaxnreg_compiles[attrs1-sm_90a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_pinned_setmaxnreg_compiles[attrs1-sm_100a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_kernels_without_setmaxnreg_are_unaffected
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_entry_registers_matches_ptxas[384-1-sm_90a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_entry_registers_matches_ptxas[384-1-sm_100a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_entry_registers_matches_ptxas[384-2-sm_90a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_entry_registers_matches_ptxas[384-2-sm_100a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_entry_registers_matches_ptxas[256-1-sm_90a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_entry_registers_matches_ptxas[256-1-sm_100a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_entry_registers_matches_ptxas[128-1-sm_90a]
+FAILED tests/python/backend/cuda/test_setmaxnreg_contract.py::test_entry_registers_matches_ptxas[128-1-sm_100a]
+========================= 15 failed, 1 passed in 5.74s =========================

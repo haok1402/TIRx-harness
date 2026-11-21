@@ -1,0 +1,4 @@
+NVIDIA H200, 595.91.07
+tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[fma_rp_ftz] PASSED [100%]
+
+============================= 38 passed in 34.91s ==============================

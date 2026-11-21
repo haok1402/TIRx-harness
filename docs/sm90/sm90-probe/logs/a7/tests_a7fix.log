@@ -1,0 +1,102 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0 -- /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-wgmma-helpers/python/tvm_tirx/__init__.py
+TVM_TIRX_LIBRARY_PATH=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/tvm_tirx/lib SKBUILD_EDITABLE_SKIP=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/build
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-wgmma-helpers
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+collecting ... collected 37 items
+
+tests/python/backend/cuda/test_wgmma_helpers.py::test_shapes PASSED      [  2%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[8] PASSED [  5%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[64] PASSED [  8%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[256] PASSED [ 10%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_a_fragment_is_the_first_16_accumulator_columns PASSED [ 13%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_named_barriers FAILED [ 16%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_offsets_cross_swizzle_atoms PASSED [ 18%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw128-k128B] PASSED [ 21%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw128-k256B] PASSED [ 24%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw64-k64B] PASSED [ 27%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw64-k256B] PASSED [ 29%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw32-k32B] PASSED [ 32%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[bflo-sw32-k256B] PASSED [ 35%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw128-k128B] PASSED [ 37%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw128-k256B] PASSED [ 40%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw64-k64B] PASSED [ 43%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw64-k256B] PASSED [ 45%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw32-k32B] PASSED [ 48%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_k_major_chain_across_swizzle_atoms[floa-sw32-k256B] PASSED [ 51%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw128-k128B] PASSED [ 54%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw128-k256B] PASSED [ 56%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw64-k128B] PASSED [ 59%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw64-k256B] PASSED [ 62%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw32-k128B] PASSED [ 64%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_mn_major_b_across_atoms[sw32-k256B] PASSED [ 67%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n128] PASSED [ 70%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n256] PASSED [ 72%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-f16-n128] PASSED [ 75%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-e4m3-n128-k256B] PASSED [ 78%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-bf16-n128-k256B] PASSED [ 81%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-f16-n64-sw64] PASSED [ 83%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-bf16-n64-mnB-sw64-k256B] PASSED [ 86%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_chain_is_one_pipelined_group[ss] PASSED [ 89%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_chain_is_one_pipelined_group[rs] PASSED [ 91%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_named_barrier_ping_pong PASSED [ 94%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_fa_forward_microkernel FAILED [ 97%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_producer_and_two_ping_pong_consumers PASSED [100%]
+
+=================================== FAILURES ===================================
+_____________________________ test_named_barriers ______________________________
+tests/python/backend/cuda/test_wgmma_helpers.py:100: in test_named_barriers
+    assert bars.alloc(128).barrier_id == 5 and bars.free == 15 - 5
+E   assert (5 == 5 and 9 == (15 - 5))
+E    +  where 5 = NamedBarrier(id=5, threads=128).barrier_id
+E    +    where NamedBarrier(id=5, threads=128) = alloc(128)
+E    +      where alloc = <tvm_tirx.backend.cuda.lang.named_barrier.NamedBarriers object at 0x1454015b4910>.alloc
+E    +  and   9 = <tvm_tirx.backend.cuda.lang.named_barrier.NamedBarriers object at 0x1454015b4910>.free
+_________________________ test_fa_forward_microkernel __________________________
+tests/python/backend/cuda/test_wgmma_helpers.py:408: in test_fa_forward_microkernel
+    @T.function
+     ^^^^^^^^^^
+python/tvm_tirx/script/parser/entry.py:424: in decorator
+    return apply(function) if function is not None else apply
+           ^^^^^^^^^^^^^^^
+python/tvm_tirx/script/parser/entry.py:413: in apply
+    result = parse(
+python/tvm_tirx/script/parser/entry.py:904: in parse
+    result = _builder()
+             ^^^^^^^^^^
+tests/python/backend/cuda/test_wgmma_helpers.py:409: in _builder1
+    def main(Q: T.Tensor((M, HD), "bfloat16", align=16), K: T.Tensor((KV, HD), "bfloat16", align=16),
+tests/python/backend/cuda/test_wgmma_helpers.py:445: in _build0
+    W.chain(qk, s_acc, q_tile.k_steps(qk, qk_steps), k_tile.k_steps(qk, qk_steps), accumulate=False)
+python/tvm_tirx/script/ir_builder/base.py:381: in ctx
+    return with_at_group_(self.loc, thunk, attach_result=attach_result)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/script/ir_builder/base.py:466: in with_at_group_
+    value = thunk()
+            ^^^^^^^
+tests/python/backend/cuda/test_wgmma_helpers.py:445: in <lambda>
+    W.chain(qk, s_acc, q_tile.k_steps(qk, qk_steps), k_tile.k_steps(qk, qk_steps), accumulate=False)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/script/ir_builder/base.py:381: in ctx
+    return with_at_group_(self.loc, thunk, attach_result=attach_result)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/script/ir_builder/base.py:466: in with_at_group_
+    value = thunk()
+            ^^^^^^^
+tests/python/backend/cuda/test_wgmma_helpers.py:445: in <lambda>
+    W.chain(qk, s_acc, q_tile.k_steps(qk, qk_steps), k_tile.k_steps(qk, qk_steps), accumulate=False)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/backend/cuda/lang/wgmma.py:292: in k_steps
+    return [self.k_step(op, start + k, base) for k in range(steps)]
+                                                      ^^^^^^^^^^^^
+E   TypeError: 'Var' object cannot be interpreted as an integer
+=========================== short test summary info ============================
+FAILED tests/python/backend/cuda/test_wgmma_helpers.py::test_named_barriers - assert (5 == 5 and 9 == (15 - 5))
+ +  where 5 = NamedBarrier(id=5, threads=128).barrier_id
+ +    where NamedBarrier(id=5, threads=128) = alloc(128)
+ +      where alloc = <tvm_tirx.backend.cuda.lang.named_barrier.NamedBarriers object at 0x1454015b4910>.alloc
+ +  and   9 = <tvm_tirx.backend.cuda.lang.named_barrier.NamedBarriers object at 0x1454015b4910>.free
+FAILED tests/python/backend/cuda/test_wgmma_helpers.py::test_fa_forward_microkernel - TypeError: 'Var' object cannot be interpreted as an integer
+======================== 2 failed, 35 passed in 33.99s =========================

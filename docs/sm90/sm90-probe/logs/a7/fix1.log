@@ -1,0 +1,8 @@
+srun: Job 3280666 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Job 3280666 step creation still disabled, retrying (Requested nodes are busy)
+srun: Job 3280666 step creation still disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=3280666.2130
+NVIDIA H200, 595.91.07
+ +  and   9 = <tvm_tirx.backend.cuda.lang.named_barrier.NamedBarriers object at 0x1454015b4910>.free
+FAILED tests/python/backend/cuda/test_wgmma_helpers.py::test_fa_forward_microkernel - TypeError: 'Var' object cannot be interpreted as an integer
+======================== 2 failed, 35 passed in 33.99s =========================

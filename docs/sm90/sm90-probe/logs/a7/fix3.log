@@ -1,0 +1,5 @@
+NVIDIA H200, 595.91.07
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 52 passed, 1 warning in 44.93s ========================
+All checks passed!

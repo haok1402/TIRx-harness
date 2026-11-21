@@ -1,0 +1,6 @@
+srun: Job 2562280 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=2562280.222
+NVIDIA H200, 595.91.07
+FAILED tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[f32x2_fma_rp] - AttributeError: module 'tvm_tirx.backend.cuda.script' has no attribute 'f32x2_fma_rp'
+FAILED tests/python/backend/cuda/test_packed_f32x2.py::test_bit_exact_against_scalar_ptx[f32x2_fma_rp_ftz] - AttributeError: module 'tvm_tirx.backend.cuda.script' has no attribute 'f32x2_fma_rp_ftz'
+============================== 37 failed in 5.74s ==============================
