@@ -19,4 +19,7 @@ print(f"upstream {len(a)} items ({sum(v.startswith('skip') for v in a.values())}
 print("only upstream:", sorted(set(a) - set(b))[:10]); print("only A2:", sorted(set(b) - set(a))[:10])
 diff = [k for k in set(a) & set(b) if a[k].split("\t")[0] != b[k].split("\t")[0]]
 print(f"same nodeid, different run/skip status: {len(diff)}", sorted(diff)[:10])
+xa = sum(v.split("\t")[1] == "xfail" for v in a.values()); xb = sum(v.split("\t")[1] == "xfail" for v in b.values())
+xd = [k for k in set(a) & set(b) if a[k].split("\t")[1] != b[k].split("\t")[1]]
+print(f"active static xfail: upstream {xa}, A2 {xb}; differing: {len(xd)}", sorted(xd)[:5])
 PY

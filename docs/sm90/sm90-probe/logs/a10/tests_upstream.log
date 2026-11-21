@@ -1,0 +1,53 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0 -- /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/upstream-main/python/tvm_tirx/__init__.py
+TVM_TIRX_LIBRARY_PATH=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/tvm_tirx/lib SKBUILD_EDITABLE_SKIP=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/build
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/upstream-main
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+collecting ... collected 42 items
+
+tests/python/tirx/test_cuda_backend_config.py::test_defaults_overrides_snapshot_and_roundtrip PASSED [  2%]
+tests/python/tirx/test_cuda_backend_config.py::test_fixed_keys_and_types[config0-ValueError] PASSED [  4%]
+tests/python/tirx/test_cuda_backend_config.py::test_fixed_keys_and_types[config1-ValueError] PASSED [  7%]
+tests/python/tirx/test_cuda_backend_config.py::test_fixed_keys_and_types[config2-ValueError] PASSED [  9%]
+tests/python/tirx/test_cuda_backend_config.py::test_fixed_keys_and_types[config3-TypeError] PASSED [ 11%]
+tests/python/tirx/test_cuda_backend_config.py::test_fixed_keys_and_types[config4-TypeError] PASSED [ 14%]
+tests/python/tirx/test_cuda_backend_config.py::test_fixed_keys_and_types[config5-TypeError] PASSED [ 16%]
+tests/python/tirx/test_cuda_backend_config.py::test_fixed_keys_and_types[config6-ValueError] PASSED [ 19%]
+tests/python/tirx/test_cuda_backend_config.py::test_fixed_keys_and_types[config7-ValueError] PASSED [ 21%]
+tests/python/tirx/test_cuda_backend_config.py::test_fixed_keys_and_types[config8-ValueError] PASSED [ 23%]
+tests/python/tirx/test_cuda_backend_config.py::test_managed_routing_flags[nvrtc---gpu-architecture=sm_90] PASSED [ 26%]
+tests/python/tirx/test_cuda_backend_config.py::test_managed_routing_flags[nvcc--arch] PASSED [ 28%]
+tests/python/tirx/test_cuda_backend_config.py::test_managed_routing_flags[nvcc---gpu-code=sm_90] PASSED [ 30%]
+tests/python/tirx/test_cuda_backend_config.py::test_managed_routing_flags[nvcc---options-file=flags.txt] PASSED [ 33%]
+tests/python/tirx/test_cuda_backend_config.py::test_managed_routing_flags[nvcc---cubin] PASSED [ 35%]
+tests/python/tirx/test_cuda_backend_config.py::test_managed_routing_flags[nvrtc---ptxas-options=-O1] PASSED [ 38%]
+tests/python/tirx/test_cuda_backend_config.py::test_managed_routing_flags[ptxas---output-file=kernel.cubin] PASSED [ 40%]
+tests/python/tirx/test_cuda_backend_config.py::test_native_flags_and_default_format[nvrtc-cubin] PASSED [ 42%]
+tests/python/tirx/test_cuda_backend_config.py::test_native_flags_and_default_format[nvcc-fatbin] PASSED [ 45%]
+tests/python/tirx/test_cuda_backend_config.py::test_target_tag_defaults_and_precedence[name] PASSED [ 47%]
+tests/python/tirx/test_cuda_backend_config.py::test_target_tag_defaults_and_precedence[dict] PASSED [ 50%]
+tests/python/tirx/test_cuda_backend_config.py::test_target_tag_defaults_and_precedence[export] PASSED [ 52%]
+tests/python/tirx/test_cuda_backend_config.py::test_entry_ir_roundtrip_and_resolution PASSED [ 54%]
+tests/python/tirx/test_cuda_backend_config.py::test_backend_config_controls_actual_ftz[nvrtc] PASSED [ 57%]
+tests/python/tirx/test_cuda_backend_config.py::test_backend_config_controls_actual_ftz[nvcc] PASSED [ 59%]
+tests/python/tirx/test_cuda_backend_config.py::test_two_entries_keep_compilers_math_and_order PASSED [ 61%]
+tests/python/tirx/test_cuda_backend_config.py::test_concurrent_source_compilation[nvrtc] PASSED [ 64%]
+tests/python/tirx/test_cuda_backend_config.py::test_concurrent_source_compilation[nvcc] PASSED [ 66%]
+tests/python/tirx/test_cuda_backend_config.py::test_serialized_config_replays_in_fresh_process[False] PASSED [ 69%]
+tests/python/tirx/test_cuda_backend_config.py::test_serialized_config_replays_in_fresh_process[True] PASSED [ 71%]
+tests/python/tirx/test_cuda_backend_config.py::test_device_helpers_are_cloned_per_configuration PASSED [ 73%]
+tests/python/tirx/test_cuda_backend_config.py::test_cuda_host_embeds_independent_binaries_in_plain_cpp[False] PASSED [ 76%]
+tests/python/tirx/test_cuda_backend_config.py::test_cuda_host_embeds_independent_binaries_in_plain_cpp[True] PASSED [ 78%]
+tests/python/tirx/test_cuda_backend_config.py::test_legacy_payloads PASSED [ 80%]
+tests/python/tirx/test_cuda_backend_config.py::test_generic_cuda_target_without_gpu PASSED [ 83%]
+tests/python/tirx/test_cuda_backend_config.py::test_entry_architectures_compile_without_gpu_detection[None] PASSED [ 85%]
+tests/python/tirx/test_cuda_backend_config.py::test_entry_architectures_compile_without_gpu_detection[cuda] PASSED [ 88%]
+tests/python/tirx/test_cuda_backend_config.py::test_entry_architectures_compile_without_gpu_detection[target2] PASSED [ 90%]
+tests/python/tirx/test_cuda_backend_config.py::test_entry_architectures_compile_without_gpu_detection[target_object] PASSED [ 92%]
+tests/python/tirx/test_cuda_backend_config.py::test_source_fallback_does_not_invoke_compiler PASSED [ 95%]
+tests/python/tirx/test_cuda_backend_config.py::test_identical_entries_share_one_module PASSED [ 97%]
+tests/python/tirx/test_cuda_backend_config.py::test_build_snapshots_config_before_passes PASSED [100%]
+
+============================= 42 passed in 58.81s ==============================

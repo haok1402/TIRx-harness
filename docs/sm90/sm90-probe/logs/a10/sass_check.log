@@ -1,0 +1,15 @@
+chain2_clean                                  regs=90   spill=0    GMMA=2    ARRIVE=1    perf=0   chain=ok
+chain2_hazard                                 regs=90   spill=0    GMMA=2    ARRIVE=2    perf=2   chain=serialized
+    ptxas info    : (C7517) wgmma.wait_group is injected in around line 116 by compiler to allow use of registers defined by GMMA in function 'main_kernel'
+    ptxas info    : (C7511) Potential Performance Loss: wgmma.mma_async instructions are serialized due to insufficient register resources for the wgmma pipeline in the function 'main_kernel' in line 120
+chain4_clean                                  regs=90   spill=0    GMMA=4    ARRIVE=1    perf=0   chain=ok
+gemm_bf16_4096x4096x4096_mc1_s4               regs=168  spill=0    GMMA=8    ARRIVE=2    perf=0   chain=ok
+hazard                                        regs=168  spill=0    GMMA=8    ARRIVE=2    perf=0   chain=ok
+hazard2                                       regs=168  spill=0    GMMA=8    ARRIVE=8    perf=2   chain=serialized
+    ptxas info    : (C7517) wgmma.wait_group is injected in around line 717 by compiler to allow use of registers defined by GMMA in function 'main_kernel'
+    ptxas info    : (C7514) Potential Performance Loss: wgmma.mma_async instructions are serialized due to non wgmma instructions reading accumulator registers of  a wgmma between start and end of the pipeline stage in the function 'main_kernel' in line 0
+local_mem                                     regs=21   spill=0    GMMA=0    ARRIVE=0    perf=0   chain=-
+regs_default                                  regs=136  spill=0    GMMA=0    ARRIVE=0    perf=0   chain=-
+regs_minblocks16_spill                        regs=32   spill=964  GMMA=0    ARRIVE=0    perf=0   chain=-
+wgmma_ss_bf16_f32acc_n128                     regs=90   spill=0    GMMA=32   ARRIVE=32   perf=0   chain=serialized
+wgmma_ss_bf16_f32acc_n128_staged              regs=90   spill=0    GMMA=32   ARRIVE=32   perf=0   chain=serialized

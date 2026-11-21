@@ -1,0 +1,15 @@
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/upstream-main/python/tvm_tirx/__init__.py
+            <Function test_ptx_trace_time_errors>
+            <Function test_ptx_destination_errors>
+            <Function test_ptx_register_group_errors>
+======================== 2403 tests collected in 0.55s =========================
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-test-gate/python/tvm_tirx/__init__.py
+            <Function test_ptx_trace_time_errors>
+            <Function test_ptx_destination_errors>
+            <Function test_ptx_register_group_errors>
+======================== 2403 tests collected in 0.57s =========================
+upstream 2403 items (2103 static skip); A2 2403 items (2103 static skip)
+only upstream: []
+only A2: []
+same nodeid, different run/skip status: 0 []
+active static xfail: upstream 0, A2 38; differing: 38 ['tests/python/tirx/tile/cuda/test_cp_async_bulk.py::test_dsmem[contiguous-1d]', 'tests/python/tirx/tile/cuda/test_cp_async_bulk.py::test_dsmem[contiguous-2d]', 'tests/python/tirx/tile/cuda/test_cp_async_bulk.py::test_dsmem[partial-contiguity-diff-stride]', 'tests/python/tirx/tile/cuda/test_cp_async_bulk.py::test_dsmem[stride-gap]', 'tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py::test_descriptor_static_boundary_matrix[kwargs5-alignment]']

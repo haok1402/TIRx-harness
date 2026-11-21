@@ -1,0 +1,16 @@
+NVIDIA H200, 595.91.07
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/upstream-main/python/tvm_tirx/__init__.py
+            <Function test_ptx_trace_time_errors>
+            <Function test_ptx_destination_errors>
+            <Function test_ptx_register_group_errors>
+======================== 2403 tests collected in 0.35s =========================
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-test-gate/python/tvm_tirx/__init__.py
+            <Function test_ptx_trace_time_errors>
+            <Function test_ptx_destination_errors>
+            <Function test_ptx_register_group_errors>
+======================== 2403 tests collected in 0.52s =========================
+upstream 2403 items (0 static skip); A2 2403 items (0 static skip)
+only upstream: []
+only A2: []
+same nodeid, different run/skip status: 0 []
+active static xfail: upstream 0, A2 0; differing: 0 []

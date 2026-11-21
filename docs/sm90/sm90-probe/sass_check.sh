@@ -1,14 +1,22 @@
 #!/bin/bash
-# Compile every dumped probe .cu for sm_90a with nvcc, keep PTX + cubin + SASS and the ptxas -v report.
-cd "$(dirname "$0")/out"; mkdir -p sass
+# Compile every dumped probe .cu for sm_90a with nvcc; keep PTX + cubin + SASS and the ptxas -v report, then:
+#  - perf : ptxas performance remarks, i.e. lines with a (C75xx) code (WGMMA serialization etc.)
+#  - spill: spill stores reported by ptxas -v
+#  - chain: structural WGMMA chain check (sass_chain_check.py: one ARRIVE per chain, gsb0 only on the
+#           last GMMA, not fully serialized)
+# Kernels themselves compile through NVRTC; TIRx (A10) reports the same (C75xx) lines from NVRTC.
+HERE=$(cd "$(dirname "$0")" && pwd)
+cd "${SASS_OUT:-$HERE/out}"; mkdir -p sass
 for f in ${1:-*.cu}; do
   b=${f%.cu}
   nvcc -std=c++17 -arch=sm_90a -cubin -Xptxas -v,--warn-on-spills -o sass/$b.cubin $f > sass/$b.ptxas.txt 2>&1 || echo "NVCC FAIL $b"
   nvcc -std=c++17 -arch=sm_90a -ptx -o sass/$b.ptx $f 2>/dev/null
   cuobjdump -sass sass/$b.cubin > sass/$b.sass 2>/dev/null
-  printf "%-45s regs=%-4s spill=%s HGMMA=%-4s warn=%s\n" $b \
+  chain=$(python3 "$HERE/sass_chain_check.py" sass/$b.sass | python3 -c "import sys,json; r=[json.loads(l) for l in sys.stdin]; print(','.join(sorted({f for x in r for f in x['flags']})) or ('ok' if r else '-'))")
+  printf "%-45s regs=%-4s spill=%-4s GMMA=%-4s ARRIVE=%-4s perf=%-3s chain=%s\n" $b \
     "$(grep -o 'Used [0-9]* registers' sass/$b.ptxas.txt | head -1 | grep -o '[0-9]*')" \
     "$(grep -o '[0-9]* bytes spill stores' sass/$b.ptxas.txt | head -1 | grep -o '^[0-9]*')" \
-    "$(grep -c HGMMA sass/$b.sass)" \
-    "$(grep -i -c 'wgmma\|serializ' sass/$b.ptxas.txt)"
+    "$(grep -cE '\b[HQIB]GMMA\.' sass/$b.sass)" "$(grep -c 'WARPGROUP.ARRIVE' sass/$b.sass)" \
+    "$(grep -cE '\(C75[0-9][0-9]\)' sass/$b.ptxas.txt)" "$chain"
+  grep -E '\(C75[0-9][0-9]\)' sass/$b.ptxas.txt | sed 's/^/    /'
 done

@@ -1,0 +1,11 @@
+{"file": "chain2_clean.cu", "remarks": [], "warnings": 0}
+{"file": "chain2_hazard.cu", "remarks": ["[C7517] in main_kernel: wgmma.wait_group is injected in around line 646 by compiler to allow use of registers defined by GMMA in function 'main_kernel'", "[C7511] in main_kernel: Potential Performance Loss: wgmma.mma_async instructions are serialized due to insufficient register resources for the wgmma pipeline in the function 'main_kernel' in line 650"], "warnings": 2}
+{"file": "chain4_clean.cu", "remarks": [], "warnings": 0}
+{"file": "gemm_bf16_4096x4096x4096_mc1_s4.cu", "remarks": [], "warnings": 0}
+{"file": "hazard.cu", "remarks": [], "warnings": 0}
+{"file": "hazard2.cu", "remarks": ["[C7517] in main_kernel: wgmma.wait_group is injected in around line 1247 by compiler to allow use of registers defined by GMMA in function 'main_kernel'", "[C7514] in main_kernel: Potential Performance Loss: wgmma.mma_async instructions are serialized due to non wgmma instructions reading accumulator registers of a wgmma between start and end of the pipeline stage in the function 'main_kernel' in line 0"], "warnings": 2}
+{"file": "local_mem.cu", "remarks": ["[stack] in main_kernel: 1072 bytes stack frame (local memory)"], "warnings": 1}
+{"file": "regs_default.cu", "remarks": [], "warnings": 0}
+{"file": "regs_minblocks16_spill.cu", "remarks": ["[spill] in main_kernel: 964 bytes spill stores, 964 bytes spill loads (504 bytes stack frame)"], "warnings": 1}
+{"file": "wgmma_ss_bf16_f32acc_n128.cu", "remarks": [], "warnings": 0}
+{"file": "wgmma_ss_bf16_f32acc_n128_staged.cu", "remarks": [], "warnings": 0}

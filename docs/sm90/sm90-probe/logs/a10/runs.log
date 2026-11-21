@@ -1,0 +1,11 @@
+NVIDIA H200, 595.91.07
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=================== 52 passed, 1 warning in 65.30s (0:01:05) ===================
+tests/python/tirx/test_cuda_backend_config.py::test_build_snapshots_config_before_passes PASSED [100%]
+
+============================= 42 passed in 58.81s ==============================
+worktree 9ffe4723c [CUDA] Surface ptxas performance remarks from the device compile log dirty=0
+tvm_tirx from /mnt/weka/home/hao.kang/kernel-evolve/wt/a2-a1-a10/python/tvm_tirx/__init__.py
+========== 1367 passed, 1038 skipped, 7 warnings in 143.13s (0:02:23) ==========
+DONE

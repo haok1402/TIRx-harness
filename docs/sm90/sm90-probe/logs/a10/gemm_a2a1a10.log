@@ -1,0 +1,16 @@
+/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_gemm.py:188: ResourceWarning: unclosed file <_io.TextIOWrapper name='/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/out/gemm_bf16_4096x4096x4096_mc1_s4.cu' mode='w' encoding='UTF-8'>
+  open(cu, "w").write(src)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"case": "gemm_bf16_4096x4096x4096_mc1_s4", "ok": true, "rel_err_vs_cublas": 0.0, "rel_err_vs_fp32": 0.0016612891340628266, "us": 198.75072479248047, "tflops": 691.514225246236, "cublas_us": 174.06208038330078, "cublas_tflops": 789.5973273980567, "ratio_vs_cublas": 0.8757808584851322}
+/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_gemm.py:188: ResourceWarning: unclosed file <_io.TextIOWrapper name='/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/out/gemm_bf16_8192x8192x8192_mc1_s4.cu' mode='w' encoding='UTF-8'>
+  open(cu, "w").write(src)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"case": "gemm_bf16_8192x8192x8192_mc1_s4", "ok": true, "rel_err_vs_cublas": 0.0, "rel_err_vs_fp32": 0.0016559885116294026, "us": 1664.7442626953125, "tflops": 660.4687893597725, "cublas_us": 1624.2970275878906, "cublas_tflops": 676.9153726820481, "ratio_vs_cublas": 0.9757036344778053}
+/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_gemm.py:188: ResourceWarning: unclosed file <_io.TextIOWrapper name='/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/out/gemm_bf16_2048x4096x8192_mc1_s4.cu' mode='w' encoding='UTF-8'>
+  open(cu, "w").write(src)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"case": "gemm_bf16_2048x4096x8192_mc1_s4", "ok": true, "rel_err_vs_cublas": 0.0, "rel_err_vs_fp32": 0.0016552464803680778, "us": 182.4505615234375, "tflops": 753.294220222746, "cublas_us": 171.16159439086914, "cublas_tflops": 802.9777588898872, "ratio_vs_cublas": 0.9381258844132515}
+/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/probe_gemm.py:188: ResourceWarning: unclosed file <_io.TextIOWrapper name='/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/out/gemm_bf16_4096x4096x4096_mc0_s4.cu' mode='w' encoding='UTF-8'>
+  open(cu, "w").write(src)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"case": "gemm_bf16_4096x4096x4096_mc0_s4", "ok": true, "rel_err_vs_cublas": 0.0, "rel_err_vs_fp32": 0.0016612891340628266, "us": 195.61088562011722, "tflops": 702.6140341642897, "cublas_us": 174.27839279174808, "cublas_tflops": 788.6172879516457, "ratio_vs_cublas": 0.8909442449445398}

@@ -1,0 +1,4 @@
+NVIDIA H200, 595.91.07
+FAILED tests/python/tirx/test_cuda_backend_config.py::test_cuda_host_embeds_independent_binaries_in_plain_cpp[False] - FileNotFoundError: [Errno 2] No such file or directory: 'ninja'
+FAILED tests/python/tirx/test_cuda_backend_config.py::test_cuda_host_embeds_independent_binaries_in_plain_cpp[True] - FileNotFoundError: [Errno 2] No such file or directory: 'ninja'
+=================== 2 failed, 50 passed, 1 warning in 59.66s ===================

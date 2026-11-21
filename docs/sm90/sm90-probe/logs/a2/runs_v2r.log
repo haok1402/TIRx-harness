@@ -1,0 +1,7 @@
+NVIDIA H200, 595.91.07
+worktree 389dbcacf [TEST][CUDA] Address review: strict xfails for every-arch bugs, finer SM90 floors dirty=0
+tvm_tirx from /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-test-gate/python/tvm_tirx/__init__.py
+===== 2 failed, 1375 passed, 979 skipped, 47 xfailed in 153.17s (0:02:33) ======
+worktree 893356dbd [CUDA] Fix wgmma_noop_barrier codegen and fence the accumulator by reference dirty=0
+tvm_tirx from /mnt/weka/home/hao.kang/kernel-evolve/wt/a2-plus-a1/python/tvm_tirx/__init__.py
+========== 1379 passed, 979 skipped, 47 xfailed in 151.97s (0:02:31) ===========
