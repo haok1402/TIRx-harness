@@ -1,0 +1,5 @@
+NVIDIA H200, 595.91.07
+{"nb": 1, "mode": "serial", "compile": "clean under perf_remarks=error", "max_abs_err": 0.0009, "ok": true, "sass_chains": "{\"function\": \"probe_kernel\", \"gmma\": 16, \"chains\": [8, 8], \"gsb0\": 2, \"flags\": []}"}
+{"nb": 1, "mode": "overlap", "compile": "clean under perf_remarks=error", "max_abs_err": 0.0009, "ok": true, "sass_chains": "{\"function\": \"probe_kernel\", \"gmma\": 16, \"chains\": [8, 8], \"gsb0\": 2, \"flags\": []}"}
+{"nb": 3, "mode": "serial", "compile": "clean under perf_remarks=error", "max_abs_err": 0.0006, "ok": true, "sass_chains": "{\"function\": \"probe_kernel\", \"gmma\": 48, \"chains\": [8, 8, 8, 8, 8, 8], \"gsb0\": 6, \"flags\": []}"}
+{"nb": 3, "mode": "overlap", "compile": "FAILED", "error": "ptxas reported 1 performance remark(s) for sm_90a with perf_remarks='error':\n  - [spill] in probe_kernel (sm_90a): 184 bytes spill stores, 196 bytes spill loads (184 bytes stack frame)"}
