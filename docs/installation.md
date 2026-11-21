@@ -68,6 +68,33 @@ From the repository root, run `python -m pip install --group server`, or
 the server dependencies. See {ref}`remote execution <select-remote-execution>`
 to start the server.
 
+## Development mode: local tvm-tirx and tirx-kernels checkouts
+
+Until releases contain work under development, a run venv can take the Python sources of local
+checkouts instead of the pinned `apache-tvm-tirx` and `tirx-kernels`. Set the variables before
+`evolve init`:
+
+```bash
+export TIRX_HARNESS_DEV_TVM_TIRX=/path/to/tvm-tirx        # its python/tvm_tirx is copied over the wheel
+export TIRX_HARNESS_DEV_TIRX_KERNELS=/path/to/TIRx-kernels
+uv run --package tirx-evolution evolve init --task fp16_gemm_h200 --remote @$HOME/kcoral.url
+```
+
+For the kcoral server's venv, apply the same overlay directly:
+
+```bash
+python -m evolution.preparation.dev_overlay --venv .venv \
+  --tvm-tirx /path/to/tvm-tirx --tirx-kernels /path/to/TIRx-kernels
+```
+
+How the overlay works:
+
+- The sources are copied into site-packages, not linked, so a task's banned paths still apply to them.
+- The installed wheel's compiled libraries (`tvm_tirx/lib`) are kept, so only Python-level tvm-tirx
+  changes are picked up. C++ changes need a wheel built from the checkout.
+- `manifest.json` records each overlay's source path, commit, branch and dirty state, and so does
+  `site-packages/tirx_harness_dev_overlay.json`.
+
 ## Install agent skills
 
 | Skill | Purpose |
