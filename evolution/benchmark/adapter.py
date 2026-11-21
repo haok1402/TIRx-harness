@@ -51,6 +51,7 @@ PACKAGED = {
     "fp16_gemm_h200": ("fp16_gemm_floor", 10, 50, "all"),
     "fp8_blockscale_gemm_h200": ("fp8_blockscale_gemm_h200", 10, 50, "all"),
     "rmsnorm_h200": ("rmsnorm_h200", 10, 100, "all"),
+    "fa3_forward_h200": ("fa3_forward_h200", 5, 30, "all"),
     "gdn/decode": ("gdn_decode", 10, 50, "all"),
     "gdn/prefill": ("gdn_prefill", 10, 50, "all"),
     "grouped_gemm/fp8": ("grouped_gemm_fp8", 3, 30, "all"),

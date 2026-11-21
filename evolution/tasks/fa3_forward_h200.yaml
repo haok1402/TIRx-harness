@@ -1,0 +1,52 @@
+name: fa3_forward_h200
+workload_dir: candidates/fa3_forward_h200
+kernel_authoring: TIRx-lite
+target_archs: [sm_90a]
+sota_baseline:
+  name: flashinfer-fa3
+
+spec: |
+  Implement bf16 attention forward (self-attention prefill, head_dim 128) on
+  {{gpu}} and beat FA3 (FlashInfer's `backend="fa3"` batch ragged prefill)
+  across the complete benchmark shape set.
+
+  Layout: FlashInfer's ragged NHD. Q, K, V and the output O are bf16
+  [total_tokens, num_heads, 128]. Sequence b occupies rows
+  cu_seqlens[b] : cu_seqlens[b + 1] (int32, length batch + 1). Each sequence
+  attends only within itself (q_len == kv_len), with softmax scale
+  1/sqrt(128). Causal rows attend to keys at or before their own position.
+  The 12 packaged workload rows are every row of the contract:
+  - FA3's gate shapes, batch x heads x seq_len in {4x16x4096, 2x16x8192,
+    1x16x16384, 8x16x4096, 4x32x8192}, each causal and non-causal;
+  - one varlen batch (lengths 777, 4096, 1500, 8192, 513, 3000, 16 heads),
+    causal and non-causal.
+
+  Version contract: solution.py exports
+  setup(data, seq_lens, num_heads, causal) -> callable. data contains Q, K,
+  V, cu_seqlens and a preallocated O. setup may compile, allocate scratch,
+  build tensor maps and tile tables, and execute one warmup call; every timed
+  invocation must read Q/K/V as given and overwrite O. Do not call
+  FlashInfer, FlashAttention, cuDNN, PyTorch's scaled_dot_product_attention
+  or other tensor operators, Triton, CUTE DSL, raw CUDA, or an existing
+  solution kernel for production computation.
+
+  This is Hopper: use warpgroup MMA (wgmma; rs form for P V with P from
+  registers), TMA with mbarrier rings, setmaxnreg warp specialization and
+  named barriers, on the GPU's {{num_sms}} SMs (no tcgen05/TMEM/CLC). Starting
+  point: tirx-kernels `tirx_kernels/attention/fa3_forward_sm90.py` (B3). On this
+  benchmark (kernel-only GPU time) it scores a 0.975x geomean: non-causal
+  1.00-1.03x, causal 0.93-0.96x, varlen 0.97x. Causal is where the headroom
+  is: its tiles are short, so per-tile prologue and epilogue are exposed. Its
+  docstring and PR note a persistent scheduler and 176-row KV blocks as open
+  ideas, and the single-tile assumptions a persistent version must rework. The SM90 wiki page lists the pitfalls
+  found while writing it:
+  - bind `broadcast_warpgroup_id()` to a local before use;
+  - `T.max` on floats is three instructions; use `max.f32`.
+
+  Correctness: every element within atol = rtol = 2e-2 of FA3's output on the
+  same inputs (bf16 output; FA3 itself is within about 4e-3 of a float32
+  reference). Speedup is the geometric mean over the 12 rows of FA3 GPU time /
+  candidate GPU time, so every shape counts equally; the benchmark also
+  prints the minimum per-shape ratio. The benchmark prints the ptxas
+  performance remarks (C75xx serialization, spills) of your kernels with
+  every score.
