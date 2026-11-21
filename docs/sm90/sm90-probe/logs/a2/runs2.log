@@ -1,0 +1,10 @@
+NVIDIA H200, 595.91.07
+worktree d50ce3ed4 [TEST][CUDA] Run SM90-capable codegen and tile tests on SM90 devices dirty=0
+tvm_tirx from /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-test-gate/python/tvm_tirx/__init__.py
+=========== 2 failed, 1363 passed, 1038 skipped in 150.26s (0:02:30) ===========
+worktree 2e8fbec17 [CUDA] Fix wgmma_noop_barrier codegen and fence the accumulator by reference dirty=0
+tvm_tirx from /mnt/weka/home/hao.kang/kernel-evolve/wt/a2-plus-a1/python/tvm_tirx/__init__.py
+================ 1367 passed, 1038 skipped in 151.85s (0:02:31) ================
+worktree d50ce3ed4 [TEST][CUDA] Run SM90-capable codegen and tile tests on SM90 devices dirty=0
+tvm_tirx from /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-test-gate/python/tvm_tirx/__init__.py
+======================= 166 failed, 49 passed in 34.59s ========================

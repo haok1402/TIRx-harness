@@ -1,0 +1,10 @@
+B200 emulation (env compute 10.0, Target('cuda') -> sm_100a) of the tests A2 keeps at the 10.0 floor:
+other (launch on H200 expected to fail) {'FAIL: NO_BINARY_FOR_GPU': 119, 'pass': 49}
+kept-at-10 (all-arch bug) {"FAIL: 'm'": 30, 'FAIL: Back optional access': 5, 'FAIL: Invalid A.strides[3]': 2, "FAIL: AssertionError: Regex pattern did not match.\n  Expected regex: 'alignment'\n[+1 m": 1, 'FAIL: view(dtype): the last dimension must have unit stridetests/python/tirx/tile/cuda/test_add_sub_mul_div.py:334: in test_binary_op_local_subcta_trivial': 9}
+  e.g. FAIL: 'm' -> test_ldstmatrix[1-st-False-warpgroup]
+  e.g. FAIL: Back optional access -> test_dsmem[contiguous-2d]
+  e.g. FAIL: Invalid A.strides[3] -> test_global_gpu[False]
+  e.g. FAIL: AssertionError: Regex pattern did not match.
+  Expected regex: 'alignment'
+[+1 m -> test_descriptor_static_boundary_matrix[kwargs5-alignment]
+  e.g. FAIL: view(dtype): the last dimension must have unit stridetests/python/tirx/tile/cuda/test_add_sub_mul_div.py:334: in test_binary_op_local_subcta_trivial -> test_binary_op_local_subcta_trivial[add-broadcast-cta]
