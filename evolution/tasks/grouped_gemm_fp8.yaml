@@ -5,8 +5,7 @@ sota_baseline:
   name: deepgemm_m_grouped_fp8_gemm_nt_contiguous
 bench_timeout_s: 600
 spec: |
-  Implement and optimize M-grouped contiguous FP8 GEMM in TIRx on B200
-  (sm_100), using the non-psum layout. Evaluate all four configurations:
+  Implement and optimize M-grouped contiguous FP8 GEMM in TIRx on {{gpu}}, using the non-psum layout. Evaluate all four configurations:
   (G, expected_m_per_group, N, K, seed) =
     (4, 8192, 6144, 7168, 1), (4, 8192, 4096, 4096, 3),
     (8, 4096, 7168, 3072, 6), (8, 4096, 4096, 2048, 8).

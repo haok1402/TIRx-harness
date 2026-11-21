@@ -37,7 +37,7 @@ def kernel_authoring_contract(task: Task) -> str:
     raise ValueError(f"unsupported kernel authoring mode: {task.kernel_authoring!r}")
 
 
-def kernel_search_references(task: Task) -> str:
+def kernel_search_references(task: Task, gpu_family: str = "Blackwell") -> str:
     if task.kernel_authoring == "TIRx-lite":
         return """\
 One deliberate source of invention: survey the PTX ISA manual in
@@ -50,9 +50,9 @@ micro-optimizations only.
 Study the canonical kernels and their notes in `tirx-wiki` for optimization
 ideas and tactics that transfer to this workload."""
     if task.kernel_authoring == "task":
-        return """\
+        return f"""\
 Use `KernelWiki` and the selected implementation stack's authoritative
-documentation to study Blackwell optimization patterns, permitted canonical
+documentation to study {gpu_family} optimization patterns, permitted canonical
 examples, and PTX/GPU semantics. Transfer tactics only when they comply with
 the task's implementation-language and own-source contracts; do not substitute
 a kernel written in another authoring stack."""

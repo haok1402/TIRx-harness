@@ -11,7 +11,7 @@ banned_paths:
   - qwen38-inference/optimizations.md
   - qwen38-inference/summary.txt
 spec: |
-  Optimize one prepared Qwen3.8-27B expand forward on B200 (sm_100):
+  Optimize one prepared Qwen3.8-27B expand forward on {{gpu}}:
   embedding, all 64 layers, final normalization, full-vocabulary logits and
   cache/state writes. Weights, activations and KV are BF16; recurrent state
   and returned logits are FP32. Preserve the reference computation and rounding.

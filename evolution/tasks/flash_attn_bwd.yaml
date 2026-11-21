@@ -5,7 +5,7 @@ sota_baseline:
   name: FA4
 banned_paths: []
 spec: |
-  Implement prepared-tensor FlashAttention-4 FP16 BACKWARD on B200 (sm_100)
+  Implement prepared-tensor FlashAttention-4 FP16 BACKWARD on {{gpu}}
   and beat FA4's low-level backward path on GPU-only latency.
 
   Inputs are q,k,v,out,grad_out fp16[B,S,H,128], saved natural-log LSE

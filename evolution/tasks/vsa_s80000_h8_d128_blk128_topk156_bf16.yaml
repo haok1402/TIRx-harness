@@ -9,7 +9,7 @@ banned_paths:
   - tirx-kernels/tirx_kernels/ported/cudnn/bsa/**
   - tirx-kernels/.agents/sketch/cudnn/sm100_bsa*.md
 spec: |
-  Implement Video Sparse Attention on B200 (sm_100).
+  Implement Video Sparse Attention on {{gpu}}.
   The packaged baseline calls FlashInfer's
   bsa_attn_fwd for the selected blk128 row, as BlockSparseAttentionWrapper does;
   it is the packaged library baseline, not a separate Cake implementation.

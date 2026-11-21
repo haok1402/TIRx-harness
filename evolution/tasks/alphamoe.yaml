@@ -10,7 +10,7 @@ banned_paths:
   - tirx-kernels/.agents/sketch/blockscaled_contiguous_gather_grouped_gemm_swiglu_fusion_rubin.md
 spec: |
   Implement the Alpha-MoE layer from bf16 activations and preselected routes
-  on B200 (sm_100), using the Qwen3-Next TP4 contract.
+  on {{gpu}}, using the Qwen3-Next TP4 contract.
   Beat the packaged FlashInfer TensorRT-LLM block-scale routed MoE baseline,
   including activation quantization and route processing in the timed call.
 
