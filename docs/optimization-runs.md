@@ -88,8 +88,11 @@ sandbox and an authenticating front end. The script therefore runs kcoral on
 
 The token is generated for every launch, written with mode 0600 to
 `URL_FILE.token`, and handed to the step in its environment, never on a command
-line. `kcoral_remote` reads it next to the URL file, or from `$KCORAL_TOKEN_FILE`
-for a plain URL. The server runs `--sandbox none` only because these nodes have
+line. Every local client reads it next to the URL file, or from `$KCORAL_TOKEN_FILE`
+for a plain URL: `kcoral_remote` and the NCU, IKET, Compute Sanitizer and Python
+tool CLIs all connect through `evolution/remote/kcoral_connection.py`. A bare
+`curl …/health` therefore gets HTTP 401; check the server with
+`python evolution/remote/kcoral_remote.py --remote @$HOME/kcoral.url --health`. The server runs `--sandbox none` only because these nodes have
 no `bwrap`.
 
 The step is named after the URL file, and `srun` runs with a parent-death signal.
