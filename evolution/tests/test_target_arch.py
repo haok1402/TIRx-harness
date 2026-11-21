@@ -31,12 +31,12 @@ def test_every_spec_renders_without_hardcoded_gpu(path):
 def test_undeclared_tasks_keep_their_b200_target():
     task = load_task(task_path(REPO_ROOT, "kda_forward"))
     assert task.target_archs == list(DEFAULT_TARGET_ARCHS) == ["sm_100a"]
-    assert "Kimi Delta Attention FORWARD on B200 (sm_100a)" in task.render_spec(B200)
+    assert "Kimi Delta Attention FORWARD on B200 (sm_100)" in task.render_spec(B200)
 
 
 def test_b200_only_task_is_refused_on_h200():
     task = load_task(task_path(REPO_ROOT, "kda_forward"))
-    with pytest.raises(ValueError, match=r"targets sm_100a, but the run's GPU is H200 \(sm_90a\)"):
+    with pytest.raises(ValueError, match=r"targets sm_100a, but the run's GPU is H200 \(sm_90\)"):
         task.check_target(H200)
     task.check_target(B200)
 
@@ -45,7 +45,7 @@ def test_gemm_floor_runs_on_both_and_renders_h200():
     task = load_task(task_path(REPO_ROOT, "fp16_gemm_floor"))
     task.check_target(H200)
     task.check_target(B200)
-    assert task.render_spec(H200).startswith("Implement FP16 GEMM on H200 (sm_90a)")
+    assert task.render_spec(H200).startswith("Implement FP16 GEMM on H200 (sm_90)")
 
 
 def test_unknown_arch_and_slot_are_rejected(tmp_path):
@@ -64,7 +64,7 @@ def test_prompt_renders_target(tmp_path):
     task = load_task(task_path(REPO_ROOT, "fp16_gemm_floor"))
     toolset = load_toolset(REPO_ROOT / "evolution/toolsets/kda_flow.yaml")
     prompt = cli._prompt(task=task, toolset=toolset, worktree=tmp_path, target=H200)
-    assert "FP16 GEMM on H200 (sm_90a)" in prompt
+    assert "FP16 GEMM on H200 (sm_90)" in prompt
     assert "B200" not in prompt and "{{" not in prompt
 
 
@@ -78,7 +78,7 @@ def test_task_authored_prompt_names_the_gpu_family():
 
 def test_resolve_prefers_flags_and_falls_back_to_task_default(monkeypatch, capsys):
     assert gpu_target.resolve(task_archs=["sm_100a"], remote_url=None, arch="sm_90a").label == (
-        "H200 (sm_90a)"
+        "H200 (sm_90)"
     )
 
     def no_gpu():
@@ -95,3 +95,28 @@ def test_from_properties_maps_hopper():
         {"name": "NVIDIA H200", "major": 9, "minor": 0, "sms": 132}, "local"
     )
     assert (t.arch, t.name, t.num_sms, t.family) == ("sm_90a", "H200", 132, "Hopper")
+
+
+def test_b300_runs_sm100_tasks_as_before():
+    b300 = gpu_target.GpuTarget("sm_103a", "B300", 148, source="remote")
+    task = load_task(task_path(REPO_ROOT, "kda_forward"))
+    task.check_target(b300)
+    assert "on B300 (sm_103)" in task.render_spec(b300)
+    with pytest.raises(ValueError):
+        load_task(task_path(REPO_ROOT, "kda_forward")).check_target(H200)
+
+
+def test_detected_unknown_arch_is_an_error_not_a_b200_fallback(monkeypatch):
+    def blackwell_consumer():
+        return gpu_target._from_properties(
+            {"name": "NVIDIA RTX 5090", "major": 12, "minor": 0}, "local"
+        )
+
+    monkeypatch.setattr(gpu_target, "detect_local", blackwell_consumer)
+    with pytest.raises(gpu_target.UnknownArchError, match="sm_120a"):
+        gpu_target.resolve(task_archs=["sm_100a"], remote_url=None)
+
+
+def test_wrapped_specs_keep_their_line_break():
+    rendered = load_task(task_path(REPO_ROOT, "moe")).render_spec(B200)
+    assert "Mixture-of-Experts on B200\n(sm_100) and beat" in rendered
