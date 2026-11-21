@@ -62,6 +62,7 @@ def _prompt(
     python: Path | None = None,
     target: gpu_target.GpuTarget | None = None,
     allocated_gpus: str | None = None,
+    remote_retry_seconds: int | None = None,
 ) -> str:
     target = target or gpu_target.default_for(task.target_archs)
     blocks = shared_rule_blocks(toolset, allocated_gpus=allocated_gpus)
@@ -83,6 +84,8 @@ def _prompt(
             f"{interpreter} evolution/remote/kcoral_remote.py {task.workload_dir} CANDIDATE "
             f"--remote {remote_url} --timeout {bench_timeout_s}"
         )
+        if remote_retry_seconds is not None:
+            bench_command += f" --retry-seconds {remote_retry_seconds}"
         bench_environment = ""
         remote_section = "\n\n" + render_file(
             REMOTE_TEMPLATE,
@@ -119,6 +122,7 @@ def setup(
     gpu_name: str | None = None,
     num_sms: int | None = None,
     allocated_gpus: str | None = None,
+    remote_retry_seconds: int | None = None,
 ) -> Path:
     if run_name is None:
         stem = f"{task_name}-{time.strftime('%Y%m%d-%H%M%S')}"
@@ -171,6 +175,7 @@ def setup(
             python=environment.python,
             target=target,
             allocated_gpus=allocated_gpus,
+            remote_retry_seconds=remote_retry_seconds,
         )
     )
 
@@ -221,8 +226,14 @@ def _parser() -> tuple[argparse.ArgumentParser, argparse.ArgumentParser]:
         nargs="?",
         const=BENCH_SERVER_URL,
         metavar="URL",
-        help="score candidates through the kcoral benchmark server at URL "
-        f"(default {BENCH_SERVER_URL})",
+        help="score candidates through the kcoral benchmark server at URL, or @FILE holding the "
+        f"current URL (scripts/slurm_kcoral.sh publishes one) (default {BENCH_SERVER_URL})",
+    )
+    init.add_argument(
+        "--remote-retry-seconds",
+        type=int,
+        help="with --remote: how long each benchmark keeps re-sending to an unavailable (e.g. "
+        "preempted) server before failing (default: kcoral_remote's, 6 hours)",
     )
     init.add_argument(
         "--target-arch",
@@ -277,10 +288,11 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if not (REPO_ROOT / ".git").exists():
         init.error(f"evolution must run from a TIRx-harness checkout, not {REPO_ROOT}")
-    if args.remote is not None:
+    if args.remote is not None and not args.remote.startswith("@"):
+        # "@FILE": the URL is read from FILE on every request (a preemptible server republishes it).
         server = urlparse(args.remote)
         if not (server.hostname and server.port):
-            init.error(f"--remote expects http://host:port, got {args.remote!r}")
+            init.error(f"--remote expects http://host:port or @URL_FILE, got {args.remote!r}")
     allocated = _allocated_gpus(args.allocated_gpus, remote=args.remote is not None)
     try:
         setup(
@@ -291,6 +303,7 @@ def main(argv: list[str] | None = None) -> int:
             gpu_name=args.gpu_name,
             num_sms=args.num_sms,
             allocated_gpus=allocated,
+            remote_retry_seconds=args.remote_retry_seconds,
         )
     except ValueError as error:
         init.error(str(error))

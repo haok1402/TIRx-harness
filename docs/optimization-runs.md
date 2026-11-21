@@ -70,6 +70,45 @@ uv run --package tirx-evolution evolve init --task fp16_gemm_floor \
 
 CPU checks stay local. The kcoral adapters run GPU benchmarks and diagnostics
 remotely. The server needs the task's runtime dependencies and profiling tools.
+
+**On a preemptible Slurm allocation**, run the server as a 1-GPU job step and let
+clients follow it:
+
+```bash
+scripts/slurm_kcoral.sh <job-or-array-id> ~/kcoral.url   # loop; may run on a login node
+uv run --package tirx-evolution evolve init --task fp16_gemm_floor --remote @$HOME/kcoral.url
+```
+
+kcoral runs arbitrary code for any client that reaches it and has no client
+authentication. Never bind `kcoral server` to a network interface without the
+sandbox and an authenticating front end. The script therefore runs kcoral on
+`127.0.0.1` inside the step. In front of it, on the node's address, it runs
+`evolution/remote/kcoral_auth_proxy.py`, which forwards only requests carrying
+`Authorization: Bearer <token>`.
+
+The token is generated for every launch, written with mode 0600 to
+`URL_FILE.token`, and handed to the step in its environment, never on a command
+line. `kcoral_remote` reads it next to the URL file, or from `$KCORAL_TOKEN_FILE`
+for a plain URL. The server runs `--sandbox none` only because these nodes have
+no `bwrap`.
+
+The step is named after the URL file, and `srun` runs with a parent-death signal.
+A hard-killed wrapper takes its step with it, and a restarted one cancels a
+surviving predecessor. After a preemption the wrapper waits for the next running
+task (every `RECHECK_SECONDS`, default 150) and relaunches.
+
+`--remote @FILE` makes every request re-read the URL and token. A request whose
+server went away is re-sent, backing off up to 60 s. "Went away" means:
+
+- connection refused or reset;
+- HTTP 502 or 503;
+- the worker killed mid-run or a worker crash, if the server then stays
+  unreachable or moves within 45 s.
+
+Retries continue for `--remote-retry-seconds` (on `evolve init`) or
+`$KCORAL_RETRY_SECONDS`, default 6 hours, because waits between array tasks can
+be long. Candidate failures, timeouts and a rejected token are reported, not
+retried.
 ````
 
 ## Launch the agent
