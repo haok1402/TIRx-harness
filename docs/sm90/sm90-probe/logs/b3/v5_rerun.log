@@ -1,0 +1,14 @@
+NVIDIA H200, 595.91.07
+{"state": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 79.88, 34"}, "flashinfer": "0.6.18"}
+{"shape": [4, 16, 4096], "causal": false, "gated": true, "tflops": {"tirx_def": 695.8, "fa3": 653.4}, "ratio_def": 1.065, "ratio_vs_fa3": 1.065, "max_abs_diff_vs_fa3": 0.001}
+{"shape": [4, 16, 4096], "causal": true, "gated": true, "tflops": {"tirx_def": 538.7, "fa3": 535.4}, "ratio_def": 1.006, "ratio_vs_fa3": 1.006, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [2, 16, 8192], "causal": false, "gated": true, "tflops": {"tirx_def": 702.2, "fa3": 675.9}, "ratio_def": 1.039, "ratio_vs_fa3": 1.039, "max_abs_diff_vs_fa3": 0.0005}
+{"shape": [2, 16, 8192], "causal": true, "gated": true, "tflops": {"tirx_def": 558.6, "fa3": 558.8}, "ratio_def": 1.0, "ratio_vs_fa3": 1.0, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [1, 16, 16384], "causal": false, "gated": true, "tflops": {"tirx_def": 652.6, "fa3": 634.3}, "ratio_def": 1.029, "ratio_vs_fa3": 1.029, "max_abs_diff_vs_fa3": 0.0002}
+{"shape": [1, 16, 16384], "causal": true, "gated": true, "tflops": {"tirx_def": 639.4, "fa3": 635.9}, "ratio_def": 1.006, "ratio_vs_fa3": 1.006, "max_abs_diff_vs_fa3": 0.0005}
+{"shape": [8, 16, 4096], "causal": false, "gated": true, "tflops": {"tirx_def": 628.2, "fa3": 598.6}, "ratio_def": 1.049, "ratio_vs_fa3": 1.049, "max_abs_diff_vs_fa3": 0.001}
+{"shape": [8, 16, 4096], "causal": true, "gated": true, "tflops": {"tirx_def": 524.2, "fa3": 546.7}, "ratio_def": 0.959, "ratio_vs_fa3": 0.959, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [4, 32, 8192], "causal": false, "gated": true, "tflops": {"tirx_def": 653.5, "fa3": 641.2}, "ratio_def": 1.019, "ratio_vs_fa3": 1.019, "max_abs_diff_vs_fa3": 0.0005}
+{"shape": [4, 32, 8192], "causal": true, "gated": true, "tflops": {"tirx_def": 578.5, "fa3": 595.7}, "ratio_def": 0.971, "ratio_vs_fa3": 0.971, "max_abs_diff_vs_fa3": 0.002}
+{"gated_min_ratio": 0.959, "gated_ratios": [1.065, 1.006, 1.039, 1.0, 1.029, 1.006, 1.049, 0.959, 1.019, 0.971], "gate_0.90": true}
+{"state_after": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "1635, 1980, 0x0000000000000004, 231.56, 48"}}

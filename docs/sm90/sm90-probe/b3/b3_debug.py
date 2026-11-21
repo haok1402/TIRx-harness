@@ -8,7 +8,7 @@ for lens in [(1,), (127,), (129,), (640,), (1777,), (1, 127), (127, 129), (129, 
     print("launch", lens, flush=True)
     L.seq_lens = lens
     L.cu = torch.tensor([0, *torch.tensor(lens).cumsum(0).tolist()], dtype=torch.int32, device="cuda")
-    L.tiles, L.num_tiles = fa.tile_table(lens, True)
+    L.tiles, L.num_tiles = fa.tile_table(lens, H, True)
     q, k, v = fa.prepare_data(lens, H)
     o = torch.full_like(q, float("nan"))
     L.bind(q, k, v, o)()

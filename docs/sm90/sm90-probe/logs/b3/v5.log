@@ -1,0 +1,21 @@
+NVIDIA H200, 595.91.07
+{"compile": "clean", "causal": false, "res": ["REG:168 STACK:0 SHARED:1024 LOCAL:0 CONSTANT[0]:1168 TEXTURE:0 SURFACE:0 SAMPLER:0"]}
+{"compile": "clean", "causal": true, "res": ["REG:168 STACK:0 SHARED:1024 LOCAL:0 CONSTANT[0]:1168 TEXTURE:0 SURFACE:0 SAMPLER:0"]}
+b3 tests: 0 failed
+{"state": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 79.91, 34"}, "flashinfer": "0.6.18"}
+{"shape": [4, 16, 4096], "causal": false, "gated": true, "tflops": {"tirx_def": 651.3, "fa3": 602.7}, "ratio_def": 1.081, "ratio_vs_fa3": 1.081, "max_abs_diff_vs_fa3": 0.001}
+{"shape": [4, 16, 4096], "causal": true, "gated": true, "tflops": {"tirx_def": 520.3, "fa3": 502.9}, "ratio_def": 1.035, "ratio_vs_fa3": 1.035, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [2, 16, 8192], "causal": false, "gated": true, "tflops": {"tirx_def": 651.6, "fa3": 634.9}, "ratio_def": 1.026, "ratio_vs_fa3": 1.026, "max_abs_diff_vs_fa3": 0.0005}
+{"shape": [2, 16, 8192], "causal": true, "gated": true, "tflops": {"tirx_def": 560.5, "fa3": 553.9}, "ratio_def": 1.012, "ratio_vs_fa3": 1.012, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [1, 16, 16384], "causal": false, "gated": true, "tflops": {"tirx_def": 653.8, "fa3": 638.2}, "ratio_def": 1.025, "ratio_vs_fa3": 1.025, "max_abs_diff_vs_fa3": 0.0002}
+{"shape": [1, 16, 16384], "causal": true, "gated": true, "tflops": {"tirx_def": 642.1, "fa3": 645.1}, "ratio_def": 0.995, "ratio_vs_fa3": 0.995, "max_abs_diff_vs_fa3": 0.0005}
+{"shape": [8, 16, 4096], "causal": false, "gated": true, "tflops": {"tirx_def": 625.8, "fa3": 594.5}, "ratio_def": 1.053, "ratio_vs_fa3": 1.053, "max_abs_diff_vs_fa3": 0.001}
+{"shape": [8, 16, 4096], "causal": true, "gated": true, "tflops": {"tirx_def": 525.9, "fa3": 549.5}, "ratio_def": 0.957, "ratio_vs_fa3": 0.957, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [4, 32, 8192], "causal": false, "gated": true, "tflops": {"tirx_def": 650.2, "fa3": 636.2}, "ratio_def": 1.022, "ratio_vs_fa3": 1.022, "max_abs_diff_vs_fa3": 0.0005}
+{"shape": [4, 32, 8192], "causal": true, "gated": true, "tflops": {"tirx_def": 582.2, "fa3": 599.6}, "ratio_def": 0.971, "ratio_vs_fa3": 0.971, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [8, 32, 1024], "causal": false, "gated": false, "tflops": {"tirx_def": 473.0, "fa3": 393.8}, "ratio_def": 1.201, "ratio_vs_fa3": 1.201, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [8, 32, 1024], "causal": true, "gated": false, "tflops": {"tirx_def": 316.2, "fa3": 334.2}, "ratio_def": 0.946, "ratio_vs_fa3": 0.946, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [16, 16, 2048], "causal": false, "gated": false, "tflops": {"tirx_def": 617.0, "fa3": 568.4}, "ratio_def": 1.086, "ratio_vs_fa3": 1.086, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [16, 16, 2048], "causal": true, "gated": false, "tflops": {"tirx_def": 426.7, "fa3": 456.5}, "ratio_def": 0.935, "ratio_vs_fa3": 0.935, "max_abs_diff_vs_fa3": 0.0039}
+{"gated_min_ratio": 0.957, "gated_ratios": [1.081, 1.035, 1.026, 1.012, 1.025, 0.995, 1.053, 0.957, 1.022, 0.971], "gate_0.90": true}
+{"state_after": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "1830, 1980, 0x0000000000000004, 328.52, 51"}}

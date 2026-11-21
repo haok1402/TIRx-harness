@@ -296,7 +296,12 @@ C1, C4, C5 ──> C2 ──> C3 ──> M3 (needs B1 and C6);  C7 alongside B1/
   - It survived a forced kill of the server step while a request was in flight.
   - Best scored candidate: **1.053x FlashInfer**, against the 0.854x seed, using 12 of 20 benchmark runs.
   - Details: `sm90-probe/logs/m3/`. Fixes for what the agent tripped on: `sm90-probe/issues/HARNESS-001`.
-- **M4:** B2 is done (0.997–0.998x DeepGEMM with the proxy fence). B3 is next.
+- **M4 met.**
+  - B2: 0.997–0.998x DeepGEMM.
+  - B3 (`haok/sm90-fa3` `cdf11ac`): ≥ 0.957x FA3 at every gated shape, on two runs, interleaved in the
+    same step. Non-causal runs 1.02–1.08x, causal 0.96–1.04x.
+  - Both are `perf_remarks="error"`-clean.
+  - Open follow-ups: a persistent scheduler for short causal tiles, and `fa3_forward_h200` (C3).
 
 ## 6. Version pins
 
