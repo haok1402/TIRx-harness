@@ -1,0 +1,30 @@
+NVIDIA H200, 595.91.07
+sm_100a 128 identical 731f686f24 731f686f24
+sm_100a 4096 identical 2f9b9cf856 2f9b9cf856
+sm_100a 5120 identical e15a1d0df0 e15a1d0df0
+sm_100a 8192 identical fc240f42aa fc240f42aa
+sm_103a 128 identical 731f686f24 731f686f24
+sm_103a 4096 identical 2f9b9cf856 2f9b9cf856
+sm_103a 5120 identical e15a1d0df0 e15a1d0df0
+sm_103a 8192 identical fc240f42aa fc240f42aa
+RUF021 [*] Parenthesize `a and b` expressions when chaining `and` and `or` together, to make the precedence clear
+  --> tirx_kernels/norm/_rmsnorm_sm90.py:73:9
+   |
+71 |           raise ValueError(f"hidden_size={hidden_size} is not supported by the sm_90 kernels")
+72 |       if (
+73 | /         batch_size is not None
+74 | |         and batch_size <= SMALL_MAX_BATCH
+   | |_________________________________________^
+75 |           or (hidden_size not in RING_CFG and hidden_size != 8192)
+76 |       ):
+   |
+help: Parenthesize the `and` subexpression
+   |
+72 |     if (
+   -         batch_size is not None
+   -         and batch_size <= SMALL_MAX_BATCH
+73 +         (batch_size is not None
+74 +         and batch_size <= SMALL_MAX_BATCH)
+75 |         or (hidden_size not in RING_CFG and hidden_size != 8192)
+   |
+

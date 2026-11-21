@@ -1,0 +1,5 @@
+NVIDIA H200, 595.91.07
+Total: 39  Passed: 39  Failed: 0  Skipped: 0
+{"env": {"torch": "2.15.0+cu134", "flashinfer-python": "0.6.18", "nvidia-cutlass-dsl": "4.8.0.dev0", "apache-tvm-tirx": null, "flashinfer_direct_url": "{\"url\":\"https://github.com/flashinfer-ai/flashinfer.git\",\"vcs_info\":{\"vcs\":\"git\",\"commit_id\":\"f2e04400e330fb2debe0bf8730d9424a1d37927f\",\"requested_revision\":\"f2e04400e330fb2debe0bf8730d9424a1d37927f\"}}", "tvm_tirx_from": "/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py"}, "python": "/mnt/weka/shrd/ci/haok/TIRx-kernels/refenv/bin/python", "gpu": "NVIDIA H200", "unmet_reference_requirements": []}
+direct run_test: 39/39 passed
+{"summed_time_ratio": 1.041, "gate_min_bs_ge_4113": 1.013, "gate_shapes": [1.078, 1.041, 1.036, 1.013, 1.042, 1.026]}

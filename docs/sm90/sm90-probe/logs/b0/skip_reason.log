@@ -1,0 +1,7 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+UNMET ('flashinfer-python: Git source identity cannot be verified', 'nvidia-cutlass-dsl: requires ==4.8.0.dev0, installed version is 4.7.0')
+flashinfer 0.6.18.dev20260909
+cutlass-dsl 4.7.0

@@ -1,0 +1,25 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-086", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 79.61, 28"}}
+{"hs": 4096, "bs": 1, "folded_us": 5.95, "m3_us": 5.38, "flashinfer_us": 5.95, "folded_vs_fi": 1.0, "m3_vs_fi": 1.107, "folded_eq_m3": true}
+{"hs": 4096, "bs": 32, "folded_us": 6.18, "m3_us": 6.14, "flashinfer_us": 6.5, "folded_vs_fi": 1.052, "m3_vs_fi": 1.057, "folded_eq_m3": true}
+{"hs": 4096, "bs": 128, "folded_us": 6.66, "m3_us": 6.18, "flashinfer_us": 6.82, "folded_vs_fi": 1.024, "m3_vs_fi": 1.104, "folded_eq_m3": true}
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in rmsnorm_sm90_ring_kernel (sm_90a): 8 bytes spill stores, 8 bytes spill loads (8 bytes stack frame)
+  result = compile_source(code, config, target=target)
+{"hs": 4096, "bs": 4113, "folded_us": 23.5, "m3_us": 21.89, "flashinfer_us": 23.68, "folded_vs_fi": 1.007, "m3_vs_fi": 1.082, "folded_eq_m3": true}
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in rmsnorm_sm90_ring_kernel (sm_90a): 8 bytes spill stores, 8 bytes spill loads (8 bytes stack frame)
+  result = compile_source(code, config, target=target)
+{"hs": 4096, "bs": 16384, "folded_us": 71.52, "m3_us": 69.62, "flashinfer_us": 72.02, "folded_vs_fi": 1.007, "m3_vs_fi": 1.034, "folded_eq_m3": true}
+{"hs": 5120, "bs": 1, "folded_us": 5.63, "m3_us": 5.47, "flashinfer_us": 6.11, "folded_vs_fi": 1.085, "m3_vs_fi": 1.117, "folded_eq_m3": true}
+{"hs": 5120, "bs": 32, "folded_us": 5.97, "m3_us": 5.79, "flashinfer_us": 6.85, "folded_vs_fi": 1.147, "m3_vs_fi": 1.182, "folded_eq_m3": true}
+{"hs": 5120, "bs": 128, "folded_us": 6.53, "m3_us": 6.45, "flashinfer_us": 6.96, "folded_vs_fi": 1.066, "m3_vs_fi": 1.079, "folded_eq_m3": true}
+{"hs": 5120, "bs": 4113, "folded_us": 25.87, "m3_us": 25.62, "flashinfer_us": 26.98, "folded_vs_fi": 1.043, "m3_vs_fi": 1.053, "folded_eq_m3": true}
+{"hs": 5120, "bs": 16384, "folded_us": 84.7, "m3_us": 84.53, "flashinfer_us": 85.87, "folded_vs_fi": 1.014, "m3_vs_fi": 1.016, "folded_eq_m3": true}
+{"hs": 8192, "bs": 1, "folded_us": 6.14, "m3_us": 5.7, "flashinfer_us": 6.38, "folded_vs_fi": 1.039, "m3_vs_fi": 1.121, "folded_eq_m3": true}
+{"hs": 8192, "bs": 32, "folded_us": 6.88, "m3_us": 6.0, "flashinfer_us": 6.56, "folded_vs_fi": 0.953, "m3_vs_fi": 1.093, "folded_eq_m3": true}
+{"hs": 8192, "bs": 128, "folded_us": 7.36, "m3_us": 6.78, "flashinfer_us": 7.42, "folded_vs_fi": 1.009, "m3_vs_fi": 1.094, "folded_eq_m3": true}
+{"hs": 8192, "bs": 4113, "folded_us": 37.94, "m3_us": 38.06, "flashinfer_us": 39.63, "folded_vs_fi": 1.045, "m3_vs_fi": 1.041, "folded_eq_m3": true}
+{"hs": 8192, "bs": 16384, "folded_us": 132.61, "m3_us": 132.83, "flashinfer_us": 136.82, "folded_vs_fi": 1.032, "m3_vs_fi": 1.03, "folded_eq_m3": true}
+{"summed": {"folded": 1.026, "m3": 1.042}}

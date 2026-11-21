@@ -1,0 +1,17 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in rmsnorm_sm90_small_kernel (sm_90a): 4 bytes spill stores, 4 bytes spill loads (8 bytes stack frame)
+  result = compile_source(code, config, target=target)
+{"small": [4096, 1], "loop_dbuf": 6.08, "single": 5.47, "m3": 5.47}
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in rmsnorm_sm90_small_kernel (sm_90a): 4 bytes spill stores, 4 bytes spill loads (8 bytes stack frame)
+  result = compile_source(code, config, target=target)
+{"small": [4096, 128], "loop_dbuf": 6.82, "single": 6.35, "m3": 6.34}
+{"small": [8192, 32], "loop_dbuf": 6.59, "single": 6.11, "m3": 6.11}
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in rmsnorm_sm90_ring_kernel (sm_90a): 8 bytes spill stores, 8 bytes spill loads (8 bytes stack frame)
+  result = compile_source(code, config, target=target)
+{"ring": [4096, 4113], "mine_u64": 23.89, "m3_u32": 21.98, "ctr64": [0, 0], "ctr32": [0, 0]}
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in rmsnorm_sm90_ring_kernel (sm_90a): 8 bytes spill stores, 8 bytes spill loads (8 bytes stack frame)
+  result = compile_source(code, config, target=target)
+{"ring": [4096, 16384], "mine_u64": 71.55, "m3_u32": 69.31, "ctr64": [0, 0], "ctr32": [0, 0]}
