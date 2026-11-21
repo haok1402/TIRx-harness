@@ -205,9 +205,14 @@ DeepGEMM.
   The no-promotion upper bound of the same kernel matches DeepGEMM, so the promotion is the whole gap.
 - **Kernel:** `tirx_kernels/gemm/fp8_blockscale_gemm_sm90.py`, configurable `(bm, bn, cluster)`. It is exact
   against DeepGEMM (`calc_diff` 0.0) on all 14 shapes.
-- **Status:** best configuration per shape is 0.88–0.95x (256 × 128 no cluster, 128 × 192 for N ≤ 2304),
-  below the 0.95 gate. 2-CTA multicast does not help yet. B2 continues with per-shape config selection,
-  multicast tuning and N = 576 (DeepGEMM uses bn = 144).
+- **Result (B2 done, TIRx-kernels `haok/sm90-fp8-gemm` `9734a79`):** gated geomean **1.001x DeepGEMM**, min 0.966x.
+  Output equals DeepGEMM's (`calc_diff` 0.0); 20/20 configs pass, including tails; C75xx-clean.
+  - The gap had been around the promotion, not in it. A source and SASS diff against DeepGEMM's cubin found
+    the causes:
+    - `#pragma unroll 8` on the k-loop: about 6–7%;
+    - a warp-uniform warpgroup index via `shfl.sync`, which avoids per-wgmma R2UR: about 2–3%;
+    - the ISSUE-002 workaround: about 10% on the cluster configs.
+  - Decode rows (m = 128) are tracked at 0.41–0.84x; a small-M tile is future work.
 
 Per-kernel acceptance in TIRx-kernels, all three run as 1-GPU steps:
 - `python -m tirx_kernels.test --arch sm_90a --kernel <name>` passes every CONFIG.

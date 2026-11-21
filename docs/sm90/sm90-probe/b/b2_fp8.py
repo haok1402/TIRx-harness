@@ -10,12 +10,18 @@ from tirx_kernels.gemm import fp8_blockscale_gemm_sm90 as g
 mode = sys.argv[1] if len(sys.argv) > 1 else "gated"
 import re
 def _cfg(x):
+    x = re.sub(r"-[uskw]", "", x)
     if x == "auto":
         return None
     m = re.fullmatch(r"(\d+)x(\d+)([mn]?)(?:r(\d+))?L?C?B?", x)
     return int(m[1]), int(m[2]), (m[3] or None)
 def _kw(x):
     kw = {}
+    for flag, key, val in (("-u", "_uniform_wg", False), ("-s", "_sfb_smem", False), ("-k", "_kunroll", 1),
+                           ("-w", "_warp_release", False)):
+        if flag in x:
+            kw[key] = val
+            x = x.replace(flag, "")
     if x.endswith("B"):  # cluster index from block_idx // 2
         kw["_cid_from_bid"] = True
         x = x[:-1]

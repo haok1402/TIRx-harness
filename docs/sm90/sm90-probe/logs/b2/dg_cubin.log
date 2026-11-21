@@ -1,0 +1,70 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+Generated kernel code:
+// Includes' hash value: 56f7ddf925cc4c595617f51580d6d4e6
+
+#include <deep_gemm/impls/smxx_layout.cuh>
+
+using namespace deep_gemm;
+
+static void __instantiate_kernel() {
+    auto ptr = reinterpret_cast<void*>(&transpose_fp32<
+        512, 64, 16
+    >);
+};
+
+Create directory: /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/tmp
+Create directory: /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/tmp/2700886-c997809c-470d4c1c-1de2d132
+Running NVCC command: cd /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/tmp && /usr/local/cuda/bin/nvcc /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/tmp/2700886-c997809c-470d4c1c-1de2d132/kernel.cu -cubin -o /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/tmp/2700886-c997809c-470d4c1c-1de2d132/kernel.cubin -std=c++20 --diag-suppress=39,161,174,177,186,940 --ptxas-options=--register-usage-level=10 --ptxas-options=--verbose,--warn-on-local-memory-usage -I/mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/deep_gemm/include --gpu-architecture=sm_90a --compiler-options=-fPIC,-O3,-fconcepts,-Wno-deprecated-declarations,-Wno-abi -O3 --expt-relaxed-constexpr --expt-extended-lambda
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_ZN9deep_gemm14transpose_fp32ILj512ELj64ELj16ELj17EEEvPKfPfj' for 'sm_90a'
+ptxas info    : Function properties for _ZN9deep_gemm14transpose_fp32ILj512ELj64ELj16ELj17EEEvPKfPfj
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers
+ptxas info    : Compile time = 32.576 ms
+Create directory: /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/cache
+Loading CUBIN: /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/cache/kernel.transpose_fp32.8429193445c64406d3073a28889490d1/kernel.cubin
+Load time (/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/cache/kernel.transpose_fp32.8429193445c64406d3073a28889490d1): 0.73 ms
+Launch kernel with {64, 1} x 512, shared memory: 4352 bytes, cluster: 1, pdl: 0, stream: 0
+GemmDesc(gemm_type=0, kernel_type=1, m=4096, n=7168, k=2048, num_groups=1, major_a=0, major_b=0, mma_kind=1, a_dtype=Float8_e4m3fn, b_dtype=Float8_e4m3fn, cd_dtype=BFloat16, with_accumulation=0, num_sms=132, tc_util=100, compiled_dims=nk, ensure_zero_padding=1, expected_m=0, expected_n=0, expected_k=0, expected_num_groups=0): GemmConfig(layout=Layout(swap_ab=0, block_m=256, block_n=128, block_k=128, cluster_m=1, cluster_n=2), storage_config=StorageConfig(load_block_m=256, load_block_n=128, store_block_m=256, store_block_n=128, swizzle_a_mode=128, swizzle_b_mode=128, swizzle_cd_mode=128), pipeline_config=PipelineConfig(smem_size=216384, num_stages=3), launch_config=LaunchConfig(num_sms=132, num_sms_per_cluster=2, num_threads=384, num_tma_threads=128, num_math_threads=256, num_non_epilogue_threads=0, num_epilogue_threads=0)), LayoutInfo(num_waves=7, last_wave_util=104, num_cycles=93183)
+ok
+Making TMA desc: global memory: 2048 4096, shared memory: 128 256, outer stride: 2048, swizzle: 128 (base: 0), elem size: 1, pointer: 22640601333760
+Making TMA desc: global memory: 2048 7168, shared memory: 128 128, outer stride: 2048, swizzle: 128 (base: 0), elem size: 1, pointer: 22640829923328
+Making TMA desc: global memory: 7168 4096, shared memory: 64 256, outer stride: 7168, swizzle: 128 (base: 0), elem size: 2, pointer: 22640859283456
+Making TMA desc: global memory: 4096 16, shared memory: 256 1, outer stride: 4096, swizzle: 0 (base: 0), elem size: 4, pointer: 22640578530816
+Generated kernel code:
+// Includes' hash value: 4613976a4ebe898bcbf4ed08d5e03a95
+
+#include <deep_gemm/impls/sm90_fp8_gemm_1d2d.cuh>
+
+using namespace deep_gemm;
+
+static void __instantiate_kernel() {
+    auto ptr = reinterpret_cast<void*>(&sm90_fp8_gemm_1d2d_impl<
+        cute::UMMA::Major::K,
+        0, 7168, 2048,
+        1,
+        256, 128, 128,
+        128, 128, 128,
+        3,
+        128, 256,
+        2, true,
+        132, GemmType::Normal,
+        cutlass::bfloat16_t,
+        epilogue::transform::EpilogueIdentity
+    >);
+};
+
+Create directory: /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/tmp/2700886-c393cd9a-aa102151-dcf6aa76
+Running NVCC command: cd /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/tmp && /usr/local/cuda/bin/nvcc /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/tmp/2700886-c393cd9a-aa102151-dcf6aa76/kernel.cu -cubin -o /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/tmp/2700886-c393cd9a-aa102151-dcf6aa76/kernel.cubin -std=c++20 --diag-suppress=39,161,174,177,186,940 --ptxas-options=--register-usage-level=10 --ptxas-options=--verbose,--warn-on-local-memory-usage -I/mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/deep_gemm/include --gpu-architecture=sm_90a --compiler-options=-fPIC,-O3,-fconcepts,-Wno-deprecated-declarations,-Wno-abi -O3 --expt-relaxed-constexpr --expt-extended-lambda
+ptxas info    : 10 bytes gmem
+ptxas info    : Compiling entry function '_ZN9deep_gemm23sm90_fp8_gemm_1d2d_implILN4cute4UMMA5MajorE0ELj0ELj7168ELj2048ELj1ELj256ELj128ELj128ELj128ELj128ELj128ELj3ELj128ELj256ELj2ELb1ELj132ELNS_8GemmTypeE0EN7cutlass10bfloat16_tENS_8epilogue9transform16EpilogueIdentityEEEvPfPijjj14CUtensorMap_stSC_SC_SC_' for 'sm_90a'
+ptxas info    : Function properties for _ZN9deep_gemm23sm90_fp8_gemm_1d2d_implILN4cute4UMMA5MajorE0ELj0ELj7168ELj2048ELj1ELj256ELj128ELj128ELj128ELj128ELj128ELj3ELj128ELj256ELj2ELb1ELj132ELNS_8GemmTypeE0EN7cutlass10bfloat16_tENS_8epilogue9transform16EpilogueIdentityEEEvPfPijjj14CUtensorMap_stSC_SC_SC_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 10 barriers
+ptxas info    : Compile time = 839.354 ms
+Loading CUBIN: /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/cache/kernel.sm90_fp8_gemm_1d2d.22fbd763199108b56675e008c2adfe4c/kernel.cubin
+Load time (/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/dg_cache/cache/kernel.sm90_fp8_gemm_1d2d.22fbd763199108b56675e008c2adfe4c): 0.85 ms
+Launch kernel with {132, 1} x 384, shared memory: 216384 bytes, cluster: 2, pdl: 0, stream: 0
