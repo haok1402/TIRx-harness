@@ -1,0 +1,45 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/tirx-main
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+created: 8/8 workers
+8 workers [2557 items]
+
+ssssssssss.sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [  2%]
+ssssssssssssssssssssssss.ssssssssssssssssssssssssssssssssss.ssssssssssss [  5%]
+sssssssssssssssssssssssssssssssssssssss.sssssssssssssssssssssss.ss.sssss [  8%]
+ssssssssssssssssssssssssssssssssssssssssssss..ssssssssssssssssssssssssss [ 11%]
+sssssssssssssssssss.ssss.sssssssss.sssssssssssssssssssssssssssssssssssss [ 14%]
+ssss.ssssssssssssssssssssss.ssssssssssssssssssssssssssssss.sssssssssssss [ 16%]
+sssssssssssss.ssssssssssssssssssssssssss.ssssssssssssssssssssssss.ssssss [ 19%]
+sssssssssssssssssssss.sssss.sssssssssssssssssssssssssssssssss.s.ssssssss [ 22%]
+sssssssssssssssss.s.ssssssssssssssssssssssssssssssssssssssssssssssss.sss [ 25%]
+sssssssssssssssssssssssss.sssssssssssssssssssssssssssssssssss.ssssssssss [ 28%]
+ssssss.ssssssssssssssssssssssssssssss.ssssssssssssssssssssssssssssssssss [ 30%]
+sssssssssssssssssssss.sssss.ssssssssssssssssssssssssssssssssssssssssssss [ 33%]
+sssssssssssssssssssssssssssssssssssssssssssssssss.sssssssssssssssss.ssss [ 36%]
+sssssssssss.ssssssssssssssssssssssssssssssssssssssssss.sssssssssssssssss [ 39%]
+ssssssssssss.sssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 42%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 45%]
+sssssssssssssssssssssssssss.sssss.ssssssssssss.sss.sssssssssssssssssssss [ 47%]
+ssssssssssssssssssssssssssssssssssssssssssss.ssssssssss.ssssssssssssssss [ 50%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 53%]
+sss.ssssssssssss.sssssssss.ssssssssss.ssssssssssssssssssssssssssssssssss [ 56%]
+sssssssssssssssssss.s.ssssssssssssssssssssssssssssssssssssssssssssssssss [ 59%]
+ssssssssssssssssssssssssssssss.sssssssssss.sssssss.sssssssssssssssssssss [ 61%]
+ssssssssssssssssss.ssssssssssssssssssssssssssssssssss.ssssssssssssssssss [ 64%]
+s.ssssssssssssssssssssssssssssssssssss.ssssssssssssssss.sssss.ssssssssss [ 67%]
+ssssssssssssssssssssssssssss.sssssssssssssssssssssssssssssssssssssssssss [ 70%]
+ssssssssssssssss.sssssssssssssssssssssss.ssss.ssssssssssssssssssss.ssss. [ 73%]
+sssssssssssssssssssssssssssssssssssssssssssssssssss.ssssssssssssssssssss [ 76%]
+sssssssssssssssssssssssssssssssssssssssssssssssssss.ss.sssssssssssssssss [ 78%]
+ssssssss.ss.ssssssssssssssss.ssssssssss.ss.s................ss.......... [ 81%]
+.....s.sss.ssssssssssss....................ssssssssss....ssssssssssssss. [ 84%]
+.ssssss.ssssss.ssssssssss..................................ssss.ss.sssss [ 87%]
+ssss.ssssssssssssssssssssssssssssssssssss............................... [ 90%]
+........................................................................ [ 92%]
+.......................ss..sss............ss...........................s [ 95%]
+ssssssss.s..............ss..ss..ss..s.ss.s.ss......................s.... [ 98%]
+s..................ssssssssssssssssss                                    [100%]
+================ 403 passed, 2154 skipped in 129.37s (0:02:09) =================

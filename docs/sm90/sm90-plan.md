@@ -4,15 +4,19 @@ Date: 2026-11-21. Author: agent sm90-plan. Builds on `docs/sm90-codegen.md` (pha
 
 ## Final status (2026-11-21, agent sm90-plan)
 
-**Done:** M1–M4. **Not done in track A:** A3 (per-variant arch-floor check), A4 (DSMEM bulk-copy tile
-pattern) and A5 (mma.sync/ldmatrix `KeyError 'm'`). A2 marked A4/A5's bugs as strict xfails. A9 stays
-deferred.
+**Done:** M1–M4. **Track A finished (2026-11-21), awaiting review:**
+- **A4** (DSMEM bulk-copy tile pattern) and **A5** (mma.sync/ldmatrix `KeyError 'm'`) are pushed. They are
+  stacked on A2, whose strict xfails they flip.
+- **A3** (`VerifyPTXTarget`, per-variant arch floors) is committed on `haok/ptx-arch-floor`
+  (`f6bfa25d5`), off upstream main. Its validation is in that branch's PR_DESCRIPTION.md.
+
+A9 stays deferred.
 
 ### Branches (all pushed) and their upstream targets
 
 | Repo → upstream `main` | PR branches, in merge order | Dev-only (do not merge) |
 |---|---|---|
-| **tvm-tirx** | 1. `haok/sm90-wgmma-fence` (A1)<br>2. `haok/sm90-test-gate` (A2)<br>3. `haok/sm90-ptxas-log` (A10)<br>4. `haok/sm90-wgmma-helpers` (A7)<br>5. `haok/sm90-pipeline-multicast` (A6)<br>6. `haok/sm90-packed-f32` (A8)<br>7. `haok/sm90-setmaxnreg-contract` (A11, needs A10)<br>Then sm90-codegen-fix's `haok/fix-*` for ISSUE-001..007, and `haok/fix-a7-uniform-warpgroup-docs` after A7. | `haok/sm90-stack` (A-items, cherry-picked); `haok/sm90-stack-fixes` (stack + ISSUE-001..003, B3's build); stale: `haok/sm90-plan`, `haok/sm90-design` |
+| **tvm-tirx** | 1. `haok/sm90-wgmma-fence` (A1)<br>2. `haok/sm90-test-gate` (A2)<br>3. `haok/sm90-ptxas-log` (A10)<br>4. `haok/sm90-wgmma-helpers` (A7)<br>5. `haok/sm90-pipeline-multicast` (A6)<br>6. `haok/sm90-packed-f32` (A8)<br>7. `haok/sm90-setmaxnreg-contract` (A11, needs A10)<br>8. `haok/dsmem-pattern-fix` (A4) and `haok/mma-pattern-m` (A5), both after A2<br>9. `haok/ptx-arch-floor` (A3, off main; not pushed yet)<br>Then sm90-codegen-fix's `haok/fix-*` for ISSUE-001..007, and `haok/fix-a7-uniform-warpgroup-docs` after A7. | `haok/sm90-stack` (A-items, cherry-picked); `haok/sm90-stack-fixes` (stack + ISSUE-001..003, B3's build); stale: `haok/sm90-plan`, `haok/sm90-design` |
 | **TIRx-kernels** | 1. `haok/test-runner-skips` (all-skipped exits 3)<br>2. `haok/rmsnorm-int64-offsets` (sm_100 64-bit offsets)<br>3. `haok/sm90-rmsnorm` (B0; contains 2)<br>4. `haok/sm90-gemm` (B1)<br>5. `haok/sm90-fp8-gemm` (B2)<br>6. `haok/sm90-fa3` (B3) | `haok/sm90-kernels-stack` |
 | **TIRx-harness** | 1. `haok/h200-bench-stack` (C1)<br>2. `haok/h200-target-arch` (C2)<br>3. `haok/h200-tasks` (C3, stacked on C2; seeds need the TIRx-kernels B-branches)<br>Independent of each other: `haok/srun-local-mode` (C5), `haok/kcoral-slurm` (C4), `haok/dev-local-stack` (C6 overlay), `haok/sm90-skills` (C7), `haok/wgmma-fail-soft` (C8 phase 1), `haok/banned-path-list` (C9). | `haok/h200-harness-stack`; docs: `haok/sm90-plan` |
 
@@ -69,11 +73,9 @@ All four are `perf_remarks="error"`-clean.
   - No evolution run on `fa3_forward_h200` yet.
 - **NCU:** the nodes set `RmProfilingAdminOnly=1`. Only admins can lift it
   (`NVreg_RestrictProfilingToAdminUsers=0`); this goes to the user.
-- **A3, A4, A5** (above), and the C6 pin bump.
-- **Housekeeping:**
-  - HARNESS-001 #6: wiki reference checkout lacks the SM90 kernels.
-  - Two stale partial run dirs, `workspace/kda_flow_runs/m3-rmsnorm-h200{,b}` (6.6 GB each), await a
-    delete decision.
+- **A3/A4/A5 review**, and the C6 pin bump.
+- **Housekeeping:** HARNESS-001 #6: the wiki reference checkout lacks the SM90 kernels. The two
+  stale M3 run dirs were deleted on 2026-11-21, as approved.
   - Shared-space venvs `TIRx-kernels/{refenv,b3env}` and the tvm-tirx wheel and build dir are kept
     for reruns.
 

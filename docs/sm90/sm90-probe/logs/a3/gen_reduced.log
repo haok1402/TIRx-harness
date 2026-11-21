@@ -1,0 +1,22 @@
+reduced-scope run 2026-11-21T20:27:42Z on 2562280
+gen_floors: 287 families, 61468 variants, 2175 jobs
+gen_floors: 0 jobs from cache, 2175 to run
+gen_floors: 200/2175 jobs, 43s
+gen_floors: 400/2175 jobs, 81s
+gen_floors: 600/2175 jobs, 111s
+gen_floors: 800/2175 jobs, 381s
+gen_floors: 1000/2175 jobs, 1183s
+srun: forcing job termination
+srun: forcing job termination
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: got SIGCONT
+[2026-11-21T20:48:17.503] error: *** STEP 2562280.487 ON fs-mbz-gpu-358 CANCELLED AT 2026-11-21T20:48:17 DUE to SIGNAL Killed ***
+srun: error: fs-mbz-gpu-358: task 0: Killed
+restart without sm_107* families 2026-11-21T20:48:37Z
+gen_floors: 123 families, 45126 variants, 1295 jobs
+gen_floors: 480 jobs from cache, 815 to run
+gen_floors: 200/815 jobs, 54s
+gen_floors: 400/815 jobs, 95s
+gen_floors: 600/815 jobs, 134s
+gen_floors: 800/815 jobs, 175s
+gen_floors: wrote 107 families to /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/logs/a3/floors_reduced.py

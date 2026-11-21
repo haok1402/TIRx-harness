@@ -1,0 +1,10 @@
+
+============================= 122 passed in 12.80s =============================
+PTX instructions the target architecture cannot run:
+  /mnt/weka/home/hao.kang/kernel-evolve/TIRx-kernels/tirx_kernels/gemm/fp16_bf16_gemm.py:414:1: `tcgen05.alloc.cta_group::2.sync.aligned.shared::cta.b32` requires a newer target such as sm_100a (rejected on every checked arch: sm_
+  <unknown location>: `cp.async.bulk.tensor.2d.shared::cluster.global.mbarrier::complete_tx::bytes.cta_group::2` requires a newer target such as sm_100a (rejected on every checked arch: sm_80, sm_89, sm_90, sm_90a); the target is 
+  <unknown location>: `clusterlaunchcontrol.query_cancel.is_canceled.pred.b128` requires a newer target such as sm_100a (rejected on every checked arch: sm_80, sm_89, sm_90, sm_90a); the target is sm_90a (in gemm_kernel)
+  <unknown location>: `clusterlaunchcontrol.query_cancel.get_first_ctaid::x.b32.b128` requires a newer target such as sm_100a (rejected on every checked arch: sm_80, sm_89, sm_90, sm_90a); the target is sm_90a (in gemm_kernel)
+  <unknown location>: `clusterlaunchcontrol.try_cancel.async.shared::cta.mbarrier::complete_tx::bytes.multicast::cluster::all.b128` requires a newer target such as sm_100a (rejected on every checked arch: sm_80, sm_89, sm_90, sm_9
+  <unknown location>: `tcgen05.mma.cta_group::2.kind::f16` requires a newer target such as sm_100a (rejected on every checked arch: sm_80, sm_89, sm_90, sm_90a); the target is s
+ACCEPT nvrtc_reached= False

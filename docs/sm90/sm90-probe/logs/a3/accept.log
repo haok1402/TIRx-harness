@@ -1,0 +1,6 @@
+PTX instructions the target architecture cannot run:
+  tirx_kernels/gemm/fp16_bf16_gemm.py:414:1: `tcgen05.alloc.cta_group::2.sync.aligned.shared::cta.b32` requires a newer target such as sm_100a (rejected on every checked arch: sm_80, sm_89, sm_90, sm_90a); the 
+  tirx_kernels/gemm/fp16_bf16_gemm.py:490:1 <- tirx_kernels/gemm/fp16_bf16_gemm.py:522:1 <- ... <- tirx_kernels/gemm/fp16_bf16_gemm.py:786:1: `cp.async.bulk.tensor.2d.shared::cluster.global.mbarrier::complete_t
+  tirx_kernels/gemm/fp16_bf16_gemm.py:507:1 <- tirx_kernels/gemm/fp16_bf16_gemm.py:522:1 <- ... <- tirx_kernels/gemm/fp16_bf16_gemm.py:786:1: `cp.async.bulk.tensor.2d.shared::cluster.global.mbarrier::complete_t
+  /mnt/weka/home/hao.kang/kernel-evolve/wt/a3/python/tvm_tirx/backend/cuda/lang/clc.py:45:5 <- /mn
+ACCEPT nvrtc_reached= False

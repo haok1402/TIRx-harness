@@ -1,0 +1,13 @@
+rows 38696 kernels 106
+   29514  identical
+    8646  rejected by A3 (sm_90a)
+     278  same harness/main failure: TypeError
+     120  same harness/main failure: SkipTest
+      32  same harness/main failure: RuntimeError
+      32  same harness/main failure: ValueError
+      32  same harness/main failure: AcceleratorError
+      26  same harness/main failure: AttributeError
+      16  same harness/main failure: ModuleNotFoundError
+covered (main ok) by arch: [(('sm_100a', False), 214), (('sm_100a', True), 9519), (('sm_103a', False), 38), (('sm_103a', True), 8922), (('sm_107a', False), 41), (('sm_107a', True), 8903), (('sm_110a', True), 1161), (('sm_90a', False), 243), (('sm_90a', True), 9655)]
+A3-rejected kernels at sm_90a: 85
+PROBLEMS: 0

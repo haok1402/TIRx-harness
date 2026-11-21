@@ -1,0 +1,3 @@
+{"kernel": "flashinfer_rmsnorm_quant", "config": "fp16_e4m3_m1_h111_xc_yc_pdl0_s0p01", "arch": "sm_90a", "main": "nvrtc_rejects", "msg": "ptxas application ptx input, line 746; error   : Feature 'mul.f32x2' requires .target sm_100 or higher"}
+{"kernel": "flashinfer_rmsnorm_quant", "config": "fp16_e4m3_m99_h111_xc_yc_pdl0_s10", "arch": "sm_90a", "main": "nvrtc_rejects", "msg": "ptxas application ptx input, line 746; error   : Feature 'mul.f32x2' requires .target sm_100 or higher"}
+{"kernel": "flashinfer_rmsnorm_quant", "config": "fp16_e5m2_m989_h500_xc_ys_pdl1_s1_eps1e4_full_abi", "arch": "sm_90a", "main": "nvrtc_rejects", "msg": "ptxas application ptx input, line 823; error   : Feature 'mul.f32x2' requires .target sm_100 or higher"}

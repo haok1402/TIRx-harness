@@ -1,0 +1,64 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/a3
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+created: 8/8 workers
+8 workers [2680 items]
+
+ssssssssssssss.s.ssssssssssssss.sssssssssssssssssssssssssssssssssssssss. [  2%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssss.sssssssssssss [  5%]
+sssssssssssssssssssssssssssss.sss......ssssss.sssssss........sssssssssss [  8%]
+ss.ss.ss.s......................ss..ssss..sss.s.sssssss.ssssssssssss.sss [ 10%]
+ssssssssssssssssssssssssssssssssssssssss.sssssssssssss.ss..sssssssss.sss [ 13%]
+ssssssss.ssssssssssssssssss.sssssssssssssssssssssssssssss.sssssssssss.s. [ 16%]
+sssss.sssssssss.ssssssssssssssssssss.ssssssssssssssssssssssssssssss.ssss [ 18%]
+sssssssssssssss.s.sssssssss.ssss.ssssssssssss.sssss.ssssssssssssssssssss [ 21%]
+sssssssssssssssssssss.ss.ssssssssssssssss.s.s.sssssssssssss.sssssssssss. [ 24%]
+sssssssssssssssssssssssssssssssssss.ssss.sssssssssssss.sssss.sssssssssss [ 26%]
+ssss.s.sssssss.sssssssssssssssssssssssssssss.sssssssssssssssssssssssssss [ 29%]
+.ssssssssss.ssssss.ssssss.ssssss.ss.ssssssssssssssssss.sssssssssssssssss [ 32%]
+sssssssssssssssss.sssssss.ssssssss.ssssssssssss.s.sssss.sssssssssss.ssss [ 34%]
+sssssssssssssssssssssssssssssssssss.sss.ssssssssss.ssssssssssssss.ssssss [ 37%]
+sss.ssss.ss.sssssssssssssssssssssssssssssssssssssssss.ssssssssssss.sssss [ 40%]
+ssss.ssssssssssss.sssss.ssssssssssssss.ssssssssssssssssssssssssssssss.ss [ 42%]
+ssssssssssssssssssssss.ss.sss.ssss.sssssssssssssssssssssssssssss.sssssss [ 45%]
+ssssssss.sssssssssssssssssssssssssssssssss.sssssss.sssssssssssssssssssss [ 48%]
+ssss.sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 51%]
+.ssssssss.sssssssssssssssssssssssssssssssssssssssssssssssss.ss.sssssssss [ 53%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 56%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 59%]
+sssssssssssssssss.sssssssss.ssssss.ss.ssssssssssssssssssssssssssssssssss [ 61%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 64%]
+ssssssssssssssssssssssssssssssssssssssss.sssssssssssssssssssssss.sssssss [ 67%]
+ssssss.ssss.ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 69%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssss.sssssssssssssssssss [ 72%]
+sssssssss.sssssssssssssssssssssssss.sssssssssss.ssssssssssssssssssssssss [ 75%]
+sssssssssssssssssssssssssssssssssssssssssssssssssssssss.ssssssssssssssss [ 77%]
+sssssssssssssssssssss.sssssssssssssssssssssss.ssssssssssssssssssssssssss [ 80%]
+sssssssssssssss.sssssssssssssssssssssssssssssssssssssssssssssss.sssss... [ 83%]
+........................................................................ [ 85%]
+....................................................s.s................. [ 88%]
+..................................ss.................................... [ 91%]
+.............................................ssssssssssssss............. [ 94%]
+................s....................s.................................. [ 96%]
+.........sssssssss......sss...............ssssssssssssssssssssssssssssss [ 99%]
+ssssFs....ss.sss                                                         [100%]
+=================================== FAILURES ===================================
+_____________________________ test_ptx_nvcc_smoke ______________________________
+[gw6] linux -- Python 3.14.6 /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tests/python/tirx/codegen/test_ptx_dialect.py:5184: in test_ptx_nvcc_smoke
+    '"=f"(__redval)',
+    ^^^^^^^^^^
+python/tvm_tirx/script/parser/entry.py:424: in decorator
+    return apply(function) if function is not None else apply
+           ^^^^^^^^^^^^^^^
+python/tvm_tirx/script/parser/entry.py:405: in apply
+    require_definition_site(function, frame, decorator)
+python/tvm_tirx/script/parser/inspect_source.py:328: in require_definition_site
+    for item in tree.body[-1].decorator_list
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Expr' object has no attribute 'decorator_list'
+=========================== short test summary info ============================
+FAILED tests/python/tirx/codegen/test_ptx_dialect.py::test_ptx_nvcc_smoke - A...
+=========== 1 failed, 525 passed, 2154 skipped in 129.87s (0:02:09) ============
