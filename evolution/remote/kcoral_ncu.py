@@ -81,6 +81,14 @@ def main(argv=None):
             print(f"kcoral_ncu: report saved to {output}", file=sys.stderr)
         else:
             print("kcoral_ncu: NCU produced no report", file=sys.stderr)
+            if capture.get("counters_restricted"):
+                print(
+                    "kcoral_ncu: the server's GPU driver restricts performance counters to admins "
+                    "(RmProfilingAdminOnly=1), so NCU cannot profile there at all "
+                    "(ERR_NVGPUCTRPERM). Retrying with other options will not help; report it "
+                    "and use the CUPTI timings of the benchmark or IKET instead.",
+                    file=sys.stderr,
+                )
             if code == 0:
                 code = 1
         return exit_code(code)

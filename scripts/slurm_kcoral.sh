@@ -26,6 +26,8 @@
 # Env:
 #   KCORAL_VENV        environment with the `benchmark` and `server` groups (default: <repo>/.venv)
 #   KCORAL_CPUS / KCORAL_MEM   step resources (default 8 / 64G)
+#   CUDA_HOME          CUDA toolkit whose bin/ (ncu, compute-sanitizer) the server's requests get on PATH
+#                      (default /usr/local/cuda)
 #   RECHECK_SECONDS    wait between checks while no task runs (default 150)
 #   KCORAL_SERVER_ARGS extra `kcoral server` arguments
 set -uo pipefail
@@ -39,6 +41,7 @@ URL_FILE=$(realpath -m "$2")
 TOKEN_FILE="$URL_FILE.token"
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 VENV=${KCORAL_VENV:-$ROOT/.venv}
+CUDA_BIN=${CUDA_HOME:-/usr/local/cuda}/bin  # ncu / compute-sanitizer for the tool CLIs
 CPUS=${KCORAL_CPUS:-8}
 MEM=${KCORAL_MEM:-64G}
 RECHECK=${RECHECK_SECONDS:-150}
@@ -90,8 +93,9 @@ while true; do
     srun --jobid="$job" -J "$STEP_NAME" -N1 -n1 --gres=gpu:1 --cpus-per-task="$CPUS" --mem="$MEM" \
     bash -c "
       # Requests inherit this environment: the server venv goes first on PATH, so python in --cmd
-      # scripts and tool targets is the provisioned interpreter, not the bare system one.
-      export VIRTUAL_ENV='$VENV' PATH='$VENV/bin':\$PATH
+      # scripts and tool targets is the provisioned interpreter, not the bare system one; CUDA's bin
+      # follows, so the tool CLIs find ncu and compute-sanitizer.
+      export VIRTUAL_ENV='$VENV' PATH='$VENV/bin':'$CUDA_BIN':\$PATH
       env -u KCORAL_PROXY_TOKEN '$VENV/bin/kcoral' server --host 127.0.0.1 --port $inner --gpus 0 --sandbox none \
         --max-timeout-seconds 3600 --log-dir '' $EXTRA &
       server=\$!
