@@ -1,0 +1,16 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/shrd/ci/haok/TIRx-kernels/b3env/lib/python3.13/site-packages/tvm_tirx/__init__.py 0.1.1.dev27+g801280ac4
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fa3/tirx_kernels/__init__.py
+{"state": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 79.93, 34"}, "flashinfer": "0.6.18"}
+{"shape": [4, 16, 4096], "causal": false, "gated": true, "tflops": {"tirx": 577.8, "fa3": 688.6}, "ratio_vs_fa3": 0.839, "max_abs_diff_vs_fa3": 0.001}
+{"shape": [4, 16, 4096], "causal": true, "gated": true, "tflops": {"tirx": 459.9, "fa3": 616.1}, "ratio_vs_fa3": 0.746, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [2, 16, 8192], "causal": false, "gated": true, "tflops": {"tirx": 584.4, "fa3": 720.0}, "ratio_vs_fa3": 0.812, "max_abs_diff_vs_fa3": 0.0005}
+{"shape": [2, 16, 8192], "causal": true, "gated": true, "tflops": {"tirx": 482.8, "fa3": 599.6}, "ratio_vs_fa3": 0.805, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [1, 16, 16384], "causal": false, "gated": true, "tflops": {"tirx": 535.6, "fa3": 658.1}, "ratio_vs_fa3": 0.814, "max_abs_diff_vs_fa3": 0.0002}
+{"shape": [1, 16, 16384], "causal": true, "gated": true, "tflops": {"tirx": 519.1, "fa3": 646.7}, "ratio_vs_fa3": 0.803, "max_abs_diff_vs_fa3": 0.002}
+{"shape": [8, 16, 4096], "causal": false, "gated": true, "tflops": {"tirx": 515.0, "fa3": 622.8}, "ratio_vs_fa3": 0.827, "max_abs_diff_vs_fa3": 0.001}
+{"shape": [8, 16, 4096], "causal": true, "gated": true, "tflops": {"tirx": 397.4, "fa3": 552.9}, "ratio_vs_fa3": 0.719, "max_abs_diff_vs_fa3": 0.0039}
+{"shape": [4, 32, 8192], "causal": false, "gated": true, "tflops": {"tirx": 508.7, "fa3": 627.3}, "ratio_vs_fa3": 0.811, "max_abs_diff_vs_fa3": 0.0005}
+{"shape": [4, 32, 8192], "causal": true, "gated": true, "tflops": {"tirx": 433.9, "fa3": 567.8}, "ratio_vs_fa3": 0.764, "max_abs_diff_vs_fa3": 0.0039}
+{"gated_min_ratio": 0.719, "gated_ratios": [0.839, 0.746, 0.812, 0.805, 0.814, 0.803, 0.827, 0.719, 0.811, 0.764], "gate_0.90": false}
+{"state_after": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "1485, 1980, 0x0000000000000004, 230.54, 50"}}

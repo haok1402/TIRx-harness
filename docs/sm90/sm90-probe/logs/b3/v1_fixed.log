@@ -1,0 +1,24 @@
+NVIDIA H200, 595.91.07
+done max err 0.006523609161376953
+len 2 rc=0
+done max err 0.006523609161376953
+len 63 rc=0
+done max err 0.006523609161376953
+len 127 rc=0
+done max err 0.006523609161376953
+len 129 rc=0
+done max err 0.006523609161376953
+len 255 rc=0
+{"compile": "clean", "causal": false, "res": ["REG:168 STACK:0 SHARED:1024 LOCAL:0 CONSTANT[0]:1040 TEXTURE:0 SURFACE:0 SAMPLER:0"]}
+{"compile": "clean", "causal": true, "res": ["REG:168 STACK:0 SHARED:1024 LOCAL:0 CONSTANT[0]:1040 TEXTURE:0 SURFACE:0 SAMPLER:0"]}
+PASS s128_h2_full
+PASS s128_h2_causal
+PASS s1000_h2_full
+PASS s1000_h2_causal
+PASS s4096_h4_full
+PASS s4096_h4_causal
+PASS varlen_h3_full
+PASS varlen_h3_causal
+PASS b2_s2048_h4_full
+PASS b2_s2048_h4_causal
+b3 tests: 0 failed
