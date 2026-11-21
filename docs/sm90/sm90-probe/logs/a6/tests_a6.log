@@ -1,0 +1,27 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0 -- /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-pipeline-multicast/python/tvm_tirx/__init__.py
+TVM_TIRX_LIBRARY_PATH=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/tvm_tirx/lib SKBUILD_EDITABLE_SKIP=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/build
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-pipeline-multicast
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+collecting ... collected 16 items
+
+tests/python/backend/cuda/test_pipeline_multicast.py::test_arrive_multicast_releases_every_cta[2] PASSED [  6%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_arrive_multicast_releases_every_cta[4] PASSED [ 12%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_arrive_multicast_rejects_empty_ranks PASSED [ 18%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[1-384-192] PASSED [ 25%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[1-256-96] PASSED [ 31%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[1-128-32] PASSED [ 37%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[2-384-192] PASSED [ 43%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[2-256-96] PASSED [ 50%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[2-128-32] PASSED [ 56%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[4-384-192] PASSED [ 62%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[4-256-96] PASSED [ 68%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[4-128-32] PASSED [ 75%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[8-384-192] PASSED [ 81%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[8-256-96] PASSED [ 87%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_matches_the_driver[8-128-32] PASSED [ 93%]
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_is_not_num_sms_over_cluster_on_hopper PASSED [100%]
+
+============================= 16 passed in 19.06s ==============================

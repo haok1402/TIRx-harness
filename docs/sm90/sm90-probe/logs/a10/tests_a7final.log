@@ -1,0 +1,54 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0 -- /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-wgmma-helpers/python/tvm_tirx/__init__.py
+TVM_TIRX_LIBRARY_PATH=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/tvm_tirx/lib SKBUILD_EDITABLE_SKIP=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/build
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-wgmma-helpers
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+collecting ... collected 37 items
+
+tests/python/backend/cuda/test_wgmma_helpers.py::test_shapes PASSED      [  2%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[8] PASSED [  5%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[64] PASSED [  8%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[256] PASSED [ 10%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_a_fragment_is_the_first_16_accumulator_columns PASSED [ 13%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_named_barriers PASSED [ 16%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n64] PASSED [ 18%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n128] PASSED [ 21%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n256] PASSED [ 24%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-f16-n128] PASSED [ 27%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-e4m3-n128] PASSED [ 29%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-bf16-n128] PASSED [ 32%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-f16-n64] PASSED [ 35%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n128-mnB] PASSED [ 37%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-bf16-n64-mnB] PASSED [ 40%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_chain_is_one_pipelined_group[ss] PASSED [ 43%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_chain_is_one_pipelined_group[rs] PASSED [ 45%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_named_barrier_ping_pong PASSED [ 48%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_fa_forward_microkernel PASSED [ 51%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_wgmma_serialization_remarks PASSED [ 54%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_spills_and_stack_frames PASSED [ 56%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_clean_and_empty_logs PASSED [ 59%]
+tests/python/backend/cuda/test_perf_remarks.py::test_report_policy PASSED [ 62%]
+tests/python/backend/cuda/test_perf_remarks.py::test_backend_config_validates_perf_remarks PASSED [ 64%]
+tests/python/backend/cuda/test_perf_remarks.py::test_serialized_wgmma_chain_warns_and_raises PASSED [ 67%]
+tests/python/backend/cuda/test_perf_remarks.py::test_clean_wgmma_chain_has_no_remarks[2] PASSED [ 70%]
+tests/python/backend/cuda/test_perf_remarks.py::test_clean_wgmma_chain_has_no_remarks[4] PASSED [ 72%]
+tests/python/backend/cuda/test_perf_remarks.py::test_register_spills_are_reported PASSED [ 75%]
+tests/python/backend/cuda/test_perf_remarks.py::test_error_mode_through_tvm_tirx_compile PASSED [ 78%]
+tests/python/backend/cuda/test_op_result_types.py::test_statement_intrinsic_registers_void[tirx.cuda.wait_until] PASSED [ 81%]
+tests/python/backend/cuda/test_op_result_types.py::test_statement_intrinsic_registers_void[tirx.cuda.timer_init] PASSED [ 83%]
+tests/python/backend/cuda/test_op_result_types.py::test_statement_intrinsic_registers_void[tirx.cuda.timer_start] PASSED [ 86%]
+tests/python/backend/cuda/test_op_result_types.py::test_statement_intrinsic_registers_void[tirx.cuda.timer_end] PASSED [ 89%]
+tests/python/backend/cuda/test_op_result_types.py::test_statement_intrinsic_registers_void[tirx.cuda.timer_finalize] PASSED [ 91%]
+tests/python/backend/cuda/test_op_result_types.py::test_statement_intrinsic_registers_void[tirx.nvshmem.getmem_nbi_block] PASSED [ 94%]
+tests/python/backend/cuda/test_op_result_types.py::test_every_intrinsic_has_a_result_type PASSED [ 97%]
+tests/python/backend/cuda/test_op_result_types.py::test_statement_intrinsics_emit_under_a_builder PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/python/backend/cuda/test_perf_remarks.py::test_report_policy
+  /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/_pytest/python.py:187: TIRxPerfWarning: ptxas [C7517] in main_kernel: wgmma.wait_group is injected in around line 646 by compiler to allow use of registers defined by GMMA in function 'main_kernel'
+    result = testfunction(**testargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 37 passed, 1 warning in 24.43s ========================

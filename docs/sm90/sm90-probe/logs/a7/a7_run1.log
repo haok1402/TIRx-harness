@@ -1,0 +1,4 @@
+NVIDIA H200, 595.91.07
+FAILED tests/python/backend/cuda/test_wgmma_helpers.py::test_chain_is_one_pipelined_group[rs] - TypeError: 'AlreadyEmitted' object is not subscriptable
+FAILED tests/python/backend/cuda/test_wgmma_helpers.py::test_fa_forward_microkernel - TypeError: A primitive for loop requires an iteration specification
+========================= 12 failed, 7 passed in 6.02s =========================

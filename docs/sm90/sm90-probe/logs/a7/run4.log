@@ -1,0 +1,4 @@
+NVIDIA H200, 595.91.07
+tests/python/backend/cuda/test_wgmma_helpers.py::test_fa_forward_microkernel PASSED [100%]
+
+============================== 1 passed in 7.19s ===============================

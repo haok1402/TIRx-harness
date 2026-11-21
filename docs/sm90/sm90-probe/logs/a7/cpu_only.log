@@ -1,0 +1,4 @@
+SKIPPED [2] tests/python/backend/cuda/test_wgmma_helpers.py:265: needs cuobjdump
+SKIPPED [1] tests/python/backend/cuda/test_wgmma_helpers.py:294: wgmma needs an sm_90 device
+SKIPPED [1] tests/python/backend/cuda/test_wgmma_helpers.py:350: wgmma needs an sm_90 device
+======================== 6 passed, 13 skipped in 3.96s =========================

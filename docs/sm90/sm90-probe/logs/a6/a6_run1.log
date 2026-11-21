@@ -1,0 +1,4 @@
+NVIDIA H200, 595.91.07
+tests/python/backend/cuda/test_pipeline_multicast.py::test_max_active_clusters_is_not_num_sms_over_cluster_on_hopper PASSED [100%]
+
+============================= 16 passed in 19.06s ==============================

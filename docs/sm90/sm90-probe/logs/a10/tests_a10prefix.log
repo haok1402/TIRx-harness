@@ -1,0 +1,83 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0 -- /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/a10-prefix/python/tvm_tirx/__init__.py
+TVM_TIRX_LIBRARY_PATH=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/tvm_tirx/lib SKBUILD_EDITABLE_SKIP=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/build
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/a10-prefix
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+collecting ... collected 2 items
+
+tests/python/backend/cuda/test_perf_remarks.py::test_collectors_nest_by_identity FAILED [ 50%]
+tests/python/backend/cuda/test_perf_remarks.py::test_user_collector_around_tvm_tirx_compile FAILED [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_collectors_nest_by_identity _______________________
+tests/python/backend/cuda/test_perf_remarks.py:169: in test_collectors_nest_by_identity
+    assert outer.remarks == list(remarks) * 2
+E   assert [] == [PerfRemark(kind='ptxas', message="wgmma.wait_group is injected in around line 646 by compiler to allow use of registers defined by GMMA in function 'main_kernel'", function='main_kernel', code='C7517', arch='sm_90a'), PerfRemark(kind='ptxas', message="Potential Performance Loss: wgmma.mma_async instructions are serialized due to insufficient register resources for the wgmma pipeline in the function 'main_kernel' in line 650", function='main_kernel', code='C7511', arch='sm_90a'), PerfRemark(kind='ptxas', message="wgmma.wait_group is injected in around line 646 by compiler to allow use of registers defined by GMMA in function 'main_kernel'", function='main_kernel', code='C7517', arch='sm_90a'), PerfRemark(kind='ptxas', message="Potential Performance Loss: wgmma.mma_async instructions are serialized due to insufficient register resources for the wgmma pipeline in the function 'main_kernel' in line 650", function='main_kernel', code='C7511', arch='sm_90a')]
+E     
+E     Right contains 4 more items, first extra item: PerfRemark(kind='ptxas', message="wgmma.wait_group is injected in around line 646 by compiler to allow use of registers defined by GMMA in function 'main_kernel'", function='main_kernel', code='C7517', arch='sm_90a')
+E     
+E     Full diff: (-: missing in left side, +: extra in left side)
+E     + []
+E     - [
+E     -     PerfRemark(
+E     -         kind='ptxas',
+E     -         message='wgmma.wait_group is injected in around line 646 by compiler '
+E     -                 'to allow use of registers defined by GMMA in function '
+E     -                 "'main_kernel'",
+E     -         function='main_kernel',
+E     -         code='C7517',
+E     -         arch='sm_90a',
+E     -     ),
+E     -     PerfRemark(
+E     -         kind='ptxas',
+E     -         message='Potential Performance Loss: wgmma.mma_async instructions are '
+E     -                 'serialized due to insufficient register resources for the '
+E     -                 "wgmma pipeline in the function 'main_kernel' in line 650",
+E     -         function='main_kernel',
+E     -         code='C7511',
+E     -         arch='sm_90a',
+E     -     ),
+E     -     PerfRemark(
+E     -         kind='ptxas',
+E     -         message='wgmma.wait_group is injected in around line 646 by compiler '
+E     -                 'to allow use of registers defined by GMMA in function '
+E     -                 "'main_kernel'",
+E     -         function='main_kernel',
+E     -         code='C7517',
+E     -         arch='sm_90a',
+E     -     ),
+E     -     PerfRemark(
+E     -         kind='ptxas',
+E     -         message='Potential Performance Loss: wgmma.mma_async instructions are '
+E     -                 'serialized due to insufficient register resources for the '
+E     -                 "wgmma pipeline in the function 'main_kernel' in line 650",
+E     -         function='main_kernel',
+E     -         code='C7511',
+E     -         arch='sm_90a',
+E     -     ),
+E     - ]
+
+During handling of the above exception, another exception occurred:
+tests/python/backend/cuda/test_perf_remarks.py:162: in test_collectors_nest_by_identity
+    with collect_perf_remarks() as outer:
+         ^^^^^^^^^^^^^^^^^^^^^^
+../../../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/contextlib.py:162: in __exit__
+    self.gen.throw(value)
+python/tvm_tirx/backend/cuda/perf_remarks.py:202: in collect_perf_remarks
+    stack.remove(collector)
+E   ValueError: list.remove(x): x not in list
+_________________ test_user_collector_around_tvm_tirx_compile __________________
+tests/python/backend/cuda/test_perf_remarks.py:332: in test_user_collector_around_tvm_tirx_compile
+    with collect_perf_remarks() as batch:
+         ^^^^^^^^^^^^^^^^^^^^^^
+../../../.local/share/uv/python/cpython-3.14.6-linux-x86_64-gnu/lib/python3.14/contextlib.py:148: in __exit__
+    next(self.gen)
+python/tvm_tirx/backend/cuda/perf_remarks.py:202: in collect_perf_remarks
+    stack.remove(collector)
+E   ValueError: list.remove(x): x not in list
+=========================== short test summary info ============================
+FAILED tests/python/backend/cuda/test_perf_remarks.py::test_collectors_nest_by_identity - ValueError: list.remove(x): x not in list
+FAILED tests/python/backend/cuda/test_perf_remarks.py::test_user_collector_around_tvm_tirx_compile - ValueError: list.remove(x): x not in list
+============================== 2 failed in 7.04s ===============================
