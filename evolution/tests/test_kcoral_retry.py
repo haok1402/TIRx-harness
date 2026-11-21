@@ -22,12 +22,17 @@ class _Result:
         self.results = {"rows": [1]}
 
 
+seen_headers = []
+
+
 def _fake_client(script, seen):
     """A Client whose execute() plays ``script`` (exceptions or results), recording the URLs used."""
 
     class Client:
-        def __init__(self, url):
+        def __init__(self, url, headers=None):
             self.url = url
+            self.headers = headers
+            seen_headers.append(headers)
 
         def __enter__(self):
             return self
@@ -49,6 +54,11 @@ def _fake_client(script, seen):
             return {"status": "ok"}
 
     return Client
+
+
+@pytest.fixture(autouse=True)
+def short_gone_poll(monkeypatch):
+    monkeypatch.setattr(kr, "GONE_POLL_SECONDS", 0)
 
 
 @pytest.fixture
@@ -128,3 +138,52 @@ def test_retry_budget_is_bounded(monkeypatch, no_sleep):
     _install(monkeypatch, [TransportError("refused")] * 3, [])
     with pytest.raises(SystemExit, match="unavailable for 0s after 1 attempts"):
         kr._execute("http://n:1", object(), 60)
+
+
+def test_token_is_read_next_to_the_url_file_and_sent(tmp_path, monkeypatch, no_sleep):
+    url_file = tmp_path / "kcoral.url"
+    url_file.write_text("http://node-a:1000\n")
+    (tmp_path / "kcoral.url.token").write_text("s3cr3t-token\n")
+    seen_headers.clear()
+    _install(monkeypatch, [_Result()], [])
+    kr._execute(f"@{url_file}", object(), 60)
+    assert seen_headers[-1] == {"Authorization": "Bearer s3cr3t-token"}
+
+
+def test_rejected_token_is_reported_not_retried(monkeypatch, no_sleep):
+    seen = []
+    _install(monkeypatch, [KCoralError(401, "unauthorized")], seen)
+    with pytest.raises(SystemExit, match="rejected the token"):
+        kr._execute("http://n:1", object(), 60)
+    assert len(seen) == 1
+
+
+def test_worker_crash_500_is_retried_only_when_the_server_went_away(monkeypatch, no_sleep):
+    seen = []
+    _install(monkeypatch, [KCoralError(500, "worker crashed"), "health-down", _Result()], seen)
+    assert kr._execute("http://n:1", object(), 60).completed
+    _install(monkeypatch, [KCoralError(500, "worker crashed")], seen)
+    with pytest.raises(KCoralError):
+        kr._execute("http://n:1", object(), 60)
+
+
+def test_slow_shutdown_is_still_seen_as_gone(monkeypatch, no_sleep):
+    """Healthy at the first poll (SIGTERM not yet acted on), gone at a later one: retried."""
+    monkeypatch.setattr(kr, "GONE_POLL_SECONDS", 3600)
+    clock = iter(range(0, 10**6, 10))
+    monkeypatch.setattr(kr.time, "monotonic", lambda: next(clock))
+    seen = []
+    script = [_Result(False, "worker exited while executing the instruction"), "ok", "health-down"]
+    script.append(_Result())
+    real = _fake_client(script, seen)
+
+    class Client(real):
+        def health(self):
+            if script and script[0] == "ok":
+                script.pop(0)
+                return {"status": "ok"}
+            return super().health()
+
+    monkeypatch.setitem(__import__("sys").modules, "kcoral", types.SimpleNamespace(Client=Client))
+    assert kr._execute("http://n:1", object(), 60).completed
+    assert len(seen) == 2

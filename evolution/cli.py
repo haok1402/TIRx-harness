@@ -58,6 +58,7 @@ def _prompt(
     worktree: Path,
     remote_url: str | None = None,
     python: Path | None = None,
+    remote_retry_seconds: int | None = None,
 ) -> str:
     blocks = shared_rule_blocks(toolset)
     preamble = "You are running as an autonomous kernel-optimization agent."
@@ -75,6 +76,8 @@ def _prompt(
             f"{interpreter} evolution/remote/kcoral_remote.py {task.workload_dir} CANDIDATE "
             f"--remote {remote_url} --timeout {bench_timeout_s}"
         )
+        if remote_retry_seconds is not None:
+            bench_command += f" --retry-seconds {remote_retry_seconds}"
         bench_environment = ""
         remote_section = "\n\n" + render_file(
             REMOTE_TEMPLATE,
@@ -107,6 +110,7 @@ def setup(
     task_name: str,
     remote_url: str | None = None,
     run_name: str | None = None,
+    remote_retry_seconds: int | None = None,
 ) -> Path:
     if run_name is None:
         stem = f"{task_name}-{time.strftime('%Y%m%d-%H%M%S')}"
@@ -147,6 +151,7 @@ def setup(
             worktree=worktree,
             remote_url=remote_url,
             python=environment.python,
+            remote_retry_seconds=remote_retry_seconds,
         )
     )
 
@@ -199,6 +204,12 @@ def _parser() -> tuple[argparse.ArgumentParser, argparse.ArgumentParser]:
         f"current URL (scripts/slurm_kcoral.sh publishes one) (default {BENCH_SERVER_URL})",
     )
     init.add_argument(
+        "--remote-retry-seconds",
+        type=int,
+        help="with --remote: how long each benchmark keeps re-sending to an unavailable (e.g. "
+        "preempted) server before failing (default: kcoral_remote's, 6 hours)",
+    )
+    init.add_argument(
         "--name",
         dest="run_name",
         help="exact run directory name (default: <task>-<timestamp>)",
@@ -221,6 +232,7 @@ def main(argv: list[str] | None = None) -> int:
             task_name=args.task,
             remote_url=args.remote,
             run_name=args.run_name,
+            remote_retry_seconds=args.remote_retry_seconds,
         )
     except ValueError as error:
         init.error(str(error))

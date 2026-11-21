@@ -1,41 +1,51 @@
 #!/usr/bin/env bash
-# Keep a kcoral benchmark server running as a 1-GPU step of a (preemptible) Slurm job, and publish its URL.
+# Keep an authenticated kcoral benchmark server running as a 1-GPU step of a (preemptible) Slurm job.
 #
 #   scripts/slurm_kcoral.sh JOB_OR_ARRAY_ID URL_FILE
 #   python evolution/remote/kcoral_remote.py <workload> vN --remote @URL_FILE      # clients
 #   evolve init --task <task> --remote @URL_FILE
 #
-# Each round resolves the job's RUNNING task (an array's running element gets its own job id; srun needs that
-# id, not ARRAY_TASK), launches `kcoral server` as a step on it, and writes http://<node>:<port> to URL_FILE
-# (atomically, on shared storage). When the step ends (the task is preempted, or the step is cancelled), the
-# URL file is removed and the loop waits for a running task again: every RECHECK_SECONDS while none runs. The
-# server takes no `--overlap`: like any other step it waits for its GPU. Clients re-read URL_FILE and retry
-# (evolution/remote/kcoral_remote.py), so a scoring request in flight is re-sent to the relaunched server.
+# SECURITY. kcoral runs arbitrary code for any client and has no client authentication, so the server
+# itself only ever binds 127.0.0.1. In front of it, on the node's network address, runs
+# evolution/remote/kcoral_auth_proxy.py, which forwards only requests carrying a per-launch bearer token.
+# The token is generated for each launch, written with mode 0600 to URL_FILE.token, passed to the step in
+# its environment (never on a command line), and sent by kcoral_remote on every request.
+# Residual risk: processes of other users on the same node could reach the loopback port; our
+# allocations have been exclusive, but Slurm marks them OverSubscribe=OK. kcoral's bubblewrap sandbox
+# needs `bwrap`, which these nodes lack (user namespaces themselves work), so workers run unsandboxed.
 #
-# The step is named kcoral-server-<this script's pid>, so `squeue -s` shows it and only it can be cancelled.
-# The loop itself is light (it sleeps and waits on srun) and may run on a login node; the server runs only in
-# the step. Stop it with Ctrl+C / SIGTERM: the current step is cancelled and the URL file removed.
+# Each round resolves the job's RUNNING task (an array's running element has its own job id; srun needs it),
+# cancels this URL file's previous server step if one survived (it is named after the URL file), and
+# launches the server step. srun runs with a parent-death signal, so a hard-killed wrapper takes its step
+# with it. When the step ends (preemption, cancel), the URL and token files are removed and the loop waits
+# for a running task again (every RECHECK_SECONDS while none runs). No `--overlap`: the step waits for its GPU
+# like any other. Clients re-read URL_FILE and its token and retry (evolution/remote/kcoral_remote.py).
+#
+# The loop is light (it sleeps and waits on srun) and may run on a login node. Stop it with Ctrl+C/SIGTERM.
 #
 # Env:
-#   KCORAL_VENV       environment with the `server` group (default: <repo>/.venv)
-#   KCORAL_PORT       fixed port (default: a random port in 20000-59999 per launch)
+#   KCORAL_VENV        environment with the `benchmark` and `server` groups (default: <repo>/.venv)
 #   KCORAL_CPUS / KCORAL_MEM   step resources (default 8 / 64G)
-#   RECHECK_SECONDS   wait between checks while no task runs (default 150)
+#   RECHECK_SECONDS    wait between checks while no task runs (default 150)
 #   KCORAL_SERVER_ARGS extra `kcoral server` arguments
 set -uo pipefail
 
 if [ $# -ne 2 ]; then
-  sed -n '2,8p' "$0" >&2
+  sed -n '2,6p' "$0" >&2
   exit 2
 fi
 JOB=$1
 URL_FILE=$(realpath -m "$2")
+TOKEN_FILE="$URL_FILE.token"
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 VENV=${KCORAL_VENV:-$ROOT/.venv}
 CPUS=${KCORAL_CPUS:-8}
 MEM=${KCORAL_MEM:-64G}
 RECHECK=${RECHECK_SECONDS:-150}
 EXTRA=${KCORAL_SERVER_ARGS:-}
+PROXY="$ROOT/evolution/remote/kcoral_auth_proxy.py"
+# One server per URL file: the step name identifies it, so a new wrapper can find a surviving predecessor.
+STEP_NAME="kcoral-$(printf %s "$URL_FILE" | md5sum | cut -c1-12)"
 mkdir -p "$(dirname "$URL_FILE")"
 
 log() { echo "[slurm_kcoral $(date '+%F %T')] $*" >&2; }
@@ -43,7 +53,7 @@ log() { echo "[slurm_kcoral $(date '+%F %T')] $*" >&2; }
 STEP_PID=
 cleanup() {
   [ -n "$STEP_PID" ] && kill "$STEP_PID" 2>/dev/null
-  rm -f "$URL_FILE"
+  rm -f "$URL_FILE" "$TOKEN_FILE"
   log "stopped"
   exit 0
 }
@@ -51,27 +61,48 @@ trap cleanup INT TERM
 
 running_job() { squeue -j "$JOB" -t RUNNING -h -o %A 2>/dev/null | head -1; }
 
+cancel_predecessors() {
+  # Only steps of this user with this URL file's step name.
+  squeue -s -u "$USER" -h -o "%i %j" 2>/dev/null | awk -v n="$STEP_NAME" '$2 == n {print $1}' |
+    while read -r step; do
+      log "cancelling surviving server step $step"
+      scancel "$step"
+    done
+}
+
 while true; do
   job=$(running_job)
   if [ -z "$job" ]; then
-    rm -f "$URL_FILE"
+    rm -f "$URL_FILE" "$TOKEN_FILE"
     log "no RUNNING task of $JOB; rechecking in ${RECHECK}s"
     sleep "$RECHECK" & wait $!
     continue
   fi
-  port=${KCORAL_PORT:-$((20000 + RANDOM % 40000))}
-  log "starting kcoral server on job $job, port $port"
-  # The step publishes its own URL (it alone knows the node), then becomes the server.
-  srun --jobid="$job" -J "kcoral-server-$$" -N1 -n1 --gres=gpu:1 --cpus-per-task="$CPUS" --mem="$MEM" \
-    bash -c "set -e; echo \"http://\$(hostname):$port\" > '$URL_FILE.tmp'; mv '$URL_FILE.tmp' '$URL_FILE'
-             exec '$VENV/bin/kcoral' server --host 0.0.0.0 --port $port --gpus 0 --sandbox none \
-               --max-timeout-seconds 3600 --log-dir '' $EXTRA" &
+  cancel_predecessors
+  port=$((20000 + RANDOM % 40000))
+  inner=$((20000 + RANDOM % 40000))
+  token=$(head -c 48 /dev/urandom | base64 | tr -d '+/=\n')
+  (umask 077 && printf '%s\n' "$token" > "$TOKEN_FILE.tmp" && mv "$TOKEN_FILE.tmp" "$TOKEN_FILE")
+  log "starting kcoral server on job $job (proxy port $port, loopback port $inner), step $STEP_NAME"
+  # The step runs kcoral on loopback and the token proxy on the network, publishes the proxy URL, and ends
+  # (taking both down) as soon as either exits.
+  KCORAL_PROXY_TOKEN="$token" setpriv --pdeathsig TERM -- \
+    srun --jobid="$job" -J "$STEP_NAME" -N1 -n1 --gres=gpu:1 --cpus-per-task="$CPUS" --mem="$MEM" \
+    bash -c "
+      env -u KCORAL_PROXY_TOKEN '$VENV/bin/kcoral' server --host 127.0.0.1 --port $inner --gpus 0 --sandbox none \
+        --max-timeout-seconds 3600 --log-dir '' $EXTRA &
+      server=\$!
+      '$VENV/bin/python' '$PROXY' --listen 0.0.0.0:$port --upstream 127.0.0.1:$inner &
+      proxy=\$!
+      trap 'kill \$server \$proxy 2>/dev/null' EXIT TERM INT
+      echo \"http://\$(hostname):$port\" > '$URL_FILE.tmp' && mv '$URL_FILE.tmp' '$URL_FILE'
+      wait -n \$server \$proxy
+    " &
   STEP_PID=$!
   wait "$STEP_PID"
   rc=$?
   STEP_PID=
-  rm -f "$URL_FILE"
+  rm -f "$URL_FILE" "$TOKEN_FILE"
   log "server step on job $job ended (rc=$rc)"
-  # Back off briefly before relaunching (a port clash or a crash loop must not spin).
   sleep 10 & wait $!
 done

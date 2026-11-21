@@ -85,8 +85,8 @@ def _init(task, overrides, workloads, blob_keys, solution_source, *blob_tensors)
     blobs = {
         (key["path"], key["tensor_key"]): tensor for key, tensor in zip(blob_keys, blob_tensors)
     }
-    common.load_safetensor = (
-        lambda spec, device: blobs[(spec["path"], spec["tensor_key"])].to(device).clone()
+    common.load_safetensor = lambda spec, device: (
+        blobs[(spec["path"], spec["tensor_key"])].to(device).clone()
     )
 
     @cache

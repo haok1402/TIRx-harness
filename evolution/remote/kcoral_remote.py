@@ -97,8 +97,15 @@ def _request(task_name: str, overrides: dict, workloads: list, candidate: bytes 
 
 
 RETRY_SECONDS_ENV = "KCORAL_RETRY_SECONDS"  # total time to keep retrying an unavailable server
-DEFAULT_RETRY_SECONDS = 1800
+# Gaps between preemptible array tasks here can exceed 30 min: wait hours, not minutes.
+DEFAULT_RETRY_SECONDS = 6 * 3600
 _RETRY_HTTP = {502, 503}  # bad gateway / busy or shutting down; 504 is the request's own timeout
+TOKEN_FILE_ENV = (
+    "KCORAL_TOKEN_FILE"  # bearer token for a plain-URL --remote (see kcoral_auth_proxy.py)
+)
+GONE_POLL_SECONDS = (
+    45  # Slurm's KillWait (30 s) plus slack: a SIGTERMed server may answer health a while
+)
 
 
 def resolve_url(remote: str) -> str:
@@ -115,36 +122,75 @@ def resolve_url(remote: str) -> str:
         return ""  # no server published right now (e.g. waiting for the next Slurm task)
 
 
-def _server_gone(remote: str, url: str) -> bool:
-    """After a worker died mid-request: did the server go away (retry) or the candidate crash?"""
+def token_for(remote: str) -> str | None:
+    """The bearer token: ``URL_FILE.token`` for ``@URL_FILE``, else ``$KCORAL_TOKEN_FILE``.
+
+    scripts/slurm_kcoral.sh writes a fresh token (mode 0600) with every launch; it is re-read on
+    every attempt, like the URL.
+    """
+    path = Path(remote[1:] + ".token") if remote.startswith("@") else None
+    if path is None and os.environ.get(TOKEN_FILE_ENV):
+        path = Path(os.environ[TOKEN_FILE_ENV])
+    if path is None:
+        return None
+    try:
+        return path.expanduser().read_text().strip() or None
+    except FileNotFoundError:
+        return None
+
+
+def _client(url: str, remote: str):
     from kcoral import Client
+
+    token = token_for(remote)
+    headers = {"Authorization": f"Bearer {token}"} if token else None
+    return Client(url, headers=headers)
+
+
+def _server_gone(remote: str, url: str) -> bool:
+    """After a worker died mid-request: did the server go away (retry) or the candidate crash?
+
+    A preempted step is SIGTERMed and may keep answering health for up to Slurm's KillWait, so
+    poll for GONE_POLL_SECONDS: gone as soon as the URL file moves or health fails; a candidate
+    crash only if the same server stays healthy the whole time.
+    """
     from kcoral.errors import KCoralError, ProtocolError, TransportError
 
-    time.sleep(5)
-    if resolve_url(remote) != url:
-        return True
-    try:
-        with Client(url) as client:
-            client.health()
-    except (TransportError, KCoralError, ProtocolError):
-        return True
-    return False
+    deadline = time.monotonic() + GONE_POLL_SECONDS
+    while True:
+        time.sleep(5)
+        if resolve_url(remote) != url:
+            return True
+        try:
+            with _client(url, remote) as client:
+                client.health()
+        except (TransportError, KCoralError, ProtocolError):
+            return True
+        if time.monotonic() >= deadline:
+            return False
 
 
-def _execute(remote: str, program, timeout_seconds: int, output_limit_bytes: int | None = None):
+def _execute(
+    remote: str,
+    program,
+    timeout_seconds: int,
+    output_limit_bytes: int | None = None,
+    retry_seconds: float | None = None,
+):
     """Send ``program``, replay the worker's output, fail loudly on a FAILED request.
 
     Requests are self-contained, so a request that the server could not finish because the
     server went away (connection refused or reset, HTTP 502/503, or its worker killed mid-run by a
     preemption) is re-sent to the server ``remote`` currently resolves to. Retries back off from
-    5 s to 60 s, for up to ``$KCORAL_RETRY_SECONDS`` (default 1800) in total. Candidate failures,
-    timeouts and protocol errors are not retried.
+    5 s to 60 s, for up to ``retry_seconds`` (``--retry-seconds``, else ``$KCORAL_RETRY_SECONDS``,
+    default 6 h) in total. Candidate failures, timeouts and protocol errors are not retried.
     """
 
-    from kcoral import Client
     from kcoral.errors import KCoralError, TransportError
 
-    budget = float(os.environ.get(RETRY_SECONDS_ENV, DEFAULT_RETRY_SECONDS))
+    if retry_seconds is None:
+        retry_seconds = float(os.environ.get(RETRY_SECONDS_ENV, DEFAULT_RETRY_SECONDS))
+    budget = float(retry_seconds)
     deadline = time.monotonic() + budget
     delay = 5.0
     attempt = 0
@@ -157,7 +203,7 @@ def _execute(remote: str, program, timeout_seconds: int, output_limit_bytes: int
             reason = f"no server URL published in {remote[1:]}"
         else:
             try:
-                with Client(url) as client:
+                with _client(url, remote) as client:
                     result = client.execute(
                         program,
                         timeout_seconds=timeout_seconds,
@@ -166,7 +212,15 @@ def _execute(remote: str, program, timeout_seconds: int, output_limit_bytes: int
             except TransportError as exc:
                 reason = f"{url} unreachable ({exc})"
             except KCoralError as exc:
-                if exc.status_code not in _RETRY_HTTP:
+                crashed = exc.status_code == 500 and "worker crashed" in str(exc.message)
+                if exc.status_code == 401:
+                    raise SystemExit(
+                        f"benchmark server {url} rejected the token (HTTP 401): "
+                        f"check {remote}.token or ${TOKEN_FILE_ENV}"
+                    ) from exc
+                if exc.status_code not in _RETRY_HTTP and not (
+                    crashed and _server_gone(remote, url)
+                ):
                     raise
                 reason = f"{url} answered HTTP {exc.status_code} ({exc.message})"
         if result is not None:
@@ -206,6 +260,7 @@ def run_remote(
     shape_mode: str,
     url: str,
     timeout: int,
+    retry_seconds: float | None = None,
 ):
     """Score ``vN`` (or the baseline): one self-contained request for the full suite."""
 
@@ -215,7 +270,7 @@ def run_remote(
     program, bundle, handles = _request(task_name, overrides, workloads, candidate)
     program.return_(key="rows", value=program.run(id="run", fn=bundle, args=["run"]))
     print(f"benchmark server: {url} ({len(workloads)} workloads, {len(handles)} blob tensors)")
-    result = _execute(url, program, timeout)
+    result = _execute(url, program, timeout, retry_seconds=retry_seconds)
     print(f"worker: {result.results['init']}")
     return result.results["rows"]
 
@@ -271,7 +326,14 @@ def _tar(path: Path) -> bytes:
 OUTPUT_LIMIT_BYTES = 16 * 1024**2  # the server's maximum; a build log outgrows the 1 MB default
 
 
-def run_cmd(script: str, send: Path | None = None, *, url: str, timeout: int) -> int:
+def run_cmd(
+    script: str,
+    send: Path | None = None,
+    *,
+    url: str,
+    timeout: int,
+    retry_seconds: float | None = None,
+) -> int:
     """Run ``script`` under bash on the server: one module upload, one run, no workload."""
 
     from kcoral import Program
@@ -287,7 +349,7 @@ def run_cmd(script: str, send: Path | None = None, *, url: str, timeout: int) ->
         sent = f", {send} as {len(archive) / 1024**2:.2f} MiB tar"
     program.return_(key="cmd", value=program.run(id="cmd", fn=runner, args=args))
     print(f"benchmark server: {url} (bash, {len(script)} chars{sent})")
-    result = _execute(url, program, timeout, OUTPUT_LIMIT_BYTES)
+    result = _execute(url, program, timeout, OUTPUT_LIMIT_BYTES, retry_seconds=retry_seconds)
     if result.stdout_truncated or result.stderr_truncated:
         print(f"warning: output truncated at {OUTPUT_LIMIT_BYTES} bytes", file=sys.stderr)
     outcome = result.results["cmd"]
@@ -311,8 +373,8 @@ def main(argv=None) -> None:
         metavar="URL",
         required=True,
         help="the kcoral benchmark server URL, or @FILE holding the current URL (re-read on "
-        "every attempt; scripts/slurm_kcoral.sh publishes one). Unavailable servers are retried "
-        "for $KCORAL_RETRY_SECONDS (default 1800)",
+        "every attempt, with its token from FILE.token; scripts/slurm_kcoral.sh publishes both). "
+        "Unavailable servers are retried (see --retry-seconds)",
     )
     parser.add_argument("--warmup", type=int, default=None, help="default: per-workload value")
     parser.add_argument("--repeat", type=int, default=None, help="default: per-workload value")
@@ -338,6 +400,13 @@ def main(argv=None) -> None:
         default=3600,
         help="server-side seconds for the full request, including all workloads (max 3600)",
     )
+    parser.add_argument(
+        "--retry-seconds",
+        type=float,
+        default=None,
+        help="how long to keep re-sending to an unavailable server "
+        f"(default ${RETRY_SECONDS_ENV} or {DEFAULT_RETRY_SECONDS} s)",
+    )
     args = parser.parse_args(argv)
     if args.send is not None and args.cmd is None:
         parser.error("--send needs --cmd: nothing would run the unpacked files")
@@ -348,7 +417,15 @@ def main(argv=None) -> None:
         )  # a long inline script is no path
         if args.send is not None and not args.send.exists():
             parser.error(f"--send path does not exist: {args.send}")
-        raise SystemExit(run_cmd(script, args.send, url=args.remote, timeout=args.timeout))
+        raise SystemExit(
+            run_cmd(
+                script,
+                args.send,
+                url=args.remote,
+                timeout=args.timeout,
+                retry_seconds=args.retry_seconds,
+            )
+        )
     if args.workload is None:
         parser.error("a workload is required unless --cmd is given")
     key = workload_key(args.workload)
@@ -361,6 +438,7 @@ def main(argv=None) -> None:
         shape_mode=shape_mode,
         url=args.remote,
         timeout=args.timeout,
+        retry_seconds=args.retry_seconds,
     )
     version = "baseline" if args.version is None else args.version
     run_remote(task, CANDIDATES_ROOT / key, version, **kwargs)
