@@ -1,0 +1,7 @@
+usage: evolve init [-h] --task TASK [--remote [URL]]
+                   [--target-arch {sm_100a,sm_103a,sm_90a}]
+                   [--gpu-name GPU_NAME] [--num-sms NUM_SMS] [--name RUN_NAME]
+evolve init: error: task 'kda_forward' targets sm_100a, but the run's GPU is H200 (sm_90a) (local). Choose a task whose target_archs includes sm_90a, or a server with a supported GPU.
+detected: {'arch': 'sm_90a', 'name': 'H200', 'num_sms': 132, 'source': 'local'} H200 (sm_90a)
+evolve init --task kda_forward -> exit 2
+fp16_gemm_floor prompt line: Implement FP16 GEMM on H200 (sm_90a) and beat cuBLAS across the complete

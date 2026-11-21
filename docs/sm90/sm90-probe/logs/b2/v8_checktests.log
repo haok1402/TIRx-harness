@@ -1,0 +1,14 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+bringing up nodes...
+bringing up nodes...
+
+................                                                         [100%]
+16 passed in 14.58s
+=== kernel suite (default: no bitwise)
+============================================================
+Total: 20  Passed: 20  Failed: 0  Skipped: 0
+=== kernel suite with the bitwise invariant
+Total: 20  Passed: 20  Failed: 0  Skipped: 0

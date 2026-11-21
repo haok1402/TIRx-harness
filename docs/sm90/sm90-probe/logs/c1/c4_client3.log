@@ -1,0 +1,103 @@
+12:38:48
+benchmark server: @/mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/c4/kcoral.url (12 workloads, 0 blob tensors)
+benchmark server: http://fs-mbz-gpu-266:39495 unreachable (Server disconnected without sending a response.); retrying in 5s
+benchmark server: no server URL published in /mnt/weka/home/hao.kang/kernel-evolve/sm90-probe/c4/kcoral.url; retrying in 10s
+benchmark server: http://fs-mbz-gpu-266:26021 unreachable ([Errno 111] Connection refused); retrying in 20s
+benchmark server: http://fs-mbz-gpu-266:26021 unreachable ([Errno 111] Connection refused); retrying in 40s
+OP: fp16_gemm_floor
+workloads: 12
+device: cuda:0
+warmup/iters/trials: 10/30000/3
+correctness runs/post-timing/repeatable-outputs/input-dependence: 5/True/False/True
+
+[001/012] official:m1024-n1024-k1024 axes={'M': 1024, 'N': 1024, 'K': 1024}
+  baseline: 0.006325 ms
+  kernel:   0.006293 ms
+  speedup:  1.0051x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[002/012] official:m2048-n2048-k2048 axes={'M': 2048, 'N': 2048, 'K': 2048}
+  baseline: 0.024939 ms
+  kernel:   0.024992 ms
+  speedup:  0.9979x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[003/012] official:m4096-n4096-k4096 axes={'M': 4096, 'N': 4096, 'K': 4096}
+  baseline: 0.205558 ms
+  kernel:   0.205451 ms
+  speedup:  1.0005x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[004/012] official:m8192-n8192-k8192 axes={'M': 8192, 'N': 8192, 'K': 8192}
+  baseline: 1.703157 ms
+  kernel:   1.701281 ms
+  speedup:  1.0011x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[005/012] official:m2048-n11008-k4096 axes={'M': 2048, 'N': 11008, 'K': 4096}
+  baseline: 0.288898 ms
+  kernel:   0.289847 ms
+  speedup:  0.9967x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[006/012] official:m2048-n4096-k11008 axes={'M': 2048, 'N': 4096, 'K': 11008}
+  baseline: 0.267458 ms
+  kernel:   0.267277 ms
+  speedup:  1.0007x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[007/012] official:m4096-n11008-k4096 axes={'M': 4096, 'N': 11008, 'K': 4096}
+  baseline: 0.585743 ms
+  kernel:   0.585145 ms
+  speedup:  1.0010x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[008/012] official:m4096-n4096-k11008 axes={'M': 4096, 'N': 4096, 'K': 11008}
+  baseline: 0.548569 ms
+  kernel:   0.548761 ms
+  speedup:  0.9997x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[009/012] official:m1024-n8192-k2048 axes={'M': 1024, 'N': 8192, 'K': 2048}
+  baseline: 0.046774 ms
+  kernel:   0.046741 ms
+  speedup:  1.0007x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[010/012] official:m8192-n1024-k2048 axes={'M': 8192, 'N': 1024, 'K': 2048}
+  baseline: 0.046603 ms
+  kernel:   0.046603 ms
+  speedup:  1.0000x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[011/012] official:m4096-n2048-k8192 axes={'M': 4096, 'N': 2048, 'K': 8192}
+  baseline: 0.198198 ms
+  kernel:   0.198337 ms
+  speedup:  0.9993x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[012/012] official:m2048-n8192-k1024 axes={'M': 2048, 'N': 8192, 'K': 1024}
+  baseline: 0.052971 ms
+  kernel:   0.053035 ms
+  speedup:  0.9988x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+timer: cupti
+
+Summary
+  passed: 12/12
+  mean speedup: 1.0001x
+  geomean speedup: 1.0001x
+  min/max speedup: 0.9967x / 1.0051x
+  official geomean: 1.0001x (n=12)
+  by M:
+    1024: geo=1.0029x n=2
+    2048: geo=0.9985x n=4
+    4096: geo=1.0001x n=4
+    8192: geo=1.0005x n=2
+
+# Aggregate result
+| candidate | candidate (12/12 PASS) | 3974us | 1.000x |
+worker: {'versions': {'torch': '2.15.0+cu134', 'flashinfer': '0.6.18.dev20260909'}, 'tirx_kernels': '/mnt/weka/home/hao.kang/kernel-evolve/wt/h-c1/.venv/lib/python3.13/site-packages/tirx_kernels/__init__.py'}
+benchmark server: succeeded on attempt 5 via http://fs-mbz-gpu-266:26021
+client exit 0 at 12:57:01

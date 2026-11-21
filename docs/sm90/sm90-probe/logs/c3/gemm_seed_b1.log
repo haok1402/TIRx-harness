@@ -1,0 +1,96 @@
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-gemm/tirx_kernels/__init__.py
+selected GPU cuda:0 (memory_used=4 MiB, util=0%)
+OP: fp16_gemm_floor
+workloads: 12
+device: cuda:0
+warmup/iters/trials: 10/50/3
+correctness runs/post-timing/repeatable-outputs/input-dependence: 5/True/False/True
+
+[001/012] official:m1024-n1024-k1024 axes={'M': 1024, 'N': 1024, 'K': 1024}
+  baseline: 0.006214 ms
+  kernel:   0.014128 ms
+  speedup:  0.4398x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[002/012] official:m2048-n2048-k2048 axes={'M': 2048, 'N': 2048, 'K': 2048}
+  baseline: 0.025296 ms
+  kernel:   0.027051 ms
+  speedup:  0.9351x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[003/012] official:m4096-n4096-k4096 axes={'M': 4096, 'N': 4096, 'K': 4096}
+  baseline: 0.183691 ms
+  kernel:   0.183259 ms
+  speedup:  1.0024x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[004/012] official:m8192-n8192-k8192 axes={'M': 8192, 'N': 8192, 'K': 8192}
+  baseline: 1.458175 ms
+  kernel:   1.506655 ms
+  speedup:  0.9678x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[005/012] official:m2048-n11008-k4096 axes={'M': 2048, 'N': 11008, 'K': 4096}
+  baseline: 0.253484 ms
+  kernel:   0.266780 ms
+  speedup:  0.9502x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[006/012] official:m2048-n4096-k11008 axes={'M': 2048, 'N': 4096, 'K': 11008}
+  baseline: 0.232747 ms
+  kernel:   0.237206 ms
+  speedup:  0.9812x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[007/012] official:m4096-n11008-k4096 axes={'M': 4096, 'N': 11008, 'K': 4096}
+  baseline: 0.497980 ms
+  kernel:   0.493527 ms
+  speedup:  1.0090x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[008/012] official:m4096-n4096-k11008 axes={'M': 4096, 'N': 4096, 'K': 11008}
+  baseline: 0.468326 ms
+  kernel:   0.479697 ms
+  speedup:  0.9763x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[009/012] official:m1024-n8192-k2048 axes={'M': 1024, 'N': 8192, 'K': 2048}
+  baseline: 0.047440 ms
+  kernel:   0.050427 ms
+  speedup:  0.9408x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[010/012] official:m8192-n1024-k2048 axes={'M': 8192, 'N': 1024, 'K': 2048}
+  baseline: 0.047211 ms
+  kernel:   0.049856 ms
+  speedup:  0.9469x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[011/012] official:m4096-n2048-k8192 axes={'M': 4096, 'N': 2048, 'K': 8192}
+  baseline: 0.174864 ms
+  kernel:   0.179563 ms
+  speedup:  0.9738x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[012/012] official:m2048-n8192-k1024 axes={'M': 2048, 'N': 8192, 'K': 1024}
+  baseline: 0.053968 ms
+  kernel:   0.050683 ms
+  speedup:  1.0648x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+timer: cupti
+
+Summary
+  passed: 12/12
+  mean speedup: 0.9323x
+  geomean speedup: 0.9137x
+  min/max speedup: 0.4398x / 1.0648x
+  official geomean: 0.9137x (n=12)
+  by M:
+    1024: geo=0.6432x n=2
+    2048: geo=0.9816x n=4
+    4096: geo=0.9903x n=4
+    8192: geo=0.9573x n=2
+
+# Aggregate result
+| candidate | candidate (12/12 PASS) | 3539us | 0.975x |

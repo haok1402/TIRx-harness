@@ -1,0 +1,188 @@
+[slurm_kcoral 2026-11-21 12:33:06] starting kcoral server on job 3280666, port 42992
+warning: CUDA_VISIBLE_DEVICES is set but does not restrict this server; workers are pinned by --gpus (physical GPU ids). Unset it to avoid confusion.
+INFO:     Started server process [2796948]
+INFO:     Waiting for application startup.
+2026-11-21T12:33:08.464Z INFO    server_started
+2026-11-21T12:33:17.587Z INFO    worker_ready worker_id=gpu0/w0 gpu_id=0 generation=1 pid=2797012 device=GPU-97d1088d-fac0-0255-5a84-6827af4992bd arch=sm_90a
+2026-11-21T12:33:23.557Z INFO    worker_ready worker_id=gpu0/w1 gpu_id=0 generation=1 pid=2797261 device=GPU-97d1088d-fac0-0255-5a84-6827af4992bd arch=sm_90a
+2026-11-21T12:33:29.504Z INFO    worker_ready worker_id=gpu0/w2 gpu_id=0 generation=1 pid=2797565 device=GPU-97d1088d-fac0-0255-5a84-6827af4992bd arch=sm_90a
+2026-11-21T12:33:35.456Z INFO    worker_ready worker_id=gpu0/w3 gpu_id=0 generation=1 pid=2797855 device=GPU-97d1088d-fac0-0255-5a84-6827af4992bd arch=sm_90a
+2026-11-21T12:33:41.285Z INFO    worker_ready worker_id=gpu0/w4 gpu_id=0 generation=1 pid=2798133 device=GPU-97d1088d-fac0-0255-5a84-6827af4992bd arch=sm_90a
+2026-11-21T12:33:47.332Z INFO    worker_ready worker_id=gpu0/w5 gpu_id=0 generation=1 pid=2798398 device=GPU-97d1088d-fac0-0255-5a84-6827af4992bd arch=sm_90a
+2026-11-21T12:33:53.312Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=1 pid=2798608 device=GPU-97d1088d-fac0-0255-5a84-6827af4992bd arch=sm_90a
+2026-11-21T12:33:59.006Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=1 pid=2798828 device=GPU-97d1088d-fac0-0255-5a84-6827af4992bd arch=sm_90a
+2026-11-21T12:33:59.007Z INFO    pool_ready sandbox=none mode=gpu target={'arch': 'sm_90a'} workers=8
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:42992 (Press CTRL+C to quit)
+INFO:     10.24.3.220:57920 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.24.3.220:57926 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T12:34:10.748Z INFO    request_received request_id=dbb003a4-5763-43be-91e2-d6c3c88fadcb client=10.24.2.74 content_length=67103
+2026-11-21T12:34:10.751Z INFO    request_accepted request_id=dbb003a4-5763-43be-91e2-d6c3c88fadcb request_bytes=67103 timeout_seconds=3600.0 instructions=6
+2026-11-21T12:34:10.751Z INFO    request_routed request_id=dbb003a4-5763-43be-91e2-d6c3c88fadcb worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=1 pid=2798828 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "push_back"
+ - leaked function "__init__"
+ - leaked function "create_or"
+ - leaked function "create_sin"
+ - leaked function "create_dot"
+ - leaked function "get_flat_symbol_ref_attr"
+ - leaked function ""
+ - leaked function "create_print"
+ - leaked function "create_cluster_barrier"
+ - leaked function "set_insertion_point_after"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T12:34:18.223Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=1 pid=2798828 reason=request_limit
+2026-11-21T12:34:18.223Z INFO    request_finished request_id=dbb003a4-5763-43be-91e2-d6c3c88fadcb http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=7471.1 lease_wait_ms=0.0 lease_held_ms=7469.1 response_bytes=14731
+INFO:     10.24.2.74:38414 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T12:34:24.089Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=2 pid=2799972 device=GPU-97d1088d-fac0-0255-5a84-6827af4992bd arch=sm_90a
+[2026-11-21T12:34:39.455] error: *** STEP 3280666.2384 ON fs-mbz-gpu-086 CANCELLED AT 2026-11-21T12:34:39 DUE to SIGNAL Killed ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: fs-mbz-gpu-086: task 0: Killed
+[slurm_kcoral 2026-11-21 12:34:39] server step on job 3280666 ended (rc=137)
+[slurm_kcoral 2026-11-21 12:34:49] starting kcoral server on job 3280666, port 42659
+warning: CUDA_VISIBLE_DEVICES is set but does not restrict this server; workers are pinned by --gpus (physical GPU ids). Unset it to avoid confusion.
+INFO:     Started server process [3248275]
+INFO:     Waiting for application startup.
+2026-11-21T12:34:51.494Z INFO    server_started
+2026-11-21T12:35:00.948Z INFO    worker_ready worker_id=gpu0/w0 gpu_id=0 generation=1 pid=3248330 device=GPU-90a6a95b-7694-4cdc-d239-0937a0ebf5bf arch=sm_90a
+2026-11-21T12:35:07.003Z INFO    worker_ready worker_id=gpu0/w1 gpu_id=0 generation=1 pid=3248440 device=GPU-90a6a95b-7694-4cdc-d239-0937a0ebf5bf arch=sm_90a
+2026-11-21T12:35:13.206Z INFO    worker_ready worker_id=gpu0/w2 gpu_id=0 generation=1 pid=3248498 device=GPU-90a6a95b-7694-4cdc-d239-0937a0ebf5bf arch=sm_90a
+2026-11-21T12:35:19.391Z INFO    worker_ready worker_id=gpu0/w3 gpu_id=0 generation=1 pid=3248554 device=GPU-90a6a95b-7694-4cdc-d239-0937a0ebf5bf arch=sm_90a
+2026-11-21T12:35:25.479Z INFO    worker_ready worker_id=gpu0/w4 gpu_id=0 generation=1 pid=3248640 device=GPU-90a6a95b-7694-4cdc-d239-0937a0ebf5bf arch=sm_90a
+2026-11-21T12:35:31.761Z INFO    worker_ready worker_id=gpu0/w5 gpu_id=0 generation=1 pid=3248720 device=GPU-90a6a95b-7694-4cdc-d239-0937a0ebf5bf arch=sm_90a
+2026-11-21T12:35:37.957Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=1 pid=3248794 device=GPU-90a6a95b-7694-4cdc-d239-0937a0ebf5bf arch=sm_90a
+2026-11-21T12:35:44.076Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=1 pid=3249021 device=GPU-90a6a95b-7694-4cdc-d239-0937a0ebf5bf arch=sm_90a
+2026-11-21T12:35:44.076Z INFO    pool_ready sandbox=none mode=gpu target={'arch': 'sm_90a'} workers=8
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:42659 (Press CTRL+C to quit)
+INFO:     10.24.3.220:56708 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T12:35:49.049Z INFO    request_received request_id=ab1e45b3-8fba-45dd-8d14-42d26a89591d client=10.24.2.74 content_length=67104
+2026-11-21T12:35:49.052Z INFO    request_accepted request_id=ab1e45b3-8fba-45dd-8d14-42d26a89591d request_bytes=67104 timeout_seconds=3600.0 instructions=6
+2026-11-21T12:35:49.052Z INFO    request_routed request_id=ab1e45b3-8fba-45dd-8d14-42d26a89591d worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=1 pid=3249021 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_ashr"
+ - leaked function "create_barrier"
+ - leaked function "get_uint16"
+ - leaked function "is_invertible"
+ - leaked function "create_and"
+ - leaked function "create_atomic_load"
+ - leaked function ""
+ - leaked function "create_sqrt"
+ - leaked function "create_fcmpOGT"
+ - leaked function "create_load"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T12:37:29.512Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=1 pid=3249021 reason=request_limit
+2026-11-21T12:37:29.513Z INFO    request_finished request_id=ab1e45b3-8fba-45dd-8d14-42d26a89591d http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=100459.3 lease_wait_ms=0.0 lease_held_ms=100457.5 response_bytes=14667
+INFO:     10.24.2.74:46810 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T12:37:35.383Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=2 pid=3249870 device=GPU-90a6a95b-7694-4cdc-d239-0937a0ebf5bf arch=sm_90a
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+[2026-11-21T12:37:39.693] error: *** STEP 3280666.2387 ON fs-mbz-gpu-266 CANCELLED AT 2026-11-21T12:37:39 DUE to SIGNAL Killed ***
+srun: error: fs-mbz-gpu-266: task 0: Killed
+[slurm_kcoral 2026-11-21 12:37:41] server step on job 3280666 ended (rc=137)
+[slurm_kcoral 2026-11-21 12:37:51] starting kcoral server on job 3280666, port 39495
+warning: CUDA_VISIBLE_DEVICES is set but does not restrict this server; workers are pinned by --gpus (physical GPU ids). Unset it to avoid confusion.
+INFO:     Started server process [3250202]
+INFO:     Waiting for application startup.
+2026-11-21T12:37:52.436Z INFO    server_started
+2026-11-21T12:38:00.825Z INFO    worker_ready worker_id=gpu0/w0 gpu_id=0 generation=1 pid=3250225 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:38:06.532Z INFO    worker_ready worker_id=gpu0/w1 gpu_id=0 generation=1 pid=3250268 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:38:12.151Z INFO    worker_ready worker_id=gpu0/w2 gpu_id=0 generation=1 pid=3250296 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:38:17.916Z INFO    worker_ready worker_id=gpu0/w3 gpu_id=0 generation=1 pid=3250324 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:38:23.627Z INFO    worker_ready worker_id=gpu0/w4 gpu_id=0 generation=1 pid=3250358 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:38:29.507Z INFO    worker_ready worker_id=gpu0/w5 gpu_id=0 generation=1 pid=3250387 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:38:35.446Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=1 pid=3251015 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:38:41.270Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=1 pid=3251078 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:38:41.270Z INFO    pool_ready sandbox=none mode=gpu target={'arch': 'sm_90a'} workers=8
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:39495 (Press CTRL+C to quit)
+INFO:     10.24.3.220:47076 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T12:38:51.995Z INFO    request_received request_id=c8caec9c-d59c-40bf-91e4-3482daa2d090 client=10.24.1.221 content_length=67105
+2026-11-21T12:38:51.998Z INFO    request_accepted request_id=c8caec9c-d59c-40bf-91e4-3482daa2d090 request_bytes=67105 timeout_seconds=3600.0 instructions=6
+2026-11-21T12:38:51.998Z INFO    request_routed request_id=c8caec9c-d59c-40bf-91e4-3482daa2d090 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=1 pid=3251078 queue_ms=0.0
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+[2026-11-21T12:39:13.009] error: *** STEP 3280666.2391 ON fs-mbz-gpu-266 CANCELLED AT 2026-11-21T12:39:13 DUE to SIGNAL Killed ***
+srun: error: fs-mbz-gpu-266: task 0: Killed
+[slurm_kcoral 2026-11-21 12:39:13] server step on job 3280666 ended (rc=137)
+[slurm_kcoral 2026-11-21 12:39:23] starting kcoral server on job 3280666, port 26021
+warning: CUDA_VISIBLE_DEVICES is set but does not restrict this server; workers are pinned by --gpus (physical GPU ids). Unset it to avoid confusion.
+INFO:     Started server process [3254443]
+INFO:     Waiting for application startup.
+2026-11-21T12:39:25.228Z INFO    server_started
+2026-11-21T12:39:35.170Z INFO    worker_ready worker_id=gpu0/w0 gpu_id=0 generation=1 pid=3254802 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:39:42.184Z INFO    worker_ready worker_id=gpu0/w1 gpu_id=0 generation=1 pid=3256002 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:39:48.684Z INFO    worker_ready worker_id=gpu0/w2 gpu_id=0 generation=1 pid=3257184 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:39:55.293Z INFO    worker_ready worker_id=gpu0/w3 gpu_id=0 generation=1 pid=3258157 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:40:02.192Z INFO    worker_ready worker_id=gpu0/w4 gpu_id=0 generation=1 pid=3258263 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:40:08.872Z INFO    worker_ready worker_id=gpu0/w5 gpu_id=0 generation=1 pid=3258304 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:40:15.250Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=1 pid=3258333 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:40:21.773Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=1 pid=3258369 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+2026-11-21T12:40:21.773Z INFO    pool_ready sandbox=none mode=gpu target={'arch': 'sm_90a'} workers=8
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:26021 (Press CTRL+C to quit)
+2026-11-21T12:40:28.059Z INFO    request_received request_id=d25e389e-d7c6-456d-a6ac-88a60c502517 client=10.24.1.221 content_length=67105
+2026-11-21T12:40:28.062Z INFO    request_accepted request_id=d25e389e-d7c6-456d-a6ac-88a60c502517 request_bytes=67105 timeout_seconds=3600.0 instructions=6
+2026-11-21T12:40:28.062Z INFO    request_routed request_id=d25e389e-d7c6-456d-a6ac-88a60c502517 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=1 pid=3258369 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_fneg"
+ - leaked function "__init__"
+ - leaked function "set_insertion_point_to_start"
+ - leaked function "get_padded_shared_layout"
+ - leaked function "get_fp8e5b16_ty"
+ - leaked function "create_or"
+ - leaked function "get_name"
+ - leaked function "invert"
+ - leaked function "create_fcmpOGT"
+ - leaked function "get_tensor_descriptor_im2col_layout_type"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T12:57:00.844Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=1 pid=3258369 reason=request_limit
+2026-11-21T12:57:00.845Z INFO    request_finished request_id=d25e389e-d7c6-456d-a6ac-88a60c502517 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=992781.5 lease_wait_ms=0.0 lease_held_ms=992779.5 response_bytes=14727
+INFO:     10.24.1.221:47692 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T12:57:07.298Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=2 pid=3291276 device=GPU-fc050bad-4890-bf9f-5325-ee1030c00ee1 arch=sm_90a
+srun: forcing job termination
+srun: forcing job termination
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+[2026-11-21T12:58:32.219] error: *** STEP 3280666.2398 ON fs-mbz-gpu-266 CANCELLED AT 2026-11-21T12:58:32 DUE to SIGNAL Killed ***
+[slurm_kcoral 2026-11-21 12:58:32] stopped
+srun: error: fs-mbz-gpu-266: task 0: Killed

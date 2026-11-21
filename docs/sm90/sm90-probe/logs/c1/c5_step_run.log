@@ -1,0 +1,9 @@
+step: SLURM_STEP_GPUS=5 CUDA_VISIBLE_DEVICES=0 visible=1
+     12   correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+      1   geomean speedup: 0.9971x
+      1   mean speedup: 0.9971x
+      1   min/max speedup: 0.9686x / 1.0060x
+      1   speedup:  0.9686x
+      1   speedup:  0.9923x
+      1   speedup:  0.9984x
+      1   speedup:  0.9987x

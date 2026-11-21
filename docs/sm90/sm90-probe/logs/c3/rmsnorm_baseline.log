@@ -1,0 +1,114 @@
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+selected GPU cuda:0 (memory_used=0 MiB, util=0%)
+OP: rmsnorm_h200
+workloads: 15
+device: cuda:0
+warmup/iters/trials: 10/100/3
+correctness runs/post-timing/repeatable-outputs/input-dependence: 5/True/False/True
+
+[001/015] official:hs4096-bs1 axes={'batch_size': 1, 'hidden_size': 4096}
+  baseline: 0.001920 ms
+  kernel:   0.001920 ms
+  speedup:  1.0001x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[002/015] official:hs4096-bs32 axes={'batch_size': 32, 'hidden_size': 4096}
+  baseline: 0.002432 ms
+  kernel:   0.002432 ms
+  speedup:  1.0000x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[003/015] official:hs4096-bs128 axes={'batch_size': 128, 'hidden_size': 4096}
+  baseline: 0.002720 ms
+  kernel:   0.002731 ms
+  speedup:  0.9961x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[004/015] official:hs4096-bs4113 axes={'batch_size': 4113, 'hidden_size': 4096}
+  baseline: 0.019643 ms
+  kernel:   0.019627 ms
+  speedup:  1.0008x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[005/015] official:hs4096-bs16384 axes={'batch_size': 16384, 'hidden_size': 4096}
+  baseline: 0.068064 ms
+  kernel:   0.067973 ms
+  speedup:  1.0013x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[006/015] official:hs5120-bs1 axes={'batch_size': 1, 'hidden_size': 5120}
+  baseline: 0.002187 ms
+  kernel:   0.002208 ms
+  speedup:  0.9903x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[007/015] official:hs5120-bs32 axes={'batch_size': 32, 'hidden_size': 5120}
+  baseline: 0.002645 ms
+  kernel:   0.002667 ms
+  speedup:  0.9918x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[008/015] official:hs5120-bs128 axes={'batch_size': 128, 'hidden_size': 5120}
+  baseline: 0.003019 ms
+  kernel:   0.003029 ms
+  speedup:  0.9966x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[009/015] official:hs5120-bs4113 axes={'batch_size': 4113, 'hidden_size': 5120}
+  baseline: 0.024139 ms
+  kernel:   0.024080 ms
+  speedup:  1.0024x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[010/015] official:hs5120-bs16384 axes={'batch_size': 16384, 'hidden_size': 5120}
+  baseline: 0.083360 ms
+  kernel:   0.083579 ms
+  speedup:  0.9974x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[011/015] official:hs8192-bs1 axes={'batch_size': 1, 'hidden_size': 8192}
+  baseline: 0.002325 ms
+  kernel:   0.002373 ms
+  speedup:  0.9797x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[012/015] official:hs8192-bs32 axes={'batch_size': 32, 'hidden_size': 8192}
+  baseline: 0.002528 ms
+  kernel:   0.002517 ms
+  speedup:  1.0042x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[013/015] official:hs8192-bs128 axes={'batch_size': 128, 'hidden_size': 8192}
+  baseline: 0.003307 ms
+  kernel:   0.003317 ms
+  speedup:  0.9969x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[014/015] official:hs8192-bs4113 axes={'batch_size': 4113, 'hidden_size': 8192}
+  baseline: 0.035504 ms
+  kernel:   0.035541 ms
+  speedup:  0.9990x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[015/015] official:hs8192-bs16384 axes={'batch_size': 16384, 'hidden_size': 8192}
+  baseline: 0.132090 ms
+  kernel:   0.132048 ms
+  speedup:  1.0003x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+timer: cupti
+
+Summary
+  passed: 15/15
+  mean speedup: 0.9971x
+  geomean speedup: 0.9971x
+  min/max speedup: 0.9797x / 1.0042x
+  official geomean: 0.9971x (n=15)
+  by hidden_size:
+    4096: geo=0.9997x n=5
+    5120: geo=0.9957x n=5
+    8192: geo=0.9960x n=5
+
+# Aggregate result
+| candidate | candidate (15/15 PASS) | 386us | 1.000x |
+batch_size >= 4113 speedup: 1.000x (6 rows)
