@@ -60,3 +60,36 @@ descriptor work is hidden.
   T.ptx.shfl_sync.idx.b32(wgv[0], T.Cast("uint32", tx // 128), T.uint32(0), T.uint32(31), T.uint32(0xFFFFFFFF))
   wg = T.Cast("int32", wgv[0]) - 1
   ```
+
+## Resolution (compiler-fix agent, 2026-11-21)
+
+**Cause.** Placement, not the `// 4`. B2 vs DeepGEMM, gated geomean on H200, 2 runs:
+
+| `T.cuda.warpgroup_id()` lowering | B2 |
+|---|---|
+| `shfl(tid // 32) // 4` at kernel entry (main) | 0.994–0.995 |
+| `shfl(tid // 128)` at kernel entry | 0.994–0.995 |
+| `shfl(tid // 128)` at the use | 0.999–1.001 |
+| explicit `shfl.sync.idx` in the consumer branch (what B2 ships) | 1.000–1.002 |
+
+R2UR count is 244 in all four builds for this shape (4096x7168x2048), so it does not discriminate here. The
+entry-bound value is live across the warp-specialized `setmaxnreg`.
+
+**Shipped (decision B):** the lowering stays as on main, and there is a new `T.cuda.broadcast_warpgroup_id()`
+(branch `haok/fix-cuda-warpgroup-uniform`). It is a full-mask `__shfl_sync(tid / 128, lane 0)` emitted at the
+call site. Its contract: call only from warp-converged code. It is documented next to `warpgroup_id`, and
+the A7 helper docs point to it (branch `haok/fix-a7-uniform-warpgroup-docs`).
+
+An at-use lowering of `warpgroup_id()` itself was tried and discarded, for two reasons:
+- a full-mask shuffle under a lane-divergent condition (e.g. `if lane_id() == 0`) is undefined behavior;
+- the analyzer loses the relation to `warp_id_in_cta` (e.g. `warp_id_in_cta % 4` no longer folds under
+  `wg_id == 0`).
+
+### Future item (option A)
+
+Have ExecAnalysis place the shuffle. Keep `warpgroup_id()` and `warp_id_in_cta` semantics for the analyzer, but
+emit the warp-index shuffle at the start of the innermost scope that both
+- covers all uses, and
+- is known to be warp-converged (ExecAnalysis already tracks warp/warpgroup scope predicates).
+
+Then `warpgroup_id()` itself would get the consumer-branch placement safely, without a new API.

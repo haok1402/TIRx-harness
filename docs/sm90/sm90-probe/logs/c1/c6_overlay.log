@@ -1,0 +1,18 @@
+dev overlay imports ok
+{
+  "tvm_tirx": {
+    "source": "/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack",
+    "commit": "29158ed043bc4abebc538dcb521b111f7cc95b89",
+    "branch": "haok/sm90-stack",
+    "dirty": false
+  },
+  "tirx_kernels": {
+    "source": "/mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-stack",
+    "commit": "dd903f70f9115a49d2db8757bd4757706182f1ce",
+    "branch": "haok/sm90-kernels-stack",
+    "dirty": false
+  }
+}
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/h-c1/.venv/lib/python3.13/site-packages/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/h-c1/.venv/lib/python3.13/site-packages/tirx_kernels/__init__.py
+B1 from installed tirx_kernels: bit_exact True remarks []
