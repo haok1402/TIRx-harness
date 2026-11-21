@@ -9,17 +9,21 @@ from tirx_harness.numsim.transpiler import native_frontend
 _TEST_ROOT = Path(__file__).parents[1]
 
 
+# "unmodelled" ops (WGMMA) have no runtime semantics to test; test_unmodelled_ops.py covers them.
+_NO_RUNTIME_SEMANTICS = {"rejected", "unmodelled"}
+
+
 def _registered_targets() -> set[str]:
     registry = native_frontend.registry()
     targets = {
         f"call:{row['ir_name']}"
         for row in native_frontend.registry_ops()
-        if row["support"] != "rejected"
+        if row["support"] not in _NO_RUNTIME_SEMANTICS
     }
     targets.update(
         f"call:{path['op']['ir_name']}"
         for path in registry["contextual_op_paths"]
-        if path["op"]["support"] != "rejected"
+        if path["op"]["support"] not in _NO_RUNTIME_SEMANTICS
     )
     return targets
 

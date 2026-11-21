@@ -22,7 +22,7 @@ from .cases import (
     ExecutionAssumptions,
     NumSimCase,
 )
-from .errors import NumSimBuildError, NumSimExecutionError
+from .errors import NumSimBuildError, NumSimExecutionError, UnmodeledTIRxFormError
 from .host_abi import HostAbiContract, HostAbiError, HostBindingSlot, build_host_abi
 from .report import Mismatch, NumSimReport
 from .transpiler import native_frontend
@@ -452,6 +452,17 @@ class Engine:
         assumptions: ExecutionAssumptions | None = None,
         outputs: Iterable[str] | Mapping[str, str] | None = None,
     ) -> NumSimResult:
+        unmodelled = tuple(getattr(module.spec, "unmodelled", ()) or ())
+        if unmodelled:
+            # Synccheck/racecheck tolerate skipped ops (they report them); a numerical result
+            # without them would be wrong, so NumSim refuses to produce one.
+            name = unmodelled[0].split(":", 1)[-1]
+            raise UnmodeledTIRxFormError(
+                f"call:{name}",
+                f"NumSim cannot simulate this kernel numerically: {len(unmodelled)} executed "
+                f"operation site(s) are not modelled ({name}, ...); WGMMA results are not "
+                "simulated. Synccheck and racecheck still run on it.",
+            )
         execution = self._prepare_execution(
             module,
             inputs,
