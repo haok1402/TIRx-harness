@@ -66,7 +66,8 @@ class Environment:
         )
         paths = json.loads(result.stdout)
         site = Path(paths["site"]).resolve()
-        if not site.is_relative_to(prefix):
+        # Compare resolved paths: the run root may be a symlink (e.g. into shared storage).
+        if not site.is_relative_to(prefix.resolve()):
             raise ValueError("The venv's site-packages must be inside its own directory.")
         packages = {}
         for name, origin in paths["packages"].items():
