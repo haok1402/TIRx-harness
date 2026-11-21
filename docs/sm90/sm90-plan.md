@@ -2,6 +2,82 @@
 
 Date: 2026-11-21. Author: agent sm90-plan. Builds on `docs/sm90-codegen.md` (phase 1, 2026-11-02).
 
+## Final status (2026-11-21, agent sm90-plan)
+
+**Done:** M1–M4. **Not done in track A:** A3 (per-variant arch-floor check), A4 (DSMEM bulk-copy tile
+pattern) and A5 (mma.sync/ldmatrix `KeyError 'm'`). A2 marked A4/A5's bugs as strict xfails. A9 stays
+deferred.
+
+### Branches (all pushed) and their upstream targets
+
+| Repo → upstream `main` | PR branches, in merge order | Dev-only (do not merge) |
+|---|---|---|
+| **tvm-tirx** | 1. `haok/sm90-wgmma-fence` (A1)<br>2. `haok/sm90-test-gate` (A2)<br>3. `haok/sm90-ptxas-log` (A10)<br>4. `haok/sm90-wgmma-helpers` (A7)<br>5. `haok/sm90-pipeline-multicast` (A6)<br>6. `haok/sm90-packed-f32` (A8)<br>7. `haok/sm90-setmaxnreg-contract` (A11, needs A10)<br>Then sm90-codegen-fix's `haok/fix-*` for ISSUE-001..007, and `haok/fix-a7-uniform-warpgroup-docs` after A7. | `haok/sm90-stack` (A-items, cherry-picked); `haok/sm90-stack-fixes` (stack + ISSUE-001..003, B3's build); stale: `haok/sm90-plan`, `haok/sm90-design` |
+| **TIRx-kernels** | 1. `haok/test-runner-skips` (all-skipped exits 3)<br>2. `haok/rmsnorm-int64-offsets` (sm_100 64-bit offsets)<br>3. `haok/sm90-rmsnorm` (B0; contains 2)<br>4. `haok/sm90-gemm` (B1)<br>5. `haok/sm90-fp8-gemm` (B2)<br>6. `haok/sm90-fa3` (B3) | `haok/sm90-kernels-stack` |
+| **TIRx-harness** | 1. `haok/h200-bench-stack` (C1)<br>2. `haok/h200-target-arch` (C2)<br>3. `haok/h200-tasks` (C3, stacked on C2; seeds need the TIRx-kernels B-branches)<br>Independent of each other: `haok/srun-local-mode` (C5), `haok/kcoral-slurm` (C4), `haok/dev-local-stack` (C6 overlay), `haok/sm90-skills` (C7), `haok/wgmma-fail-soft` (C8 phase 1), `haok/banned-path-list` (C9). | `haok/h200-harness-stack`; docs: `haok/sm90-plan` |
+
+**Cross-repo dependencies.**
+- **B1/B2** need tvm-tirx A1, A7, A6 and A11 (A10 for the `perf_remarks` checks).
+- **B3** also needs ISSUE-003's `broadcast_warpgroup_id`, i.e. `haok/fix-cuda-warpgroup-uniform`; it
+  binds the value at entry because of ISSUE-008.
+- **Pins:** C6 is a dev overlay until tvm-tirx/TIRx-kernels releases contain the above. The pin bump
+  (plan C6) is still to do.
+
+### Verified on H200 (driver 595.91.07)
+
+**Kernels** (official `tirx_kernels.test` in the pinned-reference venv: 0 skipped)
+
+| Kernel | Tests | Gate result |
+|---|---|---|
+| B0 rmsnorm | 41/41, incl. > 2^31 elements | ≥ 1.010x FlashInfer per shape at bs ≥ 4113; 1.033x summed |
+| B1 GEMM | 38/38 | 0.989x bf16 / 0.993x fp16 vs cuBLAS |
+| B2 FP8 GEMM | 20/20 | 0.997–0.998x DeepGEMM, with the proxy fence |
+| B3 FA3 forward | 20/20 | **CUPTI kernel-only:** worst gated 0.926x, geomean 0.975x vs FA3 |
+
+All four are `perf_remarks="error"`-clean.
+
+**Harness**
+- **Tasks:** all four H200 tasks run with seeds, kernel-only CUPTI timing.
+- **M3:** an evolution run (rmsnorm_h200, 1.053x) survived a forced kcoral kill.
+- **kcoral tools over the token proxy:** health, python, sanitizer and IKET work. NCU is blocked by
+  the driver (below).
+- **NumSim / synccheck / racecheck** on the WGMMA kernels.
+- **evolution/tests:** 239 pass.
+
+### Needs a B200 (sm_100) run
+
+- **TIRx-kernels `e8e7733` (rmsnorm sm_100 64-bit offsets):** timing; static SASS is +0–8% integer
+  ops. Also its new > 2^31-element configs.
+- **tvm-tirx:**
+  - A1, A2, A10, A8: the full GPU suites on sm_100. A8's packed path is only compile-checked there.
+- **TIRx-harness:**
+  - C2: B200 specs render byte-identical by test; run one B200 task end to end.
+  - C8: run tools/tests on B200 for the sm_100 corpus.
+  - C1 timer changes on B200 nodes.
+
+### Open follow-ups
+
+- **sm90-codegen-fix:**
+  - ISSUE-008: `broadcast_warpgroup_id` re-emitted per use; a divergent shfl hang.
+  - ISSUE-009: float `T.max` is 3 instructions, and the exp2 add+mul; together 20% of B3's
+    instructions.
+  - ISSUE-001..007 fix branches still to land upstream.
+- **B3:**
+  - a persistent scheduler for short causal tiles, which must rework the unmatched final ping-pong
+    `bar.arrive` and the epilogue's Q-buffer reuse;
+  - 176-row KV blocks.
+  - No evolution run on `fa3_forward_h200` yet.
+- **NCU:** the nodes set `RmProfilingAdminOnly=1`. Only admins can lift it
+  (`NVreg_RestrictProfilingToAdminUsers=0`); this goes to the user.
+- **A3, A4, A5** (above), and the C6 pin bump.
+- **Housekeeping:**
+  - HARNESS-001 #6: wiki reference checkout lacks the SM90 kernels.
+  - Two stale partial run dirs, `workspace/kda_flow_runs/m3-rmsnorm-h200{,b}` (6.6 GB each), await a
+    delete decision.
+  - Shared-space venvs `TIRx-kernels/{refenv,b3env}` and the tvm-tirx wheel and build dir are kept
+    for reruns.
+
+
 **v2 changelog (2026-11-21).** v2 applies the independent review (agent sm90-plan-review,
 `~/sm90-plan-review/REVIEW.md`, findings F1–F10 plus the named-barrier gap) and the coordinator's rulings. The
 v1 plan is in git history.
