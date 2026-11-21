@@ -7,6 +7,7 @@ import importlib.util
 import json
 import math
 import os
+import socket
 import statistics
 import subprocess
 import sys
@@ -264,7 +265,59 @@ def clone_args(args):
     return tuple(clone_arg(arg) for arg in args)
 
 
+def gpu_state(device=None) -> dict:
+    """Where and how a score was measured: host, GPU, SM clock and active clock-throttle reasons.
+
+    Recorded with every score row, so a throttled or shared GPU is visible in the result
+    rather than silently lowering it. The GPU is looked up by PCI bus id, which stays
+    correct under any ``CUDA_VISIBLE_DEVICES`` remapping (a Slurm step's included).
+    """
+    state = {"host": socket.gethostname()}
+    try:
+        index = torch.cuda.current_device() if device is None else torch.device(device).index
+        props = torch.cuda.get_device_properties(0 if index is None else index)
+        state["gpu"] = props.name
+        bus = f"{props.pci_domain_id:08x}:{props.pci_bus_id:02x}:{props.pci_device_id:02x}.0"
+        fields = "clocks.sm,clocks.max.sm,clocks_throttle_reasons.active,temperature.gpu,power.draw"
+        out = subprocess.check_output(
+            ["nvidia-smi", "-i", bus, f"--query-gpu={fields}", "--format=csv,noheader,nounits"],
+            text=True,
+            timeout=10,
+        ).strip()
+        sm, sm_max, throttle, temp, power = (part.strip() for part in out.split(","))
+        state.update(
+            sm_clock_mhz=int(float(sm)),
+            sm_clock_max_mhz=int(float(sm_max)),
+            throttle_reasons=throttle,
+            temperature_c=int(float(temp)),
+            power_w=float(power),
+        )
+    except Exception as exc:  # provenance must never break a score
+        state["gpu_state_error"] = f"{type(exc).__name__}: {exc}"[:200]
+    return state
+
+
+_L2_FLUSH = {}
+
+
+def _flush_l2(device):
+    """Evict L2 by writing a buffer twice its size (as the CUPTI path's ``cold_l2_cache=True``)."""
+    key = torch.device(device).index
+    buf = _L2_FLUSH.get(key)
+    if buf is None:
+        l2 = getattr(torch.cuda.get_device_properties(device), "L2_cache_size", 0) or (128 << 20)
+        buf = _L2_FLUSH[key] = torch.empty(2 * l2, dtype=torch.uint8, device=device)
+    buf.zero_()
+
+
 def time_fn(fn, args, device, warmup: int, iters: int):
+    """Median milliseconds per call with a cold L2.
+
+    The FlashInfer CUPTI timer is the scoring timer. If it is unavailable, CUDA events
+    time each call separately with the L2 flushed before it, so the fallback measures the
+    same thing (it used to time back-to-back calls with a hot L2, which flatters
+    memory-bound kernels). ``BENCH_REQUIRE_CUPTI=1`` refuses to score without CUPTI.
+    """
     try:
         from flashinfer.testing import bench_gpu_time_with_cupti
 
@@ -278,20 +331,29 @@ def time_fn(fn, args, device, warmup: int, iters: int):
         )
         return statistics.median(times), "cupti"
     except Exception as exc:
-        print(f"  timer: CUPTI unavailable ({type(exc).__name__}: {exc}); using CUDA events")
+        if env_str("BENCH_REQUIRE_CUPTI", "0") == "1":
+            raise RuntimeError(
+                f"CUPTI timer unavailable ({type(exc).__name__}: {exc}) and BENCH_REQUIRE_CUPTI=1"
+            ) from exc
+        print(
+            f"  timer: CUPTI unavailable ({type(exc).__name__}: {exc}); using cold-L2 CUDA events"
+        )
 
     with torch.cuda.device(device):
         for _ in range(warmup):
             fn(*args)
         torch.cuda.synchronize(device)
-        start = torch.cuda.Event(enable_timing=True)
-        end = torch.cuda.Event(enable_timing=True)
-        start.record()
+        times = []
         for _ in range(iters):
+            _flush_l2(device)
+            start = torch.cuda.Event(enable_timing=True)
+            end = torch.cuda.Event(enable_timing=True)
+            start.record()
             fn(*args)
-        end.record()
-        torch.cuda.synchronize(device)
-        return start.elapsed_time(end) / iters, "cuda_event"
+            end.record()
+            torch.cuda.synchronize(device)
+            times.append(start.elapsed_time(end))
+        return statistics.median(times), "cuda_event_cold_l2"
 
 
 def compare_outputs(
@@ -965,6 +1027,8 @@ def run_benchmark(
         f"{correctness_runs}/{check_after_timing}/{require_repeatable_outputs}/"
         f"{check_input_dependence}"
     )
+    state = gpu_state(device)
+    print(f"gpu_state: {state}")
     print()
 
     rows = []
@@ -1245,10 +1309,15 @@ def run_benchmark(
                 "speedup": speedup,
                 "timer": entry_timer,
                 "timed": entry_timed,
+                **state,
             }
         )
         print()
 
+    state_after = gpu_state(device)
+    print(f"gpu_state after: {state_after}")
+    for row in rows:
+        row["gpu_state_after"] = state_after
     if timer_name:
         print(f"timer: {timer_name}")
     summarize(rows, group_axis)

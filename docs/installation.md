@@ -68,6 +68,24 @@ From the repository root, run `python -m pip install --group server`, or
 the server dependencies. See {ref}`remote execution <select-remote-execution>`
 to start the server.
 
+### Hosts with glibc older than 2.38 (e.g. H200 nodes on Ubuntu 22.04)
+
+The pinned DeepGEMM wheel needs glibc 2.38, so `import deep_gemm` fails on these hosts. Skip it, then build the
+same commit from source into the environment:
+
+```bash
+uv sync --locked --group benchmark --no-install-package deep-gemm
+scripts/build_deepgemm.sh
+```
+
+The build needs git, a C++20 compiler and the CUDA toolkit; it reuses its checkout under `.cache/`. A plain
+`uv sync --locked --group benchmark` reinstalls the wheel, so keep `--no-install-package deep-gemm` on these
+hosts.
+
+Installing the harness project itself also builds its Rust frontend (NumSim), which needs `cargo`. A benchmark or
+kcoral server environment does not use it: on hosts without a Rust toolchain, add `--no-install-project` to the
+`uv sync` above.
+
 ## Install agent skills
 
 | Skill | Purpose |
