@@ -1,0 +1,6 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"shape": [4096, 7168, 2048], "deepgemm": 1277, "bn128_promote": 1096, "bn128_nopromote": 1281, "bn192_promote": 1118, "bn192_nopromote": 1309}
+{"shape": [4096, 4096, 7168], "deepgemm": 1410, "bn128_promote": 1164, "bn128_nopromote": 1358, "bn192_promote": 1136, "bn192_nopromote": 1342}

@@ -1,0 +1,47 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+33], tmp_ptr[34], tmp_ptr[35], tmp_ptr[36], tmp_ptr[37], tmp_ptr[38], tmp_ptr[39], tmp_ptr[40], tmp_ptr[41], tmp_ptr[42], tmp_ptr[43], tmp_ptr[44], tmp_ptr[45], tmp_ptr[46], tmp_ptr[47], tmp_ptr[48], tmp_ptr[49], tmp_ptr[50], tmp_ptr[51], tmp_ptr[52], tmp_ptr[53], tmp_ptr[54], tmp_ptr[55], tmp_ptr[56], tmp_ptr[57], tmp_ptr[58], tmp_ptr[59], tmp_ptr[60], tmp_ptr[61], tmp_ptr[62], tmp_ptr[63], ((da0 + (((uint64_t)(stage_1 * 16384)) >> (uint64_t)4ULL)) + (uint64_t)2ULL), ((db0 + (((uint64_t)(stage_1 * 16384)) >> (uint64_t)4ULL)) + (uint64_t)2ULL), (uint)1);
+          tvm_builtin_ptx_wgmma_fp8_ss_mma_async_sync_aligned_m64n128k32_f32_e4m3_e4m3_1_1(tmp_ptr[0], tmp_ptr[1], tmp_ptr[2], tmp_ptr[3], tmp_ptr[4], tmp_ptr[5], tmp_ptr[6], tmp_ptr[7], tmp_ptr[8], tmp_ptr[9], tmp_ptr[10], tmp_ptr[11], tmp_ptr[12], tmp_ptr[13], tmp_ptr[14], tmp_ptr[15], tmp_ptr[16], tmp_ptr[17], tmp_ptr[18], tmp_ptr[19], tmp_ptr[20], tmp_ptr[21], tmp_ptr[22], tmp_ptr[23], tmp_ptr[24], tmp_ptr[25], tmp_ptr[26], tmp_ptr[27], tmp_ptr[28], tmp_ptr[29], tmp_ptr[30], tmp_ptr[31], tmp_ptr[32], tmp_ptr[33], tmp_ptr[34], tmp_ptr[35], tmp_ptr[36], tmp_ptr[37], tmp_ptr[38], tmp_ptr[39], tmp_ptr[40], tmp_ptr[41], tmp_ptr[42], tmp_ptr[43], tmp_ptr[44], tmp_ptr[45], tmp_ptr[46], tmp_ptr[47], tmp_ptr[48], tmp_ptr[49], tmp_ptr[50], tmp_ptr[51], tmp_ptr[52], tmp_ptr[53], tmp_ptr[54], tmp_ptr[55], tmp_ptr[56], tmp_ptr[57], tmp_ptr[58], tmp_ptr[59], tmp_ptr[60], tmp_ptr[61], tmp_ptr[62], tmp_ptr[63], ((da0 + (((uint64_t)(stage_1 * 16384)) >> (uint64_t)4ULL)) + (uint64_t)4ULL), ((db0 + (((uint64_t)(stage_1 * 16384)) >> (uint64_t)4ULL)) + (uint64_t)4ULL), (uint)1);
+          tvm_builtin_ptx_wgmma_fp8_ss_mma_async_sync_aligned_m64n128k32_f32_e4m3_e4m3_1_1(tmp_ptr[0], tmp_ptr[1], tmp_ptr[2], tmp_ptr[3], tmp_ptr[4], tmp_ptr[5], tmp_ptr[6], tmp_ptr[7], tmp_ptr[8], tmp_ptr[9], tmp_ptr[10], tmp_ptr[11], tmp_ptr[12], tmp_ptr[13], tmp_ptr[14], tmp_ptr[15], tmp_ptr[16], tmp_ptr[17], tmp_ptr[18], tmp_ptr[19], tmp_ptr[20], tmp_ptr[21], tmp_ptr[22], tmp_ptr[23], tmp_ptr[24], tmp_ptr[25], tmp_ptr[26], tmp_ptr[27], tmp_ptr[28], tmp_ptr[29], tmp_ptr[30], tmp_ptr[31], tmp_ptr[32], tmp_ptr[33], tmp_ptr[34], tmp_ptr[35], tmp_ptr[36], tmp_ptr[37], tmp_ptr[38], tmp_ptr[39], tmp_ptr[40], tmp_ptr[41], tmp_ptr[42], tmp_ptr[43], tmp_ptr[44], tmp_ptr[45], tmp_ptr[46], tmp_ptr[47], tmp_ptr[48], tmp_ptr[49], tmp_ptr[50], tmp_ptr[51], tmp_ptr[52], tmp_ptr[53], tmp_ptr[54], tmp_ptr[55], tmp_ptr[56], tmp_ptr[57], tmp_ptr[58], tmp_ptr[59], tmp_ptr[60], tmp_ptr[61], tmp_ptr[62], tmp_ptr[63], ((da0 + (((uint64_t)(stage_1 * 16384)) >> (uint64_t)4ULL)) + (uint64_t)6ULL), ((db0 + (((uint64_t)(stage_1 * 16384)) >> (uint64_t)4ULL)) + (uint64_t)6ULL), (uint)1);
+          tvm_builtin_ptx_wgmma_commit_group_commit_group_sync_aligned();
+          sc_ptr[2] = (sc_ptr[0] * sb0);
+          sc_ptr[3] = (sc_ptr[0] * sb1);
+          sc_ptr[4] = (sc_ptr[1] * sb0);
+          sc_ptr[5] = (sc_ptr[1] * sb1);
+          tvm_builtin_ptx_wgmma_wait_group_wait_group_sync_aligned_0();
+          ptx_wgmma_fence_float(tmp_ptr[0]);
+          ptx_wgmma_fence_float(tmp_ptr[1]);
+          ptx_wgmma_fence_float(tmp_ptr[2]);
+          ptx_wgmma_fence_float(tmp_ptr[3]);
+          ptx_wgmma_fence_float(tmp_ptr[4]);
+          ptx_wgmma_fence_float(tmp_ptr[5]);
+          ptx_wgmma_fence_float(tmp_ptr[6]);
+          ptx_wgmma_fence_float(tmp_ptr[7]);
+          ptx_wgmma_fence_float(tmp_ptr[8]);
+          ptx_wgmma_fence_float(tmp_ptr[9]);
+          ptx_wgmma_fence_float(tmp_ptr[10]);
+          ptx_wgmma_fence_float(tmp_ptr[11]);
+          ptx_wgmma_fence_float(tmp_ptr[12]);
+          ptx_wgmma_fence_float(tmp_ptr[13]);
+          ptx_wgmma_fence_float(tmp_ptr[14]);
+          ptx_wgmma_fence_float(tmp_ptr[15]);
+          ptx_wgmma_fence_float(tmp_ptr[16]);
+          ptx_wgmma_fence_float(tmp_ptr[17]);
+          ptx_wgmma_fence_float(tmp_ptr[18]);
+          ptx_wgmma_fence_float(tmp_ptr[19]);
+          ptx_wgmma_fence_float(tmp_ptr[20]);
+          ptx_wgmma_fence_float(tmp_ptr[21]);
+          ptx_wgmma_fence_float(tmp_ptr[22]);
+          ptx_wgmma_fence_float(tmp_ptr[23]);
+          ptx_wgmma_fence_float(tmp_ptr[24]);
+          ptx_wgmma_fence_float(tmp_ptr[25]);
+          ptx_wgmma_fence_float(tmp_ptr[26]);
+          ptx_wgmma_fence_float(tmp_ptr[27]);
+          ptx_wgmma_fence_float(tmp_ptr[28]);
+          ptx_wgmma_fence_float(tmp_ptr[29]);
+          ptx_wgmma_fence_float(tmp_ptr[30]);
+          ptx_wgmma_fence_float(tmp_ptr[31]);
+         
+{'FFMA': 64, 'UIADD3': 51, 'IMAD': 48, 'PLOP3': 48, 'BRA': 42, 'ULEA': 41, 'CS2R': 32, 'F2FP': 32, 'UMOV': 30, 'SYNCS': 30, 'USHF': 24, 'LOP3': 20, 'NOP': 17, 'ULOP3': 14, 'SHF': 13, 'UIMAD': 13, 'R2UR': 13, 'ELECT': 12, 'UTMALDG': 12, 'VIADD': 9, 'STSM': 8, 'ULDC': 6, 'ISETP': 6, 'LEA': 6, 'S2R': 5, 'NANOSLEEP': 5, 'BSSY': 4, 'S2UR': 4, 'BSYNC': 4, 'IADD3': 4}

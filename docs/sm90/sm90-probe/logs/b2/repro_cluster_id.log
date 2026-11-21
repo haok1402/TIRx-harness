@@ -1,0 +1,2 @@
+cid = block_idx(x) // 2: volatile register reads in kernel source: 3, SASS S2R/S2UR 10, total SASS 184
+cid = cluster_id(x): volatile register reads in kernel source: 19, SASS S2R/S2UR 6, total SASS 144

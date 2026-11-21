@@ -1,0 +1,49 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+nocluster total 808
+clusterL total 824
+clusterMC total 912
+IMAD          44    75   103
+CS2R          63    63    64
+UIADD3        49    41    24
+PLOP3         56    36    35
+BRA           44    36    46
+R2UR          25    30    60
+ULEA          42    30    19
+LOP3          23    26    38
+UMOV          28    22    11
+SYNCS         26    18    27
+ISETP          6    17    18
+VIADD         11    16    30
+USHF          21    16    14
+NOP           11    14    16
+I2FP           0    12    12
+FMUL           4    12    12
+LEA            9     9    24
+ULOP3         16     8     3
+SHF           10     8    16
+F2I            0     8     8
+SEL            0     8     8
+S2R            4     7     7
+LDC            2     7     8
+IADD3          4     6     9
+ULDC           6     6     5
+UTMALDG       12     6     6
+ELECT         12     6     6
+UIMAD         11     6     2
+EXIT           4     4     1
+MUFU           0     4     4
+BSYNC          4     4     5
+BSSY           4     4     5
+S2UR           4     3     4
+NANOSLEEP      5     3     6
+MEMBAR         1     3     3
+UCGABAR        0     2     2
+CCTL           1     2     2
+CGAERRBAR      0     1     1
+ERRBAR         0     1     1
+UISETP         3     1     0
+PRMT           0     0     2
+MOV            0     0     2

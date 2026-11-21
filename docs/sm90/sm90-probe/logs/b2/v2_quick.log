@@ -1,0 +1,16 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 76.50, 28"}, "deep_gemm": "2.6.1"}
+{"bn": "256x128n", "cfg": [256, 128, "n"], "shape": [4096, 7168, 2048], "compile_s": 3.8, "remarks": [], "nan": 0, "diff_vs_ref": 2.394081616285959e-07, "diff_deepgemm_vs_ref": 2.394081616285959e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 114.4, "dg_us": 94.3, "tirx_tflops": 1050.8, "dg_tflops": 1274.8, "ratio": 0.824}
+{"bn": "256x128", "cfg": [256, 128, null], "shape": [4096, 7168, 2048], "compile_s": 1.7, "remarks": [], "nan": 0, "diff_vs_ref": 2.394081616285959e-07, "diff_deepgemm_vs_ref": 2.394081616285959e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 99.5, "dg_us": 93.8, "tirx_tflops": 1209.2, "dg_tflops": 1281.5, "ratio": 0.944}
+{"bn": "128x128", "cfg": [128, 128, null], "shape": [4096, 7168, 2048], "compile_s": 1.5, "remarks": [], "nan": 0, "diff_vs_ref": 2.394081616285959e-07, "diff_deepgemm_vs_ref": 2.394081616285959e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 111.1, "dg_us": 94.2, "tirx_tflops": 1082.7, "dg_tflops": 1277.0, "ratio": 0.848}
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in main_kernel (sm_90a): 20 bytes spill stores, 16 bytes spill loads (16 bytes stack frame)
+  result = compile_source(code, config, target=target)
+{"bn": "128x192m", "cfg": [128, 192, "m"], "shape": [4096, 7168, 2048], "compile_s": 1.7, "remarks": ["[spill] in main_kernel (sm_90a): 20 bytes spill stores, 16 bytes spill loads (16 bytes stack frame)"], "nan": 0, "diff_vs_ref": 2.394081616285959e-07, "diff_deepgemm_vs_ref": 2.394081616285959e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 125.3, "dg_us": 94.1, "tirx_tflops": 959.9, "dg_tflops": 1277.6, "ratio": 0.751}
+{"bn": "256x128n", "gated_geomean": 0.824, "n": 1, "min": 0.824}
+{"bn": "256x128", "gated_geomean": 0.944, "n": 1, "min": 0.944}
+{"bn": "128x128", "gated_geomean": 0.848, "n": 1, "min": 0.848}
+{"bn": "128x192m", "gated_geomean": 0.751, "n": 1, "min": 0.751}
+{"state_after": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "1980, 1980, 0x0000000000000000, 117.93, 30"}}

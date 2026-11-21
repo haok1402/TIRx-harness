@@ -1,0 +1,10 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in main_kernel (sm_90a): 20 bytes spill stores, 16 bytes spill loads (16 bytes stack frame)
+  result = compile_source(code, config, target=target)
+(256, 128, 'n') stages 3 max_active_clusters 66
+(256, 128, 'm') stages 3 max_active_clusters 66
+(128, 192, 'm') stages 4 max_active_clusters 66
+(256, 128, None) stages 3 max_active_clusters 132

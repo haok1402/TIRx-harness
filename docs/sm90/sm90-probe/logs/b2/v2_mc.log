@@ -1,0 +1,18 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 76.88, 28"}, "deep_gemm": "2.6.1"}
+{"bn": "256x128r40", "cfg": [256, 128, null], "shape": [4096, 7168, 2048], "compile_s": 3.7, "remarks": [], "nan": 0, "diff_vs_ref": 2.394081616285959e-07, "diff_deepgemm_vs_ref": 2.394081616285959e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 99.1, "dg_us": 94.5, "tirx_tflops": 1213.7, "dg_tflops": 1272.4, "ratio": 0.954}
+{"bn": "256x128nr40", "cfg": [256, 128, "n"], "shape": [4096, 7168, 2048], "compile_s": 1.7, "remarks": [], "nan": 0, "diff_vs_ref": 2.394081616285959e-07, "diff_deepgemm_vs_ref": 2.394081616285959e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 116.0, "dg_us": 93.9, "tirx_tflops": 1036.7, "dg_tflops": 1280.2, "ratio": 0.81}
+{"bn": "256x128nr40L", "cfg": [256, 128, "n"], "shape": [4096, 7168, 2048], "compile_s": 1.7, "remarks": [], "nan": 0, "diff_vs_ref": 2.394081616285959e-07, "diff_deepgemm_vs_ref": 2.394081616285959e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 113.7, "dg_us": 94.4, "tirx_tflops": 1057.9, "dg_tflops": 1273.9, "ratio": 0.83}
+{"bn": "256x128r40", "cfg": [256, 128, null], "shape": [4096, 4096, 7168], "compile_s": 1.7, "remarks": [], "nan": 0, "diff_vs_ref": 2.3908227120283954e-07, "diff_deepgemm_vs_ref": 2.3908227120283954e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 187.2, "dg_us": 169.5, "tirx_tflops": 1284.5, "dg_tflops": 1419.1, "ratio": 0.905}
+{"bn": "256x128nr40", "cfg": [256, 128, "n"], "shape": [4096, 4096, 7168], "compile_s": 1.7, "remarks": [], "nan": 0, "diff_vs_ref": 2.3908227120283954e-07, "diff_deepgemm_vs_ref": 2.3908227120283954e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 205.5, "dg_us": 169.6, "tirx_tflops": 1170.4, "dg_tflops": 1417.9, "ratio": 0.825}
+{"bn": "256x128nr40L", "cfg": [256, 128, "n"], "shape": [4096, 4096, 7168], "compile_s": 1.7, "remarks": [], "nan": 0, "diff_vs_ref": 2.3908227120283954e-07, "diff_deepgemm_vs_ref": 2.3908227120283954e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 206.6, "dg_us": 169.6, "tirx_tflops": 1164.0, "dg_tflops": 1418.6, "ratio": 0.821}
+{"bn": "256x128r40", "cfg": [256, 128, null], "shape": [4096, 32768, 512], "compile_s": 1.7, "remarks": [], "nan": 0, "diff_vs_ref": 2.416830745533005e-07, "diff_deepgemm_vs_ref": 2.416830745533005e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 142.8, "dg_us": 129.8, "tirx_tflops": 962.8, "dg_tflops": 1058.7, "ratio": 0.909}
+{"bn": "256x128nr40", "cfg": [256, 128, "n"], "shape": [4096, 32768, 512], "compile_s": 1.7, "remarks": [], "nan": 0, "diff_vs_ref": 2.416830745533005e-07, "diff_deepgemm_vs_ref": 2.416830745533005e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 145.9, "dg_us": 130.3, "tirx_tflops": 941.9, "dg_tflops": 1054.5, "ratio": 0.893}
+{"bn": "256x128nr40L", "cfg": [256, 128, "n"], "shape": [4096, 32768, 512], "compile_s": 1.7, "remarks": [], "nan": 0, "diff_vs_ref": 2.416830745533005e-07, "diff_deepgemm_vs_ref": 2.416830745533005e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 146.0, "dg_us": 129.6, "tirx_tflops": 941.6, "dg_tflops": 1060.6, "ratio": 0.888}
+{"bn": "256x128r40", "gated_geomean": 0.922, "n": 3, "min": 0.905}
+{"bn": "256x128nr40", "gated_geomean": 0.842, "n": 3, "min": 0.81}
+{"bn": "256x128nr40L", "gated_geomean": 0.846, "n": 3, "min": 0.821}
+{"state_after": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "1980, 1980, 0x0000000000000000, 117.68, 30"}}

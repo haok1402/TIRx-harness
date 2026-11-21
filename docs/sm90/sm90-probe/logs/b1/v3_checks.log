@@ -1,0 +1,25 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+bf16 perf_remarks=error: compiled; chain check rc 0 {"function": "main_kernel", "gmma": 8, "chains": [4, 4], "gsb0": 2, "flags": []}
+fp16 perf_remarks=error: compiled; chain check rc 0 {"function": "main_kernel", "gmma": 8, "chains": [4, 4], "gsb0": 2, "flags": []}
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"dtype": "bf16", "shape": [1, 4096, 4096], "nan": 0, "rel_err_vs_fp32": 0.0016508034896105528, "cublas_rel_err_vs_fp32": 0.0016507917316630483, "bit_exact_cublas": false, "run_test": "pass", "ratio": 0.403}
+{"dtype": "bf16", "shape": [100, 2112, 7168], "nan": 0, "rel_err_vs_fp32": 0.0016499997582286596, "cublas_rel_err_vs_fp32": 0.001649982063099742, "bit_exact_cublas": false, "run_test": "pass", "ratio": 0.269}
+{"dtype": "bf16", "shape": [777, 576, 1000], "nan": 0, "rel_err_vs_fp32": 0.0016604752745479345, "cublas_rel_err_vs_fp32": 0.0016604752745479345, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.604}
+{"dtype": "bf16", "shape": [4096, 2112, 7168], "nan": 0, "rel_err_vs_fp32": 0.001658375607803464, "cublas_rel_err_vs_fp32": 0.001658375607803464, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.722}
+{"dtype": "bf16", "shape": [300, 520, 136], "nan": 0, "rel_err_vs_fp32": 0.001650946564041078, "cublas_rel_err_vs_fp32": 0.001650946564041078, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.628}
+{"dtype": "bf16", "shape": [129, 264, 8], "nan": 0, "rel_err_vs_fp32": 0.001660185749642551, "cublas_rel_err_vs_fp32": 0.001660185749642551, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.707}
+{"dtype": "fp16", "shape": [1, 4096, 4096], "nan": 0, "rel_err_vs_fp32": 0.00020749484247062355, "cublas_rel_err_vs_fp32": 0.00020738306920975447, "bit_exact_cublas": false, "run_test": "pass", "ratio": 0.406}
+{"dtype": "fp16", "shape": [100, 2112, 7168], "nan": 0, "rel_err_vs_fp32": 0.0002078575053019449, "cublas_rel_err_vs_fp32": 0.0002077085227938369, "bit_exact_cublas": false, "run_test": "pass", "ratio": 0.271}
+{"dtype": "fp16", "shape": [777, 576, 1000], "nan": 0, "rel_err_vs_fp32": 0.00020757927268277854, "cublas_rel_err_vs_fp32": 0.00020757927268277854, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.564}
+{"dtype": "fp16", "shape": [4096, 2112, 7168], "nan": 0, "rel_err_vs_fp32": 0.00020742272317875177, "cublas_rel_err_vs_fp32": 0.00020742272317875177, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.728}
+{"dtype": "fp16", "shape": [300, 520, 136], "nan": 0, "rel_err_vs_fp32": 0.0002065263397525996, "cublas_rel_err_vs_fp32": 0.0002065263397525996, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.707}
+{"dtype": "fp16", "shape": [129, 264, 8], "nan": 0, "rel_err_vs_fp32": 0.00020992672943975776, "cublas_rel_err_vs_fp32": 0.00020992672943975776, "bit_exact_cublas": true, "run_test": "pass", "ratio": 0.721}
+torch 2.15.0+cu134
+
+============================================================
+Total: 38  Passed: 38  Failed: 0  Skipped: 0

@@ -1,0 +1,7 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"bn": 128, "stages": 5, "acc_regs_per_thread": 128, "remarks": [], "reg": 168, "stack": 0, "local": 0, "chains": "{\"function\": \"main_kernel\", \"gmma\": 4, \"chains\": [4], \"gsb0\": 1, \"flags\": []}"}
+{"bn": 192, "stages": 4, "acc_regs_per_thread": 192, "remarks": [], "reg": 168, "stack": 0, "local": 0, "chains": "{\"function\": \"main_kernel\", \"gmma\": 4, \"chains\": [4], \"gsb0\": 1, \"flags\": []}"}
+{"bn": 256, "stages": 3, "acc_regs_per_thread": 256, "remarks": ["None: 236 bytes spill stores, 220 bytes spill loads (136 bytes stack frame)"], "reg": 168, "stack": 136, "local": 0, "chains": "{\"function\": \"main_kernel\", \"gmma\": 4, \"chains\": [4], \"gsb0\": 1, \"flags\": []}"}

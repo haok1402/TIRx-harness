@@ -1,0 +1,10 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 76.67, 31"}, "deep_gemm": "2.6.1"}
+{"bn": 128, "shape": [4096, 7168, 2048], "compile_s": 3.6, "remarks": [], "nan": 0, "diff_vs_ref": 2.394081616285959e-07, "diff_deepgemm_vs_ref": 2.394081616285959e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 117.5, "dg_us": 95.5, "tirx_tflops": 1023.7, "dg_tflops": 1259.0, "ratio": 0.813}
+{"bn": 192, "shape": [4096, 7168, 2048], "compile_s": 1.7, "remarks": [], "nan": 0, "diff_vs_ref": 2.394081616285959e-07, "diff_deepgemm_vs_ref": 2.394081616285959e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 112.7, "dg_us": 95.6, "tirx_tflops": 1067.5, "dg_tflops": 1257.3, "ratio": 0.849}
+{"bn": 128, "gated_geomean": 0.813, "n": 1, "min": 0.813}
+{"bn": 192, "gated_geomean": 0.849, "n": 1, "min": 0.849}
+{"state_after": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "1980, 1980, 0x0000000000000000, 125.85, 33"}}

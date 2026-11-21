@@ -182,6 +182,33 @@ flush before every rep, median of ≥ 30, on one GPU.
 - B3's codegen risks (rs form, fragment maps, named-barrier ping-pong) are pulled forward into A7's tests,
   the FA microkernel and the 2-warpgroup barrier test. That way they surface in track A, not at M4.
 
+**B1 result (2026-11-21).** Gated geomean against cuBLAS is **0.986x bf16 / 0.992x fp16**, min 0.938x. It
+is bit-exact, has any-M and N/K % 8 tails, passes 38/38 configs and is C75xx-clean. It needs two compiler-bug
+workarounds: ISSUE-001 and ISSUE-002 in `sm90-probe/issues/`.
+
+**B2-design result (2026-11-21).** Measured on H200: compile-only budget sweeps plus same-step timing against
+DeepGEMM.
+
+- **Register budget at 384 threads.** The pinned entry is 168, split by `setmaxnreg` as 40 / 232; 24 / 240
+  spills once cluster addressing is added. Accumulators per consumer thread:
+
+  | Tile | Accumulators (f32) | Result |
+  |---|---|---|
+  | 128 × 128 | 64 + 64 | clean |
+  | 128 × 192 | 96 + 96 | clean |
+  | 128 × 256 | 128 + 128 | **spills 236 B** |
+  | 256 × 128, two m64 waves per warpgroup | 2·64 + 64 | clean (DeepGEMM's main tile) |
+
+- **Promotion cannot be overlapped by double-buffering `tmp`.** At 128 × 128, 3 × 64 registers fit, but ptxas
+  serializes every wgmma (C7514) as soon as the retired buffer is read while the next chain is in flight. The
+  promotion therefore stays serial after `wait_group 0`, as in DeepGEMM, and is amortized with bigger tiles.
+  The no-promotion upper bound of the same kernel matches DeepGEMM, so the promotion is the whole gap.
+- **Kernel:** `tirx_kernels/gemm/fp8_blockscale_gemm_sm90.py`, configurable `(bm, bn, cluster)`. It is exact
+  against DeepGEMM (`calc_diff` 0.0) on all 14 shapes.
+- **Status:** best configuration per shape is 0.88–0.95x (256 × 128 no cluster, 128 × 192 for N ≤ 2304),
+  below the 0.95 gate. 2-CTA multicast does not help yet. B2 continues with per-shape config selection,
+  multicast tuning and N = 576 (DeepGEMM uses bn = 144).
+
 Per-kernel acceptance in TIRx-kernels, all three run as 1-GPU steps:
 - `python -m tirx_kernels.test --arch sm_90a --kernel <name>` passes every CONFIG.
 - `python -m tirx_kernels.bench --arch sm_90a --kernel <name> --with-references` reports the ratio to
