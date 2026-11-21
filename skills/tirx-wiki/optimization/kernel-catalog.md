@@ -651,3 +651,15 @@ membership and family names.
 Do **not** add line numbers — they drift on every edit and create false
 confidence. The audit history of this doc proved it: line refs rotted within
 weeks while symbol anchors held up.
+
+## SM90 (Hopper) canonical kernels
+
+The kernels above target Blackwell (tcgen05/TMEM/CLC). For an `sm_90a` target, start from these, and
+read [sm90.md](sm90.md) first:
+
+- `norm/rmsnorm.py` (sm_90a path, `_is_sm90`): persistent memory-bound grid, `SM90_CTAS_PER_SM`.
+- `gemm/fp16_bf16_gemm_sm90.py`: `compile_persistent` (two-pass `max_active_clusters`),
+  `arrive_multicast` stage release, `stmatrix` + `cp.async.bulk.tensor` store epilogue.
+- `gemm/fp8_blockscale_gemm_sm90.py`: `pick_config`, promotion after `W.wait(0, ...)`,
+  `shfl_sync.idx` warpgroup broadcast, `T.serial(KB, unroll=8)`, `check_output`.
+
