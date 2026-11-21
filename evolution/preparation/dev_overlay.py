@@ -8,6 +8,11 @@ kcoral server venv can take the Python sources of local checkouts:
   picked up. C++ changes need a wheel built from the checkout.
 * ``tirx-kernels``: the checkout's ``tirx_kernels`` package replaces the installed one.
 
+Re-overlaying deletes stale files. ``tirx_kernels`` is replaced as a whole. For ``tvm_tirx``, every
+file a previous overlay copied that the checkout no longer has is deleted; the list is kept in
+``FILES_MARKER``. Files that only the wheel ships stay. Some are generated (``_version.py``,
+headers, licenses), so the wheel itself is never pruned against the checkout.
+
 The sources are *copied* into site-packages (not linked or put on ``sys.path``), so a task's banned
 paths still apply to them: ``Environment.sanitize`` removes banned kernel files from the copy.
 
@@ -30,6 +35,7 @@ from pathlib import Path
 ENV_TVM_TIRX = "TIRX_HARNESS_DEV_TVM_TIRX"
 ENV_TIRX_KERNELS = "TIRX_HARNESS_DEV_TIRX_KERNELS"
 MARKER = "tirx_harness_dev_overlay.json"
+FILES_MARKER = "tirx_harness_dev_overlay.files.json"  # tvm_tirx files the last overlay copied
 _IGNORE = shutil.ignore_patterns("__pycache__", "*.pyc", "lib", "*.so")
 
 
@@ -46,6 +52,13 @@ def _git(path: Path) -> dict:
     }
 
 
+def _copied_files(site: Path) -> list[str]:
+    try:
+        return json.loads((site / FILES_MARKER).read_text())
+    except (OSError, ValueError):
+        return []
+
+
 def overlay(site: Path, tvm_tirx: Path | None = None, tirx_kernels: Path | None = None) -> dict:
     """Copy the given checkouts' Python packages into ``site`` (a site-packages dir); return the record."""
     site = Path(site)
@@ -57,8 +70,20 @@ def overlay(site: Path, tvm_tirx: Path | None = None, tirx_kernels: Path | None 
             raise ValueError(f"{ENV_TVM_TIRX}: no python/tvm_tirx package under {tvm_tirx}")
         if not dst.is_dir():
             raise ValueError(f"tvm_tirx is not installed in {site}; sync the venv first")
+        previous = _copied_files(site)
         shutil.copytree(src, dst, ignore=_IGNORE, dirs_exist_ok=True)
+        copied = sorted(
+            path.relative_to(dst).as_posix()
+            for path in dst.rglob("*")
+            if path.is_file() and (src / path.relative_to(dst)).is_file()
+        )
+        stale = sorted(set(previous) - set(copied))
+        for name in stale:
+            (dst / name).unlink(missing_ok=True)
+        (site / FILES_MARKER).write_text(json.dumps(copied) + "\n")
         record["tvm_tirx"] = {"source": str(src.parent.parent), **_git(src)}
+        if stale:
+            record["tvm_tirx"]["deleted_stale"] = stale
     if tirx_kernels is not None:
         root = Path(tirx_kernels).expanduser().resolve()
         src = root / "tirx_kernels"

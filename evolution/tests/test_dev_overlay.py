@@ -66,3 +66,34 @@ def test_environment_variables_select_the_overlay(tmp_path, monkeypatch):
 def test_bad_checkout_is_rejected(tmp_path):
     with pytest.raises(ValueError, match="no python/tvm_tirx package"):
         dev_overlay.overlay(_site(tmp_path), tvm_tirx=tmp_path / "missing")
+
+
+def test_reoverlay_deletes_files_the_checkout_dropped_but_keeps_wheel_only_files(tmp_path):
+    site = _site(tmp_path)
+    tvm, _ = _checkouts(tmp_path)
+    (site / "tvm_tirx" / "_version.py").write_text("__version__ = '1'\n")  # generated, wheel only
+    dev_overlay.overlay(site, tvm_tirx=tvm)
+    assert (site / "tvm_tirx" / "backend" / "wgmma.py").is_file()
+    # The dev checkout renames a module: the old copy must not stay importable.
+    backend = tvm / "python" / "tvm_tirx" / "backend"
+    (backend / "wgmma.py").rename(backend / "wgmma_ops.py")
+    record = dev_overlay.overlay(site, tvm_tirx=tvm)
+    assert not (site / "tvm_tirx" / "backend" / "wgmma.py").exists()
+    assert (site / "tvm_tirx" / "backend" / "wgmma_ops.py").is_file()
+    assert record["tvm_tirx"]["deleted_stale"] == ["backend/wgmma.py"]
+    # Files only the wheel ships are never pruned against the checkout.
+    assert (site / "tvm_tirx" / "_version.py").is_file()
+    assert (site / "tvm_tirx" / "wheel_only.py").is_file()
+    assert (site / "tvm_tirx" / "lib" / "libtvm_runtime.so").read_text() == "wheel binary"
+
+
+def test_kcoral_worker_reports_the_server_venv_overlay(tmp_path, monkeypatch):
+    """Scores from an overlaid kcoral server say so (the driver's init record)."""
+    import sysconfig
+
+    from evolution.remote import kcoral_driver
+
+    monkeypatch.setattr(sysconfig, "get_path", lambda name: str(tmp_path))
+    assert kcoral_driver._dev_overlay() is None
+    (tmp_path / dev_overlay.MARKER).write_text(json.dumps({"tirx_kernels": {"commit": "abc"}}))
+    assert kcoral_driver._dev_overlay() == {"tirx_kernels": {"commit": "abc"}}

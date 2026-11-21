@@ -85,8 +85,8 @@ def _init(task, overrides, workloads, blob_keys, solution_source, *blob_tensors)
     blobs = {
         (key["path"], key["tensor_key"]): tensor for key, tensor in zip(blob_keys, blob_tensors)
     }
-    common.load_safetensor = (
-        lambda spec, device: blobs[(spec["path"], spec["tensor_key"])].to(device).clone()
+    common.load_safetensor = lambda spec, device: (
+        blobs[(spec["path"], spec["tensor_key"])].to(device).clone()
     )
 
     @cache
@@ -113,6 +113,9 @@ def _init(task, overrides, workloads, blob_keys, solution_source, *blob_tensors)
     )
     kernels = importlib.util.find_spec("tirx_kernels")
     return {
+        # A server venv overlaid with local checkouts (evolution/preparation/dev_overlay.py) scores
+        # different code than the pins: every score reports which, None meaning the pins.
+        "dev_overlay": _dev_overlay(),
         "versions": {
             name: importlib.import_module(name).__version__
             for name in ("torch", "tvm", "flashinfer")
@@ -120,6 +123,18 @@ def _init(task, overrides, workloads, blob_keys, solution_source, *blob_tensors)
         },
         "tirx_kernels": kernels and kernels.origin,
     }
+
+
+def _dev_overlay():
+    """The worker venv's dev-overlay record (``tirx_harness_dev_overlay.json``), or None."""
+    import pathlib
+    import sysconfig
+
+    try:
+        path = pathlib.Path(sysconfig.get_path("purelib")) / "tirx_harness_dev_overlay.json"
+        return json.loads(path.read_text())
+    except (OSError, ValueError):
+        return None
 
 
 def _run():
