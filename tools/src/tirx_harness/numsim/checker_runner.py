@@ -704,6 +704,47 @@ def native_binding_incomplete_payload(
     return _attach_native_metadata_owned(payload, module, bindings)
 
 
+def unmodelled_summary(module: Any) -> dict[str, Any] | None:
+    """The executed ops a kernel uses that NumSim skips (e.g. WGMMA), grouped by op name."""
+    items = tuple(getattr(getattr(module, "spec", None), "unmodelled", ()) or ())
+    if not items:
+        return None
+    counts: dict[str, int] = {}
+    for item in items:
+        name = item.split(":", 1)[1] if ":" in item else item
+        counts[name] = counts.get(name, 0) + 1
+    return {"ops": dict(sorted(counts.items())), "sites": len(items)}
+
+
+def _apply_unmodelled(payload: dict[str, Any], module: Any) -> dict[str, Any]:
+    """Fail soft on unmodelled ops: keep every result, report the skipped ops, never claim clean.
+
+    The checker ran with those ops skipped, so its findings stand (a deadlock or barrier error
+    elsewhere is real), but anything that depends on them was not checked: for WGMMA, its
+    asynchronous SMEM operand reads (races against TMA writes / stage reuse) and its numerics. A
+    ``clean`` verdict therefore becomes ``review``, with an ``unmodelled_operations`` advisory.
+    """
+    summary = unmodelled_summary(module)
+    if summary is None:
+        return payload
+    names = ", ".join(f"{name} x{count}" for name, count in summary["ops"].items())
+    advisory = {
+        "kind": "unmodelled_operations",
+        "message": (
+            f"{summary['sites']} executed operation site(s) are not modelled and were skipped: "
+            f"{names}. Their effects (WGMMA: tensor-core results, asynchronous shared-memory "
+            "operand reads, wgmma-group ordering) are not checked; everything else was."
+        ),
+        "ops": summary["ops"],
+    }
+    payload.setdefault("advisories", []).append(advisory)
+    if payload.get("verdict") == "clean":
+        payload["verdict"] = "review"
+    if isinstance(payload.get("sync"), dict) and payload["sync"].get("verdict") == "clean":
+        payload["sync"]["verdict"] = "review"
+    return payload
+
+
 def _frontend_incomplete_payload(
     checker: NativeChecker,
     error: UnsupportedTIRxError,
@@ -872,7 +913,9 @@ def run_native_checker(
         return NativeCheckerRun(
             module=module,
             bindings=replace(bindings, prepared_bindings=None),
-            payload=_attach_native_metadata_owned(payload, module, bindings),
+            payload=_apply_unmodelled(
+                _attach_native_metadata_owned(payload, module, bindings), module
+            ),
         )
 
     coverage_bounds = coverage_bounds or default_coverage_bounds()
@@ -897,7 +940,9 @@ def run_native_checker(
     return NativeCheckerRun(
         module=module,
         bindings=replace(bindings, prepared_bindings=None),
-        payload=_attach_native_metadata_owned(payload, module, bindings),
+        payload=_apply_unmodelled(
+            _attach_native_metadata_owned(payload, module, bindings), module
+        ),
     )
 
 

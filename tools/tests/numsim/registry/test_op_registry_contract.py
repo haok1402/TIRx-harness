@@ -9,12 +9,20 @@ from tvm_tirx import ir
 _DEVICE_PREFIXES = ("tirx.cuda.", "tirx.ptx.")
 
 # Register-only forms with explicitly unsupported semantics: WGMMA.
-_INTENTIONAL_REGISTER_ONLY_PTX_REJECTIONS = {
+# Register-only PTX ops that are not modelled: every WGMMA op is tolerated as "unmodelled" (skipped,
+# reported by the checkers, refused by NumSim's numerics) rather than rejected.
+_INTENTIONAL_REGISTER_ONLY_PTX_REJECTIONS: set[str] = set()
+_INTENTIONAL_REGISTER_ONLY_PTX_UNMODELLED = {
     "tirx.ptx.wgmma_b1_rs",
     "tirx.ptx.wgmma_b1_ss",
     "tirx.ptx.wgmma_int_rs",
     "tirx.ptx.wgmma_int_ss",
 }
+WGMMA_UNMODELLED_REASON = (
+    "WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand "
+    "reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel "
+    "still run"
+)
 
 
 # Consumed outside call dispatch: TileDispatch expands tile ops before analysis
@@ -84,6 +92,8 @@ def test_register_only_ptx_rejections_are_explicit():
 
     rejected = {name for name in register_only if specs[name]["support"] == "rejected"}
     assert rejected == _INTENTIONAL_REGISTER_ONLY_PTX_REJECTIONS
+    unmodelled = {name for name in register_only if specs[name]["support"] == "unmodelled"}
+    assert unmodelled == _INTENTIONAL_REGISTER_ONLY_PTX_UNMODELLED
 
 
 def test_explicit_rejections_have_exact_public_reasons():
@@ -98,15 +108,20 @@ def test_explicit_rejections_have_exact_public_reasons():
     assert helper["family"] == "validated_cuda_helper"
     assert helper["support"] == "modeled"
     assert "opaque CUDA helper bodies are rejected" in helper["reason"]
-    wgmma_reason = "WGMMA is not supported by the SM100 NumSim target"
     authoritative_wgmma = {
         name
         for name in _authoritative_device_ops()
         if name.startswith(("tirx.cuda.wgmma_", "tirx.ptx.wgmma_"))
     }
-    assert {name for name, reason in rejected.items() if reason == wgmma_reason} == (
-        authoritative_wgmma
-    )
+    unmodelled = {
+        spec["ir_name"]: spec["reason"]
+        for spec in native_frontend.registry_ops()
+        if spec["support"] == "unmodelled"
+    }
+    # Every WGMMA op, and nothing else, is tolerated-but-unmodelled, with one public reason.
+    assert set(unmodelled) == authoritative_wgmma
+    assert set(unmodelled.values()) == {WGMMA_UNMODELLED_REASON}
+    assert not (set(rejected) & authoritative_wgmma)
 
     unreviewed_reason = "target-table PTX operation has no reviewed NumSim semantics"
     unreviewed = {name for name, reason in rejected.items() if reason == unreviewed_reason}

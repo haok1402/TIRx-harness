@@ -263,6 +263,7 @@ pub fn analyze_primfunc(ctx: &Ctx, func: &Function) -> AResult<KernelPlan> {
             json_strings(sorted_unique(semantic_requirements)),
         ),
         ("unsupported", json_strings(unsupported_items)),
+        ("unmodelled", json_strings(facts.unmodelled)),
     ]);
     let mut plan = KernelPlan {
         func: func.clone(),
@@ -313,6 +314,8 @@ struct KernelFacts {
     /// `op#<id>:<kind>` for every node kind the frontend does not support.
     unsupported_node_kinds: Vec<String>,
     semantic_unsupported: Vec<String>,
+    /// `op#<id>:<name>` for every call to an op NumSim tolerates but does not model (e.g. WGMMA).
+    unmodelled: Vec<String>,
     /// The unsupported memory or expression-binding analysis.
     analysis_failure: Option<(String, Vec<String>)>,
 }
@@ -350,6 +353,13 @@ impl KernelFacts {
         }
         self.source_entries
             .push(source_entry(node, &runtime_kind(node)?, op_id)?);
+        if let Some(name) = crate::decode::call_name(node)? {
+            if let Some(entry) = ctx.schema.registered_ops.get(&name) {
+                if entry.support == "unmodelled" {
+                    self.unmodelled.push(format!("op#{op_id}:{name}"));
+                }
+            }
+        }
         check_node(ctx, node, kind, op_id, &mut self.semantic_unsupported)
     }
 }

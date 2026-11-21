@@ -96,8 +96,8 @@ A listed operation may still reject modifier, dtype, shape, or layout values out
 | `tirx.cuda.warp_sync` | synchronization | modeled |  |
 | `tirx.cuda.warpgroup_id` | pure_scalar | modeled |  |
 | `tirx.cuda.warpgroup_sync` | synchronization | modeled |  |
-| `tirx.cuda.wgmma_encode_matrix_descriptor` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.cuda.wgmma_noop_barrier` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
+| `tirx.cuda.wgmma_encode_matrix_descriptor` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.cuda.wgmma_noop_barrier` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
 | `tirx.ptx.abs` | register_bit_manipulation | modeled | table register types and bit carriers share instruction-predicated reads/writeback; preserved predicate outputs retain Boolean truth; unspecified inactive outputs use a zero representative |
 | `tirx.ptx.abs_f` | register_unary | deterministic_representative | f32/f64/f16/bf16 and packed-half sign operations honor legal FTZ forms and instruction predicates; abs.f64 passes NaNs through unchanged; otherwise ISA-unspecified NaNs use a stable sign-only representative |
 | `tirx.ptx.abs_half` | register_unary | deterministic_representative | f32/f64/f16/bf16 and packed-half sign operations honor legal FTZ forms and instruction predicates; abs.f64 passes NaNs through unchanged; otherwise ISA-unspecified NaNs use a stable sign-only representative |
@@ -624,25 +624,25 @@ A listed operation may still reject modifier, dtype, shape, or layout values out
 | `tirx.ptx.testp` | register_comparison_selection | modeled | instruction predicates gate source evaluation and all destinations with one snapshotted mask; preserve_dst retains inactive data and Boolean truth for predicate outputs, otherwise inactive results use a zero representative |
 | `tirx.ptx.vote_sync` | warp_collective | modeled | instruction predicates gate operand reads, participation and all outputs with one snapshotted mask; preserve_dst retains inactive data and Boolean truth for predicate outputs, otherwise inactive results use a zero representative; membermask contracts and movmatrix full-warp participation remain enforced |
 | `tirx.ptx.vote_sync_ballot` | warp_collective | modeled | instruction predicates gate operand reads, participation and all outputs with one snapshotted mask; preserve_dst retains inactive data and Boolean truth for predicate outputs, otherwise inactive results use a zero representative; membermask contracts and movmatrix full-warp participation remain enforced |
-| `tirx.ptx.wgmma_b1_rs` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_b1_ss` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_bf16_rs` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_bf16_ss` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_commit_group` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_f16_f16acc_rs` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_f16_f16acc_ss` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_f16_rs` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_f16_ss` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_fence` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_fp8_f16acc_rs` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_fp8_f16acc_ss` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_fp8_rs` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_fp8_ss` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_int_rs` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_int_ss` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_tf32_rs` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_tf32_ss` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
-| `tirx.ptx.wgmma_wait_group` | architecture_rejection | rejected | WGMMA is not supported by the SM100 NumSim target |
+| `tirx.ptx.wgmma_b1_rs` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_b1_ss` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_bf16_rs` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_bf16_ss` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_commit_group` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_f16_f16acc_rs` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_f16_f16acc_ss` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_f16_rs` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_f16_ss` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_fence` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_fp8_f16acc_rs` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_fp8_f16acc_ss` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_fp8_rs` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_fp8_ss` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_int_rs` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_int_ss` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_tf32_rs` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_tf32_ss` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
+| `tirx.ptx.wgmma_wait_group` | wgmma_unmodelled | unmodelled | WGMMA is not modelled: the op is skipped (no tensor-core result, no asynchronous SMEM operand reads, no wgmma-group ordering); synchronization and memory checks of the rest of the kernel still run |
 | `tirx.ptx.xor` | register_bit_manipulation | modeled | table register types and bit carriers share instruction-predicated reads/writeback; preserved predicate outputs retain Boolean truth; unspecified inactive outputs use a zero representative |
 
 ## CUDA Tile Operations

@@ -119,6 +119,8 @@ class PrimFuncSpec:
     uses_dynamic_tmem_lifecycle: bool
     semantic_requirements: tuple[str, ...]
     unsupported: tuple[str, ...]
+    # Executed ops NumSim tolerates but does not model (e.g. WGMMA): `op#<id>:<name>`.
+    unmodelled: tuple[str, ...] = ()
 
     def to_manifest(self, *, include_source_spans: bool = True) -> dict[str, Any]:
         return {
@@ -136,6 +138,7 @@ class PrimFuncSpec:
             "uses_dynamic_tmem_lifecycle": self.uses_dynamic_tmem_lifecycle,
             "semantic_requirements": list(self.semantic_requirements),
             "unsupported": list(self.unsupported),
+            "unmodelled": list(self.unmodelled),
         }
 
 
@@ -156,6 +159,10 @@ class ModuleSpec:
     @property
     def unsupported(self) -> tuple[str, ...]:
         return tuple(item for kernel in self.kernels for item in kernel.unsupported)
+
+    @property
+    def unmodelled(self) -> tuple[str, ...]:
+        return tuple(item for kernel in self.kernels for item in kernel.unmodelled)
 
     @property
     def topology(self) -> LaunchTopology:
@@ -225,6 +232,7 @@ def _primfunc_spec_from_manifest(kernel: dict[str, Any]) -> PrimFuncSpec:
         uses_dynamic_tmem_lifecycle=kernel["uses_dynamic_tmem_lifecycle"],
         semantic_requirements=tuple(kernel["semantic_requirements"]),
         unsupported=tuple(kernel["unsupported"]),
+        unmodelled=tuple(kernel.get("unmodelled", ())),
         **_derived_manifest_fields(source_map),
     )
 
