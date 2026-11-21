@@ -1,0 +1,83 @@
+{
+  "name": "fa3_forward_h200",
+  "description": "bf16 attention forward (self-attention prefill, head_dim 128, causal and non-causal, varlen) in FlashInfer's ragged NHD layout on H200; FA3 baseline.",
+  "op_type": "flash_attention",
+  "tags": [
+    "stage:forward",
+    "dtype:bf16",
+    "status:synthetic",
+    "baseline:flashinfer-fa3",
+    "arch:sm_90a",
+    "layout:ragged_nhd"
+  ],
+  "axes": {
+    "seq_lens": {
+      "type": "var"
+    },
+    "total_tokens": {
+      "type": "var"
+    },
+    "num_heads": {
+      "type": "var"
+    },
+    "head_dim": {
+      "type": "const",
+      "value": 128
+    },
+    "causal": {
+      "type": "var"
+    }
+  },
+  "constraints": [
+    "Q.shape == K.shape == V.shape == [total_tokens, num_heads, 128]",
+    "cu_seqlens == [0, cumsum(seq_lens)]",
+    "sm_scale == 1/sqrt(128)"
+  ],
+  "inputs": {
+    "Q": {
+      "shape": [
+        "total_tokens",
+        "num_heads",
+        "head_dim"
+      ],
+      "dtype": "bfloat16"
+    },
+    "K": {
+      "shape": [
+        "total_tokens",
+        "num_heads",
+        "head_dim"
+      ],
+      "dtype": "bfloat16"
+    },
+    "V": {
+      "shape": [
+        "total_tokens",
+        "num_heads",
+        "head_dim"
+      ],
+      "dtype": "bfloat16"
+    },
+    "cu_seqlens": {
+      "shape": [
+        "len(seq_lens) + 1"
+      ],
+      "dtype": "int32"
+    },
+    "causal": {
+      "shape": null,
+      "dtype": "bool"
+    }
+  },
+  "outputs": {
+    "O": {
+      "shape": [
+        "total_tokens",
+        "num_heads",
+        "head_dim"
+      ],
+      "dtype": "bfloat16"
+    }
+  },
+  "reference": "#!/usr/bin/env python3\n\"\"\"FA3 baseline (FlashInfer ``backend=\"fa3\"``, batch ragged prefill) for the H200 attention task.\n\n``prepare`` allocates the workspace and plans outside timing. The timed call is ``wrapper.run``.\n\"\"\"\n\nfrom __future__ import annotations\n\nimport torch\n\nHEAD_DIM = 128\n\n\n@torch.no_grad()\ndef prepare(q, k, v, cu_seqlens, causal):\n    import flashinfer\n\n    workspace = torch.empty(512 << 20, dtype=torch.uint8, device=q.device)\n    wrapper = flashinfer.BatchPrefillWithRaggedKVCacheWrapper(workspace, \"NHD\", backend=\"fa3\")\n    heads = q.shape[1]\n    wrapper.plan(\n        cu_seqlens,\n        cu_seqlens,\n        heads,\n        heads,\n        HEAD_DIM,\n        causal=bool(causal),\n        q_data_type=torch.bfloat16,\n    )\n    return wrapper, q, k, v, workspace\n\n\n@torch.no_grad()\ndef run_prepared(wrapper, q, k, v, workspace):\n    return wrapper.run(q, k, v)\n\n\n@torch.no_grad()\ndef run(q, k, v, cu_seqlens, causal):\n    \"\"\"Run the complete public task contract.\"\"\"\n\n    return run_prepared(*prepare(q, k, v, cu_seqlens, causal))\n"
+}

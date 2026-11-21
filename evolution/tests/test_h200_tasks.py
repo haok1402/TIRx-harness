@@ -16,7 +16,34 @@ H200_TASKS = {
     "rmsnorm_h200": "rmsnorm_h200",
     "fp16_gemm_h200": "fp16_gemm_floor",
     "fp8_blockscale_gemm_h200": "fp8_blockscale_gemm_h200",
+    "fa3_forward_h200": "fa3_forward_h200",
 }
+
+
+def test_fa3_workloads_cover_gate_shapes_and_varlen():
+    from evolution.benchmark.flashinfer_bench_evolve.tasks.fa3_forward_h200 import benchmark as fa3
+
+    rows = fa3.make_workloads(fa3.default_config())
+    assert len(rows) == 12
+    shapes = {
+        (len(r["axes"]["seq_lens"]), r["axes"]["num_heads"], max(r["axes"]["seq_lens"]))
+        for r in rows
+    }
+    assert {(4, 16, 4096), (2, 16, 8192), (1, 16, 16384), (8, 16, 4096), (4, 32, 8192)} <= shapes
+    assert any(len(set(r["axes"]["seq_lens"])) > 1 for r in rows)  # a varlen batch
+    assert {r["axes"]["causal"] for r in rows} == {True, False}
+    for r in rows:
+        assert r["axes"]["total_tokens"] == sum(r["axes"]["seq_lens"])
+
+
+def test_fa3_inputs_are_ragged_nhd():
+    torch = pytest.importorskip("torch")
+    from evolution.benchmark.flashinfer_bench_evolve.tasks.fa3_forward_h200 import benchmark as fa3
+
+    entry = {"id": "t", "axes": {"seq_lens": [3, 5], "num_heads": 2, "causal": True}}
+    q, k, v, cu, causal = fa3.make_inputs(entry, torch.device("cpu"))
+    assert q.shape == k.shape == v.shape == (8, 2, 128) and q.dtype == torch.bfloat16
+    assert cu.tolist() == [0, 3, 8] and cu.dtype == torch.int32 and causal is True
 
 
 def test_fp8_spec_states_untimed_scale_layout():
