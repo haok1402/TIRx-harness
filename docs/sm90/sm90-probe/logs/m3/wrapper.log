@@ -1,0 +1,1931 @@
+[slurm_kcoral 2026-11-21 14:27:31] starting kcoral server on job 3280666 (proxy port 39229, loopback port 51955), step kcoral-656b88f872b0
+warning: CUDA_VISIBLE_DEVICES is set but does not restrict this server; workers are pinned by --gpus (physical GPU ids). Unset it to avoid confusion.
+INFO:     Started server process [3011799]
+INFO:     Waiting for application startup.
+2026-11-21T14:27:32.386Z INFO    server_started
+2026-11-21T14:27:41.425Z INFO    worker_ready worker_id=gpu0/w0 gpu_id=0 generation=1 pid=3011859 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:27:47.421Z INFO    worker_ready worker_id=gpu0/w1 gpu_id=0 generation=1 pid=3012109 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:27:53.238Z INFO    worker_ready worker_id=gpu0/w2 gpu_id=0 generation=1 pid=3012359 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:27:58.992Z INFO    worker_ready worker_id=gpu0/w3 gpu_id=0 generation=1 pid=3012607 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:28:04.710Z INFO    worker_ready worker_id=gpu0/w4 gpu_id=0 generation=1 pid=3012766 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:28:10.692Z INFO    worker_ready worker_id=gpu0/w5 gpu_id=0 generation=1 pid=3012963 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:28:16.663Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=1 pid=3013175 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:28:22.541Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=1 pid=3013446 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:28:22.541Z INFO    pool_ready sandbox=none mode=gpu target={'arch': 'sm_90a'} workers=8
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:51955 (Press CTRL+C to quit)
+INFO:     127.0.0.1:56180 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56180 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38694 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T14:28:40.363Z INFO    request_received request_id=6e038ee4-d9c6-4689-95d0-ea82669968d3 client=127.0.0.1
+2026-11-21T14:28:40.365Z INFO    request_accepted request_id=6e038ee4-d9c6-4689-95d0-ea82669968d3 request_bytes=655 timeout_seconds=120.0 instructions=4
+2026-11-21T14:28:40.365Z INFO    request_routed request_id=6e038ee4-d9c6-4689-95d0-ea82669968d3 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=1 pid=3013446 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_ceil"
+ - leaked function ""
+ - leaked function "param_types"
+ - leaked function "run"
+ - leaked function "__init__"
+ - leaked function "create_split"
+ - leaked function "matmul"
+ - leaked function "create_icmpULT"
+ - leaked function "create_fcmpONE"
+ - leaked function "get_int_attr"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:28:41.031Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=1 pid=3013446 reason=request_limit
+2026-11-21T14:28:41.032Z INFO    request_finished request_id=6e038ee4-d9c6-4689-95d0-ea82669968d3 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=665.5 lease_wait_ms=0.0 lease_held_ms=663.7 response_bytes=488
+INFO:     127.0.0.1:38694 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:28:47.445Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=2 pid=3014649 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:32846 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T14:32:53.899Z INFO    request_received request_id=33496427-ec6b-46ff-b0d9-e7c32d693824 client=127.0.0.1
+2026-11-21T14:32:53.901Z INFO    request_accepted request_id=33496427-ec6b-46ff-b0d9-e7c32d693824 request_bytes=655 timeout_seconds=120.0 instructions=4
+2026-11-21T14:32:53.901Z INFO    request_routed request_id=33496427-ec6b-46ff-b0d9-e7c32d693824 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=2 pid=3014649 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_async_tdm_scatter"
+ - leaked function "create_local_dealloc"
+ - leaked function "get_coalesced_layout"
+ - leaked function ""
+ - leaked function "add_fn_attr"
+ - leaked function "__repr__"
+ - leaked function "size"
+ - leaked function "create_memdesc_reshape"
+ - leaked function "create_map_elementwise_ret"
+ - leaked function "get_flat_symbol_ref_attr"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:32:54.237Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=2 pid=3014649 reason=request_limit
+2026-11-21T14:32:54.237Z INFO    request_finished request_id=33496427-ec6b-46ff-b0d9-e7c32d693824 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=335.5 lease_wait_ms=0.0 lease_held_ms=334.2 response_bytes=490
+INFO:     127.0.0.1:32846 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:33:00.697Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=3 pid=3018706 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:43664 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T14:37:42.468Z INFO    request_received request_id=c20b3f85-f01a-4bb5-8a21-73122fc616c0 client=127.0.0.1
+2026-11-21T14:37:42.470Z INFO    request_accepted request_id=c20b3f85-f01a-4bb5-8a21-73122fc616c0 request_bytes=655 timeout_seconds=120.0 instructions=4
+2026-11-21T14:37:42.470Z INFO    request_routed request_id=c20b3f85-f01a-4bb5-8a21-73122fc616c0 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=3 pid=3018706 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_local_load"
+ - leaked function "create_ashr"
+ - leaked function "__init__"
+ - leaked function "create_async_tdm_copy_global_to_local"
+ - leaked function "get_double_ty"
+ - leaked function "get_swizzled_shared_layout"
+ - leaked function "create_icmpULT"
+ - leaked function "get_void_ty"
+ - leaked function "create_tmem_store"
+ - leaked function "get_after"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:37:43.022Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=3 pid=3018706 reason=request_limit
+2026-11-21T14:37:43.022Z INFO    request_finished request_id=c20b3f85-f01a-4bb5-8a21-73122fc616c0 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=551.9 lease_wait_ms=0.0 lease_held_ms=550.2 response_bytes=489
+INFO:     127.0.0.1:43664 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:37:49.453Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=4 pid=3022807 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:55986 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33482 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33398 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47658 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54924 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37902 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52006 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53308 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41974 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59328 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41968 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T14:50:58.246Z INFO    request_received request_id=63275512-e57b-4306-badf-7b0f83993ec5 client=127.0.0.1
+2026-11-21T14:50:58.248Z INFO    request_finished request_id=63275512-e57b-4306-badf-7b0f83993ec5 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:38734 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:50:58.251Z INFO    request_received request_id=d6ec5366-6013-4f08-9cd7-3c1a82cf555d client=127.0.0.1
+2026-11-21T14:50:58.253Z INFO    request_accepted request_id=d6ec5366-6013-4f08-9cd7-3c1a82cf555d request_bytes=22414 timeout_seconds=1500.0 instructions=5 blob_bytes=20480
+2026-11-21T14:50:58.253Z INFO    request_routed request_id=d6ec5366-6013-4f08-9cd7-3c1a82cf555d worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=4 pid=3022807 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_amd_cluster_arrive"
+ - leaked function "create_clampf"
+ - leaked function "create_fp_to_si"
+ - leaked function "create_fcmpOGE"
+ - leaked function "push_back"
+ - leaked function "create_fdiv"
+ - leaked function "__ne__"
+ - leaked function "__mul__"
+ - leaked function "get_void_ty"
+ - leaked function "set_insertion_point_after"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+INFO:     127.0.0.1:38738 - "GET /health HTTP/1.1" 200 OK
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:50:59.076Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=4 pid=3022807 reason=request_limit
+2026-11-21T14:50:59.076Z INFO    request_finished request_id=d6ec5366-6013-4f08-9cd7-3c1a82cf555d http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=822.3 lease_wait_ms=0.0 lease_held_ms=820.9 response_bytes=468
+INFO:     127.0.0.1:38734 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:51:06.514Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=5 pid=3037369 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:51:09.182Z INFO    request_received request_id=f5a19894-0584-46e0-b1c6-c91846174f57 client=127.0.0.1
+2026-11-21T14:51:09.183Z INFO    request_accepted request_id=f5a19894-0584-46e0-b1c6-c91846174f57 request_bytes=1594 timeout_seconds=3600.0 instructions=4
+2026-11-21T14:51:09.184Z INFO    request_routed request_id=f5a19894-0584-46e0-b1c6-c91846174f57 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=5 pid=3037369 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_else_block"
+ - leaked function "get_uint8"
+ - leaked function "create_buffer_load"
+ - leaked function "create_async_commit_group"
+ - leaked function "push_back"
+ - leaked function "__repr__"
+ - leaked function "get_fp16"
+ - leaked function "get_uint16"
+ - leaked function "create_maxnumf"
+ - leaked function "add_flag"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:51:09.737Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=5 pid=3037369 reason=request_limit
+2026-11-21T14:51:09.738Z INFO    request_finished request_id=f5a19894-0584-46e0-b1c6-c91846174f57 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=552.9 lease_wait_ms=0.0 lease_held_ms=551.6 response_bytes=711
+INFO:     127.0.0.1:48596 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:51:14.981Z INFO    request_received request_id=9dcef215-824e-46d9-8f1c-131fad68bfb7 client=127.0.0.1
+2026-11-21T14:51:14.984Z INFO    request_accepted request_id=9dcef215-824e-46d9-8f1c-131fad68bfb7 request_bytes=1710 timeout_seconds=3600.0 instructions=4
+2026-11-21T14:51:14.984Z INFO    request_routed request_id=9dcef215-824e-46d9-8f1c-131fad68bfb7 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=1 pid=3013175 queue_ms=0.0
+INFO:     127.0.0.1:42960 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_fma"
+ - leaked function "create_icmpNE"
+ - leaked function "get_default_region"
+ - leaked function "create_sin"
+ - leaked function "create_approx_divf"
+ - leaked function "create_floor"
+ - leaked function "create_clc_get_program_id"
+ - leaked function "__init__"
+ - leaked function "add_fn_attr"
+ - leaked function "create_async_tdm_scatter"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:51:25.480Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=1 pid=3013175 reason=request_limit
+2026-11-21T14:51:25.481Z INFO    request_finished request_id=9dcef215-824e-46d9-8f1c-131fad68bfb7 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=10495.9 lease_wait_ms=0.0 lease_held_ms=10494.2 response_bytes=604
+INFO:     127.0.0.1:42946 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:51:25.664Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=6 pid=3037687 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:51:32.166Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=2 pid=3038109 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:51:32.289Z INFO    request_received request_id=39f989e6-1cba-4f43-a8ff-d9d339b6cb7e client=127.0.0.1
+2026-11-21T14:51:32.290Z INFO    request_accepted request_id=39f989e6-1cba-4f43-a8ff-d9d339b6cb7e request_bytes=1743 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T14:51:32.290Z INFO    request_routed request_id=39f989e6-1cba-4f43-a8ff-d9d339b6cb7e worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=2 pid=3038109 queue_ms=0.0
+INFO:     127.0.0.1:60644 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42392 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_fp64"
+ - leaked function "get_block"
+ - leaked function "set_loc"
+ - leaked function "create_icmpULT"
+ - leaked function "get_total_elems_per_thread"
+ - leaked function "create_split"
+ - leaked function "__new__"
+ - leaked function "create_cat"
+ - leaked function "get_cache_policy"
+ - leaked function "create_get_num_programs"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:52:04.172Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=2 pid=3038109 reason=request_limit
+2026-11-21T14:52:04.173Z INFO    request_finished request_id=39f989e6-1cba-4f43-a8ff-d9d339b6cb7e http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=31881.7 lease_wait_ms=0.0 lease_held_ms=31880.6 response_bytes=3877
+INFO:     127.0.0.1:39528 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:52:10.879Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=3 pid=3039504 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:39492 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T14:52:29.995Z INFO    request_received request_id=a9c08256-47d4-42a9-adae-ffa94dff5271 client=127.0.0.1
+2026-11-21T14:52:29.996Z INFO    request_accepted request_id=a9c08256-47d4-42a9-adae-ffa94dff5271 request_bytes=1888 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T14:52:29.997Z INFO    request_routed request_id=a9c08256-47d4-42a9-adae-ffa94dff5271 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=3 pid=3039504 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_warp_pipeline_border"
+ - leaked function "get_gluon_layout_from_memdesc"
+ - leaked function "create_fcmpUGE"
+ - leaked function "__str__"
+ - leaked function "args"
+ - leaked function "get_type"
+ - leaked function "get_in_dim_names"
+ - leaked function "create_scan_ret"
+ - leaked function ""
+ - leaked function "create_fence_async_shared"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:52:35.579Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=3 pid=3039504 reason=request_limit
+2026-11-21T14:52:35.580Z INFO    request_finished request_id=a9c08256-47d4-42a9-adae-ffa94dff5271 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=5582.3 lease_wait_ms=0.0 lease_held_ms=5580.9 response_bytes=9669
+INFO:     127.0.0.1:46642 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:52:39.130Z INFO    request_received request_id=2bd135c1-1c6d-4d56-9366-23b5ac1d92b7 client=127.0.0.1
+2026-11-21T14:52:39.132Z INFO    request_accepted request_id=2bd135c1-1c6d-4d56-9366-23b5ac1d92b7 request_bytes=1922 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T14:52:39.132Z INFO    request_routed request_id=2bd135c1-1c6d-4d56-9366-23b5ac1d92b7 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=6 pid=3037687 queue_ms=0.0
+INFO:     127.0.0.1:52386 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_swizzled_shared_layout"
+ - leaked function "__repr__"
+ - leaked function "create_warp_return"
+ - leaked function "id"
+ - leaked function ""
+ - leaked function "create_srem"
+ - leaked function "create_addptr"
+ - leaked function "create_make_range"
+ - leaked function "get_tensor_memory_layout"
+ - leaked function "create_extern_elementwise"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:52:44.656Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=6 pid=3037687 reason=request_limit
+2026-11-21T14:52:44.657Z INFO    request_finished request_id=2bd135c1-1c6d-4d56-9366-23b5ac1d92b7 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=5524.2 lease_wait_ms=0.0 lease_held_ms=5522.8 response_bytes=6581
+INFO:     127.0.0.1:46642 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:52:44.907Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=4 pid=3039597 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T14:52:50.738Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=7 pid=3039649 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:38584 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35106 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44930 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54448 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T14:54:00.929Z INFO    request_received request_id=68483751-bfb5-4917-ac3d-57440953bcce client=127.0.0.1
+2026-11-21T14:54:00.931Z INFO    request_finished request_id=68483751-bfb5-4917-ac3d-57440953bcce http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:54448 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:54:00.935Z INFO    request_received request_id=230210c6-8bbf-494f-bda7-73c75c468c07 client=127.0.0.1
+2026-11-21T14:54:00.937Z INFO    request_accepted request_id=230210c6-8bbf-494f-bda7-73c75c468c07 request_bytes=22413 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T14:54:00.937Z INFO    request_routed request_id=230210c6-8bbf-494f-bda7-73c75c468c07 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=7 pid=3039649 queue_ms=0.0
+INFO:     127.0.0.1:52602 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function ""
+ - leaked function "create_int_cast"
+ - leaked function ""
+ - leaked function "get_result"
+ - leaked function "__iter__"
+ - leaked function "create_tcgen05_mma_scaled"
+ - leaked function "create_fcmpUNE"
+ - leaked function "get_int64_ty"
+ - leaked function "create_expand_dims"
+ - leaked function "create_clc_is_canceled"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:54:30.522Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=7 pid=3039649 reason=request_limit
+2026-11-21T14:54:30.523Z INFO    request_finished request_id=230210c6-8bbf-494f-bda7-73c75c468c07 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=29585.6 lease_wait_ms=0.0 lease_held_ms=29584.2 response_bytes=2529
+INFO:     127.0.0.1:54448 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:54:36.875Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=8 pid=3041011 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:57498 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T14:54:55.515Z INFO    request_received request_id=049769b0-0258-4cac-99d7-a301aac55ed3 client=127.0.0.1
+2026-11-21T14:54:55.516Z INFO    request_finished request_id=049769b0-0258-4cac-99d7-a301aac55ed3 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:34900 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:54:55.520Z INFO    request_received request_id=be7cebb1-e8e9-4763-ab9c-82b98fd1ad00 client=127.0.0.1
+2026-11-21T14:54:55.521Z INFO    request_accepted request_id=be7cebb1-e8e9-4763-ab9c-82b98fd1ad00 request_bytes=22403 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T14:54:55.522Z INFO    request_routed request_id=be7cebb1-e8e9-4763-ab9c-82b98fd1ad00 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=8 pid=3041011 queue_ms=0.0
+INFO:     127.0.0.1:34912 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_default_region"
+ - leaked function "create_clampf"
+ - leaked function "__init__"
+ - leaked function "__str__"
+ - leaked function "arg"
+ - leaked function "create_icmpUGT"
+ - leaked function "get_function_ty"
+ - leaked function "printStackTraceOnDiagnostic"
+ - leaked function "__new__"
+ - leaked function "get_tensor_descriptor_layout_type"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:55:03.025Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=8 pid=3041011 reason=request_limit
+2026-11-21T14:55:03.026Z INFO    request_finished request_id=be7cebb1-e8e9-4763-ab9c-82b98fd1ad00 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=7503.2 lease_wait_ms=0.0 lease_held_ms=7501.8 response_bytes=828
+INFO:     127.0.0.1:34900 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:55:09.253Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=9 pid=3041481 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:54924 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55534 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56704 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60114 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33366 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55770 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39920 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T14:57:22.648Z INFO    request_received request_id=53b7c36c-1c59-4542-ab16-4e9800a7a61c client=127.0.0.1
+2026-11-21T14:57:22.649Z INFO    request_finished request_id=53b7c36c-1c59-4542-ab16-4e9800a7a61c http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:39920 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:57:22.653Z INFO    request_received request_id=f37643be-07aa-494c-aaf1-1e460062a2cd client=127.0.0.1
+2026-11-21T14:57:22.654Z INFO    request_accepted request_id=f37643be-07aa-494c-aaf1-1e460062a2cd request_bytes=32653 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T14:57:22.655Z INFO    request_routed request_id=f37643be-07aa-494c-aaf1-1e460062a2cd worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=9 pid=3041481 queue_ms=0.0
+INFO:     127.0.0.1:37178 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_int8_ty"
+ - leaked function "create_maxui"
+ - leaked function "get_else_yield"
+ - leaked function "create_block"
+ - leaked function "get_partitioned_shared_layout"
+ - leaked function "get_uint32"
+ - leaked function "get_distributed_view"
+ - leaked function ""
+ - leaked function "strided_1d"
+ - leaked function "create_async_commit_group"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:57:58.525Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=9 pid=3041481 reason=request_limit
+2026-11-21T14:57:58.526Z INFO    request_finished request_id=f37643be-07aa-494c-aaf1-1e460062a2cd http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=35870.6 lease_wait_ms=0.0 lease_held_ms=35869.2 response_bytes=2733
+INFO:     127.0.0.1:39920 - "POST /execute HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39920 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T14:58:04.796Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=10 pid=3042674 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:53208 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T14:58:33.876Z INFO    request_received request_id=221e315f-82a5-45fd-8722-7f5db3ab8b83 client=127.0.0.1
+2026-11-21T14:58:33.878Z INFO    request_finished request_id=221e315f-82a5-45fd-8722-7f5db3ab8b83 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:53130 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:58:33.881Z INFO    request_received request_id=6d1a5ae6-3ff4-4a7e-8a29-d073a9d614c5 client=127.0.0.1
+2026-11-21T14:58:33.883Z INFO    request_accepted request_id=6d1a5ae6-3ff4-4a7e-8a29-d073a9d614c5 request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T14:58:33.883Z INFO    request_routed request_id=6d1a5ae6-3ff4-4a7e-8a29-d073a9d614c5 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=10 pid=3042674 queue_ms=0.0
+INFO:     127.0.0.1:50800 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34182 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48452 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_memdesc_subslice"
+ - leaked function "get_gluon_layout_from_memdesc"
+ - leaked function "__init__"
+ - leaked function "create_minui"
+ - leaked function "create_fadd"
+ - leaked function "get_uint16"
+ - leaked function "add_fn_attr"
+ - leaked function "get_flat_symbol_ref_attr"
+ - leaked function "create_sub"
+ - leaked function "get_unit_attr"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T14:59:28.856Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=10 pid=3042674 reason=request_limit
+2026-11-21T14:59:28.857Z INFO    request_finished request_id=6d1a5ae6-3ff4-4a7e-8a29-d073a9d614c5 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=54973.3 lease_wait_ms=0.0 lease_held_ms=54972.1 response_bytes=6333
+INFO:     127.0.0.1:53130 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T14:59:35.060Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=11 pid=3043291 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:41444 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41632 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T15:00:17.768Z INFO    request_received request_id=2a03dea4-d779-4efd-92f5-6dd0f0e70349 client=127.0.0.1
+2026-11-21T15:00:17.770Z INFO    request_finished request_id=2a03dea4-d779-4efd-92f5-6dd0f0e70349 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:45366 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:00:17.773Z INFO    request_received request_id=eba3f329-eb11-47bb-a437-add16d295880 client=127.0.0.1
+2026-11-21T15:00:17.775Z INFO    request_accepted request_id=eba3f329-eb11-47bb-a437-add16d295880 request_bytes=22423 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:00:17.775Z INFO    request_routed request_id=eba3f329-eb11-47bb-a437-add16d295880 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=11 pid=3043291 queue_ms=0.0
+INFO:     127.0.0.1:45376 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52266 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_default_region"
+ - leaked function "__init__"
+ - leaked function "is_declaration"
+ - leaked function "create_umulhi"
+ - leaked function "printOpOnDiagnostic"
+ - leaked function "create_local_scatter"
+ - leaked function "get_int64_ty"
+ - leaked function "has_return"
+ - leaked function "get_int128_ty"
+ - leaked function "create_cluster_barrier"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:00:46.451Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=11 pid=3043291 reason=request_limit
+2026-11-21T15:00:46.452Z INFO    request_finished request_id=eba3f329-eb11-47bb-a437-add16d295880 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=28676.0 lease_wait_ms=0.0 lease_held_ms=28674.8 response_bytes=3867
+INFO:     127.0.0.1:45366 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:00:52.567Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=12 pid=3043720 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:43170 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T15:01:13.089Z INFO    request_received request_id=7aa54b2f-77ce-425f-87f3-0610807a61ec client=127.0.0.1
+2026-11-21T15:01:13.090Z INFO    request_finished request_id=7aa54b2f-77ce-425f-87f3-0610807a61ec http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:42496 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:01:13.094Z INFO    request_received request_id=0e0e1ee9-893a-48ba-9ee7-6531c8ae708d client=127.0.0.1
+2026-11-21T15:01:13.095Z INFO    request_accepted request_id=0e0e1ee9-893a-48ba-9ee7-6531c8ae708d request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T15:01:13.095Z INFO    request_routed request_id=0e0e1ee9-893a-48ba-9ee7-6531c8ae708d worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=12 pid=3043720 queue_ms=0.0
+INFO:     127.0.0.1:60208 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45620 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "__str__"
+ - leaked function "create_experimental_fpsan_unembed"
+ - leaked function "get_result"
+ - leaked function "get_uint8"
+ - leaked function "create_exp"
+ - leaked function "__str__"
+ - leaked function "get_shape_from_tensor"
+ - leaked function "create_lshr"
+ - leaked function "create_location_snapshot"
+ - leaked function "create_fp_trunc"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:01:50.098Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=12 pid=3043720 reason=request_limit
+2026-11-21T15:01:50.098Z INFO    request_finished request_id=0e0e1ee9-893a-48ba-9ee7-6531c8ae708d http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=37002.2 lease_wait_ms=0.0 lease_held_ms=37001.0 response_bytes=2868
+INFO:     127.0.0.1:42496 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:01:56.332Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=13 pid=3044175 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:60630 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T15:02:06.140Z INFO    request_received request_id=f1ba2b55-c6f8-409e-9039-23dde8888398 client=127.0.0.1
+2026-11-21T15:02:06.143Z INFO    request_finished request_id=f1ba2b55-c6f8-409e-9039-23dde8888398 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:52924 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:02:06.146Z INFO    request_received request_id=94b8e0d0-99f9-4afb-ae26-2d4104963fab client=127.0.0.1
+2026-11-21T15:02:06.149Z INFO    request_accepted request_id=94b8e0d0-99f9-4afb-ae26-2d4104963fab request_bytes=87055 timeout_seconds=120.0 instructions=7 blob_bytes=12145
+2026-11-21T15:02:06.149Z INFO    request_routed request_id=94b8e0d0-99f9-4afb-ae26-2d4104963fab worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=13 pid=3044175 queue_ms=0.0
+INFO:     127.0.0.1:58626 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_int16_ty"
+ - leaked function "__iter__"
+ - leaked function "__new__"
+ - leaked function "matmul"
+ - leaked function "__repr__"
+ - leaked function "add_fn_attr"
+ - leaked function "create_module"
+ - leaked function "get_flat_symbol_ref_attr"
+ - leaked function "create_icmpULT"
+ - leaked function "create_clc_get_program_id"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:02:24.129Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=13 pid=3044175 reason=request_limit
+2026-11-21T15:02:24.130Z INFO    request_finished request_id=94b8e0d0-99f9-4afb-ae26-2d4104963fab http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=17980.0 lease_wait_ms=0.0 lease_held_ms=17978.3 response_bytes=29770
+INFO:     127.0.0.1:52924 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:02:30.136Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=14 pid=3044508 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:60786 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44812 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46354 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34122 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T15:03:49.279Z INFO    request_received request_id=e4ea58eb-aaa8-4763-80fa-e5d0bc4f0593 client=127.0.0.1
+2026-11-21T15:03:49.280Z INFO    request_finished request_id=e4ea58eb-aaa8-4763-80fa-e5d0bc4f0593 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:37486 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:03:49.284Z INFO    request_received request_id=778ef77e-e074-4f6b-842b-1be593a67fe2 client=127.0.0.1
+2026-11-21T15:03:49.285Z INFO    request_accepted request_id=778ef77e-e074-4f6b-842b-1be593a67fe2 request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T15:03:49.285Z INFO    request_routed request_id=778ef77e-e074-4f6b-842b-1be593a67fe2 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=14 pid=3044508 queue_ms=0.0
+INFO:     127.0.0.1:56826 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48696 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_reshape"
+ - leaked function "erase"
+ - leaked function "get_body"
+ - leaked function "__ne__"
+ - leaked function "get_region"
+ - leaked function ""
+ - leaked function ""
+ - leaked function "__mul__"
+ - leaked function "create_fadd"
+ - leaked function "create_async_tdm_copy_global_to_local"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:04:23.232Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=14 pid=3044508 reason=request_limit
+2026-11-21T15:04:23.233Z INFO    request_finished request_id=778ef77e-e074-4f6b-842b-1be593a67fe2 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=33946.9 lease_wait_ms=0.0 lease_held_ms=33945.7 response_bytes=3366
+INFO:     127.0.0.1:37486 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:04:29.473Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=15 pid=3045459 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:39014 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47938 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T15:05:11.059Z INFO    request_received request_id=6579ce74-b534-4930-8ded-239976e899ae client=127.0.0.1
+2026-11-21T15:05:11.060Z INFO    request_finished request_id=6579ce74-b534-4930-8ded-239976e899ae http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:57140 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:05:11.064Z INFO    request_received request_id=59a3d30f-abc9-4486-aec0-5473be4d737b client=127.0.0.1
+2026-11-21T15:05:11.065Z INFO    request_accepted request_id=59a3d30f-abc9-4486-aec0-5473be4d737b request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T15:05:11.065Z INFO    request_routed request_id=59a3d30f-abc9-4486-aec0-5473be4d737b worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=15 pid=3045459 queue_ms=0.0
+INFO:     127.0.0.1:36628 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_async_tdm_fused_copy_global_to_local"
+ - leaked function "create_warp_return"
+ - leaked function "empty"
+ - leaked function "create_maximumf"
+ - leaked function "get_int64"
+ - leaked function "id"
+ - leaked function "create_log"
+ - leaked function "get_int16_ty"
+ - leaked function "get_functions"
+ - leaked function ""
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:05:38.936Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=15 pid=3045459 reason=request_limit
+2026-11-21T15:05:38.936Z INFO    request_finished request_id=59a3d30f-abc9-4486-aec0-5473be4d737b http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=27870.0 lease_wait_ms=0.0 lease_held_ms=27868.8 response_bytes=1785
+INFO:     127.0.0.1:57140 - "POST /execute HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57140 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T15:05:45.283Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=16 pid=3046482 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T15:05:52.863Z INFO    request_received request_id=7c27e887-9475-4d59-9471-8d22a8feed94 client=127.0.0.1
+2026-11-21T15:05:52.865Z INFO    request_finished request_id=7c27e887-9475-4d59-9471-8d22a8feed94 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:38050 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:05:52.870Z INFO    request_received request_id=945be21b-e314-4774-b811-39e0bb255ce6 client=127.0.0.1
+2026-11-21T15:05:52.872Z INFO    request_accepted request_id=945be21b-e314-4774-b811-39e0bb255ce6 request_bytes=81830 timeout_seconds=120.0 instructions=7 blob_bytes=6920
+2026-11-21T15:05:52.872Z INFO    request_routed request_id=945be21b-e314-4774-b811-39e0bb255ce6 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=16 pid=3046482 queue_ms=0.0
+INFO:     127.0.0.1:47466 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "__init__"
+ - leaked function "create_async_commit_group"
+ - leaked function "remove_fn_attr"
+ - leaked function "create_local_gather"
+ - leaked function "get_argument"
+ - leaked function "create_fcmpOLE"
+ - leaked function "is_convert_layout_trivial"
+ - leaked function "get_name"
+ - leaked function "create_exp2"
+ - leaked function "get_distributed_view"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:06:05.035Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=16 pid=3046482 reason=request_limit
+2026-11-21T15:06:05.036Z INFO    request_finished request_id=945be21b-e314-4774-b811-39e0bb255ce6 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=12163.2 lease_wait_ms=0.0 lease_held_ms=12161.8 response_bytes=29694
+INFO:     127.0.0.1:38050 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:06:11.329Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=17 pid=3047118 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:39044 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T15:06:25.497Z INFO    request_received request_id=e50e9e1a-44e6-425f-8775-299393e2d840 client=127.0.0.1
+2026-11-21T15:06:25.499Z INFO    request_finished request_id=e50e9e1a-44e6-425f-8775-299393e2d840 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:39044 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:06:25.503Z INFO    request_received request_id=47a0838e-49ab-4b0e-a0e1-7011cfec80c6 client=127.0.0.1
+2026-11-21T15:06:25.505Z INFO    request_accepted request_id=47a0838e-49ab-4b0e-a0e1-7011cfec80c6 request_bytes=86132 timeout_seconds=120.0 instructions=7 blob_bytes=11222
+2026-11-21T15:06:25.505Z INFO    request_routed request_id=47a0838e-49ab-4b0e-a0e1-7011cfec80c6 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=17 pid=3047118 queue_ms=0.0
+INFO:     127.0.0.1:42646 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_loc"
+ - leaked function "get_bool_attr"
+ - leaked function "get_else_yield"
+ - leaked function "create_make_tensor_descriptor"
+ - leaked function "get_fp64"
+ - leaked function "get_region"
+ - leaked function "create_tmem_alloc"
+ - leaked function "create_tcgen05_mma"
+ - leaked function "empty"
+ - leaked function "create_xor"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:06:41.975Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=17 pid=3047118 reason=request_limit
+2026-11-21T15:06:41.975Z INFO    request_finished request_id=47a0838e-49ab-4b0e-a0e1-7011cfec80c6 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=16469.2 lease_wait_ms=0.0 lease_held_ms=16467.6 response_bytes=29676
+INFO:     127.0.0.1:39044 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:06:48.074Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=18 pid=3047437 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+2026-11-21T15:06:57.771Z INFO    request_received request_id=a498beff-6bc1-465f-b38b-36ac6ed517ce client=127.0.0.1
+2026-11-21T15:06:57.773Z INFO    request_accepted request_id=a498beff-6bc1-465f-b38b-36ac6ed517ce request_bytes=74720 timeout_seconds=120.0 instructions=7 blob_bytes=12145
+2026-11-21T15:06:57.773Z INFO    request_routed request_id=a498beff-6bc1-465f-b38b-36ac6ed517ce worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=18 pid=3047437 queue_ms=0.0
+INFO:     127.0.0.1:53268 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_udiv"
+ - leaked function "create_make_tensor_descriptor"
+ - leaked function "create_tmem_subslice"
+ - leaked function "create_load"
+ - leaked function "create_warp_pipeline_border"
+ - leaked function "create_async_tdm_copy_global_to_local"
+ - leaked function "create_tmem_alloc"
+ - leaked function "create_tcgen05_mma_scaled"
+ - leaked function "get_or_insert_function"
+ - leaked function "create_unsplat"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:07:15.857Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=18 pid=3047437 reason=request_limit
+2026-11-21T15:07:15.858Z INFO    request_finished request_id=a498beff-6bc1-465f-b38b-36ac6ed517ce http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=18083.9 lease_wait_ms=0.0 lease_held_ms=18082.3 response_bytes=29682
+INFO:     127.0.0.1:53260 - "POST /execute HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41328 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T15:07:22.021Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=19 pid=3048015 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:48094 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60536 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51268 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60876 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:32974 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54402 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48922 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59510 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43152 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43348 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40936 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:32778 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T15:11:46.242Z INFO    request_received request_id=d45cea8f-a75b-482b-99ef-67970d74e138 client=127.0.0.1
+2026-11-21T15:11:46.244Z INFO    request_finished request_id=d45cea8f-a75b-482b-99ef-67970d74e138 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:32778 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:11:46.247Z INFO    request_received request_id=13b692d0-ada9-49ac-823e-2aa448ccf8bc client=127.0.0.1
+2026-11-21T15:11:46.249Z INFO    request_accepted request_id=13b692d0-ada9-49ac-823e-2aa448ccf8bc request_bytes=22423 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:11:46.249Z INFO    request_routed request_id=13b692d0-ada9-49ac-823e-2aa448ccf8bc worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=19 pid=3048015 queue_ms=0.0
+INFO:     127.0.0.1:40696 - "GET /health HTTP/1.1" 200 OK
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_region"
+ - leaked function "create_erf"
+ - leaked function "pseudoinvert"
+ - leaked function "get_coalesced_layout"
+ - leaked function "create_frem"
+ - leaked function "create_convert_layout"
+ - leaked function "get_parent"
+ - leaked function "get_auto_layout"
+ - leaked function "create_async_copy_mbarrier_arrive"
+ - leaked function "create_iabs"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:12:10.186Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=19 pid=3048015 reason=request_limit
+2026-11-21T15:12:10.186Z INFO    request_finished request_id=13b692d0-ada9-49ac-823e-2aa448ccf8bc http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=23936.3 lease_wait_ms=0.0 lease_held_ms=23934.8 response_bytes=2815
+INFO:     127.0.0.1:32778 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:12:16.328Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=20 pid=3050968 device=GPU-26cdfc74-3584-e882-344c-8cc34cd3a4a5 arch=sm_90a
+INFO:     127.0.0.1:33516 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T15:12:39.948Z INFO    request_received request_id=5551ce06-a49e-4e3b-87d5-449f83d83398 client=127.0.0.1
+2026-11-21T15:12:39.949Z INFO    request_finished request_id=5551ce06-a49e-4e3b-87d5-449f83d83398 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:35702 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:12:39.953Z INFO    request_received request_id=e33be8f6-77b4-46c6-bcc5-b48762a1c3cb client=127.0.0.1
+2026-11-21T15:12:39.954Z INFO    request_accepted request_id=e33be8f6-77b4-46c6-bcc5-b48762a1c3cb request_bytes=22423 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:12:39.955Z INFO    request_routed request_id=e33be8f6-77b4-46c6-bcc5-b48762a1c3cb worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=20 pid=3050968 queue_ms=0.0
+INFO:     127.0.0.1:35714 - "GET /health HTTP/1.1" 200 OK
+[2026-11-21T15:12:42.598] error: *** STEP 3280666.2648 ON fs-mbz-gpu-086 CANCELLED AT 2026-11-21T15:12:42 DUE to SIGNAL Killed ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: fs-mbz-gpu-086: task 0: Killed
+[slurm_kcoral 2026-11-21 15:12:43] server step on job 3280666 ended (rc=137)
+[slurm_kcoral 2026-11-21 15:12:53] starting kcoral server on job 3280666 (proxy port 30949, loopback port 47883), step kcoral-656b88f872b0
+warning: CUDA_VISIBLE_DEVICES is set but does not restrict this server; workers are pinned by --gpus (physical GPU ids). Unset it to avoid confusion.
+INFO:     Started server process [3051492]
+INFO:     Waiting for application startup.
+2026-11-21T15:12:54.766Z INFO    server_started
+2026-11-21T15:13:03.377Z INFO    worker_ready worker_id=gpu0/w0 gpu_id=0 generation=1 pid=3051516 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:13:09.007Z INFO    worker_ready worker_id=gpu0/w1 gpu_id=0 generation=1 pid=3051558 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:13:14.948Z INFO    worker_ready worker_id=gpu0/w2 gpu_id=0 generation=1 pid=3051587 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:13:20.980Z INFO    worker_ready worker_id=gpu0/w3 gpu_id=0 generation=1 pid=3051884 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:13:26.701Z INFO    worker_ready worker_id=gpu0/w4 gpu_id=0 generation=1 pid=3051917 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:13:32.606Z INFO    worker_ready worker_id=gpu0/w5 gpu_id=0 generation=1 pid=3051946 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:13:38.444Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=1 pid=3051980 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:13:44.237Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=1 pid=3052017 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:13:44.238Z INFO    pool_ready sandbox=none mode=gpu target={'arch': 'sm_90a'} workers=8
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:47883 (Press CTRL+C to quit)
+2026-11-21T15:13:57.709Z INFO    request_received request_id=3b6f17fd-e604-4af7-983e-befffc848f28 client=127.0.0.1
+2026-11-21T15:13:57.712Z INFO    request_finished request_id=3b6f17fd-e604-4af7-983e-befffc848f28 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:51994 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:13:57.716Z INFO    request_received request_id=5b11a422-b046-43ed-938a-74d59ad424d4 client=127.0.0.1
+2026-11-21T15:13:57.718Z INFO    request_accepted request_id=5b11a422-b046-43ed-938a-74d59ad424d4 request_bytes=22423 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:13:57.718Z INFO    request_routed request_id=5b11a422-b046-43ed-938a-74d59ad424d4 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=1 pid=3052017 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_make_range"
+ - leaked function "__iter__"
+ - leaked function "is_integer"
+ - leaked function ""
+ - leaked function "create_fneg"
+ - leaked function "get_scaled_upcast_fp4_scale_layout"
+ - leaked function "create_frem"
+ - leaked function "get_bf16_ty"
+ - leaked function "get_uint32"
+ - leaked function "create_reduce_ret"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:14:37.197Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=1 pid=3052017 reason=request_limit
+2026-11-21T15:14:37.197Z INFO    request_finished request_id=5b11a422-b046-43ed-938a-74d59ad424d4 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=39478.2 lease_wait_ms=0.0 lease_held_ms=39476.7 response_bytes=4099
+INFO:     127.0.0.1:51994 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:14:43.322Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=2 pid=3052579 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:14:49.480Z INFO    request_received request_id=2f788d4e-e559-4052-965b-9ca1842d5162 client=127.0.0.1
+2026-11-21T15:14:49.482Z INFO    request_finished request_id=2f788d4e-e559-4052-965b-9ca1842d5162 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:57980 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:14:49.486Z INFO    request_received request_id=e11fc353-bc18-4b9a-82fd-defb70afd761 client=127.0.0.1
+2026-11-21T15:14:49.488Z INFO    request_accepted request_id=e11fc353-bc18-4b9a-82fd-defb70afd761 request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T15:14:49.488Z INFO    request_routed request_id=e11fc353-bc18-4b9a-82fd-defb70afd761 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=2 pid=3052579 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function ""
+ - leaked function "__str__"
+ - leaked function "create_async_copy_mbarrier_arrive"
+ - leaked function "is_declaration"
+ - leaked function "get_functions"
+ - leaked function "create_extract_slice"
+ - leaked function "create_sqrt"
+ - leaked function "__repr__"
+ - leaked function "create_async_wait_group"
+ - leaked function "get_function"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:15:29.308Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=2 pid=3052579 reason=request_limit
+2026-11-21T15:15:29.309Z INFO    request_finished request_id=e11fc353-bc18-4b9a-82fd-defb70afd761 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=39819.8 lease_wait_ms=0.0 lease_held_ms=39818.5 response_bytes=5945
+INFO:     127.0.0.1:57980 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:15:35.328Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=3 pid=3052955 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:15:43.690Z INFO    request_received request_id=91b4e50e-c1a0-425a-9dd3-5876b87e7b9d client=127.0.0.1
+2026-11-21T15:15:43.692Z INFO    request_finished request_id=91b4e50e-c1a0-425a-9dd3-5876b87e7b9d http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:39988 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:15:43.695Z INFO    request_received request_id=adc1a0e7-ec69-4be4-ba49-68b46a4a71e5 client=127.0.0.1
+2026-11-21T15:15:43.697Z INFO    request_accepted request_id=adc1a0e7-ec69-4be4-ba49-68b46a4a71e5 request_bytes=22423 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:15:43.697Z INFO    request_routed request_id=adc1a0e7-ec69-4be4-ba49-68b46a4a71e5 worker_id=gpu0/w7 gpu_id=0 gpu_ids=[0] generation=3 pid=3052955 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_fp64"
+ - leaked function "get_amd_mfma_layout"
+ - leaked function "create_maximumf"
+ - leaked function "__eq__"
+ - leaked function ""
+ - leaked function "create_tcgen05_commit"
+ - leaked function "create_lshr"
+ - leaked function "invert_and_compose"
+ - leaked function "__mul__"
+ - leaked function "push_back"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:16:24.537Z INFO    worker_retired worker_id=gpu0/w7 gpu_id=0 generation=3 pid=3052955 reason=request_limit
+2026-11-21T15:16:24.537Z INFO    request_finished request_id=adc1a0e7-ec69-4be4-ba49-68b46a4a71e5 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w7 gpu_id=0 queue_ms=0.0 elapsed_ms=40839.7 lease_wait_ms=0.0 lease_held_ms=40838.4 response_bytes=4758
+INFO:     127.0.0.1:39988 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:16:25.173Z INFO    request_received request_id=e0153c05-dd12-4ef6-97d2-5fe57217ed49 client=127.0.0.1
+2026-11-21T15:16:25.175Z INFO    request_accepted request_id=e0153c05-dd12-4ef6-97d2-5fe57217ed49 request_bytes=1753 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:16:25.175Z INFO    request_routed request_id=e0153c05-dd12-4ef6-97d2-5fe57217ed49 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=1 pid=3051980 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_fp8e5b16_ty"
+ - leaked function "create_minsi"
+ - leaked function "get_tensordesc_metadata"
+ - leaked function "run"
+ - leaked function "set_insertion_point_to_start"
+ - leaked function "__str__"
+ - leaked function "create_fp_ext"
+ - leaked function "create_buffer_store"
+ - leaked function "run"
+ - leaked function "create_print"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:17:06.588Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=1 pid=3051980 reason=request_limit
+2026-11-21T15:17:06.588Z INFO    request_finished request_id=e0153c05-dd12-4ef6-97d2-5fe57217ed49 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=41412.8 lease_wait_ms=0.0 lease_held_ms=41411.4 response_bytes=4757
+INFO:     127.0.0.1:39988 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:17:06.776Z INFO    worker_ready worker_id=gpu0/w7 gpu_id=0 generation=4 pid=3053611 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:17:12.686Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=2 pid=3054198 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:17:50.680Z INFO    request_received request_id=9bdcc345-112f-438b-908a-0a44cc4d010b client=127.0.0.1
+2026-11-21T15:17:50.683Z INFO    request_finished request_id=9bdcc345-112f-438b-908a-0a44cc4d010b http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:55350 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:17:50.687Z INFO    request_received request_id=32d49a64-81e6-4650-a9a2-982b988dd80f client=127.0.0.1
+2026-11-21T15:17:50.689Z INFO    request_accepted request_id=32d49a64-81e6-4650-a9a2-982b988dd80f request_bytes=87395 timeout_seconds=120.0 instructions=7 blob_bytes=12485
+2026-11-21T15:17:50.689Z INFO    request_routed request_id=32d49a64-81e6-4650-a9a2-982b988dd80f worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=2 pid=3054198 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_broadcast"
+ - leaked function "strided_1d"
+ - leaked function "create_warp_specialize"
+ - leaked function "create_minsi"
+ - leaked function ""
+ - leaked function ""
+ - leaked function "create_expand_dims"
+ - leaked function "get_cache_policy"
+ - leaked function "set_insertion_point_to_start"
+ - leaked function "create_sub"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:18:06.606Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=2 pid=3054198 reason=request_limit
+2026-11-21T15:18:06.607Z INFO    request_finished request_id=32d49a64-81e6-4650-a9a2-982b988dd80f http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=15917.2 lease_wait_ms=0.0 lease_held_ms=15915.6 response_bytes=29711
+INFO:     127.0.0.1:55350 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:18:12.786Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=3 pid=3054967 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:18:31.202Z INFO    request_received request_id=83b34bcf-48c3-43fa-9ccb-01374c6452da client=127.0.0.1
+2026-11-21T15:18:31.204Z INFO    request_finished request_id=83b34bcf-48c3-43fa-9ccb-01374c6452da http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:56950 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:18:31.210Z INFO    request_received request_id=a7e03cef-40f2-41d9-9a36-c505c4156eb2 client=127.0.0.1
+2026-11-21T15:18:31.211Z INFO    request_accepted request_id=a7e03cef-40f2-41d9-9a36-c505c4156eb2 request_bytes=22423 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:18:31.211Z INFO    request_routed request_id=a7e03cef-40f2-41d9-9a36-c505c4156eb2 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=3 pid=3054967 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_lds_barrier_wait"
+ - leaked function "create_select"
+ - leaked function "create_bitcast"
+ - leaked function "get_constant_value"
+ - leaked function "create_warpgroup_mma"
+ - leaked function "create_get_program_id"
+ - leaked function "move_before"
+ - leaked function "get_bf16"
+ - leaked function "replace_all_uses_with"
+ - leaked function "create_async_tma_scatter"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:19:07.836Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=3 pid=3054967 reason=request_limit
+2026-11-21T15:19:07.837Z INFO    request_finished request_id=a7e03cef-40f2-41d9-9a36-c505c4156eb2 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=36624.4 lease_wait_ms=0.0 lease_held_ms=36623.2 response_bytes=3500
+INFO:     127.0.0.1:56950 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:19:14.183Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=4 pid=3056631 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:20:18.457Z INFO    request_received request_id=fdb47ca8-90e1-4f34-a42a-e6b867429dfb client=127.0.0.1
+2026-11-21T15:20:18.458Z INFO    request_finished request_id=fdb47ca8-90e1-4f34-a42a-e6b867429dfb http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:50862 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:20:18.462Z INFO    request_received request_id=3f565307-f03c-4243-b62e-8ca990a64364 client=127.0.0.1
+2026-11-21T15:20:18.463Z INFO    request_accepted request_id=3f565307-f03c-4243-b62e-8ca990a64364 request_bytes=22423 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:20:18.463Z INFO    request_routed request_id=3f565307-f03c-4243-b62e-8ca990a64364 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=4 pid=3056631 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_clc_try_cancel"
+ - leaked function "get_default_region"
+ - leaked function "get_op_builder"
+ - leaked function "set_loc"
+ - leaked function "get_unit_attr"
+ - leaked function "create_cat"
+ - leaked function "create_fdiv"
+ - leaked function "create_local_gather"
+ - leaked function "create_lds_barrier_init"
+ - leaked function "create_warp_specialize"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:20:38.748Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=4 pid=3056631 reason=request_limit
+2026-11-21T15:20:38.749Z INFO    request_finished request_id=3f565307-f03c-4243-b62e-8ca990a64364 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=20284.8 lease_wait_ms=0.0 lease_held_ms=20283.4 response_bytes=2251
+INFO:     127.0.0.1:50862 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:20:45.173Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=5 pid=3058393 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:21:07.198Z INFO    request_received request_id=b997fdea-0124-4760-8037-7f5598f49be3 client=127.0.0.1
+2026-11-21T15:21:07.199Z INFO    request_finished request_id=b997fdea-0124-4760-8037-7f5598f49be3 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:45110 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:21:07.203Z INFO    request_received request_id=8ea5cede-1c0d-425c-9a26-5180fd6bf85a client=127.0.0.1
+2026-11-21T15:21:07.204Z INFO    request_accepted request_id=8ea5cede-1c0d-425c-9a26-5180fd6bf85a request_bytes=22423 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:21:07.204Z INFO    request_routed request_id=8ea5cede-1c0d-425c-9a26-5180fd6bf85a worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=5 pid=3058393 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "__init__"
+ - leaked function "get_induction_var"
+ - leaked function "create_reduce"
+ - leaked function "create_urem"
+ - leaked function "remove_fn_attr"
+ - leaked function "get_double_ty"
+ - leaked function "get_num_regions"
+ - leaked function "call"
+ - leaked function "create_cluster_barrier"
+ - leaked function ""
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:21:24.210Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=5 pid=3058393 reason=request_limit
+2026-11-21T15:21:24.210Z INFO    request_finished request_id=8ea5cede-1c0d-425c-9a26-5180fd6bf85a http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=17005.2 lease_wait_ms=0.0 lease_held_ms=17004.0 response_bytes=1314
+INFO:     127.0.0.1:45110 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:21:30.469Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=6 pid=3058638 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:21:58.067Z INFO    request_received request_id=bdbdb424-0e4f-4624-825f-ec394b116e06 client=127.0.0.1
+2026-11-21T15:21:58.069Z INFO    request_finished request_id=bdbdb424-0e4f-4624-825f-ec394b116e06 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:44044 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:21:58.072Z INFO    request_received request_id=ae5de289-1ee3-4700-ae07-0de6d99ac032 client=127.0.0.1
+2026-11-21T15:21:58.073Z INFO    request_accepted request_id=ae5de289-1ee3-4700-ae07-0de6d99ac032 request_bytes=22423 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:21:58.074Z INFO    request_routed request_id=ae5de289-1ee3-4700-ae07-0de6d99ac032 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=6 pid=3058638 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_unit_attr"
+ - leaked function "get_num_operands"
+ - leaked function "get_result"
+ - leaked function "create_clc_load_result"
+ - leaked function "is_convert_layout_trivial"
+ - leaked function "create_async_tdm_scatter"
+ - leaked function "create_urem"
+ - leaked function "get_int8_ty"
+ - leaked function "printStackTraceOnDiagnostic"
+ - leaked function "create_icmpULE"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:22:18.801Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=6 pid=3058638 reason=request_limit
+2026-11-21T15:22:18.802Z INFO    request_finished request_id=ae5de289-1ee3-4700-ae07-0de6d99ac032 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=20727.4 lease_wait_ms=0.0 lease_held_ms=20726.1 response_bytes=1548
+INFO:     127.0.0.1:44044 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:22:25.342Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=7 pid=3059507 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:22:33.537Z INFO    request_received request_id=769fefab-1b22-458c-83fe-b3620667d8d1 client=127.0.0.1
+2026-11-21T15:22:33.539Z INFO    request_finished request_id=769fefab-1b22-458c-83fe-b3620667d8d1 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:34814 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:22:33.543Z INFO    request_received request_id=cc97304c-37ee-4f8f-9099-44d405a821d9 client=127.0.0.1
+2026-11-21T15:22:33.545Z INFO    request_accepted request_id=cc97304c-37ee-4f8f-9099-44d405a821d9 request_bytes=22423 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:22:33.545Z INFO    request_routed request_id=cc97304c-37ee-4f8f-9099-44d405a821d9 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=7 pid=3059507 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "set_attr"
+ - leaked function "get_tensor_mem_desc_ty"
+ - leaked function "str_nodebug"
+ - leaked function "get_fp8e5_ty"
+ - leaked function "create_fma"
+ - leaked function "create_loc"
+ - leaked function ""
+ - leaked function ""
+ - leaked function "create_join"
+ - leaked function "__repr__"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:22:53.568Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=7 pid=3059507 reason=request_limit
+2026-11-21T15:22:53.568Z INFO    request_finished request_id=cc97304c-37ee-4f8f-9099-44d405a821d9 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=20022.8 lease_wait_ms=0.0 lease_held_ms=20021.5 response_bytes=1848
+INFO:     127.0.0.1:34814 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:23:00.088Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=8 pid=3061626 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:23:05.649Z INFO    request_received request_id=3ffda62a-d3a7-4fdd-b766-22bbfa560e89 client=127.0.0.1
+2026-11-21T15:23:05.650Z INFO    request_finished request_id=3ffda62a-d3a7-4fdd-b766-22bbfa560e89 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:39654 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:23:05.654Z INFO    request_received request_id=79066652-ad68-40ce-853e-bc173e313c51 client=127.0.0.1
+2026-11-21T15:23:05.656Z INFO    request_accepted request_id=79066652-ad68-40ce-853e-bc173e313c51 request_bytes=22423 timeout_seconds=2400.0 instructions=5 blob_bytes=20480
+2026-11-21T15:23:05.657Z INFO    request_routed request_id=79066652-ad68-40ce-853e-bc173e313c51 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=8 pid=3061626 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_descriptor_load"
+ - leaked function "create_ptr_to_int"
+ - leaked function "get_name"
+ - leaked function "create_fmul"
+ - leaked function "get_int32"
+ - leaked function "get_int16_ty"
+ - leaked function "create_fp_to_si"
+ - leaked function "create_async_tdm_copy_global_to_local"
+ - leaked function "create_umulhi"
+ - leaked function "get_null_value"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:23:27.872Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=8 pid=3061626 reason=request_limit
+2026-11-21T15:23:27.873Z INFO    request_finished request_id=79066652-ad68-40ce-853e-bc173e313c51 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=22215.3 lease_wait_ms=0.0 lease_held_ms=22214.0 response_bytes=2744
+INFO:     127.0.0.1:39654 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:23:35.736Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=9 pid=3062483 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:24:51.452Z INFO    request_received request_id=78e9eeea-2e07-436a-a5af-e2fd00da31b9 client=127.0.0.1
+2026-11-21T15:24:51.453Z INFO    request_finished request_id=78e9eeea-2e07-436a-a5af-e2fd00da31b9 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:37818 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:24:51.456Z INFO    request_received request_id=4f113aa6-ca8f-4052-a76a-5693dd89f383 client=127.0.0.1
+2026-11-21T15:24:51.458Z INFO    request_accepted request_id=4f113aa6-ca8f-4052-a76a-5693dd89f383 request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T15:24:51.458Z INFO    request_routed request_id=4f113aa6-ca8f-4052-a76a-5693dd89f383 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=9 pid=3062483 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_sdiv"
+ - leaked function "create_tdm_prefetch"
+ - leaked function "append_operand"
+ - leaked function "set_loc"
+ - leaked function "create_mbarrier_arrive"
+ - leaked function "create_join"
+ - leaked function "get_then_yield"
+ - leaked function "set_calling_conv"
+ - leaked function "create_tcgen05_commit"
+ - leaked function "set_requested_registers"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:25:23.676Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=9 pid=3062483 reason=request_limit
+2026-11-21T15:25:23.677Z INFO    request_finished request_id=4f113aa6-ca8f-4052-a76a-5693dd89f383 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=32218.1 lease_wait_ms=0.0 lease_held_ms=32217.0 response_bytes=2636
+INFO:     127.0.0.1:37818 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:25:30.365Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=10 pid=3065572 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:26:09.446Z INFO    request_received request_id=2bb25c02-f928-44dc-8e5f-0cc5acf45c6d client=127.0.0.1
+2026-11-21T15:26:09.448Z INFO    request_finished request_id=2bb25c02-f928-44dc-8e5f-0cc5acf45c6d http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:45334 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:26:09.451Z INFO    request_received request_id=eaf65a51-2fc1-4a0a-8d3f-cf3283b25f74 client=127.0.0.1
+2026-11-21T15:26:09.452Z INFO    request_accepted request_id=eaf65a51-2fc1-4a0a-8d3f-cf3283b25f74 request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T15:26:09.452Z INFO    request_routed request_id=eaf65a51-2fc1-4a0a-8d3f-cf3283b25f74 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=10 pid=3065572 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_bool_attr"
+ - leaked function "add_entry_block"
+ - leaked function "set_attr"
+ - leaked function "get_shape"
+ - leaked function ""
+ - leaked function "get_fp16"
+ - leaked function "create_mbarrier_init"
+ - leaked function "create_warpgroup_mma"
+ - leaked function "get_num_arguments"
+ - leaked function "create_tmem_store"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:26:37.407Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=10 pid=3065572 reason=request_limit
+2026-11-21T15:26:37.408Z INFO    request_finished request_id=eaf65a51-2fc1-4a0a-8d3f-cf3283b25f74 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=27954.7 lease_wait_ms=0.0 lease_held_ms=27953.4 response_bytes=2180
+INFO:     127.0.0.1:45334 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:26:43.796Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=11 pid=3066558 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:27:00.517Z INFO    request_received request_id=668d5a1d-24eb-4d1c-a9ae-7476545d2aae client=127.0.0.1
+2026-11-21T15:27:00.519Z INFO    request_finished request_id=668d5a1d-24eb-4d1c-a9ae-7476545d2aae http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:41110 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:27:00.523Z INFO    request_received request_id=22b57bea-d0c2-4243-9586-6acb98f19c00 client=127.0.0.1
+2026-11-21T15:27:00.525Z INFO    request_accepted request_id=22b57bea-d0c2-4243-9586-6acb98f19c00 request_bytes=95612 timeout_seconds=120.0 instructions=7 blob_bytes=20702
+2026-11-21T15:27:00.526Z INFO    request_routed request_id=22b57bea-d0c2-4243-9586-6acb98f19c00 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=11 pid=3066558 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "__new__"
+ - leaked function "create_descriptor_store"
+ - leaked function "is_declaration"
+ - leaked function "get_body"
+ - leaked function "replace_all_uses_with"
+ - leaked function "create_sqrt"
+ - leaked function ""
+ - leaked function "id"
+ - leaked function "get_shape_from_tensor"
+ - leaked function "create_async_tma_scatter"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:27:21.756Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=11 pid=3066558 reason=request_limit
+2026-11-21T15:27:21.757Z INFO    request_finished request_id=22b57bea-d0c2-4243-9586-6acb98f19c00 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=21230.0 lease_wait_ms=0.0 lease_held_ms=21228.5 response_bytes=29701
+INFO:     127.0.0.1:41110 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:27:28.259Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=12 pid=3066986 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:27:50.781Z INFO    request_received request_id=c70e1434-b858-4779-afec-06d112e3d261 client=127.0.0.1
+2026-11-21T15:27:50.782Z INFO    request_finished request_id=c70e1434-b858-4779-afec-06d112e3d261 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:55386 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:27:50.786Z INFO    request_received request_id=53157d7d-df53-4456-a091-5c687a9dc530 client=127.0.0.1
+2026-11-21T15:27:50.787Z INFO    request_accepted request_id=53157d7d-df53-4456-a091-5c687a9dc530 request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T15:27:50.787Z INFO    request_routed request_id=53157d7d-df53-4456-a091-5c687a9dc530 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=12 pid=3066986 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_threadwise_inline_asm"
+ - leaked function "get_uint16"
+ - leaked function "get_flat_symbol_ref_attr"
+ - leaked function "create_block"
+ - leaked function "create_fneg"
+ - leaked function "create_memdesc_index"
+ - leaked function "create_cluster_barrier"
+ - leaked function "create_print"
+ - leaked function "get_shared_view"
+ - leaked function "get_int_attr"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:28:28.799Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=12 pid=3066986 reason=request_limit
+2026-11-21T15:28:28.800Z INFO    request_finished request_id=53157d7d-df53-4456-a091-5c687a9dc530 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=38012.0 lease_wait_ms=0.0 lease_held_ms=38010.7 response_bytes=3166
+INFO:     127.0.0.1:55386 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:28:35.368Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=13 pid=3067670 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:28:38.380Z INFO    request_received request_id=711b3440-2482-405d-94bc-83d81e2ec18f client=127.0.0.1
+2026-11-21T15:28:38.382Z INFO    request_finished request_id=711b3440-2482-405d-94bc-83d81e2ec18f http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:36720 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:28:38.385Z INFO    request_received request_id=2952bca6-6977-404c-a8e3-adc71c2d1007 client=127.0.0.1
+2026-11-21T15:28:38.387Z INFO    request_accepted request_id=2952bca6-6977-404c-a8e3-adc71c2d1007 request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T15:28:38.387Z INFO    request_routed request_id=2952bca6-6977-404c-a8e3-adc71c2d1007 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=13 pid=3067670 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_int8"
+ - leaked function "set_loc"
+ - leaked function "__init__"
+ - leaked function "get_bool_attr"
+ - leaked function "create_expand_dims"
+ - leaked function "create_icmpUGE"
+ - leaked function "get_tensor_mem_desc_ty"
+ - leaked function "set_insertion_point_to_start"
+ - leaked function "get_shape_from_tensor"
+ - leaked function "run"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:29:20.087Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=13 pid=3067670 reason=request_limit
+2026-11-21T15:29:20.087Z INFO    request_finished request_id=2952bca6-6977-404c-a8e3-adc71c2d1007 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=41699.8 lease_wait_ms=0.0 lease_held_ms=41698.5 response_bytes=2715
+INFO:     127.0.0.1:36720 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:29:26.487Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=14 pid=3068263 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:30:09.055Z INFO    request_received request_id=7fee4672-68f4-4f88-8280-200e139cd8d9 client=127.0.0.1
+2026-11-21T15:30:09.057Z INFO    request_finished request_id=7fee4672-68f4-4f88-8280-200e139cd8d9 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:34688 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:30:09.062Z INFO    request_received request_id=092f2c42-6d53-406f-94d1-d3efc011177b client=127.0.0.1
+2026-11-21T15:30:09.064Z INFO    request_accepted request_id=092f2c42-6d53-406f-94d1-d3efc011177b request_bytes=95612 timeout_seconds=120.0 instructions=7 blob_bytes=20702
+2026-11-21T15:30:09.064Z INFO    request_routed request_id=092f2c42-6d53-406f-94d1-d3efc011177b worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=14 pid=3068263 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_fp_to_fp"
+ - leaked function "set_calling_conv"
+ - leaked function "get_tensor_memory_scales_layout"
+ - leaked function "__new__"
+ - leaked function "get_partitioned_shared_layout"
+ - leaked function "get_insertion_point"
+ - leaked function "create_clc_get_program_id"
+ - leaked function "get_all_ones_value"
+ - leaked function "create_async_tdm_fused_copy_global_to_local"
+ - leaked function "create_broadcast"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:30:31.628Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=14 pid=3068263 reason=request_limit
+2026-11-21T15:30:31.629Z INFO    request_finished request_id=092f2c42-6d53-406f-94d1-d3efc011177b http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=22564.1 lease_wait_ms=0.0 lease_held_ms=22562.4 response_bytes=29690
+INFO:     127.0.0.1:34688 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:30:38.034Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=15 pid=3069630 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:30:52.304Z INFO    request_received request_id=c2a6e1ba-5d91-40d3-8d33-29d9a8ed6433 client=127.0.0.1
+2026-11-21T15:30:52.305Z INFO    request_finished request_id=c2a6e1ba-5d91-40d3-8d33-29d9a8ed6433 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:36056 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:30:52.308Z INFO    request_received request_id=fae938fd-9e72-42a8-ba9b-93cf46788277 client=127.0.0.1
+2026-11-21T15:30:52.310Z INFO    request_accepted request_id=fae938fd-9e72-42a8-ba9b-93cf46788277 request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T15:30:52.310Z INFO    request_routed request_id=fae938fd-9e72-42a8-ba9b-93cf46788277 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=15 pid=3069630 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "set_insertion_point_to_start"
+ - leaked function "get_parent"
+ - leaked function ""
+ - leaked function "create_async_tma_copy_local_to_global"
+ - leaked function "__init__"
+ - leaked function ""
+ - leaked function ""
+ - leaked function "__new__"
+ - leaked function "gemm"
+ - leaked function "create_get_program_id"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:31:31.969Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=15 pid=3069630 reason=request_limit
+2026-11-21T15:31:31.970Z INFO    request_finished request_id=fae938fd-9e72-42a8-ba9b-93cf46788277 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=39658.9 lease_wait_ms=0.0 lease_held_ms=39657.7 response_bytes=2730
+INFO:     127.0.0.1:36056 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:31:38.295Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=16 pid=3070033 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:31:50.642Z INFO    request_received request_id=0b194da1-972c-4aba-af27-1731913d7760 client=127.0.0.1
+2026-11-21T15:31:50.644Z INFO    request_finished request_id=0b194da1-972c-4aba-af27-1731913d7760 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:33590 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:31:50.648Z INFO    request_received request_id=418bbebf-9438-44c6-8c9f-fbd5deab92a3 client=127.0.0.1
+2026-11-21T15:31:50.650Z INFO    request_accepted request_id=418bbebf-9438-44c6-8c9f-fbd5deab92a3 request_bytes=95612 timeout_seconds=120.0 instructions=7 blob_bytes=20702
+2026-11-21T15:31:50.650Z INFO    request_routed request_id=418bbebf-9438-44c6-8c9f-fbd5deab92a3 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=16 pid=3070033 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "from_bases"
+ - leaked function "create_lshr"
+ - leaked function "create_block_with_parent"
+ - leaked function ""
+ - leaked function "get_loc"
+ - leaked function "create_and"
+ - leaked function "get_gluon_layout_from_memdesc"
+ - leaked function "create_atomic_load"
+ - leaked function "create_load"
+ - leaked function "__init__"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:32:12.788Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=16 pid=3070033 reason=request_limit
+2026-11-21T15:32:12.788Z INFO    request_finished request_id=418bbebf-9438-44c6-8c9f-fbd5deab92a3 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=22137.7 lease_wait_ms=0.0 lease_held_ms=22136.2 response_bytes=29671
+INFO:     127.0.0.1:33590 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:32:19.160Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=17 pid=3070963 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:32:39.309Z INFO    request_received request_id=5a153f69-0a64-4ddd-a19a-2aa144868e79 client=127.0.0.1
+2026-11-21T15:32:39.311Z INFO    request_finished request_id=5a153f69-0a64-4ddd-a19a-2aa144868e79 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:41846 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:32:39.315Z INFO    request_received request_id=c28b392e-da72-4f4b-a964-126791f4d00a client=127.0.0.1
+2026-11-21T15:32:39.317Z INFO    request_accepted request_id=c28b392e-da72-4f4b-a964-126791f4d00a request_bytes=82679 timeout_seconds=120.0 instructions=7 blob_bytes=7769
+2026-11-21T15:32:39.317Z INFO    request_routed request_id=c28b392e-da72-4f4b-a964-126791f4d00a worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=17 pid=3070963 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_fp8e4nv_ty"
+ - leaked function "create_store"
+ - leaked function "create_expand_dims"
+ - leaked function "get_in_dim_names"
+ - leaked function "create_convert_layout"
+ - leaked function "__iter__"
+ - leaked function "create_urem"
+ - leaked function "get_gluon_layout_from_tensor"
+ - leaked function "get_void_ty"
+ - leaked function "set_attr"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:32:51.683Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=17 pid=3070963 reason=request_limit
+2026-11-21T15:32:51.684Z INFO    request_finished request_id=c28b392e-da72-4f4b-a964-126791f4d00a http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=12365.7 lease_wait_ms=0.0 lease_held_ms=12364.1 response_bytes=29735
+INFO:     127.0.0.1:41846 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:32:58.079Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=18 pid=3074857 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:33:08.604Z INFO    request_received request_id=fb981ef2-ae3f-46d3-b75a-34c4a8dd7c24 client=127.0.0.1
+2026-11-21T15:33:08.606Z INFO    request_finished request_id=fb981ef2-ae3f-46d3-b75a-34c4a8dd7c24 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:43162 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:33:08.611Z INFO    request_received request_id=cb1c9ea4-18c6-498a-b8b7-b3f053e881eb client=127.0.0.1
+2026-11-21T15:33:08.613Z INFO    request_accepted request_id=cb1c9ea4-18c6-498a-b8b7-b3f053e881eb request_bytes=95123 timeout_seconds=120.0 instructions=7 blob_bytes=20213
+2026-11-21T15:33:08.613Z INFO    request_routed request_id=cb1c9ea4-18c6-498a-b8b7-b3f053e881eb worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=18 pid=3074857 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "str"
+ - leaked function "create_or"
+ - leaked function "create_exp"
+ - leaked function "create_fcmpONE"
+ - leaked function "create_si_to_fp"
+ - leaked function "create_local_scatter"
+ - leaked function "__str__"
+ - leaked function "gemm"
+ - leaked function "strided_1d"
+ - leaked function "get_int1"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:33:29.351Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=18 pid=3074857 reason=request_limit
+2026-11-21T15:33:29.352Z INFO    request_finished request_id=cb1c9ea4-18c6-498a-b8b7-b3f053e881eb http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=20738.0 lease_wait_ms=0.0 lease_held_ms=20736.3 response_bytes=29686
+INFO:     127.0.0.1:43162 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:33:36.419Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=19 pid=3076269 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:34:15.506Z INFO    request_received request_id=d9026b4d-e39a-4983-af9f-904180394ceb client=127.0.0.1
+2026-11-21T15:34:15.508Z INFO    request_finished request_id=d9026b4d-e39a-4983-af9f-904180394ceb http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:46564 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:34:15.512Z INFO    request_received request_id=bcb96b60-e084-4174-86e2-c69374b742ad client=127.0.0.1
+2026-11-21T15:34:15.513Z INFO    request_accepted request_id=bcb96b60-e084-4174-86e2-c69374b742ad request_bytes=42903 timeout_seconds=2400.0 instructions=5 blob_bytes=40960
+2026-11-21T15:34:15.513Z INFO    request_routed request_id=bcb96b60-e084-4174-86e2-c69374b742ad worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=19 pid=3076269 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "is_invertible"
+ - leaked function "str_nodebug"
+ - leaked function "create_fcmpUNE"
+ - leaked function "get_tensor_descriptor_layout_type"
+ - leaked function "create_lds_barrier_init"
+ - leaked function "strided_1d"
+ - leaked function "create_si_to_fp"
+ - leaked function "get_default_region"
+ - leaked function "get_all_ones_value"
+ - leaked function "is_external_linkage"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:34:49.977Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=19 pid=3076269 reason=request_limit
+2026-11-21T15:34:49.977Z INFO    request_finished request_id=bcb96b60-e084-4174-86e2-c69374b742ad http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=34463.1 lease_wait_ms=0.0 lease_held_ms=34461.3 response_bytes=2205
+INFO:     127.0.0.1:46564 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:34:56.230Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=20 pid=3077598 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:35:18.247Z INFO    request_received request_id=05c06b4e-2d99-4005-85d7-66c3b9bd981d client=127.0.0.1
+2026-11-21T15:35:18.248Z INFO    request_finished request_id=05c06b4e-2d99-4005-85d7-66c3b9bd981d http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:49608 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:35:18.251Z INFO    request_received request_id=e5f1df2d-6874-4218-8e5c-34941363225b client=127.0.0.1
+2026-11-21T15:35:18.253Z INFO    request_accepted request_id=e5f1df2d-6874-4218-8e5c-34941363225b request_bytes=42903 timeout_seconds=2400.0 instructions=5 blob_bytes=40960
+2026-11-21T15:35:18.253Z INFO    request_routed request_id=e5f1df2d-6874-4218-8e5c-34941363225b worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=20 pid=3077598 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "__eq__"
+ - leaked function "add_argument_at"
+ - leaked function "get_block"
+ - leaked function "create_icmpEQ"
+ - leaked function "create_clc_get_program_id"
+ - leaked function "empty"
+ - leaked function "get_then_yield"
+ - leaked function "dump"
+ - leaked function "get_region"
+ - leaked function ""
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:35:47.666Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=20 pid=3077598 reason=request_limit
+2026-11-21T15:35:47.667Z INFO    request_finished request_id=e5f1df2d-6874-4218-8e5c-34941363225b http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=29413.2 lease_wait_ms=0.0 lease_held_ms=29411.9 response_bytes=1637
+INFO:     127.0.0.1:49608 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:35:54.105Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=21 pid=3078205 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:36:04.986Z INFO    request_received request_id=ed594da9-0418-4e22-add2-8cc1874f4451 client=127.0.0.1
+2026-11-21T15:36:04.988Z INFO    request_finished request_id=ed594da9-0418-4e22-add2-8cc1874f4451 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:37898 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:36:04.991Z INFO    request_received request_id=393896c8-d53a-43ef-af0e-e5d6070adf3d client=127.0.0.1
+2026-11-21T15:36:04.993Z INFO    request_accepted request_id=393896c8-d53a-43ef-af0e-e5d6070adf3d request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T15:36:04.993Z INFO    request_routed request_id=393896c8-d53a-43ef-af0e-e5d6070adf3d worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=21 pid=3078205 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_buffer_load"
+ - leaked function "__str__"
+ - leaked function "create_async_tdm_fused_copy_global_to_local"
+ - leaked function "create_tensor_descriptor_type"
+ - leaked function "get_then_yield"
+ - leaked function "create_ptr_to_int"
+ - leaked function "__iter__"
+ - leaked function "__init__"
+ - leaked function "get_num_arguments"
+ - leaked function "add_entry_block"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:36:55.929Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=21 pid=3078205 reason=request_limit
+2026-11-21T15:36:55.929Z INFO    request_finished request_id=393896c8-d53a-43ef-af0e-e5d6070adf3d http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=50935.4 lease_wait_ms=0.0 lease_held_ms=50934.2 response_bytes=5514
+INFO:     127.0.0.1:37898 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:37:02.088Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=22 pid=3079672 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:37:36.600Z INFO    request_received request_id=d206fff8-670f-4e90-a013-d02efbc5929d client=127.0.0.1
+2026-11-21T15:37:36.602Z INFO    request_finished request_id=d206fff8-670f-4e90-a013-d02efbc5929d http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:54284 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:37:36.605Z INFO    request_received request_id=7486f782-c03c-480f-ac63-c017571aa833 client=127.0.0.1
+2026-11-21T15:37:36.607Z INFO    request_accepted request_id=7486f782-c03c-480f-ac63-c017571aa833 request_bytes=32663 timeout_seconds=2400.0 instructions=5 blob_bytes=30720
+2026-11-21T15:37:36.607Z INFO    request_routed request_id=7486f782-c03c-480f-ac63-c017571aa833 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=22 pid=3079672 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_select"
+ - leaked function "push_back"
+ - leaked function "get_function_signature"
+ - leaked function "get_induction_var"
+ - leaked function "__repr__"
+ - leaked function "create_branch"
+ - leaked function "to_linear_layout"
+ - leaked function "create_shl"
+ - leaked function "get_shared_linear_layout"
+ - leaked function "reset_type"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:37:59.943Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=22 pid=3079672 reason=request_limit
+2026-11-21T15:37:59.943Z INFO    request_finished request_id=7486f782-c03c-480f-ac63-c017571aa833 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=23335.5 lease_wait_ms=0.0 lease_held_ms=23334.3 response_bytes=1566
+INFO:     127.0.0.1:54284 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:38:06.123Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=23 pid=3080050 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:38:13.808Z INFO    request_received request_id=d5e73ef6-799a-4b8a-b6ba-b74422e31764 client=127.0.0.1
+2026-11-21T15:38:13.811Z INFO    request_finished request_id=d5e73ef6-799a-4b8a-b6ba-b74422e31764 http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:52508 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:38:13.815Z INFO    request_received request_id=ee8b5532-717f-4e37-bb9b-77a1bead8bf1 client=127.0.0.1
+2026-11-21T15:38:13.817Z INFO    request_accepted request_id=ee8b5532-717f-4e37-bb9b-77a1bead8bf1 request_bytes=95210 timeout_seconds=120.0 instructions=7 blob_bytes=20300
+2026-11-21T15:38:13.817Z INFO    request_routed request_id=ee8b5532-717f-4e37-bb9b-77a1bead8bf1 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=23 pid=3080050 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_inline_asm"
+ - leaked function "create_scan_ret"
+ - leaked function "create_descriptor_load"
+ - leaked function "create_maxnumf"
+ - leaked function "get_gluon_layout_from_tensor"
+ - leaked function "create_fp_trunc"
+ - leaked function "create_sdiv"
+ - leaked function "create_warp_specialize_partitions"
+ - leaked function "create_reshape"
+ - leaked function ""
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:38:34.035Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=23 pid=3080050 reason=request_limit
+2026-11-21T15:38:34.035Z INFO    request_finished request_id=ee8b5532-717f-4e37-bb9b-77a1bead8bf1 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=20217.4 lease_wait_ms=0.0 lease_held_ms=20215.8 response_bytes=29693
+INFO:     127.0.0.1:52508 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:38:40.193Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=24 pid=3080403 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:39:59.764Z INFO    request_received request_id=afc6ed85-92dc-42cf-b0be-4ac3caf7c3df client=127.0.0.1
+2026-11-21T15:39:59.766Z INFO    request_finished request_id=afc6ed85-92dc-42cf-b0be-4ac3caf7c3df http_status=200 finish_reason=cache_miss status=CACHE_MISS missing=1
+INFO:     127.0.0.1:36466 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:39:59.769Z INFO    request_received request_id=4341b5c4-1e7b-445d-a74b-2a51b010970f client=127.0.0.1
+2026-11-21T15:39:59.771Z INFO    request_accepted request_id=4341b5c4-1e7b-445d-a74b-2a51b010970f request_bytes=42903 timeout_seconds=2400.0 instructions=5 blob_bytes=40960
+2026-11-21T15:39:59.771Z INFO    request_routed request_id=4341b5c4-1e7b-445d-a74b-2a51b010970f worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=24 pid=3080403 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_expand_dims"
+ - leaked function "get_void_ty"
+ - leaked function "id"
+ - leaked function ""
+ - leaked function "set_attr"
+ - leaked function "get_shared_mem_desc_ty"
+ - leaked function "get_unit_attr"
+ - leaked function "set_nvvm_maxnreg"
+ - leaked function "get_entry_func_name"
+ - leaked function "get_ptr_ty"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:40:35.409Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=24 pid=3080403 reason=request_limit
+2026-11-21T15:40:35.409Z INFO    request_finished request_id=4341b5c4-1e7b-445d-a74b-2a51b010970f http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=35637.7 lease_wait_ms=0.0 lease_held_ms=35636.4 response_bytes=2454
+INFO:     127.0.0.1:36466 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:40:41.673Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=25 pid=3081394 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+2026-11-21T15:40:46.074Z INFO    request_received request_id=d5233c6b-f9a8-44ea-bb08-f26e1e30d922 client=127.0.0.1
+2026-11-21T15:40:46.076Z INFO    request_accepted request_id=d5233c6b-f9a8-44ea-bb08-f26e1e30d922 request_bytes=74720 timeout_seconds=120.0 instructions=7 blob_bytes=20300
+2026-11-21T15:40:46.076Z INFO    request_routed request_id=d5233c6b-f9a8-44ea-bb08-f26e1e30d922 worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=25 pid=3081394 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "get_entry_func_name"
+ - leaked function "dump"
+ - leaked function "create_broadcast"
+ - leaked function "create_fcmpUGE"
+ - leaked function "get_result"
+ - leaked function "create_unsplat"
+ - leaked function "create_clc_get_program_id"
+ - leaked function "add_fn_asan_attr"
+ - leaked function "get_flat_symbol_ref_attr"
+ - leaked function "create_sub"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:41:08.251Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=25 pid=3081394 reason=request_limit
+2026-11-21T15:41:08.252Z INFO    request_finished request_id=d5233c6b-f9a8-44ea-bb08-f26e1e30d922 http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=22174.7 lease_wait_ms=0.0 lease_held_ms=22173.3 response_bytes=29641
+INFO:     127.0.0.1:33238 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:41:14.911Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=26 pid=3082119 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+INFO:     127.0.0.1:46862 - "GET /health HTTP/1.1" 200 OK
+2026-11-21T15:44:59.878Z INFO    request_received request_id=2d37202d-69de-4364-a5a6-031b87b56b5d client=127.0.0.1
+2026-11-21T15:44:59.879Z INFO    request_accepted request_id=2d37202d-69de-4364-a5a6-031b87b56b5d request_bytes=655 timeout_seconds=120.0 instructions=4
+2026-11-21T15:44:59.879Z INFO    request_routed request_id=2d37202d-69de-4364-a5a6-031b87b56b5d worker_id=gpu0/w6 gpu_id=0 gpu_ids=[0] generation=26 pid=3082119 queue_ms=0.0
+nanobind: leaked 4 instances!
+nanobind: leaked 64 types!
+ - leaked type "triton._C.libtriton.ir.location"
+ - leaked type "TMEM_LOAD_REDUCE_MODIFIER"
+ - leaked type "triton._C.libtriton.ir.block"
+ - leaked type "triton._C.libtriton.gluon_ir.GluonOpBuilder"
+ - leaked type "triton._C.libtriton.ir.builder"
+ - leaked type "triton._C.libtriton.nvidia.cublas.CublasLt"
+ - leaked type "triton._C.libtriton.ir.integer_attr"
+ - leaked type "ATOMIC_OP"
+ - leaked type "PROPAGATE_NAN"
+ - leaked type "METRIC_TYPE"
+ - ... skipped remainder
+nanobind: leaked 514 functions!
+ - leaked function "create_trans"
+ - leaked function ""
+ - leaked function "create_urem"
+ - leaked function "create_extract_slice"
+ - leaked function "create_experimental_fpsan_unembed"
+ - leaked function "get_tensor_memory_scales_layout"
+ - leaked function "create_async_tma_scatter"
+ - leaked function "create_sdiv"
+ - leaked function "create_yield_op"
+ - leaked function "from_bases"
+ - ... skipped remainder
+nanobind: this is likely caused by a reference counting issue in the binding code.
+See https://nanobind.readthedocs.io/en/latest/refleaks.html2026-11-21T15:45:00.424Z INFO    worker_retired worker_id=gpu0/w6 gpu_id=0 generation=26 pid=3082119 reason=request_limit
+2026-11-21T15:45:00.424Z INFO    request_finished request_id=2d37202d-69de-4364-a5a6-031b87b56b5d http_status=200 finish_reason=completed status=COMPLETED worker_id=gpu0/w6 gpu_id=0 queue_ms=0.0 elapsed_ms=544.4 lease_wait_ms=0.0 lease_held_ms=543.1 response_bytes=489
+INFO:     127.0.0.1:46862 - "POST /execute HTTP/1.1" 200 OK
+2026-11-21T15:45:06.862Z INFO    worker_ready worker_id=gpu0/w6 gpu_id=0 generation=27 pid=3085031 device=GPU-e7b32342-3379-2c69-5046-2521484e6f6d arch=sm_90a
+srun: forcing job termination
+srun: forcing job termination
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+[2026-11-21T15:59:04.867] error: *** STEP 3280666.2704 ON fs-mbz-gpu-086 CANCELLED AT 2026-11-21T15:59:04 DUE to SIGNAL Killed ***
+[slurm_kcoral 2026-11-21 15:59:04] stopped
+srun: forcing job termination
+srun: error: fs-mbz-gpu-086: task 0: Killed

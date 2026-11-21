@@ -14,3 +14,13 @@ Source: the agent's own end-of-session report plus its transcript (`m3/agent.jso
 
 No issue with the SM90 documentation itself was reported. The agent found no misleading compiler remarks: none
 of its frontier kernels had spills or C75xx remarks.
+
+## Resolution (2026-11-21)
+
+| # | Fix | Commit |
+|---|---|---|
+| 1, 2 | New `evolution/remote/kcoral_connection.py` is the only place a local kcoral `Client` is built. It handles the URL or `@URL_FILE`, the bearer token from `URL_FILE.token` or `$KCORAL_TOKEN_FILE`, retries across preemption, and health. `kcoral_remote` and all four tool CLIs (`ncu`, `iket`, `compute_sanitizer`, `python`) use it, and so does `target.detect_remote` in the stack. New `kcoral_remote.py --health` is an authenticated probe that exits 0 only on `status: ok`; PROMPT_remote.md polls with it instead of curl. A guard test fails if any other client module builds a `Client`. | TIRx-harness `haok/kcoral-slurm` `449842e`; stack `2851dd0` |
+| 3 | `slurm_kcoral.sh` exports `VIRTUAL_ENV` and puts the server venv first on PATH inside the server step. | `449842e` |
+| 4 | **The seed changes, not the rule.** The authoring rule forbids `allowed_func_calls` unless the task names the call. That rule exists to keep opaque calls out of candidates, and the seed had no real need for one. On sm_90, `packed.f32x2_mul` is just two scalar `mul.rz.ftz.f32`: Hopper has no packed FMUL, and the packed op is defined lane by lane. B0's sm_90 path now issues the two scalar instructions directly. Its output is bit-identical to before on 20 shapes, the generated sm_100a/sm_103a CUDA is byte-identical, it passes 36/36, and its speed is unchanged. | TIRx-kernels `haok/sm90-rmsnorm` `2a32bd1`; kernels stack `271cb4c` |
+| 5 | The hook expanded `$PATH` into one colon-joined string. Whenever the run venv was not the first entry, that string substring-matched the ancestor ban on the checkout that holds the run. Path lists are now checked entry by entry, so banned entries still block. The hook had no tests; there are now 5, and the `$PATH` test fails on unfixed main. | TIRx-harness `haok/banned-path-list` `14c6865` (off upstream main) |
+| 6 | Not addressed (not requested). | — |

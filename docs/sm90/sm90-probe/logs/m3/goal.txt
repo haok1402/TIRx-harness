@@ -1,0 +1,16 @@
+Read ../PROMPT.md and follow it. Goal: at least 1.1x aggregate speedup over FlashInfer (the task's
+summed-time score), while passing correctness checks for every workload.
+
+Run limits for this session:
+- At most 20 candidate benchmark runs in total. Count every invocation of the benchmark command in
+  PROMPT.md, including reruns. Stop starting new experiments once 20 have been used.
+- About 2 hours of wall-clock time; budget your work accordingly.
+- This machine has no GPU. All GPU work (benchmarks, correctness runs, profiling) goes through the
+  remote benchmark commands in PROMPT.md. Do not try to use a local GPU.
+- The benchmark server may become unavailable for a few minutes (preemption); the benchmark command
+  retries by itself. Wait for it rather than working around it.
+
+Before you finish: make sure candidates/rmsnorm_h200/frontier/index.json is up to date, and print a
+short summary: the best measured speedup (overall and for batch_size >= 4113), how many benchmark
+runs you used, and anything that blocked or misled you (missing or wrong documentation, confusing
+compiler remarks, tooling problems).

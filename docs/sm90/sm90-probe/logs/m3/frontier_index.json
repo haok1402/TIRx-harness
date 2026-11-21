@@ -1,0 +1,38 @@
+{
+  "workload": "candidates/rmsnorm_h200",
+  "score": "sum(flashinfer GPU time) / sum(candidate GPU time) over 15 shapes, CUPTI, cold L2 (official kcoral_remote.py)",
+  "findings": [
+    "L1::no_allocate (and L1::evict_first) on the X loads costs 2-3% of HBM throughput on H200; plain ld.global.nc.v4 is the right load.",
+    "DRAM locality of the row stream dominates: scrambling the row order costs 7-8%, 2/4/16 interleaved streams cost 1-5%. Static strided persistent schedules drift and lose ~4% at 16384 rows; dynamic row tickets fix it.",
+    "Large shapes run at ~4.15 TB/s (8192x16384: 129.3us); the driver memcpy of the same bytes takes ~127us, so <2% headroom remains there.",
+    "No gain from: L2 createpolicy hints (evict_first/last), .cs/no_allocate stores, TMA bulk stores, cluster split-row (DSMEM) for small batches, raising/lowering occupancy.",
+    "Warp-specialized producer (dedicated TMA/ticket warp + empty mbarriers) was ~3% slower than refilling from thread 0 right after the per-row reduction barrier."
+  ],
+  "members": [
+    {
+      "name": "persistent-tma-ring",
+      "path": "frontier/persistent-tma-ring/solution.py",
+      "family": "persistent async-copy pipeline with dynamic tile scheduler",
+      "mechanism": "bs>1024: k CTAs/SM persistent; thread 0 fills an S-stage smem ring with whole-row cp.async.bulk loads (mbarrier complete_tx); after the first S*grid static rows, rows come from a global atomic ticket counter (prefetched one row ahead, last CTA resets it, no fence) so the row stream stays sequential; W lives in registers; Y stored with st.global.v4 from registers. Configs (warps, CTAs/SM, stages): 4096 (4,3,6), 5120 (5,2,9), 8192 (4,2,6) for <=8192 rows else (8,1,12). bs<=1024: one-row-per-CTA register kernel (hs5120 loads W with plain ld.global).",
+      "ours_us": 367,
+      "sota_us": 386,
+      "speedup": 1.053,
+      "speedup_bs_ge_4113": 1.041,
+      "reproduced": "3 official runs: run 10 1.051x/1.039x, run 11 1.051x/1.039x, run 12 (this exact frontier file) 1.053x/1.041x",
+      "global_best": true,
+      "why_retained": "Global best. Tried and rejected on this route: warp-specialized producer warp with empty barriers (~3% slower), TMA bulk stores, L2 eviction hints on TMA loads. Remaining open paths: warp-per-row consumers without CTA barriers, per-batch ring retuning."
+    },
+    {
+      "name": "register-onepass",
+      "path": "frontier/register-onepass/solution.py",
+      "family": "non-persistent register-resident one-pass (hardware CTA dispatch)",
+      "mechanism": "One row per CTA held entirely in registers (8/10/16 warps for 4096/5120/8192, plus 20 warps option), single HBM read of X with ld.global.nc.v4, W loaded before the reduction, warp shuffle + named-barrier reduce, no shared-memory staging, hardware dispatch keeps the row stream sequential.",
+      "ours_us": 373,
+      "sota_us": 386,
+      "speedup": 1.036,
+      "speedup_bs_ge_4113": 1.024,
+      "global_best": false,
+      "why_retained": "Distinct dataflow (no smem, no persistence, no atomics); fastest at 8192x16384 in sweeps (ties the ring) and the base of every latency-bound small-batch path."
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+sm_100a 128 identical 731f686f24 731f686f24
+sm_100a 4096 identical 2f9b9cf856 2f9b9cf856
+sm_100a 5120 identical e15a1d0df0 e15a1d0df0
+sm_100a 8192 identical fc240f42aa fc240f42aa
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+sm_103a 128 identical 731f686f24 731f686f24
+sm_103a 4096 identical 2f9b9cf856 2f9b9cf856
+sm_103a 5120 identical e15a1d0df0 e15a1d0df0
+sm_103a 8192 identical fc240f42aa fc240f42aa
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+128 1 bit-identical
+128 32 bit-identical
+128 128 bit-identical
+128 4113 bit-identical
+128 16384 bit-identical
+4096 1 bit-identical
+4096 32 bit-identical
+4096 128 bit-identical
+4096 4113 bit-identical
+4096 16384 bit-identical
+5120 1 bit-identical
+5120 32 bit-identical
+5120 128 bit-identical
+5120 4113 bit-identical
+5120 16384 bit-identical
+8192 1 bit-identical
+8192 32 bit-identical
+8192 128 bit-identical
+8192 4113 bit-identical
+8192 16384 bit-identical
+bitwise ok
+Total: 36  Passed: 0  Failed: 0  Skipped: 36
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-086", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 77.29, 30"}}
+{"tests": 36, "failed": 0}
+{"hs": 4096, "bs": 1, "tirx_us": 6.72, "flashinfer_us": 6.18, "torch_us": 11.57, "ratio_vs_flashinfer": 0.919, "tirx_TBps": 0.0}
+{"hs": 4096, "bs": 32, "tirx_us": 6.82, "flashinfer_us": 7.1, "torch_us": 11.23, "ratio_vs_flashinfer": 1.042, "tirx_TBps": 0.08}
+{"hs": 4096, "bs": 128, "tirx_us": 7.04, "flashinfer_us": 6.85, "torch_us": 11.68, "ratio_vs_flashinfer": 0.973, "tirx_TBps": 0.3}
+{"hs": 4096, "bs": 4113, "tirx_us": 24.9, "flashinfer_us": 23.55, "torch_us": 28.16, "ratio_vs_flashinfer": 0.946, "tirx_TBps": 2.71}
+{"hs": 4096, "bs": 16384, "tirx_us": 77.47, "flashinfer_us": 71.73, "torch_us": 84.4, "ratio_vs_flashinfer": 0.926, "tirx_TBps": 3.46}
+{"hs": 5120, "bs": 1, "tirx_us": 7.94, "flashinfer_us": 6.4, "torch_us": 13.38, "ratio_vs_flashinfer": 0.806, "tirx_TBps": 0.0}
+{"hs": 5120, "bs": 32, "tirx_us": 7.87, "flashinfer_us": 7.31, "torch_us": 12.61, "ratio_vs_flashinfer": 0.929, "tirx_TBps": 0.08}
+{"hs": 5120, "bs": 128, "tirx_us": 8.19, "flashinfer_us": 7.55, "torch_us": 12.83, "ratio_vs_flashinfer": 0.922, "tirx_TBps": 0.32}
+{"hs": 5120, "bs": 4113, "tirx_us": 29.73, "flashinfer_us": 28.1, "torch_us": 33.57, "ratio_vs_flashinfer": 0.945, "tirx_TBps": 2.83}
+{"hs": 5120, "bs": 16384, "tirx_us": 94.46, "flashinfer_us": 87.41, "torch_us": 106.7, "ratio_vs_flashinfer": 0.925, "tirx_TBps": 3.55}
+{"hs": 8192, "bs": 1, "tirx_us": 7.71, "flashinfer_us": 6.53, "torch_us": 17.92, "ratio_vs_flashinfer": 0.846, "tirx_TBps": 0.0}
+{"hs": 8192, "bs": 32, "tirx_us": 7.78, "flashinfer_us": 6.62, "torch_us": 16.96, "ratio_vs_flashinfer": 0.852, "tirx_TBps": 0.13}
+{"hs": 8192, "bs": 128, "tirx_us": 8.7, "flashinfer_us": 7.42, "torch_us": 17.76, "ratio_vs_flashinfer": 0.853, "tirx_TBps": 0.48}
+{"hs": 8192, "bs": 4113, "tirx_us": 47.66, "flashinfer_us": 39.38, "torch_us": 58.67, "ratio_vs_flashinfer": 0.826, "tirx_TBps": 2.83}
+{"hs": 8192, "bs": 16384, "tirx_us": 170.21, "flashinfer_us": 135.76, "torch_us": 204.27, "ratio_vs_flashinfer": 0.798, "tirx_TBps": 3.15}
+{"state_after": {"host": "fs-mbz-gpu-086", "gpu": "NVIDIA H200", "smi": "1980, 1980, 0x0000000000000000, 121.82, 32"}}

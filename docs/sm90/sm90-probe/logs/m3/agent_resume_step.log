@@ -1,0 +1,2 @@
+resume step: host=fs-mbz-gpu-266 gpus=0 start=15:09:41 limit=5719s
+agent exit 0 at 15:41:33

@@ -1,0 +1,8 @@
+Continue this optimization session with the budget you have left: 16 more candidate benchmark runs
+(every invocation of the PROMPT.md benchmark command counts) and the remaining wall-clock time (the
+session ends at 16:45 local time). Keep looking for further gains or materially different routes
+worth keeping on the frontier; you decide what is worth trying. The benchmark server may become
+unavailable for a few minutes (preemption); the benchmark command retries by itself, so wait for it
+rather than working around it. Before you finish, update frontier/index.json and print the same kind
+of summary as before (best overall and batch_size >= 4113 speedup, benchmark runs used in total, and
+anything that blocked or misled you).

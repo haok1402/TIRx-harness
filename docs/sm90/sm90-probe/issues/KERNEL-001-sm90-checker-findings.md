@@ -44,7 +44,10 @@ In both checked configs (256×128 and 128×192), racecheck reports a `data_race`
 
 ## Resolution (2026-11-21)
 
-### #1: fixed. B1 now releases per warp
+### #1: a checker false positive; per-warp release kept anyway
+
+The reviewer judged the finding a false positive: WGMMA's `.sync.aligned` warpgroup instructions converge
+the warpgroup, which phase 1 cannot see. Per-warp release costs nothing, so it stays.
 
 TIRx-kernels `haok/sm90-gemm` `289b650` makes lane 0 of every consumer warp release, with empty count 8 per CTA.
 
@@ -103,14 +106,34 @@ TIRx-kernels `haok/sm90-gemm` `289b650` makes lane 0 of every consumer warp rele
 **So racecheck is right, not stricter than the model.** It flags exactly what the formal model calls a race.
 Production code tolerates it on today's hardware.
 
-**Fix and cost** (TIRx-kernels `haok/sm90-fp8-gemm` `5a68eef`):
-- Every consumer thread runs `fence.proxy.async.shared::cta` after its last read of the stage; then `__syncwarp`;
-  then lane 0 releases.
+**Two orderings are required, not one.** The reviewer found this independently, and it converges with
+`5a68eef`:
+
+1. **Generic read → async write, within each lane: the proxy fence.** This is the cross-proxy ordering
+   argued above.
+2. **Lane *i*'s read → lane 0's arrive, across lanes: `__syncwarp`.**
+   - §9.7.15.4: a bi-directional proxy fence "take[s] effect within a single thread". Only lane 0 arrives
+     (the release).
+   - So lane 1's fence orders lane 1's read before lane 1's *later* operations, but not before lane 0's
+     arrive.
+   - A fence alone therefore leaves a cross-lane hole. The warp sync closes it: every lane's fenced read →
+     `__syncwarp` → lane 0's release arrive → producer acquire → TMA write.
+   - An alternative is to have every lane arrive (count 32 × warps). That costs more mbarrier traffic and
+     was not measured.
+
+**Fix and cost** (TIRx-kernels `haok/sm90-fp8-gemm` `5a68eef`; comment and PR text naming both orderings in
+`193a7a5`):
+- Every consumer thread runs `fence.proxy.async.shared::cta` after its last read of the stage (ordering 1).
+- Then `__syncwarp` (ordering 2).
+- Then lane 0 releases.
 - racecheck: `review`, with only the WGMMA advisory (was `data_race`) in both checked configs.
 - 20/20 tests; error-mode compile clean; SASS chains unchanged.
 - Gated geomean vs DeepGEMM **0.998x / 0.997x** on two runs, against 1.001x before: about 0.3–0.4%.
-- **Lighter alternative if that cost matters:** the uni-directional, read-only
-  `fence.proxy.async::generic.release.sync_restrict::shared::cta.cluster` used in the guide's example. tvm-tirx's
-  PTX table would need to expose it.
+- **Accepted** (review, 2026-11-21): 0.3% is the right price for a fence the model requires.
+- **Follow-up for tvm-tirx (open):** expose the uni-directional, read-only release fence
+  `fence.proxy.async::generic.release.sync_restrict::shared::cta.cluster`, the one the guide's example uses,
+  in the PTX table. It orders only prior generic *reads* before later async-proxy accesses, which is exactly
+  this WAR, and may recover part of the 0.3%. Re-measure B2 with it once it exists. Not filed with
+  sm90-codegen-fix yet; it is an ISA-coverage item rather than a codegen bug.
 - B1 has no generic read of TMA-written smem. Its WGMMA reads and TMA writes are both async proxy, and its
   epilogue already fences its `stmatrix` writes before the TMA store. It needs no change.

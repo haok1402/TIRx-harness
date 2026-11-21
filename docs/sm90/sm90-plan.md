@@ -290,6 +290,14 @@ C1, C4, C5 ──> C2 ──> C3 ──> M3 (needs B1 and C6);  C7 alongside B1/
 | **M3: evolve on H200** | C1, C2, C3 (rmsnorm, bf16 GEMM), C4, C5, C6, C8-phase-1, A3, C7 | An end-to-end evolution run on `bf16_gemm_h200` through kcoral in a Slurm step survives one forced preemption and produces a scored candidate |
 | **M4: the second example, then attention** | B2-design, B2; B3-baseline, B3; C3 (fp8, FA3); A9 if B1/B3 show the need | B2 ≥ 0.95x DeepGEMM (same step, C75xx-clean); B3 meets the target set after B3-baseline |
 
+**Status (2026-11-21).**
+- **M3 met** (coordinator-approved substitution: run on `rmsnorm_h200`, the cheaper task).
+  - The run went through the secured kcoral server, with the agent in a CPU-only Slurm step.
+  - It survived a forced kill of the server step while a request was in flight.
+  - Best scored candidate: **1.053x FlashInfer**, against the 0.854x seed, using 12 of 20 benchmark runs.
+  - Details: `sm90-probe/logs/m3/`. Fixes for what the agent tripped on: `sm90-probe/issues/HARNESS-001`.
+- **M4:** B2 is done (0.997–0.998x DeepGEMM with the proxy fence). B3 is next.
+
 ## 6. Version pins
 
 ### 6.1 Development pair (pinned now)

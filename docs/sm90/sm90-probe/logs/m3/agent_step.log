@@ -1,0 +1,2 @@
+agent step: host=fs-mbz-gpu-266 CUDA_VISIBLE_DEVICES='' gpus=0 start=14:46:54
+agent exit 0 at 15:07:54
