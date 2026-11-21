@@ -1,0 +1,24 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 76.50, 31"}}
+{"tests": 36, "failed": 0}
+{"hs": 4096, "bs": 1, "tirx_us": 6.43, "flashinfer_us": 5.92, "torch_us": 11.34, "ratio_vs_flashinfer": 0.92, "tirx_TBps": 0.0}
+{"hs": 4096, "bs": 32, "tirx_us": 6.59, "flashinfer_us": 6.37, "torch_us": 11.17, "ratio_vs_flashinfer": 0.966, "tirx_TBps": 0.08}
+{"hs": 4096, "bs": 128, "tirx_us": 7.06, "flashinfer_us": 6.8, "torch_us": 11.44, "ratio_vs_flashinfer": 0.964, "tirx_TBps": 0.3}
+{"hs": 4096, "bs": 4113, "tirx_us": 24.59, "flashinfer_us": 23.57, "torch_us": 27.87, "ratio_vs_flashinfer": 0.958, "tirx_TBps": 2.74}
+{"hs": 4096, "bs": 16384, "tirx_us": 77.25, "flashinfer_us": 71.97, "torch_us": 84.1, "ratio_vs_flashinfer": 0.932, "tirx_TBps": 3.47}
+{"hs": 5120, "bs": 1, "tirx_us": 7.74, "flashinfer_us": 6.29, "torch_us": 13.38, "ratio_vs_flashinfer": 0.812, "tirx_TBps": 0.0}
+{"hs": 5120, "bs": 32, "tirx_us": 7.71, "flashinfer_us": 6.59, "torch_us": 12.45, "ratio_vs_flashinfer": 0.855, "tirx_TBps": 0.08}
+{"hs": 5120, "bs": 128, "tirx_us": 8.19, "flashinfer_us": 7.07, "torch_us": 12.74, "ratio_vs_flashinfer": 0.863, "tirx_TBps": 0.32}
+{"hs": 5120, "bs": 4113, "tirx_us": 29.68, "flashinfer_us": 28.11, "torch_us": 33.62, "ratio_vs_flashinfer": 0.947, "tirx_TBps": 2.84}
+{"hs": 5120, "bs": 16384, "tirx_us": 94.35, "flashinfer_us": 87.7, "torch_us": 106.59, "ratio_vs_flashinfer": 0.929, "tirx_TBps": 3.56}
+{"hs": 8192, "bs": 1, "tirx_us": 7.49, "flashinfer_us": 6.37, "torch_us": 17.82, "ratio_vs_flashinfer": 0.85, "tirx_TBps": 0.0}
+{"hs": 8192, "bs": 32, "tirx_us": 7.71, "flashinfer_us": 6.59, "torch_us": 16.96, "ratio_vs_flashinfer": 0.855, "tirx_TBps": 0.14}
+{"hs": 8192, "bs": 128, "tirx_us": 8.43, "flashinfer_us": 7.3, "torch_us": 17.41, "ratio_vs_flashinfer": 0.865, "tirx_TBps": 0.5}
+{"hs": 8192, "bs": 4113, "tirx_us": 47.6, "flashinfer_us": 39.6, "torch_us": 58.27, "ratio_vs_flashinfer": 0.832, "tirx_TBps": 2.83}
+{"hs": 8192, "bs": 16384, "tirx_us": 170.1, "flashinfer_us": 136.42, "torch_us": 204.05, "ratio_vs_flashinfer": 0.802, "tirx_TBps": 3.16}
+{"state_after": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "1980, 1980, 0x0000000000000000, 137.46, 34"}}
+1 file left unchanged
+All checks passed!

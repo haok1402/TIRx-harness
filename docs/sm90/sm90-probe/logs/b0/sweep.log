@@ -1,0 +1,29 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 76.60, 31"}}
+{"ctas_per_sm": 1, "hs": 4096, "bs": 128, "tirx_us": 6.78, "fi_us": 6.75, "ratio": 0.995}
+{"ctas_per_sm": 1, "hs": 4096, "bs": 4113, "tirx_us": 49.46, "fi_us": 23.55, "ratio": 0.476}
+{"ctas_per_sm": 1, "hs": 4096, "bs": 16384, "tirx_us": 168.86, "fi_us": 72.11, "ratio": 0.427}
+{"ctas_per_sm": 1, "hs": 8192, "bs": 4113, "tirx_us": 78.24, "fi_us": 39.78, "ratio": 0.508}
+{"ctas_per_sm": 1, "hs": 8192, "bs": 16384, "tirx_us": 277.57, "fi_us": 136.48, "ratio": 0.492}
+{"ctas_per_sm": 1, "hs": 5120, "bs": 16384, "tirx_us": 307.71, "fi_us": 87.42, "ratio": 0.284}
+{"ctas_per_sm": 2, "hs": 4096, "bs": 128, "tirx_us": 6.78, "fi_us": 6.75, "ratio": 0.995}
+{"ctas_per_sm": 2, "hs": 4096, "bs": 4113, "tirx_us": 34.08, "fi_us": 23.57, "ratio": 0.692}
+{"ctas_per_sm": 2, "hs": 4096, "bs": 16384, "tirx_us": 107.68, "fi_us": 72.27, "ratio": 0.671}
+{"ctas_per_sm": 2, "hs": 8192, "bs": 4113, "tirx_us": 54.53, "fi_us": 39.78, "ratio": 0.729}
+{"ctas_per_sm": 2, "hs": 8192, "bs": 16384, "tirx_us": 180.67, "fi_us": 136.16, "ratio": 0.754}
+{"ctas_per_sm": 2, "hs": 5120, "bs": 16384, "tirx_us": 179.71, "fi_us": 87.44, "ratio": 0.487}
+{"ctas_per_sm": 4, "hs": 4096, "bs": 128, "tirx_us": 6.78, "fi_us": 6.72, "ratio": 0.991}
+{"ctas_per_sm": 4, "hs": 4096, "bs": 4113, "tirx_us": 27.46, "fi_us": 23.89, "ratio": 0.87}
+{"ctas_per_sm": 4, "hs": 4096, "bs": 16384, "tirx_us": 81.89, "fi_us": 72.11, "ratio": 0.881}
+{"ctas_per_sm": 4, "hs": 8192, "bs": 4113, "tirx_us": 46.27, "fi_us": 39.66, "ratio": 0.857}
+{"ctas_per_sm": 4, "hs": 8192, "bs": 16384, "tirx_us": 158.11, "fi_us": 136.38, "ratio": 0.863}
+{"ctas_per_sm": 4, "hs": 5120, "bs": 16384, "tirx_us": 120.24, "fi_us": 87.36, "ratio": 0.727}
+{"ctas_per_sm": 8, "hs": 4096, "bs": 128, "tirx_us": 6.75, "fi_us": 6.72, "ratio": 0.995}
+{"ctas_per_sm": 8, "hs": 4096, "bs": 4113, "tirx_us": 24.91, "fi_us": 23.46, "ratio": 0.942}
+{"ctas_per_sm": 8, "hs": 4096, "bs": 16384, "tirx_us": 78.4, "fi_us": 72.0, "ratio": 0.918}
+{"ctas_per_sm": 8, "hs": 8192, "bs": 4113, "tirx_us": 48.11, "fi_us": 39.66, "ratio": 0.824}
+{"ctas_per_sm": 8, "hs": 8192, "bs": 16384, "tirx_us": 169.89, "fi_us": 136.4, "ratio": 0.803}
+{"ctas_per_sm": 8, "hs": 5120, "bs": 16384, "tirx_us": 94.27, "fi_us": 87.52, "ratio": 0.928}
