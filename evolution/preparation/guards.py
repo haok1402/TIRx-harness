@@ -217,6 +217,22 @@ def _glob_expansions(tok: str) -> list[str]:
         return []
 
 
+def _path_list_items(tok: str) -> list[str]:
+    \"\"\"The paths a token names once bash expands it.
+
+    A token whose expansion is a colon-separated list (`$PATH`, `$PYTHONPATH`,
+    `a:b`) names each entry, not one long path. Checked whole, the joined
+    string of a `$PATH` that holds the run's own `.venv/bin` substring-matches
+    the ancestor ban on the checkout around the run, which blocks harmless
+    commands such as `echo $PATH`. Each entry is checked instead, so a banned
+    entry is still caught.
+    \"\"\"
+    expanded = os.path.expanduser(os.path.expandvars(tok))
+    if os.pathsep not in expanded:
+        return [tok]
+    return [item for item in expanded.split(os.pathsep) if item] or [tok]
+
+
 def _rel_under_allowed(path: str) -> str | None:
     \"\"\"If `path` resolves under any ALLOWED_PREFIXES, return its
     representation RELATIVE to that prefix (so banned-glob matching can be
@@ -321,7 +337,7 @@ def _any_banned_ref_not_allowed(cmd: str) -> str | None:
         # Build the candidate set: the unescaped token PLUS, if it has
         # shell wildcards, every path it expands to. bash will read
         # whatever it expands to, so the hook must vet expansions.
-        candidates_raw = [tok] + _glob_expansions(tok)
+        candidates_raw = _path_list_items(tok) + _glob_expansions(tok)
         for cand_raw in candidates_raw:
             rel = _rel_under_allowed(cand_raw)
             candidate = rel if rel is not None else cand_raw
