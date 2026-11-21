@@ -298,10 +298,13 @@ C1, C4, C5 ──> C2 ──> C3 ──> M3 (needs B1 and C6);  C7 alongside B1/
   - Details: `sm90-probe/logs/m3/`. Fixes for what the agent tripped on: `sm90-probe/issues/HARNESS-001`.
 - **M4 met.**
   - B2: 0.997–0.998x DeepGEMM.
-  - B3 (`haok/sm90-fa3` `cdf11ac`): ≥ 0.957x FA3 at every gated shape, on two runs, interleaved in the
-    same step. Non-causal runs 1.02–1.08x, causal 0.96–1.04x.
+  - B3 (`haok/sm90-fa3` `cdf11ac`), gate metric **CUPTI kernel-only**: worst gated 0.926x
+    (4×32×8k causal), geomean 0.975x over the 12 `fa3_forward_h200` rows. Non-causal runs
+    1.00–1.03x, causal 0.93–0.96x; the reviewer measured 0.922–0.929x worst. Event-timed runs
+    (0.957x worst) include FlashInfer's Python dispatch and are secondary.
   - Both are `perf_remarks="error"`-clean.
-  - Open follow-ups: a persistent scheduler for short causal tiles, and `fa3_forward_h200` (C3).
+  - `fa3_forward_h200` (C3 part 3) is packaged, with B3 as its seed (`haok/h200-tasks` `85ab176`).
+  - Open follow-up: a persistent scheduler for short causal tiles.
 
 ## 6. Version pins
 

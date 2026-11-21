@@ -1,0 +1,26 @@
+NVIDIA H200, 595.91.07
+  kernel:   1.989528 ms
+  speedup:  1.0109x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[012/012] official:varlen6-h16-causal axes={'seq_lens': [777, 4096, 1500, 8192, 513, 3000], 'total_tokens': 18078, 'num_heads': 16, 'head_dim': 128, 'causal': True}
+  baseline: 1.580122 ms
+  kernel:   1.549152 ms
+  speedup:  1.0200x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+timer: cupti
+
+Summary
+  passed: 12/12
+  mean speedup: 1.0064x
+  geomean speedup: 1.0061x
+  min/max speedup: 0.9483x / 1.0551x
+  official geomean: 1.0061x (n=12)
+  by num_heads:
+    16: geo=1.0074x n=10
+    32: geo=0.9996x n=2
+
+# Aggregate result (speedup = geomean over shapes)
+| candidate | candidate (12/12 PASS) | 33426us | 1.006x |
+minimum per-shape speedup: 0.948x (b4-h16-s4096-causal)

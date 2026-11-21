@@ -1,0 +1,2 @@
+NVIDIA H200, 595.91.07
+OK    fa3_forward_sm90 [gate_b8_h16_s4096_causal]: tir=998.342µs, fa3=933.468µs

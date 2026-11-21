@@ -1,0 +1,33 @@
+NVIDIA H200, 595.91.07
+  speedup:  1.0248x
+  correct:  PASS verdict=STABLE checks=36 max_abs=9.766e-04 max_rel=2.126e+03 max_rms_ratio=0.000e+00 matched=1.0000
+  speedup:  0.9341x
+  correct:  PASS verdict=STABLE checks=36 max_abs=3.906e-03 max_rel=7.812e-03 max_rms_ratio=0.000e+00 matched=1.0000
+  speedup:  1.0064x
+  correct:  PASS verdict=STABLE checks=36 max_abs=9.766e-04 max_rel=1.199e+03 max_rms_ratio=0.000e+00 matched=1.0000
+  speedup:  0.9596x
+  correct:  PASS verdict=STABLE checks=36 max_abs=1.953e-03 max_rel=7.812e-03 max_rms_ratio=0.000e+00 matched=1.0000
+  speedup:  1.0098x
+  correct:  PASS verdict=STABLE checks=36 max_abs=4.883e-04 max_rel=4.109e+02 max_rms_ratio=0.000e+00 matched=1.0000
+  speedup:  0.9595x
+  correct:  PASS verdict=STABLE checks=36 max_abs=9.766e-04 max_rel=7.812e-03 max_rms_ratio=0.000e+00 matched=1.0000
+  speedup:  1.0086x
+  correct:  PASS verdict=STABLE checks=36 max_abs=9.766e-04 max_rel=3.142e+03 max_rms_ratio=0.000e+00 matched=1.0000
+  speedup:  0.9296x
+  correct:  PASS verdict=STABLE checks=36 max_abs=3.906e-03 max_rel=7.812e-03 max_rms_ratio=0.000e+00 matched=1.0000
+  speedup:  1.0027x
+  correct:  PASS verdict=STABLE checks=36 max_abs=9.766e-04 max_rel=2.152e+03 max_rms_ratio=0.000e+00 matched=1.0000
+  speedup:  0.9257x
+  correct:  PASS verdict=STABLE checks=36 max_abs=7.812e-03 max_rel=7.812e-03 max_rms_ratio=0.000e+00 matched=1.0000
+  speedup:  0.9695x
+  correct:  PASS verdict=STABLE checks=36 max_abs=1.953e-03 max_rel=4.830e+03 max_rms_ratio=0.000e+00 matched=1.0000
+  speedup:  0.9715x
+  correct:  PASS verdict=STABLE checks=36 max_abs=3.906e-03 max_rel=7.812e-03 max_rms_ratio=0.000e+00 matched=1.0000
+Summary
+  passed: 12/12
+  mean speedup: 0.9752x
+  geomean speedup: 0.9746x
+  min/max speedup: 0.9257x / 1.0248x
+  official geomean: 0.9746x (n=12)
+# Aggregate result (speedup = geomean over shapes)
+minimum per-shape speedup: 0.926x (b4-h32-s8192-causal)

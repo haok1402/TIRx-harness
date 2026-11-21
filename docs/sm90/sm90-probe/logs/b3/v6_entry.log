@@ -1,0 +1,23 @@
+NVIDIA H200, 595.91.07
+PASS  fa3_forward_sm90 [s128_h2_full]
+PASS  fa3_forward_sm90 [s128_h2_causal]
+PASS  fa3_forward_sm90 [s1000_h2_full]
+PASS  fa3_forward_sm90 [s1000_h2_causal]
+PASS  fa3_forward_sm90 [s4096_h4_full]
+PASS  fa3_forward_sm90 [s4096_h4_causal]
+PASS  fa3_forward_sm90 [varlen_h3_full]
+PASS  fa3_forward_sm90 [varlen_h3_causal]
+PASS  fa3_forward_sm90 [b2_s2048_h4_full]
+PASS  fa3_forward_sm90 [b2_s2048_h4_causal]
+PASS  fa3_forward_sm90 [gate_b4_h16_s4096_full]
+PASS  fa3_forward_sm90 [gate_b4_h16_s4096_causal]
+PASS  fa3_forward_sm90 [gate_b2_h16_s8192_full]
+PASS  fa3_forward_sm90 [gate_b2_h16_s8192_causal]
+PASS  fa3_forward_sm90 [gate_b1_h16_s16384_full]
+PASS  fa3_forward_sm90 [gate_b1_h16_s16384_causal]
+PASS  fa3_forward_sm90 [gate_b8_h16_s4096_full]
+PASS  fa3_forward_sm90 [gate_b8_h16_s4096_causal]
+PASS  fa3_forward_sm90 [gate_b4_h32_s8192_full]
+PASS  fa3_forward_sm90 [gate_b4_h32_s8192_causal]
+Total: 20  Passed: 20  Failed: 0  Skipped: 0
+OK    fa3_forward_sm90 [gate_b8_h16_s4096_causal]: tir=991.781µs
