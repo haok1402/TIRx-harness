@@ -44,6 +44,7 @@ import io
 import json
 import os
 import sys
+import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
@@ -95,15 +96,95 @@ def _request(task_name: str, overrides: dict, workloads: list, candidate: bytes 
     return program, bundle, handles
 
 
-def _execute(url: str, program, timeout_seconds: int, output_limit_bytes: int | None = None):
-    """Send ``program``, replay the worker's output, fail loudly on a FAILED request."""
+RETRY_SECONDS_ENV = "KCORAL_RETRY_SECONDS"  # total time to keep retrying an unavailable server
+DEFAULT_RETRY_SECONDS = 1800
+_RETRY_HTTP = {502, 503}  # bad gateway / busy or shutting down; 504 is the request's own timeout
+
+
+def resolve_url(remote: str) -> str:
+    """``--remote`` is a URL, or ``@FILE`` naming a file that holds the current URL.
+
+    A preemptible server (``scripts/slurm_kcoral.sh``) moves between nodes and ports; it republishes
+    its URL in that file, and every attempt re-reads it.
+    """
+    if not remote.startswith("@"):
+        return remote
+    try:
+        return Path(remote[1:]).expanduser().read_text().strip()
+    except FileNotFoundError:
+        return ""  # no server published right now (e.g. waiting for the next Slurm task)
+
+
+def _server_gone(remote: str, url: str) -> bool:
+    """After a worker died mid-request: did the server go away (retry) or the candidate crash?"""
+    from kcoral import Client
+    from kcoral.errors import KCoralError, ProtocolError, TransportError
+
+    time.sleep(5)
+    if resolve_url(remote) != url:
+        return True
+    try:
+        with Client(url) as client:
+            client.health()
+    except (TransportError, KCoralError, ProtocolError):
+        return True
+    return False
+
+
+def _execute(remote: str, program, timeout_seconds: int, output_limit_bytes: int | None = None):
+    """Send ``program``, replay the worker's output, fail loudly on a FAILED request.
+
+    Requests are self-contained, so a request that the server could not finish because the
+    server went away (connection refused or reset, HTTP 502/503, or its worker killed mid-run by a
+    preemption) is re-sent to the server ``remote`` currently resolves to. Retries back off from
+    5 s to 60 s, for up to ``$KCORAL_RETRY_SECONDS`` (default 1800) in total. Candidate failures,
+    timeouts and protocol errors are not retried.
+    """
 
     from kcoral import Client
+    from kcoral.errors import KCoralError, TransportError
 
-    with Client(url) as client:
-        result = client.execute(
-            program, timeout_seconds=timeout_seconds, output_limit_bytes=output_limit_bytes
-        )
+    budget = float(os.environ.get(RETRY_SECONDS_ENV, DEFAULT_RETRY_SECONDS))
+    deadline = time.monotonic() + budget
+    delay = 5.0
+    attempt = 0
+    while True:
+        attempt += 1
+        url = resolve_url(remote)
+        reason = None
+        result = None
+        if not url:
+            reason = f"no server URL published in {remote[1:]}"
+        else:
+            try:
+                with Client(url) as client:
+                    result = client.execute(
+                        program,
+                        timeout_seconds=timeout_seconds,
+                        output_limit_bytes=output_limit_bytes,
+                    )
+            except TransportError as exc:
+                reason = f"{url} unreachable ({exc})"
+            except KCoralError as exc:
+                if exc.status_code not in _RETRY_HTTP:
+                    raise
+                reason = f"{url} answered HTTP {exc.status_code} ({exc.message})"
+        if result is not None:
+            error = result.error or {}
+            worker_died = "worker exited" in str(error.get("message", ""))
+            if result.completed or not worker_died or not _server_gone(remote, url):
+                break
+            reason = f"{url} went away while running the request ({error.get('message')})"
+        if time.monotonic() + delay > deadline:
+            raise SystemExit(
+                f"benchmark server unavailable for {budget:.0f}s after {attempt} attempts: {reason}"
+            )
+        print(f"benchmark server: {reason}; retrying in {delay:.0f}s", file=sys.stderr, flush=True)
+        time.sleep(delay)
+        delay = min(delay * 2, 60.0)
+
+    if attempt > 1:
+        print(f"benchmark server: succeeded on attempt {attempt} via {url}", file=sys.stderr)
     sys.stdout.write(result.stdout)  # the harness's own output, verbatim
     sys.stderr.write(result.stderr)
     if not result.completed:
@@ -229,7 +310,9 @@ def main(argv=None) -> None:
         "--remote",
         metavar="URL",
         required=True,
-        help="the kcoral benchmark server (must already be running)",
+        help="the kcoral benchmark server URL, or @FILE holding the current URL (re-read on "
+        "every attempt; scripts/slurm_kcoral.sh publishes one). Unavailable servers are retried "
+        "for $KCORAL_RETRY_SECONDS (default 1800)",
     )
     parser.add_argument("--warmup", type=int, default=None, help="default: per-workload value")
     parser.add_argument("--repeat", type=int, default=None, help="default: per-workload value")

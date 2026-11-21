@@ -195,8 +195,8 @@ def _parser() -> tuple[argparse.ArgumentParser, argparse.ArgumentParser]:
         nargs="?",
         const=BENCH_SERVER_URL,
         metavar="URL",
-        help="score candidates through the kcoral benchmark server at URL "
-        f"(default {BENCH_SERVER_URL})",
+        help="score candidates through the kcoral benchmark server at URL, or @FILE holding the "
+        f"current URL (scripts/slurm_kcoral.sh publishes one) (default {BENCH_SERVER_URL})",
     )
     init.add_argument(
         "--name",
@@ -211,10 +211,11 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if not (REPO_ROOT / ".git").exists():
         init.error(f"evolution must run from a TIRx-harness checkout, not {REPO_ROOT}")
-    if args.remote is not None:
+    if args.remote is not None and not args.remote.startswith("@"):
+        # "@FILE": the URL is read from FILE on every request (a preemptible server republishes it).
         server = urlparse(args.remote)
         if not (server.hostname and server.port):
-            init.error(f"--remote expects http://host:port, got {args.remote!r}")
+            init.error(f"--remote expects http://host:port or @URL_FILE, got {args.remote!r}")
     try:
         setup(
             task_name=args.task,

@@ -70,6 +70,26 @@ uv run --package tirx-evolution evolve init --task fp16_gemm_floor \
 
 CPU checks stay local. The kcoral adapters run GPU benchmarks and diagnostics
 remotely. The server needs the task's runtime dependencies and profiling tools.
+
+**On a preemptible Slurm allocation**, run the server as a 1-GPU job step and let
+clients follow it:
+
+```bash
+scripts/slurm_kcoral.sh <job-or-array-id> ~/kcoral.url   # loop; may run on a login node
+uv run --package tirx-evolution evolve init --task fp16_gemm_floor --remote @$HOME/kcoral.url
+```
+
+The script resolves the job's running task, launches `kcoral server --gpus 0
+--sandbox none --max-timeout-seconds 3600` on it as a step named
+`kcoral-server-<pid>`, and writes the server's `http://node:port` to the URL file.
+The default bubblewrap sandbox needs user namespaces, and the default 900 s cap
+is too short for a full suite. After a preemption it waits for the next running
+task (every `RECHECK_SECONDS`, default 150) and relaunches the server.
+
+`--remote @FILE` makes every request re-read the URL. A request whose server
+went away (connection refused or reset, HTTP 502/503, or its worker killed
+mid-run) is re-sent, backing off up to 60 s, for `$KCORAL_RETRY_SECONDS`
+(default 1800). Candidate failures and timeouts are reported, not retried.
 ````
 
 ## Launch the agent
