@@ -19,6 +19,8 @@ class Environment:
     python: Path
     site_packages: Path
     kernels: Path
+    # Local tvm-tirx / tirx-kernels checkouts copied over the pins (dev_overlay), if any.
+    dev_overlay: dict | None = None
 
     @classmethod
     def create(cls, worktree: Path) -> Environment:
@@ -71,7 +73,10 @@ class Environment:
             if not origin or not Path(origin).resolve().is_relative_to(site):
                 raise ValueError(f"{name} was not installed into the run venv.")
             packages[name] = Path(origin).resolve().parent
-        return cls(prefix, python, site, packages["tirx_kernels"])
+        from .dev_overlay import from_environment
+
+        overlay = from_environment(site) or None
+        return cls(prefix, python, site, packages["tirx_kernels"], overlay)
 
     def kernel_bans(self, banned_paths: list[str]) -> list[str]:
         """Translate checkout-relative task restrictions to installed paths."""

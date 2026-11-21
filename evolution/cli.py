@@ -194,6 +194,7 @@ def setup(
         "venv": str(environment.prefix),
         "python": str(environment.python),
         "kernel_package": str(environment.kernels),
+        "dev_overlay": environment.dev_overlay,
     }
     (run_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     flowverse_config = {
