@@ -24,3 +24,34 @@ of its frontier kernels had spills or C75xx remarks.
 | 4 | **The seed changes, not the rule.** The authoring rule forbids `allowed_func_calls` unless the task names the call. That rule exists to keep opaque calls out of candidates, and the seed had no real need for one. On sm_90, `packed.f32x2_mul` is just two scalar `mul.rz.ftz.f32`: Hopper has no packed FMUL, and the packed op is defined lane by lane. B0's sm_90 path now issues the two scalar instructions directly. Its output is bit-identical to before on 20 shapes, the generated sm_100a/sm_103a CUDA is byte-identical, it passes 36/36, and its speed is unchanged. | TIRx-kernels `haok/sm90-rmsnorm` `2a32bd1`; kernels stack `271cb4c` |
 | 5 | The hook expanded `$PATH` into one colon-joined string. Whenever the run venv was not the first entry, that string substring-matched the ancestor ban on the checkout that holds the run. Path lists are now checked entry by entry, so banned entries still block. The hook had no tests; there are now 5, and the `$PATH` test fails on unfixed main. | TIRx-harness `haok/banned-path-list` `14c6865` (off upstream main) |
 | 6 | Not addressed (not requested). | — |
+
+## NCU re-check (2026-11-21, 16:00–16:25)
+
+A short agent session ran in the CPU step, with a fresh run from the stack at `2851dd0` and the restarted
+server.
+
+**Agent results**
+- Health check: OK.
+- `kcoral_python` with `@URL_FILE` and the token: OK. `sys.executable` is the server venv.
+- **`kcoral_ncu` failed: "ncu is not installed in the remote server environment".** The server PATH had the
+  venv but not CUDA's bin.
+
+**Fixes** (`haok/kcoral-slurm` `0dc1ad6`, stack `3d88f8c`)
+- CUDA's bin is now on the server PATH.
+- The prompt's health field list is corrected.
+
+**Direct re-check with the fixed server and CLIs**
+
+| Tool | Result |
+|---|---|
+| `kcoral_compute_sanitizer` memcheck | 0 errors |
+| `kcoral_iket` | trace JSON returned |
+| `kcoral_ncu` | reaches `ncu`, which stops with `ERR_NVGPUCTRPERM` |
+
+**NCU cannot profile on this cluster at all, and no harness fix can change that.** The nodes' driver sets
+`RmProfilingAdminOnly: 1` (`/proc/driver/nvidia/params`), and the server is not root.
+- Only an administrator can lift it, with the nvidia module option
+  `NVreg_RestrictProfilingToAdminUsers=0`.
+- `kcoral_ncu` now detects the restriction and tells the agent so, instead of letting it retry. The agent
+  in the re-check spent a fallback `--cmd` attempt on it.
+- Until then, agents profile through the benchmark's CUPTI timings and IKET.
