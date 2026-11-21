@@ -128,14 +128,26 @@ def _remote_probe_source() -> str:
 
 
 def detect_remote(url: str, timeout_seconds: int = 120) -> GpuTarget:
-    """The kcoral server's GPU: its reported compilation target plus the device's name and SM count."""
+    """The kcoral server's GPU: its reported compilation target plus the device's name and SM count.
+
+    ``url`` may be ``@URL_FILE`` (scripts/slurm_kcoral.sh); the current URL and its bearer token are
+    read from the file and ``URL_FILE.token``, as kcoral_remote does.
+    """
     from kcoral import Client, Program
 
+    from evolution.remote.kcoral_remote import resolve_url, token_for
+
+    remote = url
+    url = resolve_url(remote)
+    if not url:
+        raise RuntimeError(f"no server URL published in {remote[1:]}")
+    token = token_for(remote)
+    headers = {"Authorization": f"Bearer {token}"} if token else None
     program = Program()
     module = program.upload(id="probe", kind="module", source=_remote_probe_source())
     fn = program.get_function(id="main", module=module, name="main")
     program.return_(key="device", value=program.run(id="device", fn=fn, args=[]))
-    with Client(url) as client:
+    with Client(url, headers=headers) as client:
         arch = client.target()["arch"]
         result = client.execute(program, timeout_seconds=timeout_seconds)
     if not result.completed:
