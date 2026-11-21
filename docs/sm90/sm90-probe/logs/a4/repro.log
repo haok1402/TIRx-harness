@@ -1,0 +1,291 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/a4
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+created: 4/4 workers
+4 workers [7 items]
+
+F.FFFF.                                                                  [100%]
+=================================== FAILURES ===================================
+__________________________ test_dsmem[contiguous-1d] ___________________________
+[gw2] linux -- Python 3.14.6 /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tests/python/tirx/tile/cuda/test_cp_async_bulk.py:312: in test_dsmem
+    mod = tvm_tirx.compile(mod, target=target, pipeline="tirx")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:249: in compile
+    return Executable(_codegen_host_and_device(host_mod, device_mod_dict, target_host))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:153: in _codegen_host_and_device
+    device_modules.append(_build_for_target(device_mod, target))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:137: in _build_for_target
+    return tvm_tirx.codegen.build_module(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/codegen/__init__.py:44: in build_module
+    return get_global_func("codegen.Build")(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_ffi/cython/function.pxi:1038: in tvm_ffi.core.Function.__call__
+    ???
+<unknown>:0: in _TAIL_CALL_CALL.llvm.8155519880111797829
+    ???
+<unknown>:0: in tvm::codegen::Build(tvm::IRModule, tvm::Target)
+    ???
+3rdparty/tvm-ffi/include/tvm/ffi/optional.h:473: in T tvm::ffi::Optional<T, typename std::enable_if<use_object_ref_optional_v<T>, void>::type>::value() const & [with T = tvm::Attrs; typename std::enable_if<use_object_ref_optional_v<T>, void>::type = void]
+    ???
+E   RuntimeError: Back optional access
+E   
+E   Error in codegen: cuda
+E   Location (TVMScript):
+E   Access path: <root>.functions[Module.dsmem_copy_kernel].body.seq[13].then_case.seq[4]
+E   
+E   (... 21 lines skipped ...)
+E               T.ptx.mbarrier(T.cuda.cvta_generic_to_shared(T.address_of(v_3[0])), T.uint32(1), "init", "", "shared", "b64", "")
+E           T.ptx.fence("mbarrier_init", "release", "cluster", "")
+E           T.cuda.cluster_sync()
+E           if T.cuda.mov_sreg(32, "cluster_ctaid.x") == 0:
+E               for copy_step_1 in range(256):
+E                   copy_value_1: T.let[T.float16] = A[copy_step_1]
+E                   src_smem[copy_step_1] = copy_value_1
+E               T.ptx.fence("proxy", "async", "shared::cta", "")
+E               v_4 = T.decl_tensor(v_2.data, ty_args=[T.Tensor((256,), T.float16, scope="shared.dyn")])
+E               v_5 = T.decl_tensor(v_1.data, ty_args=[T.Tensor((256,), T.float16, scope="shared.dyn")])
+E               remote_addresses = T.Call("tirx.alloc_tensor", [], ty_args=[T.Tensor((2,), T.uint64, scope="local")], ty=T.Tensor((2,), T.uint64, scope="local"))
+E               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               T.ptx.mapa(remote_addresses[0], T.address_of(v_3[0]), T.uint32(1), "", "u64", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[0]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(v_5[0])), T.uint32(512), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E           else:
+E               T.ptx.mbarrier(T.cuda.cvta_generic_to_shared(T.address_of(v_3[0])), T.uint32(512), "arrive", "expect_tx", "", "", "shared", "b64", "")
+E               T.cuda.mbarrier_wait(T.address_of(v_3[0]), 0)
+E               for copy_step_2 in range(256):
+E                   copy_value_2: T.let[T.float16] = dst_smem[copy_step_2]
+E                   B[copy_step_2] = copy_value_2
+____________________________ test_dsmem[stride-gap] ____________________________
+[gw1] linux -- Python 3.14.6 /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tests/python/tirx/tile/cuda/test_cp_async_bulk.py:312: in test_dsmem
+    mod = tvm_tirx.compile(mod, target=target, pipeline="tirx")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:249: in compile
+    return Executable(_codegen_host_and_device(host_mod, device_mod_dict, target_host))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:153: in _codegen_host_and_device
+    device_modules.append(_build_for_target(device_mod, target))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:137: in _build_for_target
+    return tvm_tirx.codegen.build_module(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/codegen/__init__.py:44: in build_module
+    return get_global_func("codegen.Build")(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_ffi/cython/function.pxi:1038: in tvm_ffi.core.Function.__call__
+    ???
+<unknown>:0: in _TAIL_CALL_CALL.llvm.8155519880111797829
+    ???
+<unknown>:0: in tvm::codegen::Build(tvm::IRModule, tvm::Target)
+    ???
+3rdparty/tvm-ffi/include/tvm/ffi/optional.h:473: in T tvm::ffi::Optional<T, typename std::enable_if<use_object_ref_optional_v<T>, void>::type>::value() const & [with T = tvm::Attrs; typename std::enable_if<use_object_ref_optional_v<T>, void>::type = void]
+    ???
+E   RuntimeError: Back optional access
+E   
+E   Error in codegen: cuda
+E   Location (TVMScript):
+E   Access path: <root>.functions[Module.dsmem_copy_kernel].body.seq[13].then_case.seq[4]
+E   
+E   (... 21 lines skipped ...)
+E               T.ptx.mbarrier(T.cuda.cvta_generic_to_shared(T.address_of(v_3[0])), T.uint32(1), "init", "", "shared", "b64", "")
+E           T.ptx.fence("mbarrier_init", "release", "cluster", "")
+E           T.cuda.cluster_sync()
+E           if T.cuda.mov_sreg(32, "cluster_ctaid.x") == 0:
+E               for copy_step_1 in range(1024):
+E                   copy_value_1: T.let[T.float16] = A[copy_step_1]
+E                   src_smem[(copy_step_1 >> 7) * 256 + (copy_step_1 & 127)] = copy_value_1
+E               T.ptx.fence("proxy", "async", "shared::cta", "")
+E               v_4 = T.decl_tensor(v_2.data, ty_args=[T.Tensor((2048,), T.float16, scope="shared.dyn")])
+E               v_5 = T.decl_tensor(v_1.data, ty_args=[T.Tensor((2048,), T.float16, scope="shared.dyn")])
+E               remote_addresses = T.Call("tirx.alloc_tensor", [], ty_args=[T.Tensor((2,), T.uint64, scope="local")], ty=T.Tensor((2,), T.uint64, scope="local"))
+E               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               T.ptx.mapa(remote_addresses[0], T.address_of(v_3[0]), T.uint32(1), "", "u64", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[0]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(v_5[0])), T.uint32(256), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[256]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(v_5[256])), T.uint32(256), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[512]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(v_5[512])), T.uint32(256), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[768]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(v_5[768])), T.uint32(256), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[1024]), T.uint32(1), "", "u64", "")
+E   (... 13 lines skipped ...)
+_________________________ test_dsmem_remote_addresses __________________________
+[gw1] linux -- Python 3.14.6 /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tests/python/tirx/tile/cuda/test_pattern_transfers.py:535: in test_dsmem_remote_addresses
+    f = _build(kernel)
+        ^^^^^^^^^^^^^^
+tests/python/tirx/tile/cuda/test_pattern_transfers.py:34: in _build
+    return tvm_tirx.compile(f, target="cuda", pipeline="tirx")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:249: in compile
+    return Executable(_codegen_host_and_device(host_mod, device_mod_dict, target_host))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:153: in _codegen_host_and_device
+    device_modules.append(_build_for_target(device_mod, target))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:137: in _build_for_target
+    return tvm_tirx.codegen.build_module(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/codegen/__init__.py:44: in build_module
+    return get_global_func("codegen.Build")(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_ffi/cython/function.pxi:1038: in tvm_ffi.core.Function.__call__
+    ???
+<unknown>:0: in _TAIL_CALL_CALL_NON_PY_GENERAL.llvm.8155519880111797829
+    ???
+<unknown>:0: in tvm::codegen::Build(tvm::IRModule, tvm::Target)
+    ???
+3rdparty/tvm-ffi/include/tvm/ffi/optional.h:473: in T tvm::ffi::Optional<T, typename std::enable_if<use_object_ref_optional_v<T>, void>::type>::value() const & [with T = tvm::Attrs; typename std::enable_if<use_object_ref_optional_v<T>, void>::type = void]
+    ???
+E   RuntimeError: Back optional access
+E   
+E   Error in codegen: cuda
+E   Location (TVMScript):
+E   Access path: <root>.functions[Module.kernel_kernel].body.seq[10].then_case.seq[0]
+E   
+E   (... 15 lines skipped ...)
+E           barrier = T.alloc_tensor(ty_args=[T.Tensor((1,), T.uint64, scope="shared")])
+E           T.ptx.mbarrier(T.cuda.cvta_generic_to_shared(T.address_of(barrier[0])), T.uint32(1), "init", "", "shared", "b64", "")
+E           T.ptx.fence("mbarrier_init", "release", "cluster", "")
+E           if T.cuda.mov_sreg(32, "cluster_ctaid.x") == 0:
+E               for i in range(3):
+E                   for j in range(8):
+E                       src[i * 16 + j] = A[i * 8 + j]
+E               T.ptx.fence("proxy", "async", "shared::cta", "")
+E           T.cuda.cluster_sync()
+E           if T.cuda.mov_sreg(32, "cluster_ctaid.x") == 0:
+E               remote_addresses = T.Call("tirx.alloc_tensor", [], ty_args=[T.Tensor((2,), T.uint64, scope="local")], ty=T.Tensor((2,), T.uint64, scope="local"))
+E               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               T.ptx.mapa(remote_addresses[0], T.address_of(barrier[0]), T.uint32(1), "", "u64", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(dst[0]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(src[0])), T.uint32(32), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(dst[16]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(src[16])), T.uint32(32), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(dst[32]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(src[32])), T.uint32(32), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E           else:
+E               T.ptx.mbarrier(T.cuda.cvta_generic_to_shared(T.address_of(barrier[0])), T.uint32(96), "arrive", "expect_tx", "", "", "shared", "b64", "")
+E               T.cuda.mbarrier_wait(T.address_of(barrier[0]), 0)
+E   (... 4 lines skipped ...)
+__________________ test_dsmem[partial-contiguity-diff-stride] __________________
+[gw3] linux -- Python 3.14.6 /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tests/python/tirx/tile/cuda/test_cp_async_bulk.py:312: in test_dsmem
+    mod = tvm_tirx.compile(mod, target=target, pipeline="tirx")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:249: in compile
+    return Executable(_codegen_host_and_device(host_mod, device_mod_dict, target_host))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:153: in _codegen_host_and_device
+    device_modules.append(_build_for_target(device_mod, target))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:137: in _build_for_target
+    return tvm_tirx.codegen.build_module(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/codegen/__init__.py:44: in build_module
+    return get_global_func("codegen.Build")(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_ffi/cython/function.pxi:1038: in tvm_ffi.core.Function.__call__
+    ???
+<unknown>:0: in _TAIL_CALL_CALL.llvm.8155519880111797829
+    ???
+<unknown>:0: in tvm::codegen::Build(tvm::IRModule, tvm::Target)
+    ???
+3rdparty/tvm-ffi/include/tvm/ffi/optional.h:473: in T tvm::ffi::Optional<T, typename std::enable_if<use_object_ref_optional_v<T>, void>::type>::value() const & [with T = tvm::Attrs; typename std::enable_if<use_object_ref_optional_v<T>, void>::type = void]
+    ???
+E   RuntimeError: Back optional access
+E   
+E   Error in codegen: cuda
+E   Location (TVMScript):
+E   Access path: <root>.functions[Module.dsmem_copy_kernel].body.seq[13].then_case.seq[4]
+E   
+E   (... 21 lines skipped ...)
+E               T.ptx.mbarrier(T.cuda.cvta_generic_to_shared(T.address_of(v_3[0])), T.uint32(1), "init", "", "shared", "b64", "")
+E           T.ptx.fence("mbarrier_init", "release", "cluster", "")
+E           T.cuda.cluster_sync()
+E           if T.cuda.mov_sreg(32, "cluster_ctaid.x") == 0:
+E               for copy_step_1 in range(1024):
+E                   copy_value_1: T.let[T.float16] = A[copy_step_1]
+E                   src_smem[(copy_step_1 >> 7) * 256 + (copy_step_1 & 127)] = copy_value_1
+E               T.ptx.fence("proxy", "async", "shared::cta", "")
+E               v_4 = T.decl_tensor(v_2.data, ty_args=[T.Tensor((4096,), T.float16, scope="shared.dyn")])
+E               v_5 = T.decl_tensor(v_1.data, ty_args=[T.Tensor((2048,), T.float16, scope="shared.dyn")])
+E               remote_addresses = T.Call("tirx.alloc_tensor", [], ty_args=[T.Tensor((2,), T.uint64, scope="local")], ty=T.Tensor((2,), T.uint64, scope="local"))
+E               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               T.ptx.mapa(remote_addresses[0], T.address_of(v_3[0]), T.uint32(1), "", "u64", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[0]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(v_5[0])), T.uint32(256), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[512]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(v_5[256])), T.uint32(256), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[1024]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(v_5[512])), T.uint32(256), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[1536]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(v_5[768])), T.uint32(256), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[2048]), T.uint32(1), "", "u64", "")
+E   (... 13 lines skipped ...)
+__________________________ test_dsmem[contiguous-2d] ___________________________
+[gw0] linux -- Python 3.14.6 /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tests/python/tirx/tile/cuda/test_cp_async_bulk.py:312: in test_dsmem
+    mod = tvm_tirx.compile(mod, target=target, pipeline="tirx")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:249: in compile
+    return Executable(_codegen_host_and_device(host_mod, device_mod_dict, target_host))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:153: in _codegen_host_and_device
+    device_modules.append(_build_for_target(device_mod, target))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:137: in _build_for_target
+    return tvm_tirx.codegen.build_module(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/codegen/__init__.py:44: in build_module
+    return get_global_func("codegen.Build")(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_ffi/cython/function.pxi:1038: in tvm_ffi.core.Function.__call__
+    ???
+<unknown>:0: in _TAIL_CALL_CALL.llvm.8155519880111797829
+    ???
+<unknown>:0: in tvm::codegen::Build(tvm::IRModule, tvm::Target)
+    ???
+3rdparty/tvm-ffi/include/tvm/ffi/optional.h:473: in T tvm::ffi::Optional<T, typename std::enable_if<use_object_ref_optional_v<T>, void>::type>::value() const & [with T = tvm::Attrs; typename std::enable_if<use_object_ref_optional_v<T>, void>::type = void]
+    ???
+E   RuntimeError: Back optional access
+E   
+E   Error in codegen: cuda
+E   Location (TVMScript):
+E   Access path: <root>.functions[Module.dsmem_copy_kernel].body.seq[13].then_case.seq[4]
+E   
+E   (... 21 lines skipped ...)
+E               T.ptx.mbarrier(T.cuda.cvta_generic_to_shared(T.address_of(v_3[0])), T.uint32(1), "init", "", "shared", "b64", "")
+E           T.ptx.fence("mbarrier_init", "release", "cluster", "")
+E           T.cuda.cluster_sync()
+E           if T.cuda.mov_sreg(32, "cluster_ctaid.x") == 0:
+E               for copy_step_1 in range(8192):
+E                   copy_value_1: T.let[T.float16] = A[copy_step_1]
+E                   src_smem[copy_step_1] = copy_value_1
+E               T.ptx.fence("proxy", "async", "shared::cta", "")
+E               v_4 = T.decl_tensor(v_2.data, ty_args=[T.Tensor((8192,), T.float16, scope="shared.dyn")])
+E               v_5 = T.decl_tensor(v_1.data, ty_args=[T.Tensor((8192,), T.float16, scope="shared.dyn")])
+E               remote_addresses = T.Call("tirx.alloc_tensor", [], ty_args=[T.Tensor((2,), T.uint64, scope="local")], ty=T.Tensor((2,), T.uint64, scope="local"))
+E               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               T.ptx.mapa(remote_addresses[0], T.address_of(v_3[0]), T.uint32(1), "", "u64", "")
+E               T.ptx.mapa(remote_addresses[1], T.address_of(v_4[0]), T.uint32(1), "", "u64", "")
+E               T.ptx.cp(T.Cast("uint32", remote_addresses[1]), T.cuda.cvta_generic_to_shared(T.address_of(v_5[0])), T.uint32(16384), T.Cast("uint32", remote_addresses[0]), "async", "bulk", "", "", "shared::cluster", "shared::cta", "mbarrier::complete_tx::bytes", "", "")
+E           else:
+E               T.ptx.mbarrier(T.cuda.cvta_generic_to_shared(T.address_of(v_3[0])), T.uint32(16384), "arrive", "expect_tx", "", "", "shared", "b64", "")
+E               T.cuda.mbarrier_wait(T.address_of(v_3[0]), 0)
+E               for copy_step_2 in range(8192):
+E                   copy_value_2: T.let[T.float16] = dst_smem[copy_step_2]
+E                   B[copy_step_2] = copy_value_2
+=========================== short test summary info ============================
+FAILED tests/python/tirx/tile/cuda/test_cp_async_bulk.py::test_dsmem[contiguous-1d]
+FAILED tests/python/tirx/tile/cuda/test_cp_async_bulk.py::test_dsmem[stride-gap]
+FAILED tests/python/tirx/tile/cuda/test_pattern_transfers.py::test_dsmem_remote_addresses
+FAILED tests/python/tirx/tile/cuda/test_cp_async_bulk.py::test_dsmem[partial-contiguity-diff-stride]
+FAILED tests/python/tirx/tile/cuda/test_cp_async_bulk.py::test_dsmem[contiguous-2d]
+========================= 5 failed, 2 passed in 8.20s ==========================

@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/a5
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+created: 12/12 workers
+12 workers [1807 items]
+
+sssssssssss.ssssss...........x.......................................... [  3%]
+..........ssssssssssssssssssssss.sss.....ssss........................... [  7%]
+.......................................................x...x.x.......... [ 11%]
+...............................................x...xx................... [ 15%]
+.....................x..x....x....................................x..x.x [ 19%]
+...................................................................sssss [ 23%]
+sss.................................................ss.................. [ 27%]
+.................sssss.............s...........s........................ [ 31%]
+...........x.........................................x.................. [ 35%]
+x......................x...........x..sxx.xxxx..x..xx.x.x..xx.x.xxxx.... [ 39%]
+x...x.x............x...s.........sssssssssssssssssssssssssssssssssssssss [ 43%]
+ssssssssssssssssssssssssssssssssssssssssss.sssssssssssssssssssssssssssss [ 47%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss.s [ 51%]
+ssssssssssssssssssssss...................................sssssssssssssss [ 55%]
+sssssssss............................x........ssssssssssssssssss.sssssss [ 59%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 63%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 67%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 71%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 75%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 79%]
+sssssssssssssssssss.ssssssssssssssssssssssssssssssssssssssssssssssssssss [ 83%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 87%]
+sssssssssssssssssssssss.sssssssssssssssss............................... [ 91%]
+.................s.x.....ssssssssssssssssss........s........x..s.....s.. [ 95%]
+........x.xx...s.sssssssss...................s...........x.........sssss [ 99%]
+ss.....                                                                  [100%]
+=========== 860 passed, 900 skipped, 47 xfailed in 92.03s (0:01:32) ============

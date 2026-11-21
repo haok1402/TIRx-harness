@@ -1,0 +1,152 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/a5
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+created: 12/12 workers
+12 workers [596 items]
+
+................ssssssss........sss..................................... [ 12%]
+........................................................................ [ 24%]
+..s................s.................................................... [ 36%]
+........................................................................ [ 48%]
+........................................................................ [ 60%]
+.............................................s.s...............F.s.F.... [ 72%]
+.............................sss...........s....ss..ss.sss..ss.......... [ 84%]
+.......sssssssssssssssssssssssssssssssssss.........ss....ssssssssss..... [ 96%]
+..s..s...s..........                                                     [100%]
+=================================== FAILURES ===================================
+_______________________________ test_wgmma_ss_nt _______________________________
+[gw3] linux -- Python 3.14.6 /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tests/python/tirx/codegen/test_hopper.py:1203: in test_wgmma_ss_nt
+    mod = tvm_tirx.compile(mod, target=target, pipeline="tirx")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:249: in compile
+    return Executable(_codegen_host_and_device(host_mod, device_mod_dict, target_host))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:153: in _codegen_host_and_device
+    device_modules.append(_build_for_target(device_mod, target))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:137: in _build_for_target
+    return tvm_tirx.codegen.build_module(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/codegen/__init__.py:44: in build_module
+    return get_global_func("codegen.Build")(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_ffi/cython/function.pxi:1038: in tvm_ffi.core.Function.__call__
+    ???
+<unknown>:0: in _TAIL_CALL_CALL_NON_PY_GENERAL.llvm.8155519880111797829
+    ???
+<unknown>:0: in tvm::codegen::Build(tvm::IRModule, tvm::Target)
+    ???
+<unknown>:0: in TVMFFIPyCallback(void*, TVMFFIAny const*, int, TVMFFIAny*)
+    ???
+<unknown>:0: in TVMFFIPyCallManager::ForwardPyErrorToFFI()
+    ???
+<unknown>:0: in TVMFFICyErrorSetRaisedFromPyError(_object*)
+    ???
+python/tvm_tirx/backend/cuda/codegen/registry.py:52: in wrapper
+    res = func(*arg_list, **kwargs)  # pylint: disable=not-callable
+python/tvm_tirx/backend/cuda/cpp/asm.py:414: in codegen_cuda_wgmma_noop_barrier
+    dtype = str(reg.dtype)
+python/tvm_tirx/ir/expr.py:87: in __getattr__
+    raise AttributeError(f"{type(self).__name__!r} object has no attribute {name!r}")
+E   AttributeError: 'TensorLoad' object has no attribute 'dtype'
+E   
+E   Error in codegen: cuda
+E   Location (TVMScript):
+E   Access path: <root>.functions[Module.main_kernel].body.seq[18].body.seq[1].value
+E   
+E   (... 24 lines skipped ...)
+E           T.cuda.cta_sync()
+E           if T.cuda.thread_idx("x") == 0:
+E               T.ptx.cp(T.cuda.cvta_generic_to_shared(A_smem.data), T.reinterpret(T.address_of(A_map), ty=T.Ptr(T.void)), T.int32(0), T.int32(0), T.cuda.cvta_generic_to_shared(T.address_of(bar[0])), "async", "bulk", "tensor", "2d", "shared::cluster", "global", "", "mbarrier::complete_tx::bytes", "", "", "", "")
+E               T.ptx.cp(T.cuda.cvta_generic_to_shared(B_smem.data), T.reinterpret(T.address_of(B_map), ty=T.Ptr(T.void)), T.int32(0), T.int32(0), T.cuda.cvta_generic_to_shared(T.address_of(bar[0])), "async", "bulk", "tensor", "2d", "shared::cluster", "global", "", "mbarrier::complete_tx::bytes", "", "", "", "")
+E               T.ptx.mbarrier(T.cuda.cvta_generic_to_shared(T.address_of(bar[0])), T.uint32(4096), "arrive", "expect_tx", "", "", "shared", "b64", "")
+E           T.cuda.mbarrier_wait(T.address_of(bar[0]), phase[0])
+E           phase[0] = phase[0] ^ 1
+E           T.cuda.cta_sync()
+E           for i in range(32):
+E               C_local[i] = T.float32(0.0)
+E               T.cuda.wgmma_noop_barrier(C_local[i])
+E               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           T.cuda.wgmma_encode_matrix_descriptor(T.address_of(descA[0]), A_smem.data, 1, 64, 3)
+E           T.cuda.wgmma_encode_matrix_descriptor(T.address_of(descB[0]), B_smem.data, 1, 64, 3)
+E           T.ptx.wgmma("fence", "sync", "aligned", "")
+E           T.ptx.wgmma(C_local[0], C_local[1], C_local[2], C_local[3], C_local[4], C_local[5], C_local[6], C_local[7], C_local[8], C_local[9], C_local[10], C_local[11], C_local[12], C_local[13], C_local[14], C_local[15], C_local[16], C_local[17], C_local[18], C_local[19], C_local[20], C_local[21], C_local[22], C_local[23], C_local[24], C_local[25], C_local[26], C_local[27], C_local[28], C_local[29], C_local[30], C_local[31], descA[0], descB[0], T.uint32(0), T.int32(1), T.int32(1), T.int32(1), T.int32(1), "mma_async", "sync", "aligned", "m64n64k16", "f32", "f16", "f16", "p34")
+E           T.ptx.wgmma("commit_group", "sync", "aligned", "")
+E           T.ptx.wgmma(T.int32(0), "wait_group", "sync", "aligned", "")
+E           for i_1 in range(32):
+E               T.cuda.wgmma_noop_barrier(C_local[i_1])
+E           for i_2 in range(8):
+E               row: T.let[T.int32] = (T.cuda.thread_idx("x") >> 5) * 16 + ((T.cuda.thread_idx("x") & 31) >> 2)
+E   (... 5 lines skipped ...)
+_______________________________ test_wgmma_rs_nt _______________________________
+[gw3] linux -- Python 3.14.6 /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tests/python/tirx/codegen/test_hopper.py:1380: in test_wgmma_rs_nt
+    mod = tvm_tirx.compile(mod, target=target, pipeline="tirx")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:249: in compile
+    return Executable(_codegen_host_and_device(host_mod, device_mod_dict, target_host))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:153: in _codegen_host_and_device
+    device_modules.append(_build_for_target(device_mod, target))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/tirx/_compile.py:137: in _build_for_target
+    return tvm_tirx.codegen.build_module(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_tirx/codegen/__init__.py:44: in build_module
+    return get_global_func("codegen.Build")(mod, target)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+python/tvm_ffi/cython/function.pxi:1038: in tvm_ffi.core.Function.__call__
+    ???
+<unknown>:0: in _TAIL_CALL_CALL_NON_PY_GENERAL.llvm.8155519880111797829
+    ???
+<unknown>:0: in tvm::codegen::Build(tvm::IRModule, tvm::Target)
+    ???
+<unknown>:0: in TVMFFIPyCallback(void*, TVMFFIAny const*, int, TVMFFIAny*)
+    ???
+<unknown>:0: in TVMFFIPyCallManager::ForwardPyErrorToFFI()
+    ???
+<unknown>:0: in TVMFFICyErrorSetRaisedFromPyError(_object*)
+    ???
+python/tvm_tirx/backend/cuda/codegen/registry.py:52: in wrapper
+    res = func(*arg_list, **kwargs)  # pylint: disable=not-callable
+python/tvm_tirx/backend/cuda/cpp/asm.py:414: in codegen_cuda_wgmma_noop_barrier
+    dtype = str(reg.dtype)
+python/tvm_tirx/ir/expr.py:87: in __getattr__
+    raise AttributeError(f"{type(self).__name__!r} object has no attribute {name!r}")
+E   AttributeError: 'TensorLoad' object has no attribute 'dtype'
+E   
+E   Error in codegen: cuda
+E   Location (TVMScript):
+E   Access path: <root>.functions[Module.main_kernel].body.seq[18].body.seq[0].value
+E   
+E   (... 29 lines skipped ...)
+E           T.ptx.fence("proxy", "async", "shared::cta", "")
+E           T.cuda.cta_sync()
+E           if T.cuda.thread_idx("x") == 0:
+E               T.ptx.cp(T.cuda.cvta_generic_to_shared(B_smem.data), T.reinterpret(T.address_of(B_map), ty=T.Ptr(T.void)), T.int32(0), T.int32(0), T.cuda.cvta_generic_to_shared(T.address_of(bar[0])), "async", "bulk", "tensor", "2d", "shared::cluster", "global", "", "mbarrier::complete_tx::bytes", "", "", "", "")
+E               T.ptx.mbarrier(T.cuda.cvta_generic_to_shared(T.address_of(bar[0])), T.uint32(2048), "arrive", "expect_tx", "", "", "shared", "b64", "")
+E           T.cuda.mbarrier_wait(T.address_of(bar[0]), 0)
+E           T.cuda.cta_sync()
+E           for i_1 in range(32):
+E               C_local[i_1] = T.float32(0.0)
+E           for i_2 in range(4):
+E               T.cuda.wgmma_noop_barrier(A_local_b32[i_2])
+E               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           for i_3 in range(32):
+E               T.cuda.wgmma_noop_barrier(C_local[i_3])
+E           T.cuda.wgmma_encode_matrix_descriptor(T.address_of(descB[0]), B_smem.data, 1, 64, 3)
+E           T.ptx.wgmma("fence", "sync", "aligned", "")
+E           T.ptx.wgmma(C_local[0], C_local[1], C_local[2], C_local[3], C_local[4], C_local[5], C_local[6], C_local[7], C_local[8], C_local[9], C_local[10], C_local[11], C_local[12], C_local[13], C_local[14], C_local[15], C_local[16], C_local[17], C_local[18], C_local[19], C_local[20], C_local[21], C_local[22], C_local[23], C_local[24], C_local[25], C_local[26], C_local[27], C_local[28], C_local[29], C_local[30], C_local[31], A_local_b32[0], A_local_b32[1], A_local_b32[2], A_local_b32[3], descB[0], T.uint32(0), T.int32(1), T.int32(1), T.int32(1), "mma_async", "sync", "aligned", "m64n64k16", "f32", "f16", "f16", "p37")
+E           T.ptx.wgmma("commit_group", "sync", "aligned", "")
+E           T.ptx.wgmma(T.int32(0), "wait_group", "sync", "aligned", "")
+E           for i_4 in range(4):
+E               T.cuda.wgmma_noop_barrier(A_local_b32[i_4])
+E           for i_5 in range(32):
+E   (... 8 lines skipped ...)
+=========================== short test summary info ============================
+FAILED tests/python/tirx/codegen/test_hopper.py::test_wgmma_ss_nt - Attribute...
+FAILED tests/python/tirx/codegen/test_hopper.py::test_wgmma_rs_nt - Attribute...
+============ 2 failed, 515 passed, 79 skipped in 119.83s (0:01:59) =============
