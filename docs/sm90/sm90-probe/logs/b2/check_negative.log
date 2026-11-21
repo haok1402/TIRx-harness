@@ -1,0 +1,9 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+clean output: pass
+row 5 := row 6: calc_diff 2.44e-04 (< 1e-3: True) -> caught: 7132 of 29360128 outputs out of tolerance (rows 1); first at (5, 0): got 37.25, expected -82.02980982424003
+row 100 zeroed: calc_diff 1.24e-04 (< 1e-3: True) -> caught: 7131 of 29360128 outputs out of tolerance (rows 1); first at (100, 0): got 0.0, expected 3.1885593243922994
+one element +1 ulp x 4: calc_diff 1.38e-06 (< 1e-3: True) -> caught: 1 of 29360128 outputs out of tolerance (rows 1); first at (7, 9): got 19.5, expected 18.902092596394645
+last bit flipped in 1 element: calc_diff 1.38e-06 (< 1e-3: True) -> caught: 1 of 29360128 outputs differ bitwise from DeepGEMM

@@ -214,6 +214,24 @@ DeepGEMM.
     - the ISSUE-002 workaround: about 10% on the cluster configs.
   - Decode rows (m = 128) are tracked at 0.41–0.84x; a small-M tile is future work.
 
+**B3-baseline result (2026-11-21, `sm90-probe/logs/b3/baseline.log`).** bf16 hd128, same step, interleaved:
+flashinfer FA3 against cuDNN SDPA and torch flash (FA2).
+
+- FA3 is the faster baseline at **every** gated shape (s ≥ 4k):
+
+  | Shape (b·h·s) | Non-causal (TFLOPS) | Causal (TFLOPS) |
+  |---|---|---|
+  | 4·16·4k | 693 | 617 |
+  | 8·16·4k | 662 | 622 |
+  | 2·16·8k | 709 | 657 |
+  | 4·32·8k | 705 | 661 |
+  | 1·16·16k | 722 | 718 |
+
+  cuDNN runs 590–682. B3's target, 0.90x of max(FA3, cuDNN), is therefore **556–650 TFLOPS** depending on
+  shape.
+- s ≤ 2k rows are tracked only. There cuDNN is ahead (598/442 TFLOPS at 8·32·1k).
+- **B3 waits until after M3** (coordinator, 2026-11-21).
+
 Per-kernel acceptance in TIRx-kernels, all three run as 1-GPU steps:
 - `python -m tirx_kernels.test --arch sm_90a --kernel <name>` passes every CONFIG.
 - `python -m tirx_kernels.bench --arch sm_90a --kernel <name> --with-references` reports the ratio to

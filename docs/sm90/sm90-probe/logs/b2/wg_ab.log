@@ -1,0 +1,18 @@
+srun: Step created for StepId=3280666.2291
+NVIDIA H200, 595.91.07
+== B1 wg=tx unroll=0
+{"dtype": "bf16", "gated_geomean": 0.988, "n": 7, "min": 0.938}
+== B1 wg=builtin unroll=0
+{"dtype": "bf16", "gated_geomean": 0.988, "n": 7, "min": 0.938}
+== B1 wg=tx unroll=8
+{"dtype": "bf16", "gated_geomean": 0.989, "n": 7, "min": 0.937}
+== B1 wg=builtin unroll=8
+{"dtype": "bf16", "gated_geomean": 0.988, "n": 7, "min": 0.94}
+== B1 wg=builtin unroll=4
+{"dtype": "bf16", "gated_geomean": 0.989, "n": 7, "min": 0.939}
+== B2 wg=tx
+{"bn": "auto", "gated_geomean": 0.98, "n": 7, "min": 0.948}
+== B2 wg=shfl
+{"bn": "auto", "gated_geomean": 0.998, "n": 7, "min": 0.97}
+== B2 wg=builtin
+{"bn": "auto", "gated_geomean": 0.992, "n": 7, "min": 0.953}

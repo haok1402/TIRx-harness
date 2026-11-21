@@ -1,0 +1,29 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in main_kernel (sm_90a): 64 bytes spill stores, 68 bytes spill loads (48 bytes stack frame)
+  result = compile_source(code, config, target=target)
+PASS  fp8_blockscale_gemm_sm90 [4096x2112x7168]
+PASS  fp8_blockscale_gemm_sm90 [4096x576x7168]
+PASS  fp8_blockscale_gemm_sm90 [4096x24576x1536]
+PASS  fp8_blockscale_gemm_sm90 [4096x32768x512]
+PASS  fp8_blockscale_gemm_sm90 [4096x7168x16384]
+PASS  fp8_blockscale_gemm_sm90 [4096x4096x7168]
+PASS  fp8_blockscale_gemm_sm90 [4096x7168x2048]
+PASS  fp8_blockscale_gemm_sm90 [128x2112x7168]
+PASS  fp8_blockscale_gemm_sm90 [128x576x7168]
+PASS  fp8_blockscale_gemm_sm90 [128x24576x1536]
+PASS  fp8_blockscale_gemm_sm90 [128x32768x512]
+PASS  fp8_blockscale_gemm_sm90 [128x7168x16384]
+PASS  fp8_blockscale_gemm_sm90 [128x4096x7168]
+PASS  fp8_blockscale_gemm_sm90 [128x7168x2048]
+PASS  fp8_blockscale_gemm_sm90 [1x4096x7168]
+PASS  fp8_blockscale_gemm_sm90 [100x2112x7168]
+PASS  fp8_blockscale_gemm_sm90 [777x576x1008]
+PASS  fp8_blockscale_gemm_sm90 [300x520x144]
+PASS  fp8_blockscale_gemm_sm90 [1000x24584x1520]
+PASS  fp8_blockscale_gemm_sm90 [2049x7176x2064]
+
+============================================================
+Total: 20  Passed: 20  Failed: 0  Skipped: 0
