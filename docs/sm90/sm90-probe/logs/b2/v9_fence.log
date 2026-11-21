@@ -1,0 +1,21 @@
+NVIDIA H200, 595.91.07
+Total: 20  Passed: 20  Failed: 0  Skipped: 0
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+(128, 192, None) perf_remarks=error: compiled; chain check rc 0 {"function": "main_kernel", "gmma": 32, "chains": [4, 4, 4, 4, 4, 4, 4, 4], "gsb0": 8, "flags": []}
+(128, 192, 'm') perf_remarks=error: compiled; chain check rc 0 {"function": "main_kernel", "gmma": 32, "chains": [4, 4, 4, 4, 4, 4, 4, 4], "gsb0": 8, "flags": []}
+(256, 128, 'n') perf_remarks=error: compiled; chain check rc 0 {"function": "main_kernel", "gmma": 64, "chains": [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], "gsb0": 16, "flags": []}
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-fp8-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-086", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 78.50, 29"}, "deep_gemm": "2.6.1"}
+{"bn": "auto", "cfg": [128, 192, null], "shape": [4096, 2112, 7168], "compile_s": 4.6, "remarks": [], "nan": 0, "diff_vs_ref": 2.393513687248827e-07, "diff_deepgemm_vs_ref": 2.393513687248827e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 96.1, "dg_us": 96.2, "tirx_tflops": 1290.6, "dg_tflops": 1289.7, "ratio": 1.001}
+{"bn": "auto", "cfg": [128, 192, null], "shape": [4096, 576, 7168], "compile_s": 2.3, "remarks": [], "nan": 0, "diff_vs_ref": 2.4268845266739447e-07, "diff_deepgemm_vs_ref": 2.4268845266739447e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 34.4, "dg_us": 36.5, "tirx_tflops": 984.6, "dg_tflops": 927.6, "ratio": 1.061}
+{"bn": "auto", "cfg": [128, 192, "m"], "shape": [4096, 24576, 1536], "compile_s": 2.1, "remarks": [], "nan": 0, "diff_vs_ref": 2.402603561657557e-07, "diff_deepgemm_vs_ref": 2.402603561657557e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 230.7, "dg_us": 232.2, "tirx_tflops": 1340.2, "dg_tflops": 1331.9, "ratio": 1.006}
+{"bn": "auto", "cfg": [128, 192, "m"], "shape": [4096, 32768, 512], "compile_s": 1.9, "remarks": [], "nan": 0, "diff_vs_ref": 2.4168030798854545e-07, "diff_deepgemm_vs_ref": 2.4168030798854545e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 133.2, "dg_us": 128.5, "tirx_tflops": 1031.6, "dg_tflops": 1069.7, "ratio": 0.964}
+{"bn": "auto", "cfg": [256, 128, "n"], "shape": [4096, 7168, 16384], "compile_s": 2.8, "remarks": [], "nan": 0, "diff_vs_ref": 2.394827269824873e-07, "diff_deepgemm_vs_ref": 2.394827269824873e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 677.9, "dg_us": 669.2, "tirx_tflops": 1419.2, "dg_tflops": 1437.6, "ratio": 0.987}
+{"bn": "auto", "cfg": [256, 128, "n"], "shape": [4096, 4096, 7168], "compile_s": 2.9, "remarks": [], "nan": 0, "diff_vs_ref": 2.39078812191984e-07, "diff_deepgemm_vs_ref": 2.39078812191984e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 168.7, "dg_us": 166.7, "tirx_tflops": 1425.7, "dg_tflops": 1443.2, "ratio": 0.988}
+{"bn": "auto", "cfg": [256, 128, "n"], "shape": [4096, 7168, 2048], "compile_s": 3.0, "remarks": [], "nan": 0, "diff_vs_ref": 2.3941992643994325e-07, "diff_deepgemm_vs_ref": 2.3941992643994325e-07, "diff_vs_deepgemm": 0.0, "tirx_us": 94.4, "dg_us": 93.0, "tirx_tflops": 1273.5, "dg_tflops": 1293.0, "ratio": 0.985}
+{"bn": "auto", "gated_geomean": 0.998, "n": 7, "min": 0.964}
+{"state_after": {"host": "fs-mbz-gpu-086", "gpu": "NVIDIA H200", "smi": "1980, 1980, 0x0000000000000000, 118.89, 31"}}

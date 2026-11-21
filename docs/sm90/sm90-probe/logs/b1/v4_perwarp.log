@@ -1,0 +1,28 @@
+NVIDIA H200, 595.91.07
+Total: 38  Passed: 38  Failed: 0  Skipped: 0
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+bf16 perf_remarks=error: compiled; chain check rc 0 {"function": "main_kernel", "gmma": 8, "chains": [4, 4], "gsb0": 2, "flags": []}
+fp16 perf_remarks=error: compiled; chain check rc 0 {"function": "main_kernel", "gmma": 8, "chains": [4, 4], "gsb0": 2, "flags": []}
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-gemm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-086", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 79.23, 29"}}
+{"dtype": "bf16", "shape": [4096, 4096, 4096], "compile_s": 2.2, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 181.8, "cublas_us": 177.6, "tirx_tflops": 756.0, "cublas_tflops": 773.9, "ratio": 0.977}
+{"dtype": "bf16", "shape": [8192, 8192, 8192], "compile_s": 1.9, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 1482.6, "cublas_us": 1540.9, "tirx_tflops": 741.6, "cublas_tflops": 713.6, "ratio": 1.039}
+{"dtype": "bf16", "shape": [16384, 16384, 16384], "compile_s": 1.8, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 12458.1, "cublas_us": 12465.0, "tirx_tflops": 706.1, "cublas_tflops": 705.7, "ratio": 1.001}
+{"dtype": "bf16", "shape": [2048, 8192, 1024], "compile_s": 1.9, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 54.3, "cublas_us": 53.8, "tirx_tflops": 633.1, "cublas_tflops": 638.8, "ratio": 0.991}
+{"dtype": "bf16", "shape": [2048, 11008, 4096], "compile_s": 1.9, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 261.9, "cublas_us": 245.1, "tirx_tflops": 705.2, "cublas_tflops": 753.5, "ratio": 0.936}
+{"dtype": "bf16", "shape": [4096, 4096, 11008], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 462.0, "cublas_us": 453.1, "tirx_tflops": 799.4, "cublas_tflops": 815.2, "ratio": 0.981}
+{"dtype": "bf16", "shape": [4096, 11008, 4096], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 480.4, "cublas_us": 481.4, "tirx_tflops": 768.8, "cublas_tflops": 767.3, "ratio": 1.002}
+{"dtype": "fp16", "shape": [4096, 4096, 4096], "compile_s": 1.9, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 185.0, "cublas_us": 182.4, "tirx_tflops": 742.9, "cublas_tflops": 753.6, "ratio": 0.986}
+{"dtype": "fp16", "shape": [8192, 8192, 8192], "compile_s": 2.1, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 1617.1, "cublas_us": 1665.3, "tirx_tflops": 679.9, "cublas_tflops": 660.2, "ratio": 1.03}
+{"dtype": "fp16", "shape": [16384, 16384, 16384], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 12987.0, "cublas_us": 13031.5, "tirx_tflops": 677.3, "cublas_tflops": 675.0, "ratio": 1.003}
+{"dtype": "fp16", "shape": [2048, 8192, 1024], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 54.9, "cublas_us": 55.1, "tirx_tflops": 625.9, "cublas_tflops": 623.7, "ratio": 1.003}
+{"dtype": "fp16", "shape": [2048, 11008, 4096], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 268.8, "cublas_us": 252.7, "tirx_tflops": 687.1, "cublas_tflops": 730.8, "ratio": 0.94}
+{"dtype": "fp16", "shape": [4096, 4096, 11008], "compile_s": 2.2, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 481.2, "cublas_us": 473.2, "tirx_tflops": 767.7, "cublas_tflops": 780.5, "ratio": 0.984}
+{"dtype": "fp16", "shape": [4096, 11008, 4096], "compile_s": 2.0, "clusters": 66, "remarks": [], "rel_err_vs_cublas": 0.0, "bit_exact": true, "tirx_us": 496.5, "cublas_us": 500.2, "tirx_tflops": 744.0, "cublas_tflops": 738.4, "ratio": 1.008}
+{"dtype": "bf16", "gated_geomean": 0.989, "n": 7, "min": 0.936}
+{"dtype": "fp16", "gated_geomean": 0.993, "n": 7, "min": 0.94}
+{"state_after": {"host": "fs-mbz-gpu-086", "gpu": "NVIDIA H200", "smi": "1980, 1980, 0x0000000000000000, 132.77, 31"}}
