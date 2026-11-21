@@ -1,0 +1,45 @@
+ + transformers==5.17.0
+ + triton==3.9.0
+ + truststore==0.10.5
+ + typer==0.27.2
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + urllib3==2.7.0
+ + uvicorn==0.54.0
+
+real	2m29.871s
+user	0m8.252s
+sys	0m18.324s
+apache-tvm-ffi               0.1.16
+apache-tvm-ffi-orcjit        0.1.3
+apache-tvm-tirx              0.1.0
+cupti-python                 13.4.0
+deep-gemm                    2.6.1+559d79f
+flash-kda                    0.0.1+7afb9f4
+flash-linear-attention       0.6.0
+flashinfer-python            0.6.18.dev20260909
+nvidia-cuda-cupti            13.4.58
+nvidia-cuda-nvrtc            13.4.59
+nvidia-cuda-runtime          13.4.49
+nvidia-cutlass-dsl           4.7.0
+nvidia-cutlass-dsl-libs-base 4.7.0
+nvidia-cutlass-dsl-libs-core 4.7.0
+nvidia-cutlass-dsl-libs-cu12 4.7.0
+nvidia-cutlass-dsl-libs-cu13 4.7.0
+tirx-kernels                 0.1.3
+torch                        2.15.0+cu134
+torch-c-dlpack-ext           0.1.5
+triton                       3.9.0
+{"check": "torch_basic", "ok": true, "info": {"torch": "2.15.0+cu134", "cuda": "13.4", "dev": "NVIDIA H200", "cap": [9, 0], "arch_list": ["sm_75", "sm_80", "sm_86", "sm_90", "sm_100", "sm_120"], "driver": null, "sum": 856713344.0}}
+/mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/triton/knobs.py:504: UserWarning: TRITON_DEFAULT_FP_FUSION is unset: defaulting to FP fusion ENABLED for backward compatibility in Triton 3.9. The default will change to DISABLED in Triton 3.10; set TRITON_DEFAULT_FP_FUSION=1 to keep fusion enabled or =0 to adopt the new default early and silence this warning.
+  warn_once(FP_FUSION_DEFAULT_WARNING)
+{"check": "torch_compile", "ok": true, "info": {"maxerr": 9.5367431640625e-07}}
+{"check": "nvrtc_version", "ok": true, "info": {"nvrtc": "13.4", "lib": "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/nvidia/cu13/lib/libnvrtc.so.13"}}
+{"check": "tirx_kernel", "ok": true, "info": {"tvm_tirx": "0.1.0", "ok": true}}
+{"check": "cupti", "ok": true, "info": {"cupti_version": null, "records": 3}}
+{"check": "deep_gemm", "ok": false, "err": "ImportError: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found (required by /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/deep_gemm/_C.cpython-313-x86_64-linux-gnu.so)"}
+{"check": "flash_kda", "ok": true, "info": {"version": "?", "file": "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/flash_kda/__init__.py"}}
+{"check": "flashinfer", "ok": true, "info": {"version": "0.6.18.dev20260909", "file": "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/flashinfer/__init__.py"}}
+{"check": "fla", "ok": true, "info": {"version": "0.6.0", "file": "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/fla/__init__.py"}}
+{"check": "tirx_kernels", "ok": true, "info": {"version": "?", "file": "/mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/tirx_kernels/__init__.py"}}
+{"check": "deepgemm_run", "ok": false, "err": "ImportError: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found (required by /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/deep_gemm/_C.cpython-313-x86_64-linux-gnu.so)"}

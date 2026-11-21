@@ -1,0 +1,81 @@
+NVIDIA H200, 595.91.07
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/api/include/torch/python.h:4,
+DEBUG                  from csrc/python_api.cpp:2:
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/ATen/ATen.h:9:2: error: #error C++20 or later compatible compiler is required to use ATen.
+DEBUG     9 | #error C++20 or later compatible compiler is required to use ATen.
+DEBUG       |  ^~~~~
+DEBUG In file included from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/Backend.h:6,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/Layout.h:4,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/ATen/core/TensorBody.h:13,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/ATen/core/Tensor.h:4,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/utils/variadic.h:4,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/api/include/torch/detail/static.h:4,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/api/include/torch/python.h:4,
+DEBUG                  from csrc/python_api.cpp:2:
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/DispatchKeySet.h: In member function ‘uint8_t c10::DispatchKeySet::indexOfHighestBit() const’:
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/DispatchKeySet.h:445:38: error: ‘bit_width’ is not a member of ‘std’
+DEBUG   445 |     return static_cast<uint8_t>(std::bit_width(repr_));
+DEBUG       |                                      ^~~~~~~~~
+DEBUG In file included from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/SymNodeImpl.h:8,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/SymBool.h:5,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/Scalar.h:11,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/ATen/core/TensorBody.h:17,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/ATen/core/Tensor.h:4,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/utils/variadic.h:4,
+--
+DEBUG                  from csrc/python_api.cpp:2:
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/util/intrusive_ptr.h: At global scope:
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/util/intrusive_ptr.h:775:27: error: ‘strong_ordering’ in namespace ‘std’ does not name a type
+DEBUG   775 | [[nodiscard]] inline std::strong_ordering operator<=>(
+DEBUG       |                           ^~~~~~~~~~~~~~~
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/util/intrusive_ptr.h:775:22: note: ‘std::strong_ordering’ is only available from C++20 onwards
+DEBUG   775 | [[nodiscard]] inline std::strong_ordering operator<=>(
+DEBUG       |                      ^~~
+DEBUG In file included from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/SymNodeImpl.h:8,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/SymBool.h:5,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/Scalar.h:11,
+--
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/api/include/torch/python.h:4,
+DEBUG                  from csrc/python_api.cpp:2:
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/util/intrusive_ptr.h:1104:15: error: ‘strong_ordering’ in namespace ‘std’ does not name a type
+DEBUG  1104 |   friend std::strong_ordering operator<=>(
+DEBUG       |               ^~~~~~~~~~~~~~~
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/util/intrusive_ptr.h:1104:10: note: ‘std::strong_ordering’ is only available from C++20 onwards
+DEBUG  1104 |   friend std::strong_ordering operator<=>(
+DEBUG       |          ^~~
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/util/intrusive_ptr.h:1124:27: error: ‘strong_ordering’ in namespace ‘std’ does not name a type
+DEBUG  1124 | [[nodiscard]] inline std::strong_ordering operator<=>(
+DEBUG       |                           ^~~~~~~~~~~~~~~
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/util/intrusive_ptr.h:1124:22: note: ‘std::strong_ordering’ is only available from C++20 onwards
+DEBUG  1124 | [[nodiscard]] inline std::strong_ordering operator<=>(
+DEBUG       |                      ^~~
+DEBUG In file included from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/util/typeid.h:20,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/ScalarTypeToTypeMeta.h:6,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/ATen/core/TensorBody.h:19,
+--
+DEBUG                  from csrc/python_api.cpp:2:
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/util/TypeIndex.h: In function ‘constexpr c10::c10_string_view c10::util::detail::fully_qualified_type_name_impl()’:
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/util/TypeIndex.h:56:25: error: ‘const string_view’ {aka ‘const class std::basic_string_view<char>’} has no member named ‘starts_with’
+DEBUG    56 |   static_assert(fun_sig.starts_with(prefix));
+DEBUG       |                         ^~~~~~~~~~~
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/util/TypeIndex.h:57:25: error: ‘const string_view’ {aka ‘const class std::basic_string_view<char>’} has no member named ‘ends_with’
+DEBUG    57 |   static_assert(fun_sig.ends_with(suffix));
+DEBUG       |                         ^~~~~~~~~
+DEBUG In file included from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/InferenceMode.h:4,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/c10/core/TensorImpl.h:9,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/ATen/core/TensorBody.h:21,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/ATen/core/Tensor.h:4,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/utils/variadic.h:4,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/api/include/torch/detail/static.h:4,
+--
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/api/include/torch/python.h:4,
+DEBUG                  from csrc/python_api.cpp:2:
+DEBUG /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/ATen/core/Generator.h:66:8: error: defaulted ‘bool at::Generator::operator==(const at::Generator&) const’ only available with ‘-std=c++20’ or ‘-std=gnu++20’
+DEBUG    66 |   bool operator==(const Generator& rhs) const = default;
+DEBUG       |        ^~~~~~~~
+DEBUG In file included from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/ATen/core/TensorBody.h:39,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/ATen/core/Tensor.h:4,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/utils/variadic.h:4,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/api/include/torch/detail/static.h:4,
+DEBUG                  from /mnt/weka/home/hao.kang/kernel-evolve/TIRx-harness/.venv/lib/python3.13/site-packages/torch/include/torch/csrc/api/include/torch/python.h:4,
+DEBUG                  from csrc/python_api.cpp:2:

@@ -1,0 +1,11 @@
+== upstream_broad.xml (tvm-tirx 5bdc1cc07, sm_100a pins -> sm_90a, tcgen05/blackwell files excluded) {'fail': 66, 'pass': 809, 'skip': 297}
+  26 RuntimeError: Check failed: res == CUDA_SUCCESS (N vs. N) : Error in cuTensorMapEncodeTiled: invalid argument | test_cp_async_bulk_tensor::test_interleaved_tma_roundtrip_gpu, test_cp_async_bulk_tensor::test_packed_fp4_payload_gpu
+  18 RuntimeError: NVRTC compilation failed: /usr/local/cuda-N.N/include/cuda_fpN.hpp(N): warning #N-D: class "doubleN" was declared deprecated ("use doubleN_Na or d | test_cp_async_bulk_tensor::test_caller_descriptor_selection_uses_first_true, test_cp_async_bulk_tensor::test_caller_tiles_nested_shared_layout, test_cp_async_bulk_tensor::test_explicit_gather_selector_encodes_each_map_selects_address_and_issues_once
+   6 collection failure | ::codegen.test_cuda, ::codegen.test_ptx_dialect, ::tile.test_add_sub_mul_div
+   6 RuntimeError: Tensor instruction lowering failed: op=tirx.cuda.tile.apply target=cuda scope=warp 'm' call: T.cuda.tile.apply("mma.sync.aligned.mNnNkN.row.col.fN | test_mma_sync::test_cuda_gemm_mma_codegen_issue_count, test_mma_sync::test_cuda_gemm_mma_lowers_tiled, test_mma_sync::test_cuda_gemm_mma_numerical_tiled
+   4 RuntimeError: Back optional access  Error in codegen: cuda Location (TVMScript): Access path: <root>.functions[Module.dsmem_copy_kernel].body.seq[N].then_case.s | test_cp_async_bulk::test_dsmem
+   2 ValueError: Invalid A.strides[N] on argument #N when calling:   `kernel(A: Tensor([N, N, N, N], floatN), Out: Tensor([N], floatN))`,   expected N | test_explicit_patterns::test_global_gpu
+   1 AssertionError: cvt_ueNmN_fN assert 'sm_Na' == 'sm_Na'      - sm_Na   ?    ^   + sm_Na   ?    ^^ | test_ptx_cvt::test_cvt_blackwell_lines_carry_their_arch_floor
+   1 TypeError: 'Var' object cannot be interpreted as an integer | test_hopper::test_wgmma_rs_nt
+   1 AssertionError: Regex pattern did not match.   Expected regex: 'alignment' [+N more line; full report in element text] | test_cp_async_bulk_tensor::test_descriptor_static_boundary_matrix
+   1 RuntimeError: Back optional access  Error in codegen: cuda Location (TVMScript): Access path: <root>.functions[Module.kernel_kernel].body.seq[N].then_case.seq[N | test_pattern_transfers::test_dsmem_remote_addresses

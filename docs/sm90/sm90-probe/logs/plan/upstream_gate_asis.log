@@ -1,0 +1,59 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+created: 8/8 workers
+8 workers [281 items]
+
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 25%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 51%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 76%]
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss        [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/python/tirx/codegen/test_hopper.py:293: requires a CUDA compute capability 10.0 device
+SKIPPED [9] tests/python/tirx/codegen/test_hopper.py:616: requires a CUDA compute capability 10.0 device
+SKIPPED [14] tests/python/tirx/codegen/test_hopper.py:517: requires a CUDA compute capability 10.0 device
+SKIPPED [6] tests/python/tirx/codegen/test_hopper.py:152: requires a CUDA compute capability 10.0 device
+SKIPPED [1] tests/python/tirx/codegen/test_hopper.py:397: requires a CUDA compute capability 10.0 device
+SKIPPED [12] tests/python/tirx/codegen/test_hopper.py:416: requires a CUDA compute capability 10.0 device
+SKIPPED [1] tests/python/tirx/codegen/test_hopper.py:310: requires a CUDA compute capability 10.0 device
+SKIPPED [2] tests/python/tirx/codegen/test_hopper.py:65: requires a CUDA compute capability 10.0 device
+SKIPPED [6] tests/python/tirx/codegen/test_hopper.py:216: requires a CUDA compute capability 10.0 device
+SKIPPED [2] tests/python/tirx/codegen/test_hopper.py:86: requires a CUDA compute capability 10.0 device
+SKIPPED [1] tests/python/tirx/codegen/test_hopper.py:327: requires a CUDA compute capability 10.0 device
+SKIPPED [1] tests/python/tirx/codegen/test_hopper.py:344: requires a CUDA compute capability 10.0 device
+SKIPPED [1] tests/python/tirx/codegen/test_hopper.py:360: requires a CUDA compute capability 10.0 device
+SKIPPED [3] tests/python/tirx/codegen/test_hopper.py:380: requires a CUDA compute capability 10.0 device
+SKIPPED [39] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:901: requires a CUDA compute capability 10.0 device
+SKIPPED [5] tests/python/tirx/codegen/test_hopper.py:724: requires a CUDA compute capability 10.0 device
+SKIPPED [1] tests/python/tirx/codegen/test_hopper.py:1219: requires a CUDA compute capability 10.0 device
+SKIPPED [3] tests/python/tirx/codegen/test_hopper.py:830: requires a CUDA compute capability 10.0 device
+SKIPPED [1] tests/python/tirx/codegen/test_hopper.py:1399: requires a CUDA compute capability 10.0 device
+SKIPPED [3] tests/python/tirx/codegen/test_hopper.py:972: requires a CUDA compute capability 10.0 device
+SKIPPED [5] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:968: requires a CUDA compute capability 10.0 device
+SKIPPED [2] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:990: requires a CUDA compute capability 10.0 device
+SKIPPED [24] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py: requires a CUDA compute capability 10.0 device
+SKIPPED [10] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:1184: requires a CUDA compute capability 10.0 device
+SKIPPED [1] tests/python/tirx/codegen/test_hopper.py:1034: requires a CUDA compute capability 10.0 device
+SKIPPED [3] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:1282: requires a CUDA compute capability 10.0 device
+SKIPPED [3] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:1245: requires a CUDA compute capability 10.0 device
+SKIPPED [32] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:1324: requires a CUDA compute capability 10.0 device
+SKIPPED [2] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:1268: requires a CUDA compute capability 10.0 device
+SKIPPED [2] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:1478: requires a CUDA compute capability 10.0 device
+SKIPPED [6] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:1800: requires a CUDA compute capability 10.0 device
+SKIPPED [21] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:1995: requires a CUDA compute capability 10.0 device
+SKIPPED [4] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:1953: requires a CUDA compute capability 10.0 device
+SKIPPED [3] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:1848: requires a CUDA compute capability 10.0 device
+SKIPPED [2] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:2038: requires a CUDA compute capability 10.0 device
+SKIPPED [3] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:2092: requires a CUDA compute capability 10.0 device
+SKIPPED [3] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:2051: requires a CUDA compute capability 10.0 device
+SKIPPED [4] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:2174: requires a CUDA compute capability 10.0 device
+SKIPPED [1] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:2155: requires a CUDA compute capability 10.0 device
+SKIPPED [24] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:2230: requires a CUDA compute capability 10.0 device
+SKIPPED [4] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:2340: requires a CUDA compute capability 10.0 device
+SKIPPED [1] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:2370: requires a CUDA compute capability 10.0 device
+SKIPPED [2] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:2409: requires a CUDA compute capability 10.0 device
+SKIPPED [5] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:2499: requires a CUDA compute capability 10.0 device
+SKIPPED [2] tests/python/tirx/tile/cuda/test_cp_async_bulk_tensor.py:2552: requires a CUDA compute capability 10.0 device
+============================= 281 skipped in 8.80s =============================

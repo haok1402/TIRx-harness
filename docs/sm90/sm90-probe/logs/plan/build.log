@@ -1,0 +1,24 @@
+Resolved 137 packages in 2ms
+   Building apache-tvm-tirx @ file:///mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx
+      Built apache-tvm-tirx @ file:///mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx
+Prepared 1 package in 2m 44s
+Uninstalled 2 packages in 707ms
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 2 packages in 2.27s
+ - apache-tvm-ffi==0.1.15.post2
+ + apache-tvm-ffi==0.1.16
+ - apache-tvm-tirx==0.1.0b0 (from file:///mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx)
+ + apache-tvm-tirx==0.1.1.dev4+g5bdc1cc07 (from file:///mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx)
+
+real	2m53.055s
+user	46m54.992s
+sys	2m21.781s
+0.1.1.dev4+g5bdc1cc07 2.15.0+cu132 13.2
+apache-tvm-ffi         0.1.16
+apache-tvm-ffi-orcjit  0.1.3
+apache-tvm-tirx        0.1.1.dev4+g5bdc1cc07 /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx
+nvidia-cuda-nvrtc      13.2.86
+nvidia-cuda-runtime    13.2.86
+torch                  2.15.0

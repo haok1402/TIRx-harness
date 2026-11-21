@@ -52,8 +52,7 @@ def rmsnorm_sm90():
     from tirx_kernels.runner import compile_kernel
 
     k = m.get_kernel(4096, backend_config=CFG)
-    with TARGET:
-        ex = compile_kernel(k, backend_config=CFG)
+    ex = compile_kernel(k, backend_config=CFG)  # tvm-tirx #232: no target scopes
     x, w = m.prepare_data(64, 4096)
     out = torch.empty_like(x)
     ex(*m._kernel_args(x, w, out))
@@ -76,8 +75,7 @@ def gemm_sm100_on_sm90():
     from tirx_kernels.runner import compile_kernel
 
     k = m.get_kernel("bf16", 4096, 4096, 4096, backend_config=CFG)
-    with TARGET:
-        compile_kernel(k, backend_config=CFG)
+    compile_kernel(k, backend_config=CFG)  # tvm-tirx #232: no target scopes
     return {"ok": True}
 
 

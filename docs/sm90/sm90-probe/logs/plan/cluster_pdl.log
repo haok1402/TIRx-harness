@@ -1,0 +1,7 @@
+{"case": "dsmem_ld", "ok": true}
+{"case": "dsmem_bulk", "ok": true}
+{"case": "dsmem_st_async", "ok": true}
+{"case": "pdl", "ok": true, "griddepcontrol_in_src": 6}
+{"case": "preferred_cluster", "ok": true, "cluster_ranks": [1, 2, 1, 2, 1, 2, 1, 2]}
+{"case": "host_call_us", "ok": true, "tirx_host_us_per_call": 4.161239499808289, "torch_add_host_us_per_call": 4.91130445007002}
+SUMMARY 6 / 6
