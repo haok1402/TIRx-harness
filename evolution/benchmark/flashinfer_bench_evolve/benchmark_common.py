@@ -191,6 +191,29 @@ def load_safetensor(spec: dict, device: torch.device) -> torch.Tensor:
     return tensor.to(device=device, non_blocking=True)
 
 
+def prepare_with_perf_remarks(setup, *args, **kwargs):
+    """Run a candidate's ``setup`` (which compiles), printing the ptxas performance remarks.
+
+    With a tvm-tirx that reports them (``tvm_tirx.backend.cuda.perf_remarks``), every C75xx
+    remark (wgmma serialization, ignored setmaxnreg, ...) and spill of the candidate's kernels
+    is printed with the score, as ``perf_remark: [C7514] in main_kernel (sm_90a): ...``
+    (nothing when there are none). Without such a tvm-tirx this is a plain call.
+    """
+    try:
+        from tvm_tirx.backend.cuda.perf_remarks import collect_perf_remarks
+    except ImportError:
+        return setup(*args, **kwargs)
+    with collect_perf_remarks() as collector:
+        result = setup(*args, **kwargs)
+    seen = set()
+    for remark in collector.remarks:
+        text = str(remark)
+        if text not in seen:
+            seen.add(text)
+            print(f"  perf_remark: {text}")
+    return result
+
+
 def load_kernel(path: Path, module_name: str = "candidate_kernel"):
     spec = importlib.util.spec_from_file_location(module_name, path)
     if spec is None or spec.loader is None:

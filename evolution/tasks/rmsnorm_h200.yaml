@@ -1,0 +1,38 @@
+name: rmsnorm_h200
+workload_dir: candidates/rmsnorm_h200
+kernel_authoring: TIRx-lite
+target_archs: [sm_90a]
+sota_baseline:
+  name: flashinfer
+
+banned_paths:
+  - tirx-kernels/tirx_kernels/ported/flashinfer/norm/**
+  - tirx-kernels/.agents/sketch/flashinfer/norm/**
+spec: |
+  Implement FP16 RMSNorm on {{gpu}} and beat flashinfer.norm.rmsnorm across the
+  complete benchmark shape set on aggregate GPU-only latency.
+
+  Compute Y[b, :] = X[b, :] * rsqrt(mean(X[b, :]^2) + 1e-6) * W for fp16 X
+  [batch_size, hidden_size] and W [hidden_size], with fp32 accumulation and
+  fp16 output. The 15 packaged workload rows are hidden_size in {4096, 5120,
+  8192} x batch_size in {1, 32, 128, 4113, 16384}; every row is part of the
+  contract. The kernel is memory bound at large batch: the target is HBM
+  bandwidth on the GPU's {{num_sms}} SMs.
+
+  Version contract: solution.py exports setup(data, batch_size, hidden_size) ->
+  callable. data contains X, W, and a preallocated Y. setup may compile,
+  allocate scratch, and execute one warmup call; every timed invocation must
+  read X/W and overwrite Y. Do not call FlashInfer, PyTorch tensor operators,
+  Triton, CUTE DSL, raw CUDA, or an existing solution kernel for production
+  computation.
+
+  Starting point: tirx-kernels `tirx_kernels/norm/rmsnorm.py` has an sm_90a
+  path (a persistent grid of 8 CTAs per SM with 128-bit loads and stores)
+  that reaches 0.80-0.96x of FlashInfer at batch_size >= 4113. Beating 1.0x
+  there is the first goal; small batches are latency bound.
+
+  Correctness requires torch.isclose rtol=1e-3, atol=1e-3 against FlashInfer
+  on every element of every shape. Speedup is sum(FlashInfer GPU time) /
+  sum(candidate GPU time) across all 15 shapes; the benchmark also reports
+  the batch_size >= 4113 subset. The benchmark prints the ptxas performance
+  remarks (C75xx serialization, spills) of your kernels with every score.

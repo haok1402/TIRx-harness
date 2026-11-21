@@ -1,0 +1,15 @@
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs4096-bs1","axes":{"batch_size":1,"hidden_size":4096},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs4096-bs32","axes":{"batch_size":32,"hidden_size":4096},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs4096-bs128","axes":{"batch_size":128,"hidden_size":4096},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs4096-bs4113","axes":{"batch_size":4113,"hidden_size":4096},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs4096-bs16384","axes":{"batch_size":16384,"hidden_size":4096},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs5120-bs1","axes":{"batch_size":1,"hidden_size":5120},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs5120-bs32","axes":{"batch_size":32,"hidden_size":5120},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs5120-bs128","axes":{"batch_size":128,"hidden_size":5120},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs5120-bs4113","axes":{"batch_size":4113,"hidden_size":5120},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs5120-bs16384","axes":{"batch_size":16384,"hidden_size":5120},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs8192-bs1","axes":{"batch_size":1,"hidden_size":8192},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs8192-bs32","axes":{"batch_size":32,"hidden_size":8192},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs8192-bs128","axes":{"batch_size":128,"hidden_size":8192},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs8192-bs4113","axes":{"batch_size":4113,"hidden_size":8192},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}
+{"definition":"rmsnorm_h200","solution":null,"workload":{"uuid":"hs8192-bs16384","axes":{"batch_size":16384,"hidden_size":8192},"inputs":{"X":{"type":"random"},"W":{"type":"random"}}},"evaluation":null}

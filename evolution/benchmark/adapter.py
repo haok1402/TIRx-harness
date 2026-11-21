@@ -48,6 +48,8 @@ PACKAGED = {
     "flash_attention": ("fa4_forward", 10, 30, "all"),
     "flash_attn_bwd": ("fa4_backward", 10, 30, "all"),
     "fp16_gemm_floor": ("fp16_gemm_floor", 10, 50, "all"),
+    "fp16_gemm_h200": ("fp16_gemm_floor", 10, 50, "all"),
+    "rmsnorm_h200": ("rmsnorm_h200", 10, 100, "all"),
     "gdn/decode": ("gdn_decode", 10, 50, "all"),
     "gdn/prefill": ("gdn_prefill", 10, 50, "all"),
     "grouped_gemm/fp8": ("grouped_gemm_fp8", 3, 30, "all"),
