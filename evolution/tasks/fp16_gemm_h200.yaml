@@ -36,9 +36,10 @@ spec: |
 
   Starting point: tirx-kernels `tirx_kernels/gemm/fp16_bf16_gemm_sm90.py`
   (128x256x64 tiles, 3-stage TMA ring, 2 consumer warpgroups with
-  setmaxnreg 40/232, 2-CTA B multicast, stmatrix + TMA-store epilogue) is at
-  about 0.99x of cuBLAS on large shapes; wave quantization, N tails and small
-  M are where it loses.
+  setmaxnreg 40/232, 2-CTA B multicast, stmatrix + TMA-store epilogue) scores
+  0.975x of cuBLAS on this task's 12 shapes (0.97-0.99x geomean on large
+  shapes); it loses most on small shapes (0.44x at 1024^3) and to wave
+  quantization.
 
   Correctness requires torch-isclose rtol=0.01, atol=0.1 for at least 99.99% of
   elements on every shape. Speedup is sum(cuBLAS GPU time) /
