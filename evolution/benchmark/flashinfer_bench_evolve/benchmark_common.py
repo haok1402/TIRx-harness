@@ -89,7 +89,20 @@ def config_from_env(**task_defaults) -> BenchConfig:
     )
 
 
+def _visible_tokens() -> list[str] | None:
+    visible = os.environ.get("CUDA_VISIBLE_DEVICES")
+    if visible is None or not visible.strip():
+        return None
+    return [token.strip() for token in visible.split(",") if token.strip()]
+
+
 def choose_device(device_setting: str) -> torch.device:
+    """``auto``: the least-loaded GPU among those visible to this process.
+
+    ``CUDA_VISIBLE_DEVICES`` entries may be indices, GPU UUIDs (``GPU-...``) or MIG UUIDs, as
+    job schedulers set them. A Slurm step's own allocation is trusted as-is: the choice is only
+    among the devices it exposes, and the result is the CUDA-local ordinal.
+    """
     if device_setting != "auto":
         device = torch.device(device_setting)
         torch.cuda.set_device(device)
@@ -99,7 +112,7 @@ def choose_device(device_setting: str) -> torch.device:
         subprocess.check_output(
             [
                 "nvidia-smi",
-                "--query-gpu=index,memory.used,utilization.gpu",
+                "--query-gpu=index,uuid,memory.used,utilization.gpu",
                 "--format=csv,noheader,nounits",
             ],
             text=True,
@@ -107,21 +120,34 @@ def choose_device(device_setting: str) -> torch.device:
         .strip()
         .splitlines()
     )
-    candidates = []
-    visible = os.environ.get("CUDA_VISIBLE_DEVICES")
-    visible_ids = None
-    if visible:
-        visible_ids = [int(x) for x in visible.split(",") if x.strip().isdigit()]
+    gpus = []
     for row in rows:
-        idx_s, mem_s, util_s = [part.strip() for part in row.split(",")]
-        if visible_ids is not None and int(idx_s) not in visible_ids:
-            continue
-        candidates.append((int(mem_s), int(util_s), int(idx_s)))
-    mem, util, idx = min(candidates)
-    local_idx = visible_ids.index(idx) if visible_ids is not None else idx
+        idx_s, uuid, mem_s, util_s = (part.strip() for part in row.split(","))
+        util = int(util_s) if util_s.isdigit() else 0  # "[N/A]" on MIG instances
+        gpus.append((int(idx_s), uuid, int(mem_s), util))
+
+    visible = _visible_tokens()
+    candidates = []  # (memory_used, utilization, local ordinal, nvidia-smi index)
+    if visible is None:
+        candidates = [(mem, util, idx, idx) for idx, _, mem, util in gpus]
+    else:
+        for local, token in enumerate(visible):
+            for idx, uuid, mem, util in gpus:
+                # CUDA accepts an index, a full UUID or a unique UUID prefix ("GPU-438f").
+                if (token.isdigit() and int(token) == idx) or (
+                    not token.isdigit() and uuid.startswith(token)
+                ):
+                    candidates.append((mem, util, local, idx))
+                    break
+        if not candidates:
+            # e.g. MIG instances nvidia-smi lists per parent GPU, or a device cgroup that renumbers:
+            # trust the allocation and use the first visible device.
+            candidates = [(0, 0, 0, -1)]
+    mem, util, local_idx, idx = min(candidates)
     device = torch.device(f"cuda:{local_idx}")
     torch.cuda.set_device(device)
-    print(f"selected GPU cuda:{idx} (memory_used={mem} MiB, util={util}%)")
+    load = f"memory_used={mem} MiB, util={util}%"
+    print(f"selected GPU cuda:{local_idx} (nvidia-smi index {idx}, {load})")
     return device
 
 

@@ -105,7 +105,7 @@ def kernel_remote_local_checks(task: Task) -> str:
     raise ValueError(f"unsupported kernel authoring mode: {task.kernel_authoring!r}")
 
 
-def shared_rule_blocks(toolset: Toolset) -> dict[str, str]:
+def shared_rule_blocks(toolset: Toolset, *, allocated_gpus: str | None = None) -> dict[str, str]:
     """Render the banned-read and GPU rules for KDA."""
     if toolset.banned_paths:
         banned = "\n".join(f"   - {path}" for path in toolset.banned_paths)
@@ -114,5 +114,13 @@ def shared_rule_blocks(toolset: Toolset) -> dict[str, str]:
 
     return {
         "banned_reads": render("rule_banned_reads", banned_paths_block=banned).rstrip("\n"),
-        "gpu": (_PROMPTS_DIR / "rule_gpu.md").read_text().rstrip("\n"),
+        "gpu": gpu_rule(allocated_gpus),
     }
+
+
+def gpu_rule(allocated_gpus: str | None = None) -> str:
+    """Local-mode GPU rule: pick an idle GPU on a shared machine, or (``allocated_gpus`` set, e.g.
+    the ``CUDA_VISIBLE_DEVICES`` of a Slurm step) use the job step's own allocation as-is."""
+    if allocated_gpus is None:
+        return (_PROMPTS_DIR / "rule_gpu.md").read_text().rstrip("\n")
+    return render("rule_gpu_allocated", visible_devices=allocated_gpus).rstrip("\n")
