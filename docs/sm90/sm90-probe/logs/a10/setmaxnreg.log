@@ -1,0 +1,10 @@
+NVIDIA H200, 595.91.07
+{"case": "test_ptx_setmaxnreg_dec", "signature_attrs": "?", "remarks": ["[C7508]: Potential Performance Loss: 'setmaxnreg' ignored; unable to determine register count at entry."], "entry_regs": "8", "USETMAXREG": []}
+{"case": "test_ptx_setmaxnreg_inc", "signature_attrs": "?", "remarks": ["[C7508]: Potential Performance Loss: 'setmaxnreg' ignored; unable to determine register count at entry."], "entry_regs": "8", "USETMAXREG": []}
+{"case": "flat_dec_minblocks1", "signature_attrs": "?", "remarks": [], "entry_regs": "255", "USETMAXREG": ["USETMAXREG.DEALLOC.CTAPOOL 0x20"]}
+{"case": "flat_dec_maxnreg64", "signature_attrs": "?", "remarks": [], "entry_regs": "64", "USETMAXREG": ["USETMAXREG.DEALLOC.CTAPOOL 0x20"]}
+{"case": "ws384_default", "signature_attrs": "?", "remarks": ["[C7508]: Potential Performance Loss: 'setmaxnreg' ignored; unable to determine register count at entry."], "entry_regs": "8", "USETMAXREG": []}
+{"case": "ws384_minblocks1", "signature_attrs": "?", "remarks": [], "entry_regs": "168", "USETMAXREG": ["USETMAXREG.TRY_ALLOC.CTAPOOL UP0, 0xe8", "USETMAXREG.DEALLOC.CTAPOOL 0x28"]}
+{"case": "ws384_minblocks2", "signature_attrs": "?", "remarks": [], "entry_regs": "80", "USETMAXREG": ["USETMAXREG.TRY_ALLOC.CTAPOOL UP0, 0xe8", "USETMAXREG.DEALLOC.CTAPOOL 0x28"]}
+{"case": "ws384_maxnreg168", "signature_attrs": "?", "remarks": [], "entry_regs": "168", "USETMAXREG": ["USETMAXREG.TRY_ALLOC.CTAPOOL UP0, 0xe8", "USETMAXREG.DEALLOC.CTAPOOL 0x28"]}
+{"case": "divergent384_minblocks1", "signature_attrs": "?", "remarks": [], "entry_regs": "168", "USETMAXREG": ["USETMAXREG.TRY_ALLOC.CTAPOOL UP0, 0xe8"]}

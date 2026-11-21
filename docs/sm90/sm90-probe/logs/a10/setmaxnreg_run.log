@@ -1,0 +1,6 @@
+NVIDIA H200, 595.91.07
+ws384_minblocks1: completed in 0.021s, A[0]=1.0 A[200]=0.0
+ws384_minblocks1 exit=0
+ws384_default: completed in 0.021s, A[0]=1.0 A[200]=0.0
+ws384_default exit=0
+ws384_minblocks2 exit=137
