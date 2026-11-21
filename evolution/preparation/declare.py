@@ -24,7 +24,9 @@ KERNEL_AUTHORING_MODES: frozenset[str] = frozenset({"TIRx-lite", "task"})
 # Tasks that do not declare target_archs predate the field and were written for B200.
 DEFAULT_TARGET_ARCHS: tuple[str, ...] = ("sm_100a",)
 # Slots a task spec may use; evolve init fills them from the run's GpuTarget.
-SPEC_SLOTS: frozenset[str] = frozenset({"gpu", "arch", "gpu_family", "num_sms"})
+SPEC_SLOTS: frozenset[str] = frozenset(
+    {"gpu", "gpu_name", "gpu_arch", "arch", "gpu_family", "num_sms"}
+)
 
 
 @dataclass
@@ -55,7 +57,7 @@ class Task:
     target_archs: list[str] = field(default_factory=lambda: list(DEFAULT_TARGET_ARCHS))
 
     def supports(self, target: GpuTarget) -> bool:
-        return target.arch in self.target_archs
+        return target.runs(self.target_archs)
 
     def check_target(self, target: GpuTarget) -> None:
         """Refuse a run whose GPU the task was not written for."""

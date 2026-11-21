@@ -2,7 +2,10 @@
 
 A task declares the architectures it supports (``target_archs`` in its YAML). ``evolve init`` resolves the
 run's :class:`GpuTarget`, refuses tasks that do not support it, and renders the target into the task
-spec (``{{gpu}}``, ``{{arch}}``, ``{{gpu_family}}``, ``{{num_sms}}``) and the prompts.
+spec and the prompts. Spec slots: ``{{gpu}}`` ("B200 (sm_100)", "H200 (sm_90)": the arch without its
+``a`` suffix, as the specs always wrote it, so B200 prompts are byte-identical to the literal ones),
+``{{gpu_name}}`` and ``{{gpu_arch}}`` (its two halves, for a spec that wraps between them), ``{{arch}}``
+(exact, e.g. "sm_90a"), ``{{gpu_family}}`` and ``{{num_sms}}``.
 """
 
 from __future__ import annotations
@@ -18,6 +21,13 @@ KNOWN_ARCHS = {
     "sm_100a": ("Blackwell", "B200", 148),
     "sm_103a": ("Blackwell", "B300", 148),
 }
+# A GPU may run tasks written for another arch: B300 (sm_103a) runs every sm_100a task, as before
+# target_archs existed (kcoral reports sm_103a there).
+COMPATIBLE_ARCHS = {"sm_103a": ("sm_100a",)}
+
+
+class UnknownArchError(ValueError):
+    """The run's GPU was detected, but the harness does not know its architecture."""
 
 
 @dataclass(frozen=True)
@@ -29,7 +39,7 @@ class GpuTarget:
 
     def __post_init__(self):
         if self.arch not in KNOWN_ARCHS:
-            raise ValueError(
+            raise UnknownArchError(
                 f"unknown GPU architecture {self.arch!r}; known: {sorted(KNOWN_ARCHS)}"
             )
 
@@ -38,12 +48,22 @@ class GpuTarget:
         return KNOWN_ARCHS[self.arch][0]
 
     @property
+    def display_arch(self) -> str:
+        return self.arch.removesuffix("a")
+
+    @property
     def label(self) -> str:
-        return f"{self.name} ({self.arch})"
+        return f"{self.name} ({self.display_arch})"
+
+    def runs(self, task_archs) -> bool:
+        """Whether this GPU runs a task written for ``task_archs``."""
+        return any(arch in task_archs for arch in (self.arch, *COMPATIBLE_ARCHS.get(self.arch, ())))
 
     def slots(self) -> dict[str, str]:
         return {
             "gpu": self.label,
+            "gpu_name": self.name,
+            "gpu_arch": self.display_arch,
             "arch": self.arch,
             "gpu_family": self.family,
             "num_sms": str(self.num_sms),
@@ -131,11 +151,17 @@ def resolve(
     name: str | None = None,
     num_sms: int | None = None,
 ) -> GpuTarget:
-    """Flags first, then the benchmark server or local GPU; if neither is reachable, the task's first arch."""
+    """Flags first, then the benchmark server or local GPU; if neither is reachable, the task's first arch.
+
+    A GPU that is reachable but has an architecture the harness does not know is an error
+    (UnknownArchError), never silently treated as the task's default.
+    """
     if arch is not None:
         return from_flags(arch, name, num_sms)
     try:
         return detect_remote(remote_url) if remote_url is not None else detect_local()
+    except UnknownArchError:
+        raise
     except (
         Exception
     ) as exc:  # no GPU or server at init time: keep the task's own (historical) target
