@@ -1,0 +1,49 @@
+{
+  "name": "rmsnorm_h200",
+  "description": "FP16 RMSNorm (eps 1e-6) over LLM hidden sizes, decode to prefill batch sizes, on H200.",
+  "op_type": "norm",
+  "tags": [
+    "dtype:fp16",
+    "status:synthetic",
+    "baseline:flashinfer",
+    "arch:sm_90a"
+  ],
+  "axes": {
+    "batch_size": {
+      "type": "var"
+    },
+    "hidden_size": {
+      "type": "var"
+    }
+  },
+  "constraints": [
+    "X.shape == [batch_size, hidden_size]",
+    "W.shape == [hidden_size]",
+    "X.dtype == W.dtype == torch.float16"
+  ],
+  "inputs": {
+    "X": {
+      "shape": [
+        "batch_size",
+        "hidden_size"
+      ],
+      "dtype": "float16"
+    },
+    "W": {
+      "shape": [
+        "hidden_size"
+      ],
+      "dtype": "float16"
+    }
+  },
+  "outputs": {
+    "Y": {
+      "shape": [
+        "batch_size",
+        "hidden_size"
+      ],
+      "dtype": "float16"
+    }
+  },
+  "reference": "from flashinfer_bench_evolve.tasks.rmsnorm_h200.baseline import run\n"
+}

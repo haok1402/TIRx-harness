@@ -8,16 +8,25 @@ The toolset YAML is the sole authority for installed skills and shared bans.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 import yaml
+
+from evolution.preparation.target import KNOWN_ARCHS, GpuTarget
 
 # The single benchmark entry point. `python evolution/benchmark/adapter.py
 # <workload_dir> vN` dispatches to the registered flashinfer-bench-evolve task.
 BENCH_ADAPTER = "evolution/benchmark/adapter.py"
 
 KERNEL_AUTHORING_MODES: frozenset[str] = frozenset({"TIRx-lite", "task"})
+# Tasks that do not declare target_archs predate the field and were written for B200.
+DEFAULT_TARGET_ARCHS: tuple[str, ...] = ("sm_100a",)
+# Slots a task spec may use; evolve init fills them from the run's GpuTarget.
+SPEC_SLOTS: frozenset[str] = frozenset(
+    {"gpu", "gpu_name", "gpu_arch", "arch", "gpu_family", "num_sms"}
+)
 
 
 @dataclass
@@ -45,6 +54,26 @@ class Task:
     spec: str
     banned_paths: list[str] = field(default_factory=list)
     bench_timeout_s: int | None = None
+    target_archs: list[str] = field(default_factory=lambda: list(DEFAULT_TARGET_ARCHS))
+
+    def supports(self, target: GpuTarget) -> bool:
+        return target.runs(self.target_archs)
+
+    def check_target(self, target: GpuTarget) -> None:
+        """Refuse a run whose GPU the task was not written for."""
+        if not self.supports(target):
+            raise ValueError(
+                f"task {self.name!r} targets {', '.join(self.target_archs)}, but the run's GPU is "
+                f"{target.label} ({target.source}). Choose a task whose target_archs includes "
+                f"{target.arch}, or a server with a supported GPU."
+            )
+
+    def render_spec(self, target: GpuTarget) -> str:
+        """The spec with ``{{gpu}}`` / ``{{arch}}`` / ``{{gpu_family}}`` / ``{{num_sms}}`` filled in."""
+        text = self.spec
+        for key, value in target.slots().items():
+            text = text.replace("{{" + key + "}}", value)
+        return text
 
 
 def merge_unique(*lists: list[str]) -> list[str]:
@@ -133,6 +162,16 @@ def load_task(path: Path) -> Task:
         if bench_timeout_s < 1:
             raise ValueError(f"{path}: bench_timeout_s must be >= 1, got {bench_timeout_s}")
 
+    target_archs = _string_list(data, "target_archs", path) or list(DEFAULT_TARGET_ARCHS)
+    unknown = [arch for arch in target_archs if arch not in KNOWN_ARCHS]
+    if unknown:
+        raise ValueError(f"{path}: unknown target_archs {unknown}; known: {sorted(KNOWN_ARCHS)}")
+    slots = set(re.findall(r"\{\{([a-zA-Z_][a-zA-Z0-9_]*)\}\}", spec))
+    if slots - SPEC_SLOTS:
+        raise ValueError(
+            f"{path}: unknown spec slots {sorted(slots - SPEC_SLOTS)}; known: {sorted(SPEC_SLOTS)}"
+        )
+
     return Task(
         name=name,
         workload_dir=workload_dir,
@@ -141,6 +180,7 @@ def load_task(path: Path) -> Task:
         spec=spec,
         banned_paths=_string_list(data, "banned_paths", path),
         bench_timeout_s=bench_timeout_s,
+        target_archs=target_archs,
     )
 
 

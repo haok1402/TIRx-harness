@@ -1,0 +1,48 @@
+name: fp16_gemm_h200
+workload_dir: candidates/fp16_gemm_h200
+kernel_authoring: TIRx-lite
+target_archs: [sm_90a]
+sota_baseline:
+  name: cublas
+
+banned_paths:
+  - tirx-kernels/tirx_kernels/gemm/fp16_bf16_gemm.py
+  - tirx-kernels/tirx_kernels/gemm/nvfp4_gemm.py
+  - tirx-kernels/tirx_kernels/gemm/allgather_gemm.py
+  - tirx-kernels/tirx_kernels/gemm/gemm_reduce_scatter.py
+  - tirx-kernels/tirx_kernels/ported/flashinfer/gemm/**
+  - tirx-kernels/.agents/sketch/flashinfer/gemm/**
+spec: |
+  Implement FP16 GEMM on {{gpu}} and beat cuBLAS across the complete
+  benchmark shape set on aggregate GPU-only latency.
+
+  Compute D[M,N] = A[M,K] @ B[N,K]^T for fp16 A and B, with fp32-equivalent
+  accumulation and fp16 output. The 12 packaged workload rows (the
+  fp16_gemm_floor set) include square matrices, LLM FFN projections, and mixed
+  aspect ratios, with dimensions from 1024 through 11008; every row is part of
+  the contract.
+
+  This is Hopper: WGMMA (wgmma.mma_async) with TMA and mbarrier pipelines,
+  setmaxnreg warp specialization and thread-block clusters; no tcgen05, TMEM or
+  CLC. Persistent grids must be sized for the GPU's {{num_sms}} SMs with
+  max_active_clusters, not num_sms // cluster.
+
+  Version contract: solution.py exports setup(data, M, N, K) -> callable.
+  data contains A, B, and preallocated D. setup may compile, allocate scratch,
+  and execute one warmup call; every timed invocation must read A/B and
+  overwrite D. Do not call cuBLAS, torch.matmul, PyTorch tensor operators,
+  Triton, CUTE DSL, raw CUDA, or an existing solution kernel for production
+  computation.
+
+  Starting point: tirx-kernels `tirx_kernels/gemm/fp16_bf16_gemm_sm90.py`
+  (128x256x64 tiles, 3-stage TMA ring, 2 consumer warpgroups with
+  setmaxnreg 40/232, 2-CTA B multicast, stmatrix + TMA-store epilogue) scores
+  0.975x of cuBLAS on this task's 12 shapes (0.97-0.99x geomean on large
+  shapes); it loses most on small shapes (0.44x at 1024^3) and to wave
+  quantization.
+
+  Correctness requires torch-isclose rtol=0.01, atol=0.1 for at least 99.99% of
+  elements on every shape. Speedup is sum(cuBLAS GPU time) /
+  sum(candidate GPU time) across all 12 shapes. The benchmark prints the ptxas
+  performance remarks (C75xx serialization, spills) of your kernels with every
+  score.

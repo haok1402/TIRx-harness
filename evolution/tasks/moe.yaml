@@ -8,8 +8,8 @@ banned_paths:
   - tirx-kernels/tirx_kernels/ported/flashinfer/fused_moe/**
   - tirx-kernels/.agents/sketch/blockscaled_contiguous_gather_grouped_gemm_swiglu_fusion_rubin.md
 spec: |
-  Implement DeepSeek-V3/R1 FP8 block-scale Mixture-of-Experts on B200
-  (sm_100) and beat flashinfer.fused_moe.trtllm_fp8_block_scale_moe.
+  Implement DeepSeek-V3/R1 FP8 block-scale Mixture-of-Experts on {{gpu_name}}
+  ({{gpu_arch}}) and beat flashinfer.fused_moe.trtllm_fp8_block_scale_moe.
 
   Geometry is fixed: 256 global experts, 32 local experts, hidden size 7168,
   intermediate size 2048, FP8 E4M3 block size 128, top_k=8, n_group=8, and

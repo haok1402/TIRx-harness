@@ -10,7 +10,7 @@ banned_paths:
   - tirx-kernels/tirx_kernels/ported/flashinfer/gdn_prefill/**
   - tirx-kernels/.agents/sketch/flashinfer/gdn_prefill/**
 spec: |
-  Implement Gated Delta Net (Qwen3-Next) PREFILL on B200 (sm_100) and beat
+  Implement Gated Delta Net (Qwen3-Next) PREFILL on {{gpu}} and beat
   `flashinfer.chunk_gated_delta_rule` on kernel-only latency.
 
   Algorithm: the CHUNKWISE gated delta rule over packed varlen sequences.

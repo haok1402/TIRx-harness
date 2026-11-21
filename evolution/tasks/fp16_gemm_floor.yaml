@@ -1,6 +1,7 @@
 name: fp16_gemm_floor
 workload_dir: candidates/fp16_gemm_floor
 kernel_authoring: TIRx-lite
+target_archs: [sm_100a, sm_90a]
 sota_baseline:
   name: cublas
 
@@ -9,7 +10,7 @@ banned_paths:
   - tirx-kernels/tirx_kernels/ported/flashinfer/gemm/**
   - tirx-kernels/.agents/sketch/flashinfer/gemm/**
 spec: |
-  Implement FP16 GEMM on B200 (sm_100) and beat cuBLAS across the complete
+  Implement FP16 GEMM on {{gpu}} and beat cuBLAS across the complete
   benchmark shape set on aggregate GPU-only latency.
 
   Compute D[M,N] = A[M,K] @ B[N,K]^T for fp16 A and B, with fp32-equivalent

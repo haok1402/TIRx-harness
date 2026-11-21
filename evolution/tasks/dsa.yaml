@@ -5,7 +5,7 @@ sota_baseline:
   name: trtllm_mla_sparse
 banned_paths: []
 spec: |
-  Implement DeepSeek-V3.2 DSA paged sparse attention on B200 (sm_100) and
+  Implement DeepSeek-V3.2 DSA paged sparse attention on {{gpu}} and
   beat the TensorRT-LLM sparse MLA baseline on GPU-only latency.
 
   For each token t and query head h, gather the valid flattened cache token

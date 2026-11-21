@@ -9,7 +9,7 @@ banned_paths:
   - tirx-kernels/tirx_kernels/ported/flashinfer/kda/**
   - tirx-kernels/.agents/sketch/flashinfer/kda/**
 spec: |
-  Implement recurrent Kimi Delta Attention decode on B200 (sm_100) and beat
+  Implement recurrent Kimi Delta Attention decode on {{gpu}} and beat
   flashinfer.kda_decode.recurrent_kda's CuTe-DSL route.
 
   This fixed-shape task pins the following large-batch official row:

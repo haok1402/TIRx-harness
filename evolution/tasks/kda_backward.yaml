@@ -10,7 +10,7 @@ banned_paths:
   - tirx-kernels/.agents/sketch/flashinfer/kda/**
 spec: |
   Implement the Kimi K3 Delta Attention training step (forward + backward)
-  on B200 (sm_100) from raw layer inputs.
+  on {{gpu}} from raw layer inputs.
   Beat the packaged FLA chunk_kda forward plus autograd backward baseline
   (chunk_size=32, FLA_FLASH_KDA=0), timed as a prepared CUDA-graph replay
   when evaluating a candidate.

@@ -20,6 +20,7 @@ from urllib.parse import urlparse
 import yaml
 
 from evolution.preparation import sandbox
+from evolution.preparation import target as gpu_target
 from evolution.preparation.declare import (
     BENCH_ADAPTER,
     effective_guard_toolset,
@@ -58,7 +59,9 @@ def _prompt(
     worktree: Path,
     remote_url: str | None = None,
     python: Path | None = None,
+    target: gpu_target.GpuTarget | None = None,
 ) -> str:
+    target = target or gpu_target.default_for(task.target_archs)
     blocks = shared_rule_blocks(toolset)
     preamble = "You are running as an autonomous kernel-optimization agent."
     environment_blocks = ["1. " + blocks["banned_reads"]]
@@ -88,12 +91,12 @@ def _prompt(
     environment = "\n\n".join(environment_blocks)
     body = render_file(
         PROMPT_TEMPLATE,
-        task_spec=task.spec.strip(),
+        task_spec=task.render_spec(target).strip(),
         sota_baseline=task.sota_baseline.name,
         workload_dir=task.workload_dir,
         worktree=str(worktree),
         kernel_authoring_contract=kernel_authoring_contract(task),
-        kernel_search_references=kernel_search_references(task),
+        kernel_search_references=kernel_search_references(task, target.family),
         kernel_research_debugging_contract=kernel_research_debugging_contract(task),
         bench_command=bench_command,
         bench_environment=bench_environment,
@@ -107,6 +110,9 @@ def setup(
     task_name: str,
     remote_url: str | None = None,
     run_name: str | None = None,
+    target_arch: str | None = None,
+    gpu_name: str | None = None,
+    num_sms: int | None = None,
 ) -> Path:
     if run_name is None:
         stem = f"{task_name}-{time.strftime('%Y%m%d-%H%M%S')}"
@@ -124,6 +130,16 @@ def setup(
         raise SystemExit(f"run directory already exists: {run_dir}")
 
     task = load_task(task_path(REPO_ROOT, task_name))
+    # Resolve the run's GPU and refuse an unsupported task before any setup work.
+    target = gpu_target.resolve(
+        task_archs=task.target_archs,
+        remote_url=remote_url,
+        arch=target_arch,
+        name=gpu_name,
+        num_sms=num_sms,
+    )
+    task.check_target(target)
+    print(f"target GPU: {target.label}, {target.num_sms} SMs ({target.source})")
     toolset = load_toolset(toolset_path(REPO_ROOT, TOOLSET_NAME))
     effective = effective_guard_toolset(
         toolset, task, extra_banned=outside_run_bans(REPO_ROOT, RUNS_ROOT)
@@ -147,6 +163,7 @@ def setup(
             worktree=worktree,
             remote_url=remote_url,
             python=environment.python,
+            target=target,
         )
     )
 
@@ -159,6 +176,7 @@ def setup(
         "pinned_commit": pinned,
         "kernel_authoring": task.kernel_authoring,
         "bench_server_url": remote_url,
+        "target": target.as_dict(),
         "started_at": time.time(),
         "venv": str(environment.prefix),
         "python": str(environment.python),
@@ -199,6 +217,13 @@ def _parser() -> tuple[argparse.ArgumentParser, argparse.ArgumentParser]:
         f"(default {BENCH_SERVER_URL})",
     )
     init.add_argument(
+        "--target-arch",
+        choices=sorted(gpu_target.KNOWN_ARCHS),
+        help="the run's GPU architecture (default: detected from the benchmark server or local GPU)",
+    )
+    init.add_argument("--gpu-name", help="with --target-arch: GPU name for prompts (e.g. H200)")
+    init.add_argument("--num-sms", type=int, help="with --target-arch: SM count for prompts")
+    init.add_argument(
         "--name",
         dest="run_name",
         help="exact run directory name (default: <task>-<timestamp>)",
@@ -220,6 +245,9 @@ def main(argv: list[str] | None = None) -> int:
             task_name=args.task,
             remote_url=args.remote,
             run_name=args.run_name,
+            target_arch=args.target_arch,
+            gpu_name=args.gpu_name,
+            num_sms=args.num_sms,
         )
     except ValueError as error:
         init.error(str(error))

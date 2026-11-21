@@ -9,7 +9,7 @@ banned_paths:
   - tirx-kernels/tirx_kernels/ported/msa/**
   - tirx-kernels/.agents/sketch/msa/**
 spec: |
-  Implement MiniMax sparse decode attention on B200 (sm_100) with the
+  Implement MiniMax sparse decode attention on {{gpu}} with the
   msa_sparse_decode_attention contract. Beat the packaged baseline:
   MiniMax fmha_sm100 sparse_atten_func.
 

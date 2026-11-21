@@ -54,11 +54,12 @@ replace its `spec` with the complete contract:
 name: my_kernel
 workload_dir: candidates/my_kernel
 kernel_authoring: TIRx-lite
+target_archs: [sm_100a]
 sota_baseline:
   name: my_reference
 spec: |
-  Define the computation, tensors, candidate interface, valid inputs,
-  correctness policy, target GPU, and scoring rule here.
+  Implement my kernel on {{gpu}}. Define the computation, tensors, candidate
+  interface, valid inputs, correctness policy, and scoring rule here.
 ```
 
 The filename must match `name`, and `workload_dir` must identify the registered
@@ -66,6 +67,12 @@ workload. Optional `bench_timeout_s` sets a positive benchmark timeout;
 `banned_paths` lists task-specific reference restrictions. Use
 `kernel_authoring: task` when the specification defines another authoring
 contract.
+
+`target_archs` lists the GPU architectures the task is written for (`sm_90a`, `sm_100a`, `sm_103a`; default
+`[sm_100a]`). `evolve init` detects the run's GPU from the kcoral server (`--remote`) or the local GPU, or takes
+`--target-arch`. It refuses a task whose `target_archs` does not include that GPU. Write the target into the spec
+with slots instead of a literal name: `{{gpu}}` (e.g. `H200 (sm_90a)`), `{{arch}}`, `{{gpu_family}}` (`Hopper`,
+`Blackwell`) and `{{num_sms}}`.
 
 {repo}`evolution/preparation/declare.py` defines the schema. Shared skills and
 reference restrictions belong to {repo}`evolution/toolsets/kda_flow.yaml`.

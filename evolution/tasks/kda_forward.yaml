@@ -9,7 +9,7 @@ banned_paths:
   - tirx-kernels/tirx_kernels/ported/flashinfer/kda/**
   - tirx-kernels/.agents/sketch/flashinfer/kda/**
 spec: |
-  Implement Kimi Delta Attention FORWARD on B200 (sm_100) and beat
+  Implement Kimi Delta Attention FORWARD on {{gpu}} and beat
   FlashKDA's fused CUTLASS backend on GPU-only latency.
 
   This is packed-varlen KDA with outer batch B=1, total tokens T=8192,

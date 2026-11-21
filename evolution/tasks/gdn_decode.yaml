@@ -8,7 +8,7 @@ banned_paths:
   - tirx-kernels/tirx_kernels/ported/flashinfer/gdn_decode/**
   - tirx-kernels/.agents/sketch/flashinfer/gdn_decode/**
 spec: |
-  Implement Gated Delta Net (Qwen3-Next) DECODE on B200 (sm_100) and
+  Implement Gated Delta Net (Qwen3-Next) DECODE on {{gpu}} and
   beat `flashinfer.gdn_decode.gated_delta_rule_decode_pretranspose` on
   kernel-only latency.
 

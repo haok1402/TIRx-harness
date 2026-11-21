@@ -11,6 +11,7 @@ from ...benchmark_common import (
     config_from_env,
     load_candidate_override,
     load_task_workloads,
+    prepare_with_perf_remarks,
     run_benchmark,
 )
 
@@ -68,7 +69,7 @@ def tirx_prepare(solution_module, a, b):
         "B": b,
         "D": torch.empty((m, n), dtype=torch.float16, device=a.device),
     }
-    kernel_fn = solution_module.setup(data, m, n, k)
+    kernel_fn = prepare_with_perf_remarks(solution_module.setup, data, m, n, k)
     return kernel_fn, data
 
 

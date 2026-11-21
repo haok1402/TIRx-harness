@@ -6,7 +6,7 @@ sota_baseline:
 bench_timeout_s: 300
 banned_paths: []
 spec: |
-  Implement DeepSeek-V4 sparse MLA on B200 (sm_100) and beat the packaged
+  Implement DeepSeek-V4 sparse MLA on {{gpu}} and beat the packaged
   flashinfer.decode.trtllm_batch_decode_sparse_mla_dsv4 baseline with PDL
   disabled.
 

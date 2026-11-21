@@ -9,7 +9,7 @@ banned_paths:
   - tirx-kernels/tirx_kernels/ported/flashinfer/kda/**
   - tirx-kernels/.agents/sketch/flashinfer/kda/**
 spec: |
-  Implement Kimi Delta Attention FORWARD on B200 (sm_100).
+  Implement Kimi Delta Attention FORWARD on {{gpu}}.
 
   Benchmark exactly the KDA-internal fixed H=96 row `kda-fwd-h96-fixed`:
   one sequence with outer batch B=1, T=8192 tokens, H=96 heads, and K=V=128.
