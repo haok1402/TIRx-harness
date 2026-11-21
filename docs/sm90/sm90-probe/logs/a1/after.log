@@ -1,0 +1,26 @@
+NVIDIA H200, 595.91.07
+worktree e3b5f800b [CUDA] Fix wgmma_noop_barrier codegen and fence the accumulator by reference
+tvm_tirx from /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-wgmma-fence/python/tvm_tirx/__init__.py
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0 -- /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-wgmma-fence
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+collecting ... collected 3 items
+
+tests/python/tirx/codegen/test_hopper.py::test_wgmma_noop_barrier_fences_register_by_reference[float32] PASSED [ 33%]
+tests/python/tirx/codegen/test_hopper.py::test_wgmma_noop_barrier_fences_register_by_reference[uint32] PASSED [ 66%]
+tests/python/tirx/codegen/test_hopper.py::test_wgmma_ss_nt PASSED        [100%]
+
+============================== 3 passed in 2.76s ===============================
+{"case": "wgmma_ss_bf16_f32acc_n128", "ok": true, "max_abs_err": 1.52587890625e-05, "tol": 0.23700258255004883, "wgmma_in_src": 1}
+{"case": "wgmma_ss_fp16_f32acc_n128", "ok": true, "max_abs_err": 1.9073486328125e-05, "tol": 0.23700521469116212, "wgmma_in_src": 1}
+{"case": "wgmma_ss_fp16_f16acc_n128", "ok": true, "max_abs_err": 0.027498245239257812, "tol": 0.5, "wgmma_in_src": 1}
+{"case": "wgmma_ss_e4m3_f32acc_n128", "ok": true, "max_abs_err": 0.0262908935546875, "tol": 0.9523257446289063, "wgmma_in_src": 1}
+{"case": "wgmma_ss_e5m2_f32acc_n128", "ok": true, "max_abs_err": 0.01053619384765625, "tol": 0.9163613891601563, "wgmma_in_src": 1}
+{"case": "wgmma_ss_e4m3_f16acc_n128", "ok": true, "max_abs_err": 0.0276947021484375, "tol": 0.5, "wgmma_in_src": 1}
+{"case": "wgmma_rs_bf16_f32acc_n128", "ok": true, "max_abs_err": 1.52587890625e-05, "tol": 0.23700258255004883, "wgmma_in_src": 1}
+{"case": "wgmma_rs_e4m3_f32acc_n128", "ok": true, "max_abs_err": 0.0262908935546875, "tol": 0.9523257446289063, "wgmma_in_src": 1}
+{"case": "wgmma_ss_bf16_f32acc_n256", "ok": true, "max_abs_err": 1.52587890625e-05, "tol": 0.24689180374145508, "wgmma_in_src": 1}
+{"case": "wgmma_ss_bf16_f32acc_n128_staged", "ok": true, "max_abs_err": 1.52587890625e-05, "tol": 0.23700258255004883, "wgmma_in_src": 1}
+SUMMARY 10 / 10

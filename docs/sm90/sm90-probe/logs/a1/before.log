@@ -1,0 +1,38 @@
+worktree 6569e2a18 [FEAT] Allocate CUDA device memory in a locality domain (#242)
+tvm_tirx from /mnt/weka/home/hao.kang/kernel-evolve/wt/upstream-main/python/tvm_tirx/__init__.py
+(... 24 lines skipped ...)
+        T.cuda.cta_sync()
+        if T.cuda.thread_idx("x") == 0:
+            T.ptx.cp(T.cuda.cvta_generic_to_shared(A_smem.data), T.reinterpret(T.address_of(A_map), ty=T.Ptr(T.void)), T.int32(0), T.int32(0), T.cuda.cvta_generic_to_shared(T.address_of(bar[0])), "async", "bulk", "tensor", "2d", "shared::cluster", "global", "", "mbarrier::complete_tx::bytes", "", "", "", "")
+            T.ptx.cp(T.cuda.cvta_generic_to_shared(B_smem.data), T.reinterpret(T.address_of(B_map), ty=T.Ptr(T.void)), T.int32(0), T.int32(0), T.cuda.cvta_generic_to_shared(T.address_of(bar[0])), "async", "bulk", "tensor", "2d", "shared::cluster", "global", "", "mbarrier::complete_tx::bytes", "", "", "", "")
+            T.ptx.mbarrier(T.cuda.cvta_generic_to_shared(T.address_of(bar[0])), T.uint32(4096), "arrive", "expect_tx", "", "", "shared", "b64", "")
+        T.cuda.mbarrier_wait(T.address_of(bar[0]), phase[0])
+        phase[0] = phase[0] ^ 1
+        T.cuda.cta_sync()
+        for i in range(32):
+            C_local[i] = T.float32(0.0)
+            T.cuda.wgmma_noop_barrier(C_local[i])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        T.cuda.wgmma_encode_matrix_descriptor(T.address_of(descA[0]), A_smem.data, 1, 64, 3)
+        T.cuda.wgmma_encode_matrix_descriptor(T.address_of(descB[0]), B_smem.data, 1, 64, 3)
+        T.ptx.wgmma("fence", "sync", "aligned", "")
+        T.ptx.wgmma(C_local[0], C_local[1], C_local[2], C_local[3], C_local[4], C_local[5], C_local[6], C_local[7], C_local[8], C_local[9], C_local[10], C_local[11], C_local[12], C_local[13], C_local[14], C_local[15], C_local[16], C_local[17], C_local[18], C_local[19], C_local[20], C_local[21], C_local[22], C_local[23], C_local[24], C_local[25], C_local[26], C_local[27], C_local[28], C_local[29], C_local[30], C_local[31], descA[0], descB[0], T.uint32(0), T.int32(1), T.int32(1), T.int32(1), T.int32(1), "mma_async", "sync", "aligned", "m64n64k16", "f32", "f16", "f16", "p34")
+        T.ptx.wgmma("commit_group", "sync", "aligned", "")
+        T.ptx.wgmma(T.int32(0), "wait_group", "sync", "aligned", "")
+        for i_1 in range(32):
+            T.cuda.wgmma_noop_barrier(C_local[i_1])
+        for i_2 in range(8):
+            row: T.let[T.int32] = (T.cuda.thread_idx("x") >> 5) * 16 + ((T.cuda.thread_idx("x") & 31) >> 2)
+(... 5 lines skipped ...)
+============================== 3 failed in 0.61s ===============================
+{"case": "wgmma_ss_bf16_f32acc_n128", "ok": false, "error": "AttributeError: 'TensorLoad' object has no attribute 'dtype'\n\nError in codegen: cuda\nLocation (TVMScript):\nAccess path: <root>.function
+{"case": "wgmma_ss_fp16_f32acc_n128", "ok": false, "error": "AttributeError: 'TensorLoad' object has no attribute 'dtype'\n\nError in codegen: cuda\nLocation (TVMScript):\nAccess path: <root>.function
+{"case": "wgmma_ss_fp16_f16acc_n128", "ok": false, "error": "AttributeError: 'TensorLoad' object has no attribute 'dtype'\n\nError in codegen: cuda\nLocation (TVMScript):\nAccess path: <root>.function
+{"case": "wgmma_ss_e4m3_f32acc_n128", "ok": false, "error": "AttributeError: 'TensorLoad' object has no attribute 'dtype'\n\nError in codegen: cuda\nLocation (TVMScript):\nAccess path: <root>.function
+{"case": "wgmma_ss_e5m2_f32acc_n128", "ok": false, "error": "AttributeError: 'TensorLoad' object has no attribute 'dtype'\n\nError in codegen: cuda\nLocation (TVMScript):\nAccess path: <root>.function
+{"case": "wgmma_ss_e4m3_f16acc_n128", "ok": false, "error": "AttributeError: 'TensorLoad' object has no attribute 'dtype'\n\nError in codegen: cuda\nLocation (TVMScript):\nAccess path: <root>.function
+{"case": "wgmma_rs_bf16_f32acc_n128", "ok": false, "error": "AttributeError: 'TensorLoad' object has no attribute 'dtype'\n\nError in codegen: cuda\nLocation (TVMScript):\nAccess path: <root>.function
+{"case": "wgmma_rs_e4m3_f32acc_n128", "ok": false, "error": "AttributeError: 'TensorLoad' object has no attribute 'dtype'\n\nError in codegen: cuda\nLocation (TVMScript):\nAccess path: <root>.function
+{"case": "wgmma_ss_bf16_f32acc_n256", "ok": false, "error": "AttributeError: 'TensorLoad' object has no attribute 'dtype'\n\nError in codegen: cuda\nLocation (TVMScript):\nAccess path: <root>.function
+{"case": "wgmma_ss_bf16_f32acc_n128_staged", "ok": false, "error": "AttributeError: 'TensorLoad' object has no attribute 'dtype'\n\nError in codegen: cuda\nLocation (TVMScript):\nAccess path: <root>.f
+SUMMARY 0 / 10
