@@ -1,0 +1,7 @@
+NVIDIA H200, 595.91.07
+sm_100a 128 total 144 {'IMAD.WIDE.U32': 3, 'IADD3': 5, 'IADD3.X': 4, 'LEA': 2, 'LDG.E.128': 2, 'STG.E.128': 1}
+sm_100a 4096 total 224 {'IMAD.WIDE.U32': 2, 'IADD3': 5, 'IADD3.X': 4, 'LEA': 5, 'LDG.E.128': 4, 'STG.E.128': 2}
+sm_100a 5120 total 272 {'IMAD.WIDE.U32': 3, 'IADD3': 2, 'IADD3.X': 2, 'LEA': 5, 'LDG.E.128': 6, 'STG.E.128': 3}
+sm_100a 8192 total 296 {'IMAD.WIDE.U32': 3, 'IADD3': 2, 'IADD3.X': 2, 'LEA': 5, 'LDG.E.128': 8, 'STG.E.128': 4}
+sm_100a 128 total 144 {'IMAD.WIDE.U32': 3, 'IADD3': 2, 'LEA': 4, 'LDG.E.128': 2, 'STG.E.128': 1}
+sm_100a 5120 total 264 {'IMAD.WIDE.U32': 3, 'IADD3': 2, 'LEA': 5, 'IMAD': 1, 'LDG.E.128': 6, 'STG.E.128': 3}

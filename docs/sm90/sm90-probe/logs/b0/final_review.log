@@ -1,0 +1,5 @@
+NVIDIA H200, 595.91.07
+PASS  rmsnorm [hs8192_bs270000_gt2p31]
+PASS  rmsnorm [hs128_bs16778240_gt2p31]
+Total: 41  Passed: 41  Failed: 0  Skipped: 0
+{"summed_time_ratio": 1.033, "gate_min_bs_ge_4113": 1.01, "gate_shapes": [1.04, 1.028, 1.023, 1.01, 1.032, 1.025]}

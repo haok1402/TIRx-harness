@@ -1,0 +1,24 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"hs": 4096, "bs": 1, "kind": "small", "narrow": 5.41, "wide": 5.44, "ctr_zero": true}
+{"hs": 4096, "bs": 32, "kind": "small", "narrow": 5.76, "wide": 5.76, "ctr_zero": true}
+{"hs": 4096, "bs": 128, "kind": "small", "narrow": 6.13, "wide": 6.13, "ctr_zero": true}
+{"hs": 4096, "bs": 4113, "kind": "ring", "narrow": 21.84, "wide": 21.98, "wide_acqrel": 22.43, "ctr_zero": true}
+{"hs": 4096, "bs": 16384, "kind": "ring", "narrow": 69.12, "wide": 69.17, "wide_acqrel": 69.7, "ctr_zero": true}
+{"hs": 5120, "bs": 1, "kind": "small", "narrow": 5.5, "wide": 5.52, "ctr_zero": true}
+{"hs": 5120, "bs": 32, "kind": "small", "narrow": 5.79, "wide": 5.76, "ctr_zero": true}
+{"hs": 5120, "bs": 128, "kind": "small", "narrow": 6.3, "wide": 6.27, "ctr_zero": true}
+{"hs": 5120, "bs": 4113, "kind": "ring", "narrow": 25.79, "wide": 25.42, "wide_acqrel": 26.03, "ctr_zero": true}
+{"hs": 5120, "bs": 16384, "kind": "ring", "narrow": 84.51, "wide": 83.86, "wide_acqrel": 84.4, "ctr_zero": true}
+{"hs": 8192, "bs": 1, "kind": "small", "narrow": 5.74, "wide": 5.79, "ctr_zero": true}
+{"hs": 8192, "bs": 32, "kind": "small", "narrow": 6.08, "wide": 6.08, "ctr_zero": true}
+{"hs": 8192, "bs": 128, "kind": "small", "narrow": 6.78, "wide": 6.82, "ctr_zero": true}
+{"hs": 8192, "bs": 4113, "kind": "ring", "narrow": 37.86, "wide": 37.82, "wide_acqrel": 38.29, "ctr_zero": true}
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in rmsnorm_sm90_ring_kernel (sm_90a): 12 bytes spill stores, 12 bytes spill loads (16 bytes stack frame)
+  result = compile_source(code, config, target=target)
+/mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/support/nvcc.py:771: TIRxPerfWarning: ptxas [spill] in rmsnorm_sm90_ring_kernel (sm_90a): 12 bytes spill stores, 12 bytes spill loads (16 bytes stack frame)
+  result = compile_source(code, config, target=target)
+{"hs": 8192, "bs": 16384, "kind": "ring", "narrow": 133.55, "wide": 142.75, "wide_acqrel": 143.23, "ctr_zero": true}
+{"total_us": {"narrow": 426.2, "wide": 434.6, "wide_acqrel": 384.1}}

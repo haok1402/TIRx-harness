@@ -1,0 +1,21 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"state": {"host": "fs-mbz-gpu-266", "gpu": "NVIDIA H200", "smi": "345, 1980, 0x0000000000000001, 78.82, 30"}}
+{"hs": 4096, "bs": 1, "folded_us": 5.47, "m3_us": 5.5, "flashinfer_us": 6.11, "folded_vs_fi": 1.117, "m3_vs_fi": 1.11, "folded_eq_m3": true}
+{"hs": 4096, "bs": 32, "folded_us": 5.92, "m3_us": 5.89, "flashinfer_us": 6.56, "folded_vs_fi": 1.108, "m3_vs_fi": 1.114, "folded_eq_m3": true}
+{"hs": 4096, "bs": 128, "folded_us": 6.32, "m3_us": 6.34, "flashinfer_us": 7.26, "folded_vs_fi": 1.149, "m3_vs_fi": 1.146, "folded_eq_m3": true}
+{"hs": 4096, "bs": 4113, "folded_us": 22.58, "m3_us": 22.0, "flashinfer_us": 23.71, "folded_vs_fi": 1.05, "m3_vs_fi": 1.078, "folded_eq_m3": true}
+{"hs": 4096, "bs": 16384, "folded_us": 69.94, "m3_us": 69.89, "flashinfer_us": 72.22, "folded_vs_fi": 1.033, "m3_vs_fi": 1.033, "folded_eq_m3": true}
+{"hs": 5120, "bs": 1, "folded_us": 5.79, "m3_us": 5.65, "flashinfer_us": 6.3, "folded_vs_fi": 1.088, "m3_vs_fi": 1.116, "folded_eq_m3": true}
+{"hs": 5120, "bs": 32, "folded_us": 5.89, "m3_us": 5.9, "flashinfer_us": 6.56, "folded_vs_fi": 1.114, "m3_vs_fi": 1.111, "folded_eq_m3": true}
+{"hs": 5120, "bs": 128, "folded_us": 6.4, "m3_us": 6.4, "flashinfer_us": 7.3, "folded_vs_fi": 1.14, "m3_vs_fi": 1.14, "folded_eq_m3": true}
+{"hs": 5120, "bs": 4113, "folded_us": 26.13, "m3_us": 25.6, "flashinfer_us": 26.91, "folded_vs_fi": 1.03, "m3_vs_fi": 1.051, "folded_eq_m3": true}
+{"hs": 5120, "bs": 16384, "folded_us": 84.61, "m3_us": 84.66, "flashinfer_us": 85.94, "folded_vs_fi": 1.016, "m3_vs_fi": 1.015, "folded_eq_m3": true}
+{"hs": 8192, "bs": 1, "folded_us": 5.92, "m3_us": 5.89, "flashinfer_us": 6.56, "folded_vs_fi": 1.108, "m3_vs_fi": 1.114, "folded_eq_m3": true}
+{"hs": 8192, "bs": 32, "folded_us": 6.14, "m3_us": 6.11, "flashinfer_us": 6.75, "folded_vs_fi": 1.099, "m3_vs_fi": 1.105, "folded_eq_m3": true}
+{"hs": 8192, "bs": 128, "folded_us": 6.88, "m3_us": 7.22, "flashinfer_us": 7.42, "folded_vs_fi": 1.079, "m3_vs_fi": 1.029, "folded_eq_m3": true}
+{"hs": 8192, "bs": 4113, "folded_us": 38.27, "m3_us": 38.26, "flashinfer_us": 39.81, "folded_vs_fi": 1.04, "m3_vs_fi": 1.041, "folded_eq_m3": true}
+{"hs": 8192, "bs": 16384, "folded_us": 133.25, "m3_us": 132.59, "flashinfer_us": 136.83, "folded_vs_fi": 1.027, "m3_vs_fi": 1.032, "folded_eq_m3": true}
+{"summed": {"folded": 1.039, "m3": 1.043}}

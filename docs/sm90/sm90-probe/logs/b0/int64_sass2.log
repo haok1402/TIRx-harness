@@ -1,0 +1,4 @@
+NVIDIA H200, 595.91.07
+torch 2.15.0+cu134
+sm_100a 4096 total 208 {'IMAD.WIDE.U32': 3, 'IADD3': 1, 'LEA': 5, 'LDG.E.128': 4, 'STG.E.128': 2}
+sm_100a 8192 total 296 {'IMAD.WIDE.U32': 3, 'IADD3': 1, 'LEA': 5, 'LDG.E.128': 8, 'STG.E.128': 4}

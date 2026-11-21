@@ -1,0 +1,11 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"ring_wide": true, "rows_wrong": 0, "first_wrong": null}
+{"ring_wide": false, "rows_wrong": 15712, "first_wrong": 7856}
+{"hs": 128, "bs": 1, "old_int32": 5.58, "new_int64": 5.41, "equal": true}
+{"hs": 128, "bs": 128, "old_int32": 5.92, "new_int64": 5.92, "equal": true}
+{"hs": 128, "bs": 4113, "old_int32": 8.7, "new_int64": 8.67, "equal": true}
+{"hs": 128, "bs": 16384, "old_int32": 17.41, "new_int64": 17.12, "equal": true}
+{"hs": 128, "bs": 65536, "old_int32": 51.39, "new_int64": 49.58, "equal": true}

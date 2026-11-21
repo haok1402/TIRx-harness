@@ -1,0 +1,20 @@
+NVIDIA H200, 595.91.07
+tvm_tirx /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-stack/python/tvm_tirx/__init__.py
+tirx_kernels /mnt/weka/home/hao.kang/kernel-evolve/wt/k-sm90-rmsnorm/tirx_kernels/__init__.py
+torch 2.15.0+cu134
+{"hs": 4096, "bs": 1, "kind": "small", "narrow": 5.5, "wide": 5.54, "ctr_zero": true}
+{"hs": 4096, "bs": 32, "kind": "small", "narrow": 5.95, "wide": 5.95, "ctr_zero": true}
+{"hs": 4096, "bs": 128, "kind": "small", "narrow": 6.37, "wide": 6.21, "ctr_zero": true}
+{"hs": 4096, "bs": 4113, "kind": "ring", "narrow": 22.75, "wide": 22.7, "ctr_zero": true}
+{"hs": 4096, "bs": 16384, "kind": "ring", "narrow": 70.3, "wide": 69.94, "ctr_zero": true}
+{"hs": 5120, "bs": 1, "kind": "small", "narrow": 5.54, "wide": 5.73, "ctr_zero": true}
+{"hs": 5120, "bs": 32, "kind": "small", "narrow": 6.46, "wide": 6.46, "ctr_zero": true}
+{"hs": 5120, "bs": 128, "kind": "small", "narrow": 6.72, "wide": 6.69, "ctr_zero": true}
+{"hs": 5120, "bs": 4113, "kind": "ring", "narrow": 25.94, "wide": 26.05, "ctr_zero": true}
+{"hs": 5120, "bs": 16384, "kind": "ring", "narrow": 84.4, "wide": 84.48, "ctr_zero": true}
+{"hs": 8192, "bs": 1, "kind": "small", "narrow": 5.82, "wide": 5.95, "ctr_zero": true}
+{"hs": 8192, "bs": 32, "kind": "small", "narrow": 6.24, "wide": 6.24, "ctr_zero": true}
+{"hs": 8192, "bs": 128, "kind": "small", "narrow": 6.94, "wide": 6.91, "ctr_zero": true}
+{"hs": 8192, "bs": 4113, "kind": "ring", "narrow": 38.38, "wide": 38.62, "ctr_zero": true}
+{"hs": 8192, "bs": 16384, "kind": "ring", "narrow": 134.08, "wide": 133.28, "ctr_zero": true}
+{"total_us": {"narrow": 431.4, "wide": 430.8}}
