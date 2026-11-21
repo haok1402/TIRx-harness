@@ -1,0 +1,10 @@
+NVIDIA H200, 595.91.07
+ Regex: '\\[spill\\] in main_kernel: \\d+ bytes spill stores'
+ Emitted warnings: [ TIRxPerfWarning('ptxas [spill] in main_kernel (sm_90a): 964 bytes spill stores, 964 bytes spill loads (504 bytes stack frame)')].
+============= 1 failed, 54 passed, 2 warnings in 68.16s (0:01:08) ==============
+ Regex: '\\[spill\\] in main_kernel: \\d+ bytes spill stores'
+ Emitted warnings: [ TIRxPerfWarning('ptxas [spill] in main_kernel (sm_90a): 964 bytes spill stores, 964 bytes spill loads (504 bytes stack frame)')].
+================== 1 failed, 31 passed, 2 warnings in 23.89s ===================
+worktree 9872c329f [CUDA] Make ptxas performance remarks structured end to end (review) dirty=0
+tvm_tirx from /mnt/weka/home/hao.kang/kernel-evolve/wt/a2-a1-a10/python/tvm_tirx/__init__.py
+==== 1379 passed, 979 skipped, 47 xfailed, 7 warnings in 148.27s (0:02:28) =====

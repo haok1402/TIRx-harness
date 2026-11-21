@@ -1,0 +1,49 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0 -- /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-wgmma-helpers/python/tvm_tirx/__init__.py
+TVM_TIRX_LIBRARY_PATH=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/tvm_tirx/lib SKBUILD_EDITABLE_SKIP=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/build
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/sm90-wgmma-helpers
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+collecting ... collected 32 items
+
+tests/python/backend/cuda/test_wgmma_helpers.py::test_shapes PASSED      [  3%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[8] PASSED [  6%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[64] PASSED [  9%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_acc_coord_is_a_bijection[256] PASSED [ 12%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_a_fragment_is_the_first_16_accumulator_columns PASSED [ 15%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_named_barriers PASSED [ 18%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n64] PASSED [ 21%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n128] PASSED [ 25%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n256] PASSED [ 28%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-f16-n128] PASSED [ 31%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-e4m3-n128] PASSED [ 34%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-bf16-n128] PASSED [ 37%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-f16-n64] PASSED [ 40%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[ss-bf16-n128-mnB] PASSED [ 43%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_tile_numerics[rs-bf16-n64-mnB] PASSED [ 46%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_chain_is_one_pipelined_group[ss] PASSED [ 50%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_chain_is_one_pipelined_group[rs] PASSED [ 53%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_named_barrier_ping_pong PASSED [ 56%]
+tests/python/backend/cuda/test_wgmma_helpers.py::test_fa_forward_microkernel PASSED [ 59%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_wgmma_serialization_remarks PASSED [ 62%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_spills_and_stack_frames PASSED [ 65%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_multi_arch_log_tags_each_target PASSED [ 68%]
+tests/python/backend/cuda/test_perf_remarks.py::test_unnamed_remark_goes_to_the_only_entry_function PASSED [ 71%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_clean_and_empty_logs PASSED [ 75%]
+tests/python/backend/cuda/test_perf_remarks.py::test_report_policy PASSED [ 78%]
+tests/python/backend/cuda/test_perf_remarks.py::test_backend_config_validates_perf_remarks PASSED [ 81%]
+tests/python/backend/cuda/test_perf_remarks.py::test_serialized_wgmma_chain_warns_and_raises PASSED [ 84%]
+tests/python/backend/cuda/test_perf_remarks.py::test_clean_wgmma_chain_has_no_remarks[2] PASSED [ 87%]
+tests/python/backend/cuda/test_perf_remarks.py::test_clean_wgmma_chain_has_no_remarks[4] PASSED [ 90%]
+tests/python/backend/cuda/test_perf_remarks.py::test_register_spills_are_reported PASSED [ 93%]
+tests/python/backend/cuda/test_perf_remarks.py::test_error_mode_through_tvm_tirx_compile_is_structured PASSED [ 96%]
+tests/python/backend/cuda/test_perf_remarks.py::test_warn_mode_remarks_are_on_the_executable PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/python/backend/cuda/test_perf_remarks.py::test_report_policy
+  /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/_pytest/python.py:187: TIRxPerfWarning: ptxas [C7517] in main_kernel (sm_90a): wgmma.wait_group is injected in around line 646 by compiler to allow use of registers defined by GMMA in function 'main_kernel'
+    result = testfunction(**testargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 32 passed, 1 warning in 24.48s ========================

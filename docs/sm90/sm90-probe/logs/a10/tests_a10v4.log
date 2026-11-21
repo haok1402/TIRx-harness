@@ -1,0 +1,30 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.2.0, pluggy-1.7.0 -- /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/bin/python
+tvm_tirx: /mnt/weka/home/hao.kang/kernel-evolve/wt/nvrtc-perf-remarks/python/tvm_tirx/__init__.py
+TVM_TIRX_LIBRARY_PATH=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/tvm_tirx/lib SKBUILD_EDITABLE_SKIP=/mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/build
+rootdir: /mnt/weka/home/hao.kang/kernel-evolve/wt/nvrtc-perf-remarks
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+collecting ... collected 13 items
+
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_wgmma_serialization_remarks PASSED [  7%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_spills_and_stack_frames PASSED [ 15%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_multi_arch_log_tags_each_target PASSED [ 23%]
+tests/python/backend/cuda/test_perf_remarks.py::test_unnamed_remark_goes_to_the_only_entry_function PASSED [ 30%]
+tests/python/backend/cuda/test_perf_remarks.py::test_parse_clean_and_empty_logs PASSED [ 38%]
+tests/python/backend/cuda/test_perf_remarks.py::test_report_policy PASSED [ 46%]
+tests/python/backend/cuda/test_perf_remarks.py::test_backend_config_validates_perf_remarks PASSED [ 53%]
+tests/python/backend/cuda/test_perf_remarks.py::test_serialized_wgmma_chain_warns_and_raises PASSED [ 61%]
+tests/python/backend/cuda/test_perf_remarks.py::test_clean_wgmma_chain_has_no_remarks[2] PASSED [ 69%]
+tests/python/backend/cuda/test_perf_remarks.py::test_clean_wgmma_chain_has_no_remarks[4] PASSED [ 76%]
+tests/python/backend/cuda/test_perf_remarks.py::test_register_spills_are_reported PASSED [ 84%]
+tests/python/backend/cuda/test_perf_remarks.py::test_error_mode_through_tvm_tirx_compile_is_structured PASSED [ 92%]
+tests/python/backend/cuda/test_perf_remarks.py::test_warn_mode_remarks_are_on_the_executable PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/python/backend/cuda/test_perf_remarks.py::test_report_policy
+  /mnt/weka/home/hao.kang/kernel-evolve/tvm-tirx/.venv/lib/python3.14/site-packages/_pytest/python.py:187: TIRxPerfWarning: ptxas [C7517] in main_kernel (sm_90a): wgmma.wait_group is injected in around line 646 by compiler to allow use of registers defined by GMMA in function 'main_kernel'
+    result = testfunction(**testargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 13 passed, 1 warning in 12.45s ========================

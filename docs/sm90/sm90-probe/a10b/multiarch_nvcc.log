@@ -1,0 +1,24 @@
+ptxas info    : (C7508) Potential Performance Loss: 'setmaxnreg' ignored; unable to determine register count at entry.
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function 'hog_kernel' for 'sm_90a'
+ptxas info    : Function properties for hog_kernel
+    552 bytes stack frame, 1060 bytes spill stores, 1072 bytes spill loads
+ptxas info    : Used 32 registers, used 0 barriers, 552 bytes cumulative stack size
+ptxas info    : Compile time = 69.641 ms
+ptxas info    : Compiling entry function 'setmax_kernel' for 'sm_90a'
+ptxas info    : Function properties for setmax_kernel
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 8 registers, used 0 barriers
+ptxas info    : Compile time = 1.376 ms
+ptxas info    : (C7508) Potential Performance Loss: 'setmaxnreg' ignored; unable to determine register count at entry.
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function 'hog_kernel' for 'sm_100a'
+ptxas info    : Function properties for hog_kernel
+    560 bytes stack frame, 1076 bytes spill stores, 1100 bytes spill loads
+ptxas info    : Used 32 registers, used 0 barriers, 560 bytes cumulative stack size
+ptxas info    : Compile time = 33.016 ms
+ptxas info    : Compiling entry function 'setmax_kernel' for 'sm_100a'
+ptxas info    : Function properties for setmax_kernel
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 8 registers, used 0 barriers
+ptxas info    : Compile time = 1.828 ms
