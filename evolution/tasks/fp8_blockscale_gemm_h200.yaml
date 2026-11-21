@@ -47,5 +47,9 @@ spec: |
   element must be within 2^-7 |exact| + 2^-12 (|A| @ |B|^T), i.e. one bf16 ulp
   plus the fp8 tensor-core accumulation error of a 128-wide K block. Speedup is
   the geometric mean over the 7 shapes of DeepGEMM GPU time / candidate GPU
-  time. The benchmark prints the ptxas performance remarks (C75xx
+  time, so every shape counts equally. Note that this differs from the
+  summed-time score of fp16_gemm_floor / fp16_gemm_h200 / rmsnorm_h200, where
+  the largest shapes dominate. Here a 2x loss on the small 576x7168 shape costs
+  as much as a 2x loss on 7168x16384. The benchmark prints the ptxas
+  performance remarks (C75xx
   serialization, spills) of your kernels with every score.
