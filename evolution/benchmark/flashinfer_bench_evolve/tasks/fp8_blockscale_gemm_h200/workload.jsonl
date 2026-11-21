@@ -1,0 +1,7 @@
+{"definition":"fp8_blockscale_gemm_h200","solution":null,"workload":{"uuid":"m4096-n2112-k7168","axes":{"M":4096,"N":2112,"K":7168},"inputs":{"A":{"type":"random"},"B":{"type":"random"}}},"evaluation":null}
+{"definition":"fp8_blockscale_gemm_h200","solution":null,"workload":{"uuid":"m4096-n576-k7168","axes":{"M":4096,"N":576,"K":7168},"inputs":{"A":{"type":"random"},"B":{"type":"random"}}},"evaluation":null}
+{"definition":"fp8_blockscale_gemm_h200","solution":null,"workload":{"uuid":"m4096-n24576-k1536","axes":{"M":4096,"N":24576,"K":1536},"inputs":{"A":{"type":"random"},"B":{"type":"random"}}},"evaluation":null}
+{"definition":"fp8_blockscale_gemm_h200","solution":null,"workload":{"uuid":"m4096-n32768-k512","axes":{"M":4096,"N":32768,"K":512},"inputs":{"A":{"type":"random"},"B":{"type":"random"}}},"evaluation":null}
+{"definition":"fp8_blockscale_gemm_h200","solution":null,"workload":{"uuid":"m4096-n7168-k16384","axes":{"M":4096,"N":7168,"K":16384},"inputs":{"A":{"type":"random"},"B":{"type":"random"}}},"evaluation":null}
+{"definition":"fp8_blockscale_gemm_h200","solution":null,"workload":{"uuid":"m4096-n4096-k7168","axes":{"M":4096,"N":4096,"K":7168},"inputs":{"A":{"type":"random"},"B":{"type":"random"}}},"evaluation":null}
+{"definition":"fp8_blockscale_gemm_h200","solution":null,"workload":{"uuid":"m4096-n7168-k2048","axes":{"M":4096,"N":7168,"K":2048},"inputs":{"A":{"type":"random"},"B":{"type":"random"}}},"evaluation":null}

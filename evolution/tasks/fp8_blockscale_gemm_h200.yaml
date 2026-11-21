@@ -1,0 +1,51 @@
+name: fp8_blockscale_gemm_h200
+workload_dir: candidates/fp8_blockscale_gemm_h200
+kernel_authoring: TIRx-lite
+target_archs: [sm_90a]
+sota_baseline:
+  name: deepgemm
+
+banned_paths:
+  - tirx-kernels/tirx_kernels/ported/deepgemm/**
+  - tirx-kernels/.agents/sketch/deepgemm/**
+spec: |
+  Implement FP8 block-scaled GEMM on {{gpu}} (the DeepSeek-V3 recipe) and beat
+  DeepGEMM's sm90 kernel across the complete benchmark shape set.
+
+  Compute D[M,N] = (A * sfa) @ (B * sfb)^T. A is e4m3 [M, K] with one fp32
+  scale per row and 128-wide K block; B is e4m3 [N, K] with one fp32 scale per
+  128x128 block; D is bf16. Accumulate in fp32. Hopper has no block-scaled
+  MMA, so the scales must be applied by promotion: each 128-wide K block's
+  fp8 WGMMA result is added into an fp32 accumulator, scaled. The 7 packaged
+  workload rows are DeepGEMM's own m=4096 DeepSeek-V3 projection shapes
+  (N x K = 2112x7168, 576x7168, 24576x1536, 32768x512, 7168x16384,
+  4096x7168, 7168x2048); every row is part of the contract.
+
+  Scale layout and timing. SFA arrives already MN-major and TMA-aligned: fp32
+  storage [K/128, align(M, 4)], where SFA[kb, m] scales A[m, kb*128:(kb+1)*128]
+  and columns >= M are zero. This is the layout DeepGEMM consumes: the baseline
+  receives the [M, K/128] strided view of the same buffer. Scale transposition
+  is therefore excluded from timing on both sides: neither the baseline nor
+  your kernel performs one in a timed call. SFB is [ceil(N/128), K/128].
+
+  Version contract: solution.py exports setup(data, M, N, K) -> callable.
+  data contains A, SFA, B, SFB and a preallocated D. setup may compile,
+  allocate scratch, and execute one warmup call; every timed invocation must
+  read A, SFA, B and SFB as given and overwrite D (no copies or layout changes
+  of them made in setup). Do not call DeepGEMM, cuBLAS, torch._scaled_mm,
+  PyTorch tensor operators, Triton, CUTE DSL, raw CUDA, or an existing solution
+  kernel for production computation.
+
+  This is Hopper: fp8 WGMMA operands are K-major only; use TMA and mbarrier
+  pipelines, setmaxnreg warp specialization and thread-block clusters (no
+  tcgen05/TMEM/CLC); size persistent grids for the GPU's {{num_sms}} SMs with
+  max_active_clusters. Starting point: tirx-kernels
+  `tirx_kernels/gemm/fp8_blockscale_gemm_sm90.py` is at DeepGEMM parity
+  (geomean 1.00x on these shapes, per-shape tile and cluster choice).
+
+  Correctness: against the exact (float64) product rounded to bf16, every
+  element must be within 2^-7 |exact| + 2^-12 (|A| @ |B|^T), i.e. one bf16 ulp
+  plus the fp8 tensor-core accumulation error of a 128-wide K block. Speedup is
+  the geometric mean over the 7 shapes of DeepGEMM GPU time / candidate GPU
+  time. The benchmark prints the ptxas performance remarks (C75xx
+  serialization, spills) of your kernels with every score.

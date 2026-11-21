@@ -1,0 +1,68 @@
+{
+  "name": "fp8_blockscale_gemm_h200",
+  "description": "FP8 e4m3 block-scaled GEMM (DeepSeek-V3 1x128 / 128x128 recipe, fp32 scales, bf16 out) on DeepGEMM's m=4096 projection shapes, H200.",
+  "op_type": "gemm",
+  "tags": [
+    "dtype:fp8_e4m3",
+    "status:synthetic",
+    "baseline:deepgemm",
+    "arch:sm_90a"
+  ],
+  "axes": {
+    "M": {
+      "type": "var"
+    },
+    "N": {
+      "type": "var"
+    },
+    "K": {
+      "type": "var"
+    }
+  },
+  "constraints": [
+    "A.shape == [M, K]",
+    "SFA.shape == [K / 128, align(M, 4)]",
+    "B.shape == [N, K]",
+    "SFB.shape == [ceil(N / 128), K / 128]"
+  ],
+  "inputs": {
+    "A": {
+      "shape": [
+        "M",
+        "K"
+      ],
+      "dtype": "float8_e4m3fn"
+    },
+    "SFA": {
+      "shape": [
+        "K/128",
+        "align(M,4)"
+      ],
+      "dtype": "float32"
+    },
+    "B": {
+      "shape": [
+        "N",
+        "K"
+      ],
+      "dtype": "float8_e4m3fn"
+    },
+    "SFB": {
+      "shape": [
+        "ceil(N/128)",
+        "K/128"
+      ],
+      "dtype": "float32"
+    }
+  },
+  "outputs": {
+    "D": {
+      "shape": [
+        "M",
+        "N"
+      ],
+      "dtype": "bfloat16"
+    }
+  },
+  "reference": "from flashinfer_bench_evolve.tasks.fp8_blockscale_gemm_h200.baseline import run\n"
+}
