@@ -1,0 +1,98 @@
+selected GPU cuda:0 (memory_used=0 MiB, util=0%)
+OP: fp16_gemm_floor
+workloads: 12
+device: cuda:0
+warmup/iters/trials: 3/10/3
+correctness runs/post-timing/repeatable-outputs/input-dependence: 5/True/False/True
+gpu_state: {'host': 'fs-mbz-gpu-086', 'gpu': 'NVIDIA H200', 'sm_clock_mhz': 1980, 'sm_clock_max_mhz': 1980, 'throttle_reasons': '0x0000000000000000', 'temperature_c': 31, 'power_w': 88.74}
+
+[001/012] official:m1024-n1024-k1024 axes={'M': 1024, 'N': 1024, 'K': 1024}
+  baseline: 0.006304 ms
+  kernel:   0.006293 ms
+  speedup:  1.0017x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[002/012] official:m2048-n2048-k2048 axes={'M': 2048, 'N': 2048, 'K': 2048}
+  baseline: 0.024918 ms
+  kernel:   0.024907 ms
+  speedup:  1.0004x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[003/012] official:m4096-n4096-k4096 axes={'M': 4096, 'N': 4096, 'K': 4096}
+  baseline: 0.183243 ms
+  kernel:   0.183750 ms
+  speedup:  0.9972x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[004/012] official:m8192-n8192-k8192 axes={'M': 8192, 'N': 8192, 'K': 8192}
+  baseline: 1.448197 ms
+  kernel:   1.432889 ms
+  speedup:  1.0107x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[005/012] official:m2048-n11008-k4096 axes={'M': 2048, 'N': 11008, 'K': 4096}
+  baseline: 0.253788 ms
+  kernel:   0.254124 ms
+  speedup:  0.9987x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[006/012] official:m2048-n4096-k11008 axes={'M': 2048, 'N': 4096, 'K': 11008}
+  baseline: 0.233921 ms
+  kernel:   0.233313 ms
+  speedup:  1.0026x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[007/012] official:m4096-n11008-k4096 axes={'M': 4096, 'N': 11008, 'K': 4096}
+  baseline: 0.497644 ms
+  kernel:   0.497676 ms
+  speedup:  0.9999x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[008/012] official:m4096-n4096-k11008 axes={'M': 4096, 'N': 4096, 'K': 11008}
+  baseline: 0.467554 ms
+  kernel:   0.467079 ms
+  speedup:  1.0010x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[009/012] official:m1024-n8192-k2048 axes={'M': 1024, 'N': 8192, 'K': 2048}
+  baseline: 0.046229 ms
+  kernel:   0.046208 ms
+  speedup:  1.0005x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[010/012] official:m8192-n1024-k2048 axes={'M': 8192, 'N': 1024, 'K': 2048}
+  baseline: 0.046208 ms
+  kernel:   0.046133 ms
+  speedup:  1.0016x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[011/012] official:m4096-n2048-k8192 axes={'M': 4096, 'N': 2048, 'K': 8192}
+  baseline: 0.175051 ms
+  kernel:   0.175131 ms
+  speedup:  0.9995x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[012/012] official:m2048-n8192-k1024 axes={'M': 2048, 'N': 8192, 'K': 1024}
+  baseline: 0.052891 ms
+  kernel:   0.052854 ms
+  speedup:  1.0007x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+gpu_state after: {'host': 'fs-mbz-gpu-086', 'gpu': 'NVIDIA H200', 'sm_clock_mhz': 1980, 'sm_clock_max_mhz': 1980, 'throttle_reasons': '0x0000000000000000', 'temperature_c': 36, 'power_w': 307.18}
+timer: cupti
+
+Summary
+  passed: 12/12
+  mean speedup: 1.0012x
+  geomean speedup: 1.0012x
+  min/max speedup: 0.9972x / 1.0107x
+  official geomean: 1.0012x (n=12)
+  by M:
+    1024: geo=1.0011x n=2
+    2048: geo=1.0006x n=4
+    4096: geo=0.9994x n=4
+    8192: geo=1.0061x n=2
+
+# Aggregate result
+| candidate | candidate (12/12 PASS) | 3420us | 1.005x |
+RESULT cupti: rows=12 timer=cupti host=fs-mbz-gpu-086 sm=1980/1980 throttle=0x0000000000000000 speedup=1.001668388019385 after=1980

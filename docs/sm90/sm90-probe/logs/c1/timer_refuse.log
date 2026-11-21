@@ -1,0 +1,53 @@
+selected GPU cuda:0 (memory_used=4 MiB, util=0%)
+OP: fp16_gemm_floor
+workloads: 12
+device: cuda:0
+warmup/iters/trials: 3/10/3
+correctness runs/post-timing/repeatable-outputs/input-dependence: 5/True/False/True
+gpu_state: {'host': 'fs-mbz-gpu-086', 'gpu': 'NVIDIA H200', 'sm_clock_mhz': 1980, 'sm_clock_max_mhz': 1980, 'throttle_reasons': '0x0000000000000000', 'temperature_c': 32, 'power_w': 84.71}
+
+[001/012] official:m1024-n1024-k1024 axes={'M': 1024, 'N': 1024, 'K': 1024}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[002/012] official:m2048-n2048-k2048 axes={'M': 2048, 'N': 2048, 'K': 2048}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[003/012] official:m4096-n4096-k4096 axes={'M': 4096, 'N': 4096, 'K': 4096}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[004/012] official:m8192-n8192-k8192 axes={'M': 8192, 'N': 8192, 'K': 8192}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[005/012] official:m2048-n11008-k4096 axes={'M': 2048, 'N': 11008, 'K': 4096}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[006/012] official:m2048-n4096-k11008 axes={'M': 2048, 'N': 4096, 'K': 11008}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[007/012] official:m4096-n11008-k4096 axes={'M': 4096, 'N': 11008, 'K': 4096}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[008/012] official:m4096-n4096-k11008 axes={'M': 4096, 'N': 4096, 'K': 11008}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[009/012] official:m1024-n8192-k2048 axes={'M': 1024, 'N': 8192, 'K': 2048}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[010/012] official:m8192-n1024-k2048 axes={'M': 8192, 'N': 1024, 'K': 2048}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[011/012] official:m4096-n2048-k8192 axes={'M': 4096, 'N': 2048, 'K': 8192}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[012/012] official:m2048-n8192-k1024 axes={'M': 2048, 'N': 8192, 'K': 1024}
+  correct:  FAIL verdict=ERROR timing trial 1: RuntimeError: CUPTI timer unavailable (RuntimeError: CUPTI disabled for this check) and BENCH_REQUIRE_CUPTI=1 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+gpu_state after: {'host': 'fs-mbz-gpu-086', 'gpu': 'NVIDIA H200', 'sm_clock_mhz': 1980, 'sm_clock_max_mhz': 1980, 'throttle_reasons': '0x0000000000000000', 'temperature_c': 32, 'power_w': 128.45}
+
+Summary
+  passed: 0/12
+  no valid speedups
+
+# Aggregate result
+| candidate | candidate (0/12 PASS) | 999999999us | 0.000x |
+RESULT refuse: rows=12 timer=None host=fs-mbz-gpu-086 sm=1980/1980 throttle=0x0000000000000000 speedup=None after=1980

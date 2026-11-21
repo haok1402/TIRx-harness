@@ -1,0 +1,170 @@
+selected GPU cuda:0 (memory_used=4 MiB, util=0%)
+OP: fp16_gemm_floor
+workloads: 12
+device: cuda:0
+warmup/iters/trials: 3/10/3
+correctness runs/post-timing/repeatable-outputs/input-dependence: 5/True/False/True
+gpu_state: {'host': 'fs-mbz-gpu-086', 'gpu': 'NVIDIA H200', 'sm_clock_mhz': 1980, 'sm_clock_max_mhz': 1980, 'throttle_reasons': '0x0000000000000000', 'temperature_c': 32, 'power_w': 84.66}
+
+[001/012] official:m1024-n1024-k1024 axes={'M': 1024, 'N': 1024, 'K': 1024}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 0.010517 ms
+  kernel:   0.010459 ms
+  speedup:  1.0056x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[002/012] official:m2048-n2048-k2048 axes={'M': 2048, 'N': 2048, 'K': 2048}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 0.028816 ms
+  kernel:   0.028768 ms
+  speedup:  1.0017x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[003/012] official:m4096-n4096-k4096 axes={'M': 4096, 'N': 4096, 'K': 4096}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 0.181397 ms
+  kernel:   0.181525 ms
+  speedup:  0.9993x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[004/012] official:m8192-n8192-k8192 axes={'M': 8192, 'N': 8192, 'K': 8192}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 1.440875 ms
+  kernel:   1.560763 ms
+  speedup:  0.9232x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[005/012] official:m2048-n11008-k4096 axes={'M': 2048, 'N': 11008, 'K': 4096}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 0.269195 ms
+  kernel:   0.268459 ms
+  speedup:  1.0027x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[006/012] official:m2048-n4096-k11008 axes={'M': 2048, 'N': 4096, 'K': 11008}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 0.238736 ms
+  kernel:   0.234491 ms
+  speedup:  1.0181x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[007/012] official:m4096-n11008-k4096 axes={'M': 4096, 'N': 11008, 'K': 4096}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 0.502144 ms
+  kernel:   0.501909 ms
+  speedup:  1.0005x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[008/012] official:m4096-n4096-k11008 axes={'M': 4096, 'N': 4096, 'K': 11008}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 0.479611 ms
+  kernel:   0.479483 ms
+  speedup:  1.0003x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[009/012] official:m1024-n8192-k2048 axes={'M': 1024, 'N': 8192, 'K': 2048}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 0.052987 ms
+  kernel:   0.053013 ms
+  speedup:  0.9995x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[010/012] official:m8192-n1024-k2048 axes={'M': 8192, 'N': 1024, 'K': 2048}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 0.050843 ms
+  kernel:   0.050800 ms
+  speedup:  1.0008x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[011/012] official:m4096-n2048-k8192 axes={'M': 4096, 'N': 2048, 'K': 8192}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 0.177040 ms
+  kernel:   0.176885 ms
+  speedup:  1.0009x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+[012/012] official:m2048-n8192-k1024 axes={'M': 2048, 'N': 8192, 'K': 1024}
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  timer: CUPTI unavailable (RuntimeError: CUPTI disabled for this check); using cold-L2 CUDA events
+  baseline: 0.054245 ms
+  kernel:   0.054192 ms
+  speedup:  1.0010x
+  correct:  PASS verdict=STABLE checks=36 max_abs=0.000e+00 max_rel=0.000e+00 max_rms_ratio=0.000e+00 matched=1.0000
+
+gpu_state after: {'host': 'fs-mbz-gpu-086', 'gpu': 'NVIDIA H200', 'sm_clock_mhz': 1965, 'sm_clock_max_mhz': 1980, 'throttle_reasons': '0x0000000000000004', 'temperature_c': 42, 'power_w': 589.96}
+timer: cuda_event_cold_l2
+
+Summary
+  passed: 12/12
+  mean speedup: 0.9961x
+  geomean speedup: 0.9959x
+  min/max speedup: 0.9232x / 1.0181x
+  official geomean: 0.9959x (n=12)
+  by M:
+    1024: geo=1.0025x n=2
+    2048: geo=1.0058x n=4
+    4096: geo=1.0002x n=4
+    8192: geo=0.9612x n=2
+
+# Aggregate result
+| candidate | candidate (12/12 PASS) | 3601us | 0.968x |
+RESULT fallback: rows=12 timer=cuda_event_cold_l2 host=fs-mbz-gpu-086 sm=1980/1980 throttle=0x0000000000000000 speedup=1.0056093663101746 after=1965
