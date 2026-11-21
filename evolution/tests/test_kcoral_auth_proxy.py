@@ -64,3 +64,50 @@ def test_short_tokens_and_non_loopback_upstreams_are_refused(monkeypatch):
     assert proxy.main(["--listen", "0.0.0.0:1", "--upstream", "10.0.0.5:2"]) == 2
     monkeypatch.delenv(proxy.TOKEN_ENV)
     assert proxy.main(["--listen", "0.0.0.0:1", "--upstream", "127.0.0.1:2"]) == 2
+
+
+def _raw(app, method, raw_path, headers):
+    """Drive the ASGI app directly, as uvicorn would for an arbitrary request line."""
+    sent = []
+
+    async def go():
+        scope = {
+            "type": "http",
+            "method": method,
+            "path": raw_path.decode("latin-1"),
+            "raw_path": raw_path,
+            "query_string": b"",
+            "headers": headers,
+        }
+
+        async def receive():
+            return {"type": "http.request", "body": b"", "more_body": False}
+
+        async def send(message):
+            sent.append(message)
+
+        await app(scope, receive, send)
+
+    asyncio.run(go())
+    return sent[0]["status"]
+
+
+@pytest.mark.parametrize(
+    "target", [b"http://10.0.0.5:8000/execute", b"//10.0.0.5:8000/execute", b"execute"]
+)
+def test_absolute_and_scheme_relative_targets_are_refused(target):
+    calls = []
+    app = proxy.make_app(TOKEN, "http://127.0.0.1:1", transport=_upstream(calls))
+    auth = (b"authorization", f"Bearer {TOKEN}".encode())
+    assert _raw(app, "POST", target, [auth]) == 400
+    assert calls == []
+
+
+def test_duplicate_authorization_headers_are_refused():
+    calls = []
+    app = proxy.make_app(TOKEN, "http://127.0.0.1:1", transport=_upstream(calls))
+    good = (b"authorization", f"Bearer {TOKEN}".encode())
+    assert _raw(app, "GET", b"/health", [good, good]) == 401
+    assert _raw(app, "GET", b"/health", [good, (b"Authorization", b"Bearer x")]) == 401
+    assert calls == []
+    assert _raw(app, "GET", b"/health", [good]) == 200

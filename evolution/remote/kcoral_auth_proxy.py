@@ -7,8 +7,9 @@ and this proxy on the node's network address; the proxy forwards only requests t
 
     Authorization: Bearer <token>
 
-with the per-launch token from ``$KCORAL_PROXY_TOKEN`` (never on the command line, where every user
-could read it from ``ps``). Every other request gets 401 without reaching kcoral. Bodies are
+(exactly one such header) with the per-launch token from ``$KCORAL_PROXY_TOKEN`` (never on the
+command line, where every user could read it from ``ps``), and only origin-form targets
+("/path"). Every other request gets 401 (or 400) without reaching kcoral. Bodies are
 streamed in both directions and responses have no read timeout (a scoring request can run for an
 hour). The Authorization header is not forwarded.
 
@@ -74,9 +75,16 @@ def make_app(token: str, upstream: str, *, transport=None):
                     return
         if scope["type"] != "http":
             return
-        headers = dict(scope["headers"])
-        if not hmac.compare_digest(headers.get(b"authorization", b""), expected):
+        auth = [v for k, v in scope["headers"] if k.lower() == b"authorization"]
+        # Exactly one Authorization header, equal to the token (constant-time compare).
+        if len(auth) != 1 or not hmac.compare_digest(auth[0], expected):
             await reject(send, 401, "unauthorized")
+            return
+        target = scope.get("raw_path") or scope["path"].encode()
+        # Origin-form only ("/path"): an absolute-form ("http://host/...") or scheme-relative
+        # ("//host/...") target would make the upstream client leave the loopback kcoral.
+        if not target.startswith(b"/") or target.startswith(b"//"):
+            await reject(send, 400, "only origin-form request targets are accepted")
             return
 
         async def body():
@@ -91,7 +99,7 @@ def make_app(token: str, upstream: str, *, transport=None):
                     return
 
         forward = [(k, v) for k, v in scope["headers"] if k.lower() not in _HOP]
-        path = scope.get("raw_path") or scope["path"].encode()
+        path = target
         if scope.get("query_string"):
             path += b"?" + scope["query_string"]
         request = client.build_request(
