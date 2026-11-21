@@ -6,8 +6,9 @@ Server startup belongs to another process. Before use or after disconnection:
 until python evolution/remote/kcoral_remote.py --remote {{bench_server_url}} --health; do sleep 5; done
 ```
 It exits 0 only on `status: ok`; otherwise keep polling. It sends the server's
-token, as every CLI below does; a bare `curl` gets HTTP 401. Health lists `gpus[].gpu_id`,
-`workers[].status` (`idle`/`busy`), and `queue_length`. Never start, stop, kill,
+token, as every CLI below does; a bare `curl` gets HTTP 401. Health reports
+`gpu_count`, `target.arch`, package `versions`, and `load` (`request_capacity`,
+`requests_in_progress`, `requests_waiting`). Never start, stop, kill,
 restart, or reconfigure the server. Use its provisioned environment in all
 CLIs and uploaded scripts: no package installs/upgrades/removals, environment
 setup scripts, server configuration edits, or shared-file changes. Report

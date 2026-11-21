@@ -135,7 +135,22 @@ def ncu(archive, ncu_args, application, overrides):
             env=environment(workdir, overrides),
             stdin=subprocess.DEVNULL,
         )
+        captured = report.is_file()
         return {
             "returncode": completed.returncode,
-            "report": report.read_bytes() if report.is_file() else None,
+            "report": report.read_bytes() if captured else None,
+            "counters_restricted": not captured and counters_restricted(),
         }
+
+
+def counters_restricted(params="/proc/driver/nvidia/params"):
+    """Whether this driver limits GPU performance counters to admins and we are not one.
+
+    NCU then fails with ERR_NVGPUCTRPERM whatever its arguments; only an administrator can lift it
+    (the nvidia module option ``NVreg_RestrictProfilingToAdminUsers=0``).
+    """
+    try:
+        text = Path(params).read_text()
+    except OSError:
+        return False
+    return "RmProfilingAdminOnly: 1" in text and os.geteuid() != 0

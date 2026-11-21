@@ -341,7 +341,7 @@ def test_ncu_worker_argv_inputs_and_cleanup(tmp_path, monkeypatch, failure):
             ["--set", "basic"],
             ["python", "capture.py", "literal;value"],
             {"PROFILE_MODE": "override"},
-        ) == {"returncode": 7, "report": b"report\x00\xff"}
+        ) == {"returncode": 7, "report": b"report\x00\xff", "counters_restricted": False}
     assert workdirs and not workdirs[0].parent.exists()
     assert worker.os.environ["PROFILE_MODE"] == "server-value"
 
@@ -413,3 +413,33 @@ def test_iket_profile_defaults_preserve_explicit_configuration(
         {} if override is None else {key: override},
     )
     assert worker.os.environ.get(key) == inherited
+
+
+@pytest.mark.parametrize(
+    "params, euid, expected",
+    [
+        ("RmProfilingAdminOnly: 1\n", 1000, True),
+        ("RmProfilingAdminOnly: 1\n", 0, False),
+        ("RmProfilingAdminOnly: 0\n", 1000, False),
+        (None, 1000, False),
+    ],
+)
+def test_counter_restriction_is_detected(tmp_path, monkeypatch, params, euid, expected):
+    path = tmp_path / "params"
+    if params is not None:
+        path.write_text(params)
+    monkeypatch.setattr(worker.os, "geteuid", lambda: euid)
+    assert worker.counters_restricted(str(path)) is expected
+
+
+def test_ncu_explains_admin_only_counters(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(
+        ncu,
+        "execute",
+        lambda args, program: {"returncode": 1, "report": None, "counters_restricted": True},
+    )
+    monkeypatch.setattr(ncu, "build_program", lambda *a, **k: None)
+    report = tmp_path / "out.ncu-rep"
+    assert ncu.main(["--remote", "url", "-o", str(report), "--", "python", "s.py"]) == 1
+    err = capsys.readouterr().err
+    assert "no report" in err and "RmProfilingAdminOnly=1" in err and "will not help" in err
