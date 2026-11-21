@@ -36,15 +36,52 @@ def test_step_prompt_forbids_rewriting_visible_devices(tmp_path):
     ("flag", "env", "remote", "expected"),
     [
         (None, {}, False, None),  # shared machine
-        (None, {"SLURM_STEP_GPUS": "7", "CUDA_VISIBLE_DEVICES": "0"}, False, "0"),  # auto in a step
-        (None, {"SLURM_JOB_GPUS": "2,3", "CUDA_VISIBLE_DEVICES": "0,1"}, False, "0,1"),
+        # a small explicit step: auto
+        (
+            None,
+            {"SLURM_STEP_ID": "2350", "SLURM_STEP_GPUS": "7", "CUDA_VISIBLE_DEVICES": "0"},
+            False,
+            "0",
+        ),
+        (
+            None,
+            {"SLURM_STEP_ID": "12", "SLURM_STEP_GPUS": "2,3", "CUDA_VISIBLE_DEVICES": "0,1"},
+            False,
+            "0,1",
+        ),
+        # broad steps are never auto: step 0 spanning the job's GPUs, the batch step, job-level GPUs
+        (
+            None,
+            {"SLURM_STEP_ID": "0", "SLURM_STEP_GPUS": "0,1", "CUDA_VISIBLE_DEVICES": "0,1"},
+            False,
+            None,
+        ),
+        (None, {"SLURM_STEP_ID": "4294967294", "SLURM_STEP_GPUS": "0"}, False, None),
+        (
+            None,
+            {"SLURM_JOB_GPUS": "0,1,2,3,4,5,6,7", "CUDA_VISIBLE_DEVICES": "0,1,2,3,4,5,6,7"},
+            False,
+            None,
+        ),
+        (
+            None,
+            {"SLURM_STEP_ID": "9", "SLURM_STEP_GPUS": "0,1,2,3", "CUDA_VISIBLE_DEVICES": "0,1,2,3"},
+            False,
+            None,
+        ),
+        # explicit flag
         ("auto", {"CUDA_VISIBLE_DEVICES": "GPU-438f"}, False, "GPU-438f"),
         ("1", {}, False, "1"),
-        (None, {"SLURM_STEP_GPUS": "7", "CUDA_VISIBLE_DEVICES": "0"}, True, None),  # remote: n/a
+        (
+            None,
+            {"SLURM_STEP_ID": "5", "SLURM_STEP_GPUS": "7", "CUDA_VISIBLE_DEVICES": "0"},
+            True,
+            None,
+        ),  # remote
     ],
 )
 def test_allocated_gpus_detection(monkeypatch, flag, env, remote, expected):
-    for key in ("SLURM_STEP_GPUS", "SLURM_JOB_GPUS", "CUDA_VISIBLE_DEVICES"):
+    for key in ("SLURM_STEP_ID", "SLURM_STEP_GPUS", "SLURM_JOB_GPUS", "CUDA_VISIBLE_DEVICES"):
         monkeypatch.delenv(key, raising=False)
     for key, value in env.items():
         monkeypatch.setenv(key, value)

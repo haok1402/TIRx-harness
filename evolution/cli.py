@@ -212,8 +212,8 @@ def _parser() -> tuple[argparse.ArgumentParser, argparse.ArgumentParser]:
         const="auto",
         metavar="DEVICES",
         help="local mode inside a job step that owns its GPUs: tell the agent to use the step's "
-        "CUDA_VISIBLE_DEVICES as-is instead of picking a GPU (default: on when SLURM_STEP_GPUS "
-        "or SLURM_JOB_GPUS is set)",
+        "CUDA_VISIBLE_DEVICES as-is instead of picking a GPU (default: on only inside a small "
+        "explicit Slurm step, <= 2 GPUs, not step 0/batch/extern)",
     )
     init.add_argument(
         "--name",
@@ -223,17 +223,26 @@ def _parser() -> tuple[argparse.ArgumentParser, argparse.ArgumentParser]:
     return parser, init
 
 
+MAX_AUTO_STEP_GPUS = 2  # auto-detect only a small, explicit allocation
+
+
 def _allocated_gpus(flag: str | None, *, remote: bool) -> str | None:
     """The step-owned ``CUDA_VISIBLE_DEVICES`` for local mode, or None on a shared machine.
 
-    Inside a Slurm step (SLURM_STEP_GPUS / SLURM_JOB_GPUS set) the step owns its GPUs and its
-    ``CUDA_VISIBLE_DEVICES`` must not be rewritten, so this is on by default there.
+    Auto-detection (no flag) trusts only a small, explicit step allocation: SLURM_STEP_GPUS lists at
+    most MAX_AUTO_STEP_GPUS GPUs and the step is not the job's step 0, batch or extern step. Those
+    broad steps span GPUs that other agents' steps use, so telling the agent that it owns them would
+    be false; there --allocated-gpus must be given explicitly.
     """
     if remote:
         return None
-    if flag is None and not (os.environ.get("SLURM_STEP_GPUS") or os.environ.get("SLURM_JOB_GPUS")):
-        return None
-    if flag not in (None, "auto"):
+    if flag is None:
+        step = os.environ.get("SLURM_STEP_ID", "")
+        step_gpus = [g for g in os.environ.get("SLURM_STEP_GPUS", "").split(",") if g.strip()]
+        explicit_step = step.isdigit() and int(step) not in (0, 4294967294, 4294967295)
+        if not (explicit_step and 0 < len(step_gpus) <= MAX_AUTO_STEP_GPUS):
+            return None
+    elif flag != "auto":
         return flag
     return os.environ.get("CUDA_VISIBLE_DEVICES") or "the step's devices"
 
