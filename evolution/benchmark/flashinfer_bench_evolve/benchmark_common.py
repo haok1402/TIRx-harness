@@ -316,7 +316,9 @@ def time_fn(fn, args, device, warmup: int, iters: int):
     The FlashInfer CUPTI timer is the scoring timer. If it is unavailable, CUDA events
     time each call separately with the L2 flushed before it, so the fallback measures the
     same thing (it used to time back-to-back calls with a hot L2, which flatters
-    memory-bound kernels). ``BENCH_REQUIRE_CUPTI=1`` refuses to score without CUPTI.
+    memory-bound kernels). Per-call events include launch and event latency, so for
+    microsecond-scale kernels the fallback reads a few us high (~5 us vs CUPTI's ~1 us for a 1 us
+    kernel); score those with ``BENCH_REQUIRE_CUPTI=1``, which refuses to score without CUPTI.
     """
     try:
         from flashinfer.testing import bench_gpu_time_with_cupti
@@ -1027,8 +1029,7 @@ def run_benchmark(
         f"{correctness_runs}/{check_after_timing}/{require_repeatable_outputs}/"
         f"{check_input_dependence}"
     )
-    state = gpu_state(device)
-    print(f"gpu_state: {state}")
+    print(f"gpu_state at start (idle clocks are expected here): {gpu_state(device)}")
     print()
 
     rows = []
@@ -1309,7 +1310,9 @@ def run_benchmark(
                 "speedup": speedup,
                 "timer": entry_timer,
                 "timed": entry_timed,
-                **state,
+                # Sampled right after this row's timing, while the clocks still reflect the load
+                # (at idle the SM clock reads e.g. 345 MHz with throttle reason 0x1, "GPU idle").
+                **gpu_state(device),
             }
         )
         print()
