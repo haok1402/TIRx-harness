@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shlex
 import sys
@@ -58,8 +59,9 @@ def _prompt(
     worktree: Path,
     remote_url: str | None = None,
     python: Path | None = None,
+    allocated_gpus: str | None = None,
 ) -> str:
-    blocks = shared_rule_blocks(toolset)
+    blocks = shared_rule_blocks(toolset, allocated_gpus=allocated_gpus)
     preamble = "You are running as an autonomous kernel-optimization agent."
     environment_blocks = ["1. " + blocks["banned_reads"]]
     bench_timeout_s = task.bench_timeout_s or 120
@@ -68,7 +70,10 @@ def _prompt(
         f"timeout {bench_timeout_s}s {interpreter} "
         f"evolution/benchmark/adapter.py {task.workload_dir} CANDIDATE"
     )
-    bench_environment = "env CUDA_VISIBLE_DEVICES=<picked> \\\n"
+    # In a job step the GPUs are the step's: the agent must not override CUDA_VISIBLE_DEVICES.
+    bench_environment = (
+        "" if allocated_gpus is not None else "env CUDA_VISIBLE_DEVICES=<picked> \\\n"
+    )
     remote_section = ""
     if remote_url is not None:
         bench_command = (
@@ -107,6 +112,7 @@ def setup(
     task_name: str,
     remote_url: str | None = None,
     run_name: str | None = None,
+    allocated_gpus: str | None = None,
 ) -> Path:
     if run_name is None:
         stem = f"{task_name}-{time.strftime('%Y%m%d-%H%M%S')}"
@@ -147,6 +153,7 @@ def setup(
             worktree=worktree,
             remote_url=remote_url,
             python=environment.python,
+            allocated_gpus=allocated_gpus,
         )
     )
 
@@ -159,6 +166,7 @@ def setup(
         "pinned_commit": pinned,
         "kernel_authoring": task.kernel_authoring,
         "bench_server_url": remote_url,
+        "allocated_gpus": allocated_gpus,
         "started_at": time.time(),
         "venv": str(environment.prefix),
         "python": str(environment.python),
@@ -199,11 +207,35 @@ def _parser() -> tuple[argparse.ArgumentParser, argparse.ArgumentParser]:
         f"(default {BENCH_SERVER_URL})",
     )
     init.add_argument(
+        "--allocated-gpus",
+        nargs="?",
+        const="auto",
+        metavar="DEVICES",
+        help="local mode inside a job step that owns its GPUs: tell the agent to use the step's "
+        "CUDA_VISIBLE_DEVICES as-is instead of picking a GPU (default: on when SLURM_STEP_GPUS "
+        "or SLURM_JOB_GPUS is set)",
+    )
+    init.add_argument(
         "--name",
         dest="run_name",
         help="exact run directory name (default: <task>-<timestamp>)",
     )
     return parser, init
+
+
+def _allocated_gpus(flag: str | None, *, remote: bool) -> str | None:
+    """The step-owned ``CUDA_VISIBLE_DEVICES`` for local mode, or None on a shared machine.
+
+    Inside a Slurm step (SLURM_STEP_GPUS / SLURM_JOB_GPUS set) the step owns its GPUs and its
+    ``CUDA_VISIBLE_DEVICES`` must not be rewritten, so this is on by default there.
+    """
+    if remote:
+        return None
+    if flag is None and not (os.environ.get("SLURM_STEP_GPUS") or os.environ.get("SLURM_JOB_GPUS")):
+        return None
+    if flag not in (None, "auto"):
+        return flag
+    return os.environ.get("CUDA_VISIBLE_DEVICES") or "the step's devices"
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -215,11 +247,13 @@ def main(argv: list[str] | None = None) -> int:
         server = urlparse(args.remote)
         if not (server.hostname and server.port):
             init.error(f"--remote expects http://host:port, got {args.remote!r}")
+    allocated = _allocated_gpus(args.allocated_gpus, remote=args.remote is not None)
     try:
         setup(
             task_name=args.task,
             remote_url=args.remote,
             run_name=args.run_name,
+            allocated_gpus=allocated,
         )
     except ValueError as error:
         init.error(str(error))
