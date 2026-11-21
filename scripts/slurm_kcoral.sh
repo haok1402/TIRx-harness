@@ -89,6 +89,9 @@ while true; do
   KCORAL_PROXY_TOKEN="$token" setpriv --pdeathsig TERM -- \
     srun --jobid="$job" -J "$STEP_NAME" -N1 -n1 --gres=gpu:1 --cpus-per-task="$CPUS" --mem="$MEM" \
     bash -c "
+      # Requests inherit this environment: the server venv goes first on PATH, so python in --cmd
+      # scripts and tool targets is the provisioned interpreter, not the bare system one.
+      export VIRTUAL_ENV='$VENV' PATH='$VENV/bin':\$PATH
       env -u KCORAL_PROXY_TOKEN '$VENV/bin/kcoral' server --host 127.0.0.1 --port $inner --gpus 0 --sandbox none \
         --max-timeout-seconds 3600 --log-dir '' $EXTRA &
       server=\$!

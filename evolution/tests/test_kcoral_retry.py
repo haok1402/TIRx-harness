@@ -9,6 +9,7 @@ import pytest
 kcoral = pytest.importorskip("kcoral")
 from kcoral.errors import KCoralError, TransportError  # noqa: E402
 
+from evolution.remote import kcoral_connection as kc  # noqa: E402
 from evolution.remote import kcoral_remote as kr  # noqa: E402
 
 
@@ -58,12 +59,12 @@ def _fake_client(script, seen):
 
 @pytest.fixture(autouse=True)
 def short_gone_poll(monkeypatch):
-    monkeypatch.setattr(kr, "GONE_POLL_SECONDS", 0)
+    monkeypatch.setattr(kc, "GONE_POLL_SECONDS", 0)
 
 
 @pytest.fixture
 def no_sleep(monkeypatch):
-    monkeypatch.setattr(kr.time, "sleep", lambda s: None)
+    monkeypatch.setattr(kc.time, "sleep", lambda s: None)
 
 
 def _install(monkeypatch, script, seen):
@@ -83,7 +84,7 @@ def test_url_file_is_reread_and_transport_errors_retried(tmp_path, monkeypatch, 
     def move_server(*a):  # after the first failure the server republishes on another node
         url_file.write_text("http://node-b:2000\n")
 
-    monkeypatch.setattr(kr.time, "sleep", move_server)
+    monkeypatch.setattr(kc.time, "sleep", move_server)
     _install(monkeypatch, script, seen)
     result = kr._execute(f"@{url_file}", object(), 60)
     assert result.results == {"rows": [1]}
@@ -97,7 +98,7 @@ def test_missing_url_file_waits_for_a_server(tmp_path, monkeypatch):
     def publish(*a):
         url_file.write_text("http://node-c:3000")
 
-    monkeypatch.setattr(kr.time, "sleep", publish)
+    monkeypatch.setattr(kc.time, "sleep", publish)
     _install(monkeypatch, [_Result()], seen)
     kr._execute(f"@{url_file}", object(), 60)
     assert seen == ["http://node-c:3000"]
@@ -169,9 +170,9 @@ def test_worker_crash_500_is_retried_only_when_the_server_went_away(monkeypatch,
 
 def test_slow_shutdown_is_still_seen_as_gone(monkeypatch, no_sleep):
     """Healthy at the first poll (SIGTERM not yet acted on), gone at a later one: retried."""
-    monkeypatch.setattr(kr, "GONE_POLL_SECONDS", 3600)
+    monkeypatch.setattr(kc, "GONE_POLL_SECONDS", 3600)
     clock = iter(range(0, 10**6, 10))
-    monkeypatch.setattr(kr.time, "monotonic", lambda: next(clock))
+    monkeypatch.setattr(kc.time, "monotonic", lambda: next(clock))
     seen = []
     script = [_Result(False, "worker exited while executing the instruction"), "ok", "health-down"]
     script.append(_Result())

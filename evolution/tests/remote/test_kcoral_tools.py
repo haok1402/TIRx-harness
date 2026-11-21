@@ -20,8 +20,9 @@ from evolution.remote import kcoral_tool_worker as worker
 def fake_client(monkeypatch):
     def install(result, *, timeout=300):
         class Client:
-            def __init__(self, url):
+            def __init__(self, url, headers=None):
                 assert url == "http://server"
+                self.headers = headers
 
             def __enter__(self):
                 return self

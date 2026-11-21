@@ -10,6 +10,8 @@ import tarfile
 import tempfile
 from pathlib import Path, PurePosixPath
 
+from evolution.remote.kcoral_connection import REMOTE_HELP, request
+
 OUTPUT_LIMIT_BYTES = 16 * 1024**2
 WORKER_PATH = Path(__file__).with_name("kcoral_tool_worker.py")
 
@@ -56,7 +58,7 @@ def pack_inputs(paths=()):
 
 
 def add_wrapper_args(parser):
-    parser.add_argument("--remote", required=True, help="KCoral server URL")
+    parser.add_argument("--remote", required=True, metavar="URL", help=REMOTE_HELP)
     parser.add_argument(
         "--send",
         type=Path,
@@ -130,12 +132,8 @@ def build_program(archive, arguments, *, function):
 
 
 def execute(args, program):
-    from kcoral import Client
-
-    with Client(args.remote) as client:
-        result = client.execute(
-            program, timeout_seconds=args.timeout, output_limit_bytes=OUTPUT_LIMIT_BYTES
-        )
+    # Same path as scoring: @URL_FILE, the bearer token and preemption retries.
+    result = request(args.remote, program, args.timeout, OUTPUT_LIMIT_BYTES)
     sys.stdout.write(result.stdout)
     sys.stderr.write(result.stderr)
     if result.stdout_truncated or result.stderr_truncated:

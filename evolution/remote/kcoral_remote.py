@@ -44,7 +44,6 @@ import io
 import json
 import os
 import sys
-import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
@@ -55,6 +54,16 @@ from evolution.benchmark.adapter import (
     harness_sources,
     plan,
     workload_key,
+)
+from evolution.remote.kcoral_connection import (  # noqa: F401  (re-exported)
+    DEFAULT_RETRY_SECONDS,
+    REMOTE_HELP,
+    RETRY_SECONDS_ENV,
+    TOKEN_FILE_ENV,
+    health,
+    request,
+    resolve_url,
+    token_for,
 )
 
 DRIVER_PATH = Path(__file__).with_name("kcoral_driver.py")
@@ -96,80 +105,6 @@ def _request(task_name: str, overrides: dict, workloads: list, candidate: bytes 
     return program, bundle, handles
 
 
-RETRY_SECONDS_ENV = "KCORAL_RETRY_SECONDS"  # total time to keep retrying an unavailable server
-# Gaps between preemptible array tasks here can exceed 30 min: wait hours, not minutes.
-DEFAULT_RETRY_SECONDS = 6 * 3600
-_RETRY_HTTP = {502, 503}  # bad gateway / busy or shutting down; 504 is the request's own timeout
-TOKEN_FILE_ENV = (
-    "KCORAL_TOKEN_FILE"  # bearer token for a plain-URL --remote (see kcoral_auth_proxy.py)
-)
-GONE_POLL_SECONDS = (
-    45  # Slurm's KillWait (30 s) plus slack: a SIGTERMed server may answer health a while
-)
-
-
-def resolve_url(remote: str) -> str:
-    """``--remote`` is a URL, or ``@FILE`` naming a file that holds the current URL.
-
-    A preemptible server (``scripts/slurm_kcoral.sh``) moves between nodes and ports; it republishes
-    its URL in that file, and every attempt re-reads it.
-    """
-    if not remote.startswith("@"):
-        return remote
-    try:
-        return Path(remote[1:]).expanduser().read_text().strip()
-    except FileNotFoundError:
-        return ""  # no server published right now (e.g. waiting for the next Slurm task)
-
-
-def token_for(remote: str) -> str | None:
-    """The bearer token: ``URL_FILE.token`` for ``@URL_FILE``, else ``$KCORAL_TOKEN_FILE``.
-
-    scripts/slurm_kcoral.sh writes a fresh token (mode 0600) with every launch; it is re-read on
-    every attempt, like the URL.
-    """
-    path = Path(remote[1:] + ".token") if remote.startswith("@") else None
-    if path is None and os.environ.get(TOKEN_FILE_ENV):
-        path = Path(os.environ[TOKEN_FILE_ENV])
-    if path is None:
-        return None
-    try:
-        return path.expanduser().read_text().strip() or None
-    except FileNotFoundError:
-        return None
-
-
-def _client(url: str, remote: str):
-    from kcoral import Client
-
-    token = token_for(remote)
-    headers = {"Authorization": f"Bearer {token}"} if token else None
-    return Client(url, headers=headers)
-
-
-def _server_gone(remote: str, url: str) -> bool:
-    """After a worker died mid-request: did the server go away (retry) or the candidate crash?
-
-    A preempted step is SIGTERMed and may keep answering health for up to Slurm's KillWait, so
-    poll for GONE_POLL_SECONDS: gone as soon as the URL file moves or health fails; a candidate
-    crash only if the same server stays healthy the whole time.
-    """
-    from kcoral.errors import KCoralError, ProtocolError, TransportError
-
-    deadline = time.monotonic() + GONE_POLL_SECONDS
-    while True:
-        time.sleep(5)
-        if resolve_url(remote) != url:
-            return True
-        try:
-            with _client(url, remote) as client:
-                client.health()
-        except (TransportError, KCoralError, ProtocolError):
-            return True
-        if time.monotonic() >= deadline:
-            return False
-
-
 def _execute(
     remote: str,
     program,
@@ -177,68 +112,9 @@ def _execute(
     output_limit_bytes: int | None = None,
     retry_seconds: float | None = None,
 ):
-    """Send ``program``, replay the worker's output, fail loudly on a FAILED request.
-
-    Requests are self-contained, so a request that the server could not finish because the
-    server went away (connection refused or reset, HTTP 502/503, or its worker killed mid-run by a
-    preemption) is re-sent to the server ``remote`` currently resolves to. Retries back off from
-    5 s to 60 s, for up to ``retry_seconds`` (``--retry-seconds``, else ``$KCORAL_RETRY_SECONDS``,
-    default 6 h) in total. Candidate failures, timeouts and protocol errors are not retried.
-    """
-
-    from kcoral.errors import KCoralError, TransportError
-
-    if retry_seconds is None:
-        retry_seconds = float(os.environ.get(RETRY_SECONDS_ENV, DEFAULT_RETRY_SECONDS))
-    budget = float(retry_seconds)
-    deadline = time.monotonic() + budget
-    delay = 5.0
-    attempt = 0
-    while True:
-        attempt += 1
-        url = resolve_url(remote)
-        reason = None
-        result = None
-        if not url:
-            reason = f"no server URL published in {remote[1:]}"
-        else:
-            try:
-                with _client(url, remote) as client:
-                    result = client.execute(
-                        program,
-                        timeout_seconds=timeout_seconds,
-                        output_limit_bytes=output_limit_bytes,
-                    )
-            except TransportError as exc:
-                reason = f"{url} unreachable ({exc})"
-            except KCoralError as exc:
-                crashed = exc.status_code == 500 and "worker crashed" in str(exc.message)
-                if exc.status_code == 401:
-                    raise SystemExit(
-                        f"benchmark server {url} rejected the token (HTTP 401): "
-                        f"check {remote}.token or ${TOKEN_FILE_ENV}"
-                    ) from exc
-                if exc.status_code not in _RETRY_HTTP and not (
-                    crashed and _server_gone(remote, url)
-                ):
-                    raise
-                reason = f"{url} answered HTTP {exc.status_code} ({exc.message})"
-        if result is not None:
-            error = result.error or {}
-            worker_died = "worker exited" in str(error.get("message", ""))
-            if result.completed or not worker_died or not _server_gone(remote, url):
-                break
-            reason = f"{url} went away while running the request ({error.get('message')})"
-        if time.monotonic() + delay > deadline:
-            raise SystemExit(
-                f"benchmark server unavailable for {budget:.0f}s after {attempt} attempts: {reason}"
-            )
-        print(f"benchmark server: {reason}; retrying in {delay:.0f}s", file=sys.stderr, flush=True)
-        time.sleep(delay)
-        delay = min(delay * 2, 60.0)
-
-    if attempt > 1:
-        print(f"benchmark server: succeeded on attempt {attempt} via {url}", file=sys.stderr)
+    """Send ``program`` (``kcoral_connection.request``: token, URL file, retries), replay the
+    worker's output, and fail loudly on a FAILED request."""
+    result = request(remote, program, timeout_seconds, output_limit_bytes, retry_seconds)
     sys.stdout.write(result.stdout)  # the harness's own output, verbatim
     sys.stderr.write(result.stderr)
     if not result.completed:
@@ -357,6 +233,19 @@ def run_cmd(
     return outcome["returncode"]
 
 
+def print_health(remote: str) -> int:
+    """One authenticated health probe: 0 if the server answers ``status: ok``."""
+    from kcoral.errors import KCoralError, ProtocolError, TransportError
+
+    try:
+        document = health(remote)
+    except (ConnectionError, TransportError, KCoralError, ProtocolError) as exc:
+        print(f"benchmark server: not healthy ({type(exc).__name__}: {exc})", file=sys.stderr)
+        return 1
+    print(json.dumps(document, indent=1, default=str))
+    return 0 if document.get("status") == "ok" else 1
+
+
 def main(argv=None) -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument(
@@ -372,9 +261,7 @@ def main(argv=None) -> None:
         "--remote",
         metavar="URL",
         required=True,
-        help="the kcoral benchmark server URL, or @FILE holding the current URL (re-read on "
-        "every attempt, with its token from FILE.token; scripts/slurm_kcoral.sh publishes both). "
-        "Unavailable servers are retried (see --retry-seconds)",
+        help=REMOTE_HELP + ". Unavailable servers are retried (see --retry-seconds)",
     )
     parser.add_argument("--warmup", type=int, default=None, help="default: per-workload value")
     parser.add_argument("--repeat", type=int, default=None, help="default: per-workload value")
@@ -407,7 +294,14 @@ def main(argv=None) -> None:
         help="how long to keep re-sending to an unavailable server "
         f"(default ${RETRY_SECONDS_ENV} or {DEFAULT_RETRY_SECONDS} s)",
     )
+    parser.add_argument(
+        "--health",
+        action="store_true",
+        help="print the server's authenticated /health and exit 0 if its status is ok, else 1",
+    )
     args = parser.parse_args(argv)
+    if args.health:
+        raise SystemExit(print_health(args.remote))
     if args.send is not None and args.cmd is None:
         parser.error("--send needs --cmd: nothing would run the unpacked files")
     if args.cmd is not None:
