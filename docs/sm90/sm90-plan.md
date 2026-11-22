@@ -2,6 +2,54 @@
 
 Date: 2026-11-21. Author: agent sm90-plan. Builds on `docs/sm90-codegen.md` (phase 1, 2026-11-02).
 
+## Status of the kernel-examples phase (PAUSED by the user 2026-11-22 16:05 UTC, agent sm90-plan)
+
+New SM90 ports on dev stack v3. Each status below is the user's ruling or the independent reviewer's verdict.
+
+| port | branch @ sha | status |
+| --- | --- | --- |
+| FA3 backward hd128 bf16: MHA, GQA/MQA, varlen | TIRx-kernels `haok/fa3-sm90-backward` @ `b3d9c03` (MHA `254b960`, GQA `177a8b9`) | MHA and GQA/MQA: **approved** (sm90-port-review; every output bitwise-gated via K- and q-head isolation). Varlen: **approved with documented perf misses** (user ruling): long-document causal packs 0.973-0.977, ptxas schedule sensitivity, ISSUE-022 (C); revisit with NCU or an ISSUE-022 codegen fix. hd64/hd256 in progress |
+| FlashMLA sparse FP8 decode | TIRx-kernels `haok/flashmla-sm90-sparse-fp8-decode` @ `1f38b2a` | **approved with documented perf misses** (correctness approved by sm90-plan-review; port gate closed by user ruling, time-boxed like port 1). Not a pass: peak MODEL1 h128 0.909-0.913, m1c4 b256 0.974-0.977, root cause not pinned; open item to revisit if NCU access appears. Combine 55 vs 48 regs closed as a documented residual |
+| DeepGEMM 1D1D: k-grouped contiguous + normal FP32-acc wgrad | TIRx-kernels `haok/deepgemm-sm90-k-grouped-fp8` @ `6be1f1b` (`9beaa71` runs on v3; `6be1f1b` drops the ISSUE-018 workaround and needs v4) | **approved** (sm90-port-review, with notes resolved). Residual spill overs at the setmaxnreg edge filed as ISSUE-025 (perf-neutral) |
+
+v4 dev stack: tvm-tirx `haok/sm90-stack-fixes-v4` @ `d1080de9e` = v3 + ISSUE-016, 017, 018, 021, 024 (venv `fixstack4fenv`). ISSUE-023 parked (B2 4096x32768x512 -6%); ISSUE-022 and 025 open.
+
+Final-v4 re-pass (generated CUDA v3 -> v4 differs in every kernel only by ISSUE-024's header block, plus ISSUE-017's
+`&&`/`||` -> `&`/`|` in MQA logits, FlashMLA dense/sparse and FA3 bwd): bitwise and the official runner re-passed for
+all ten kernels (MQA logits at both 2da8159 and the fence commit 49dbee6).
+
+Follow-ups recorded, no action now:
+- B2 `fp8_blockscale_gemm_sm90` config `1000x24584x1520` spills 64 B stores / 68 B loads (48 B stack) and fails the
+  official runner under `perf_remarks=error` (19/20). Pre-existing: identical on v3 (fixstack3env), so not a v4
+  regression.
+
+### Resume (paused 2026-11-22; lenient pause, nothing new started)
+
+All branches below are local; the user pushes. Dev stack for everything: tvm-tirx `haok/sm90-stack-fixes-v4` @
+`d1080de9e`, venv `/mnt/weka/shrd/ci/haok/TIRx-kernels/fixstack4fenv` (fixstack4env = the pre-ISSUE-024 v4, kept).
+
+| agent (tmux `agent-<name>`) | branch @ sha | state | next step on resume | resume note |
+| --- | --- | --- | --- | --- |
+| port-fa3bwd90 | TIRx-kernels `haok/fa3-sm90-backward` @ `8fcd903` (**wip** hd64 commit on `f3b648b` hd64 sketch, on final `b3d9c03`) | MHA/GQA/varlen final at `b3d9c03`; hd64 descriptor change (user-approved: cute advance form, hd64 only) is in the wip commit, hd128 PTX verified byte-identical 28/28 | re-run hd64 bitwise / runner / CUPTI on v4; the one causal-hd64 trace experiment, report before fixing; then commit hd64 properly and send to sm90-port-review; then hd256 | `wt/k-fa3bwd90/.porting/fa3_backward_sm90/RESUME.md` |
+| port-mqalogits90 | TIRx-kernels `haok/deepgemm-sm90-mqa-logits-perf` @ `49dbee6` (fence commit on `2da8159`) | both pass full bitwise (378) and runner (65/65, 75/75) on final v4; fence SASS = add.u64 pin; small-decode with ISSUE-024: b2 h64 0.979 -> 0.987, b1 h32 0.990 -> 0.999 | attrs_ab on b1 n1 h64 mp512 / mp160, full report, PR text update; then `49dbee6` to a reviewer (sm90-plan-review re-time) | `sm90-probe/mqa90/RESUME.md` |
+| port-dgkgroup90 | TIRx-kernels `haok/deepgemm-sm90-k-grouped-fp8` @ `6be1f1b` | approved; re-passed on final v4 | none (push). Optional re-check after ISSUE-022/025 | `wt/k-dgkg90/RESUME.md` |
+| port-fmlasparse90 | TIRx-kernels `haok/flashmla-sm90-sparse-fp8-decode` @ `1f38b2a` | approved with documented perf misses; re-passed on final v4 | none. Optional: producer-loop stall attribution if NCU / PC sampling appears | `wt/k-fmla90s/RESUME.md` |
+| perf-fa3fwd90 | TIRx-kernels `haok/sm90-fa3-causal-perf` @ `a38713f` (`33434b5` + comment) | B3 causal approved at `33434b5`; ISSUE-017 drop measured and kept the folded mask; re-passed on final v4 | sm90-plan-review re-times `a38713f` (comment-only delta), then address findings | `sm90-probe/fa3c/RESUME.md` |
+| sm90-port-review | none (review worktrees `rv-fa3bwd` @ `b3d9c03`, `rv-dgkg` @ `6be1f1b`) | all verdicts final | review FA3 bwd hd64 when routed | `review-ports/RESUME.md` |
+| sm90-plan-review | none | all verdicts final (ISSUE-024 approved at `4ec7a4aa9`). Its note says v4 @ `63de01a30` and next queue ISSUE-019/020: both stale; v4 is `d1080de9e`, 019/020 were closed without compiler branches | next compiler fix from sm90-codegen-fix (ISSUE-022) | `~/sm90-plan-review/RESUME.md` |
+| sm90-codegen-fix | tvm-tirx fix branches below; ISSUE-022 work in progress (branch not reported) | was mid-turn on ISSUE-022 when paused; pause message queued, reply pending | finish / report ISSUE-022 (A row base, B descriptor rebuild incl. the FA3 hd64 evidence, C varlen schedule); ISSUE-025 info only | not yet written |
+| sm90-plan (this agent) | TIRx-harness `haok/sm90-plan` (this doc) | v3 -> final-v4 source diff and re-pass done; no steps running; loop cancelled | route FA3 hd64 and MQA `49dbee6` to reviewers when they report; collect sm90-codegen-fix's pause note | this section |
+
+tvm-tirx branches (all local): v4 `haok/sm90-stack-fixes-v4` `d1080de9e`; fixes `haok/fix-arith-fence` `0b0dfcac4`
+(016), `haok/fix-bool-bitwise` `bd6eee63f` (017), `haok/fix-ld-param` `5cf844d21` (018), `haok/fix-warp-pure`
+`d161ce94f` (021), `haok/fix-nvrtc-libcu-payload` `4ec7a4aa9` (024), parked `haok/fix-bind-refold` `ead6566d1` (023).
+v4 also carries one local test rewrite (`63de01a30`'s any_sync test for v3's call-site binding) that is not on any fix
+branch.
+
+Scratch state: the generated-source diff is in `/mnt/weka/shrd/ci/haok/TIRx-kernels/v4diff` (v3 vs final v4), with
+`v4diff.v4_pre024`, `v4diff.memo_bug` (invalid, cache bug) and `v4diff.v4a_partial` kept for reference; scripts in
+`sm90-probe/v4diff/`.
+
 ## Final status of the ports phase (2026-11-22, agent sm90-plan)
 
 **Goal (from the coordinator):** check and validate TIRx's correctness on a few more kernels, through faithful ports
