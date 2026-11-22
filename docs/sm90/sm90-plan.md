@@ -2,6 +2,122 @@
 
 Date: 2026-11-21. Author: agent sm90-plan. Builds on `docs/sm90-codegen.md` (phase 1, 2026-11-02).
 
+## Final status of the ports phase (2026-11-22, agent sm90-plan)
+
+**Goal (from the coordinator):** check and validate TIRx's correctness on a few more kernels, through faithful ports
+of state-of-the-art SM90 kernels under TIRx-kernels `ported/<upstream>/`. Each port must meet five checks:
+- correct against upstream on upstream's own shapes plus edge shapes;
+- the official runner with nothing skipped;
+- `perf_remarks=error` clean;
+- CUPTI speed against upstream;
+- any compiler issues found filed in `sm90-probe/issues/`.
+
+**Status: done.** Three ports are complete and reviewer-approved.
+
+### The three ports
+
+| Port | Upstream | Branch(es), head | Correctness | Official runner (`perf_remarks=error`) | Speed vs upstream |
+|---|---|---|---|---|---|
+| **1. DeepGEMM SM90 FP8 1D2D m-grouped GEMM** (contiguous, psum, masked) | DeepGEMM `559d79fb` | base `haok/deepgemm-sm90-m-grouped` `251c19e`; coverage extension `haok/deepgemm-sm90-m-grouped-coverage` `c714afa`; dev-stack follow-up `haok/deepgemm-sm90-m-grouped-v2stack` `b0ce824` | 89/89 configs bitwise identical over the whole output, with a NaN sentinel. Upstream's 48 test calls plus edge and coverage shapes; the review ran 20 more of its own | 58/58 + 31/31, 0 skipped | Bench-suite matrix, v2 stack, 66 shapes: geomean 1.001, 61/66 >= 0.99. Coverage shapes 0.994 (18) and 0.996 (10, cluster-1) |
+| **2. FlashMLA SM90 dense MLA decode** (agent port-flashmla90) | FlashMLA | `haok/flashmla-sm90-dense-decode` `2af43a2` | `out` and `lse` bitwise identical to `flash_mla_with_kvcache` | 345/345, 0 skipped | Its PR_DESCRIPTION.md: geomean about 0.99-1.0 over 22 configs |
+| **3. DeepGEMM SM90 FP8 MQA logits + paged MQA logits** (agent port-mqalogits90) | DeepGEMM `559d79fb` | `haok/deepgemm-sm90-mqa-logits` `1daf758` | bitwise identical over the whole logits storage (normal-range data; see its PR text for the contraction note) | 65/65 + 75/75, 0 skipped | Its PR_DESCRIPTION.md: worst 0.949, geomean 0.980 (dense bf16 lowest) |
+
+Each port went through the porting skill:
+- **Sketch:** a line-info export of upstream, then a sketch, then the sketch reviewer.
+- **Correctness:** an independent correctness reviewer.
+- **Final check:** the external reviewer.
+
+The details are in each branch's PR_DESCRIPTION.md.
+
+**Port 1 in detail.**
+- **Scope:** every specialization class DeepGEMM's SM90 heuristic picks for realistic MoE shapes. That is 35
+  classes:
+  - multicast on A or B, or none;
+  - BLOCK_N 32/48/64/96/112/128/160/192;
+  - BLOCK_M 64/128.
+- **Reach:** all 378 shapes of the review's sweep and all 552 of `sm90-probe/dg90/reach.py`
+  (DeepSeek-V3/V3.2 and Qwen3-MoE, EP 8-64). The review found 234/234 tile picks equal to DeepGEMM's
+  `DG_PRINT_CONFIGS`.
+- **ISA fidelity:** per class, every compute-instruction count equals upstream's line-info export, with no `.ftz`.
+  Two producer-side differences are documented; neither changes results.
+- **Perf work:** recorded in the ledger `.porting/sm90_fp8_gemm_1d2d/perf_ledger.md`.
+  - **E3 (adopted):** the invalid-band skip loop as upstream's constant-trip unrolled loop. It took the K-loop
+    from 146 to 135 SASS instructions per iteration and the geomean from 0.989 to 0.996.
+  - **Rejected, with evidence:** E1, E2, E4 and E5.
+- **SM-count bug, found here:** `runner.hardware_num_sms()` fell back to B200's 148 before CUDA was initialized.
+  - **Port fix:** `251c19e`.
+  - **Runner fix (plan B-b):** `haok/runner-hardware-num-sms` `29528ea` on TIRx-kernels, reviewer-approved. The
+    runner queries the device in a child process.
+
+### Compiler issues filed in this phase, and their state
+
+- **ISSUE-010 (fast-math default, FTZ):** fixed, `fp_mode`.
+- **ISSUE-011 (uint32-to-int32 cast assumed non-negative):** fixed.
+- **ISSUE-012 (hand-written mbarrier wait blocks unrolling):** fixed, `mbarrier_wait_parity`.
+- **ISSUE-013 (NaN self-compares folded):** fixed.
+- **ISSUE-014 (nvcc `-arch sm_90a` adds `compute_90`):** fixed.
+- **ISSUE-015 (float cancellations such as `x - x -> 0` should not fire under `fp_mode="precise"`):** filed by
+  sm90-codegen-fix; open, low priority.
+- **HARNESS-002:** kcoral's sealed-memfd mmap fails on Linux < 6.7, which breaks every bench-suite request over
+  1 MiB. A step-local workaround is in `sm90-probe/kcoral_compat`; the fix belongs in kcoral.
+
+**End-to-end validation of the fixes.**
+- **Port 1:** on v2 it dropped its ISSUE-010/011/012 workarounds, with 79/79 bitwise and no speed loss. The two
+  shapes that trailed DeepGEMM reached parity.
+  - On v3, the rebased follow-up `b0ce824` gives 89/89 bitwise, including the 10 cluster-1 classes.
+  - Its official runner gives 58/58 + 31/31, 0 skipped.
+- **Finding for ISSUE-010:** `fp_mode="precise"` alone does not reproduce upstream's factored instruction form for
+  the BLOCK_N 48/112 promotion. The port keeps that form, written in plain TIRx.
+- **Ports 2 and 3:** each validated its own workaround drops on v2 and v3 (see their PR texts).
+
+### tvm-tirx dev stacks (built in this phase; separate wheel and venv each)
+
+| Stack | Branch @ head | Content | Venv |
+|---|---|---|---|
+| v1 | `haok/sm90-stack-fixes` `801280ac4` | track A items + ISSUE-001..003 | `TIRx-kernels/b3env` |
+| v2 | `haok/sm90-stack-fixes-v2` `1c292fdf4` | v1 + ISSUE-010..014 + A2/A3/A4/A5 | `TIRx-kernels/fixstack2env` |
+| v3 | `haok/sm90-stack-fixes-v3` `4865655a5` | v2 + ISSUE-005..009 + A3 with per-toolchain floors (NVRTC 13.2 and 13.4) | `TIRx-kernels/fixstack3env` |
+
+**Codegen suite** (tvm-tirx `tirx/codegen`, `tirx/tile`, `backend/cuda` and `sym`, one H200, compared against the
+previous stack on the same test tree):
+- **No regression:** nothing fails on a newer stack that passed on an older one.
+- **v3:** 3456 passed and 42 failed. All 42 are `tirx/tile/cuda` tests that load PTX through the driver. The 595.91
+  driver cannot JIT PTX from NVRTC 13.4 (`CUDA_ERROR_UNSUPPORTED_PTX_VERSION`), so this is environmental.
+- **A3 on v3:** active with the NVRTC 13.4 data, and it raises nothing on any port.
+
+### Merge order (all are local or pushed topic branches; the user pushes)
+
+1. **tvm-tirx track A**, as in the 2026-11-21 status below, with A3 now carrying `b58c1a791` (one floor data set per
+   toolchain). Then sm90-codegen-fix's `haok/fix-*` for ISSUE-004..014.
+2. **TIRx-kernels:**
+   1. `haok/runner-hardware-num-sms` (B-b), independent of the ports;
+   2. `haok/deepgemm-sm90-m-grouped`, then `haok/deepgemm-sm90-m-grouped-coverage` on top of it;
+   3. `haok/flashmla-sm90-dense-decode` and `haok/deepgemm-sm90-mqa-logits`, independent of each other.
+3. **Follow-ups once the dev-stack fixes are on tvm-tirx main and in the pinned wheel:**
+   - `haok/deepgemm-sm90-m-grouped-v2stack`, which drops port 1's compiler workarounds;
+   - the ports' local SM-count defaults, which can go once B-b lands.
+
+### Open follow-ups
+
+- **Port 1 speed:**
+  - 5 of 66 bench-suite shapes are at 0.986-0.988 (v2), mostly small kernels. The skill's "> 0.99 on every shape"
+    is not met for them.
+  - **Suspect:** per-tile code outside the K loop. In the SASS, TIRx has more SYNCS, NANOSLEEP and UMOV sites than
+    DeepGEMM in masked 128x192.
+- **Port 1 ISA:** NVRTC does not unroll the producer K loop as nvcc does upstream. It also does not fold the plain
+  A/SFA branch when multicast is on A. Forcing the unroll gained nothing.
+- **Bench suite:**
+  - CPU prepare is unusable on the kcoral GPU worker, whose CUDA is already initialized. Every workload falls back
+    to GPU prepare.
+  - HARNESS-002 needs a kcoral fix.
+- **The review's 0.83x on contiguous 128x160:** an order effect of its alternating loop, unexplained. Our runs on
+  the fixed branches give 0.974-0.976 (v1) and 0.986-0.988 (v2/v3), warm or cold.
+  - The earlier cold runs that printed nothing were the SM-count bug. At 148 SMs that shape picks 128x144, a class
+    the port refuses.
+- **Driver:** NVRTC 13.4 PTX can't be JIT-loaded by the 595.91 driver. This affects only PTX-format test builds.
+- **Shared space kept for reruns:** `TIRx-kernels/{refenv,b3env,fixstack2env,fixstack3env,mqa90env}`, the tvm-tirx
+  wheels and build dirs, `dg_jit_cache`, and `bench_suite_runs`.
+
 ## Final status (2026-11-21, agent sm90-plan)
 
 **Done:** M1–M4. **Track A finished (2026-11-21), awaiting review:**
